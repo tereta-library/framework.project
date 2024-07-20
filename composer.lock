@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "tereta/framework.application",
-            "version": "1.0.6",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.application.git",
-                "reference": "d27caf0ae0d2aaa8f5999d5d951540c57f3d9ee1"
+                "reference": "6423b41ac56acb9402e4a3c54866f8ce103a9410"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.application/zipball/d27caf0ae0d2aaa8f5999d5d951540c57f3d9ee1",
-                "reference": "d27caf0ae0d2aaa8f5999d5d951540c57f3d9ee1",
+                "url": "https://api.github.com/repos/tereta-library/framework.application/zipball/6423b41ac56acb9402e4a3c54866f8ce103a9410",
+                "reference": "6423b41ac56acb9402e4a3c54866f8ce103a9410",
                 "shasum": ""
             },
             "require": {
@@ -45,13 +45,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.application/issues",
-                "source": "https://github.com/tereta-library/framework.application/tree/1.0.6"
+                "source": "https://github.com/tereta-library/framework.application/tree/1.0.10"
             },
-            "time": "2024-07-20T10:49:24+00:00"
+            "time": "2024-07-20T12:35:40+00:00"
         },
         {
             "name": "tereta/framework.cli",
-            "version": "1.0.2",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.cli.git",
@@ -78,13 +78,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.cli/issues",
-                "source": "https://github.com/tereta-library/framework.cli/tree/1.0.2"
+                "source": "https://github.com/tereta-library/framework.cli/tree/1.0.10"
             },
             "time": "2024-07-17T21:22:22+00:00"
         },
         {
             "name": "tereta/framework.config",
-            "version": "1.0.1",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.config.git",
@@ -114,13 +114,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.config/issues",
-                "source": "https://github.com/tereta-library/framework.config/tree/1.0.1"
+                "source": "https://github.com/tereta-library/framework.config/tree/1.0.10"
             },
             "time": "2024-07-07T14:07:51+00:00"
         },
         {
             "name": "tereta/framework.controller",
-            "version": "1.0.0",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.controller.git",
@@ -148,13 +148,13 @@
             "description": "PHP Framework to ease site development - Controller",
             "support": {
                 "issues": "https://github.com/tereta-library/framework.controller/issues",
-                "source": "https://github.com/tereta-library/framework.controller/tree/1.0.0"
+                "source": "https://github.com/tereta-library/framework.controller/tree/1.0.10"
             },
             "time": "2024-07-07T07:38:50+00:00"
         },
         {
             "name": "tereta/framework.docker",
-            "version": "1.0.4",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.docker.git",
@@ -181,7 +181,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.docker/issues",
-                "source": "https://github.com/tereta-library/framework.docker/tree/1.0.4"
+                "source": "https://github.com/tereta-library/framework.docker/tree/1.0.10"
             },
             "time": "2024-07-20T10:46:06+00:00"
         },
@@ -220,7 +220,7 @@
         },
         {
             "name": "tereta/framework.http",
-            "version": "1.0.1",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.http.git",
@@ -248,13 +248,13 @@
             "description": "Part of framework to process HTTP requests",
             "support": {
                 "issues": "https://github.com/tereta-library/framework.http/issues",
-                "source": "https://github.com/tereta-library/framework.http/tree/1.0.1"
+                "source": "https://github.com/tereta-library/framework.http/tree/1.0.10"
             },
             "time": "2024-07-07T12:26:46+00:00"
         },
         {
             "name": "tereta/framework.pattern",
-            "version": "1.0.2",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.pattern.git",
@@ -281,13 +281,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.pattern/issues",
-                "source": "https://github.com/tereta-library/framework.pattern/tree/1.0.2"
+                "source": "https://github.com/tereta-library/framework.pattern/tree/1.0.10"
             },
             "time": "2024-07-07T13:54:01+00:00"
         },
         {
             "name": "tereta/framework.process",
-            "version": "1.0.3",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.process.git",
@@ -314,13 +314,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.process/issues",
-                "source": "https://github.com/tereta-library/framework.process/tree/1.0.3"
+                "source": "https://github.com/tereta-library/framework.process/tree/1.0.10"
             },
             "time": "2024-07-07T13:18:35+00:00"
         },
         {
             "name": "tereta/framework.view",
-            "version": "1.0.3",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.view.git",
@@ -350,7 +350,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.view/issues",
-                "source": "https://github.com/tereta-library/framework.view/tree/1.0.3"
+                "source": "https://github.com/tereta-library/framework.view/tree/1.0.10"
             },
             "time": "2024-07-17T21:21:49+00:00"
         }

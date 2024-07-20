@@ -1,17 +1,14 @@
 #!/bin/bash
 
-fileDir=$(dirname "$0")
-rootDir=$(realpath "$(dirname "$0")/../..")
+ROOTDIR=$(realpath "$(dirname "$0")/../..")
 
-cd "$fileDir"
+source "$ROOTDIR/dev/repositories/include/config.sh"
+source "$ROOTDIR/dev/repositories/include/version.sh"
 
-source "$rootDir/dev/repositories/include/config.sh"
-source "$rootDir/dev/repositories/include/version.sh"
+mkdir -p "$ROOTDIR/dev"
+mkdir -p "$ROOTDIR/dev/repositories"
+mkdir -p "$ROOTDIR/dev/repositories/git"
 
-for repo in "${REPOSITORIES[@]}"; do
-    cd "$rootDir/dev/repositories/git/$repo"
-    git tag $VERSION
-    git push --tags
+for REPO in "${REPOSITORIES[@]}"; do
+  echo "cd \"$ROOTDIR/dev/repositories/git/$REPO\"; git tag $VERSION; git push --tags" | bash
 done
-
-cd "$fileDir"

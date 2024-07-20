@@ -1,26 +1,26 @@
 #!/bin/bash
 
-fileDir=$(dirname "$0")
-rootDir=$(realpath "$(dirname "$0")/../..")
+ROOTDIR=$(realpath "$(dirname "$0")/../..")
 
-cd "$fileDir"
+source "$ROOTDIR/dev/repositories/include/config.sh"
 
-source "$rootDir/dev/repositories/include/config.sh"
+mkdir -p "$ROOTDIR/dev"
+mkdir -p "$ROOTDIR/dev/repositories"
+mkdir -p "$ROOTDIR/dev/repositories/git"
 
-mkdir -p "$rootDir/dev"
-mkdir -p "$rootDir/dev/repositories"
-mkdir -p "$rootDir/dev/repositories/git"
+read -p "Did you make push before reinit? [Yes]: " AGREE
 
-for repo in "${REPOSITORIES[@]}"; do
-  # Создаем директорию
-  mkdir -p "$rootDir/dev/repositories/git/$repo"
+if [ "$AGREE" != "Yes" ]; then
+  echo "You must make push before reinit"
+  exit 1
+fi
 
-  # Клонируем репозиторий
-  git clone "git@github.com:tereta-library/$repo.git" "$rootDir/dev/repositories/git/$repo"
+for REPO in "${REPOSITORIES[@]}"; do
+  mkdir -p "$ROOTDIR/dev/repositories/git/$REPO"
 
-  # Переходим в директорию и делаем pull
-  cd "$rootDir/dev/repositories/git/$repo"
-  git pull origin master
+  git clone "git@github.com:tereta-library/$REPO.git" "$ROOTDIR/dev/repositories/git/$REPO"
+  rm -Rf "$ROOTDIR/vendor/tereta/$REPO/.git"
+  cp -R "$ROOTDIR/dev/repositories/git/$REPO/.git" "$ROOTDIR/vendor/tereta/$REPO/.git"
+
+  echo "cd \"$ROOTDIR/dev/repositories/git/$REPO\"; git pull origin master" | bash
 done
-
-cd "$fileDir"
