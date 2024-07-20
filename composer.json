@@ -1,6 +1,6 @@
 {
     "require": {
-        "tereta\/framework.application": "=>0.0.1"
+        "tereta\/framework.application": "0.0.5"
     },
     "autoload": {
         "psr-4": {
