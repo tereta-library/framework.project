@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8cfa323bbfe94eda27df4fd8eb0b571",
+    "content-hash": "18e4d9fcd0d1dfa1c6523b39b738fb38",
     "packages": [
         {
             "name": "tereta/framework.application",
-            "version": "0.0.1",
+            "version": "0.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.application.git",
-                "reference": "be1de57381032bc26c2d5844d0bda5dc8ee6d289"
+                "reference": "24ad9fa7ee42e306783f5a858207dfb56a1ea942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.application/zipball/be1de57381032bc26c2d5844d0bda5dc8ee6d289",
-                "reference": "be1de57381032bc26c2d5844d0bda5dc8ee6d289",
+                "url": "https://api.github.com/repos/tereta-library/framework.application/zipball/24ad9fa7ee42e306783f5a858207dfb56a1ea942",
+                "reference": "24ad9fa7ee42e306783f5a858207dfb56a1ea942",
                 "shasum": ""
             },
             "require": {
@@ -45,9 +45,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.application/issues",
-                "source": "https://github.com/tereta-library/framework.application/tree/0.0.1"
+                "source": "https://github.com/tereta-library/framework.application/tree/0.0.4"
             },
-            "time": "2024-07-20T17:09:20+00:00"
+            "time": "2024-07-20T18:46:31+00:00"
         },
         {
             "name": "tereta/framework.cli",
