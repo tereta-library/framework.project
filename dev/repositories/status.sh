@@ -6,6 +6,6 @@ source "$ROOTDIR/dev/repositories/include/config.sh"
 
 for REPO in "${REPOSITORIES[@]}"; do
   echo "+ $REPO"
-  echo "cd \"$ROOTDIR/dev/repositories/git/$REPO\"; git tag" | bash
+  echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git status" | bash
   echo "- $REPO"
 done
