@@ -16,6 +16,7 @@ if [ "$AGREE" != "Yes" ]; then
 fi
 
 for REPO in "${REPOSITORIES[@]}"; do
+  rm -Rf "$ROOTDIR/dev/repositories/git/$REPO"
   mkdir -p "$ROOTDIR/dev/repositories/git/$REPO"
 
   git clone "git@github.com:tereta-library/$REPO.git" "$ROOTDIR/dev/repositories/git/$REPO"
