@@ -1,0 +1,6 @@
+cli.php
+pub/index.php
+pub/.htaccess
+.idea
+.DS_Store
+vendor

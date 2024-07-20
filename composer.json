@@ -1,0 +1,5 @@
+{
+    "require": {
+        "tereta/framework.application": "^1.0"
+    }
+}
