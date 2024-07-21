@@ -2,7 +2,7 @@
 
 return [
     'Framework\\Application' => [
-        'enabled' => false,
+        'enabled' => true,
         'path' => 'vendor/tereta/framework.application/src',
     ],
     'Vendor\\Module' => [
