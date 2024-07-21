@@ -1,0 +1,35 @@
+<?php declare(strict_types=1);
+
+namespace Builder\Cms\Controller;
+
+use Framework\Controller\Interface\Controller;
+use Framework\Http\Router\Expression as HttpRouterExpression;
+
+/**
+ * ···························WWW.TERETA.DEV······························
+ * ·······································································
+ * : _____                        _                     _                :
+ * :|_   _|   ___   _ __    ___  | |_    __ _        __| |   ___  __   __:
+ * :  | |    / _ \ | '__|  / _ \ | __|  / _` |      / _` |  / _ \ \ \ / /:
+ * :  | |   |  __/ | |    |  __/ | |_  | (_| |  _  | (_| | |  __/  \ V / :
+ * :  |_|    \___| |_|     \___|  \__|  \__,_| (_)  \__,_|  \___|   \_/  :
+ * ·······································································
+ * ·······································································
+ *
+ * @class Builder\Cms\Controller\Page
+ * @package Builder\Cms\Controller
+ * @link https://tereta.dev
+ * @author Tereta Alexander <tereta.alexander@gmail.com>
+ */
+class Page implements Controller
+{
+    /**
+     * @router HttpRouterExpression METHOD_GET /^\/cms\/page\/(.*)$/Usi
+     * @param string $identifier
+     * @return void
+     */
+    public function render(string $identifier)
+    {
+
+    }
+}
