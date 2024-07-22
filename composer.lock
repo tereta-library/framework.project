@@ -4,31 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f3f54bb011529e27705e18e15f2beac7",
+    "content-hash": "f413ae871ff0d6492324795047fe1fa0",
     "packages": [
         {
             "name": "tereta/framework.application",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.application.git",
-                "reference": "ee674e8d893300f84e9cf9c6b6e3d3ec38b0a334"
+                "reference": "c779936cca41a7fde3c03cb57c07c7587918c7f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.application/zipball/ee674e8d893300f84e9cf9c6b6e3d3ec38b0a334",
-                "reference": "ee674e8d893300f84e9cf9c6b6e3d3ec38b0a334",
+                "url": "https://api.github.com/repos/tereta-library/framework.application/zipball/c779936cca41a7fde3c03cb57c07c7587918c7f0",
+                "reference": "c779936cca41a7fde3c03cb57c07c7587918c7f0",
                 "shasum": ""
             },
             "require": {
-                "tereta/framework.cli": "^0.0.10",
-                "tereta/framework.config": "^0.0.10",
-                "tereta/framework.controller": "^0.0.10",
-                "tereta/framework.docker": "^0.0.10",
-                "tereta/framework.helper": "^0.0.10",
-                "tereta/framework.http": "^0.0.10",
-                "tereta/framework.process": "^0.0.10",
-                "tereta/framework.view": "^0.0.10"
+                "tereta/framework.cli": "^0.0.14",
+                "tereta/framework.config": "^0.0.14",
+                "tereta/framework.docker": "^0.0.14",
+                "tereta/framework.helper": "^0.0.14",
+                "tereta/framework.http": "^0.0.14",
+                "tereta/framework.process": "^0.0.14",
+                "tereta/framework.view": "^0.0.14"
             },
             "type": "library",
             "autoload": {
@@ -45,26 +44,26 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.application/issues",
-                "source": "https://github.com/tereta-library/framework.application/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.application/tree/0.0.14"
             },
-            "time": "2024-07-21T20:49:36+00:00"
+            "time": "2024-07-22T19:44:51+00:00"
         },
         {
             "name": "tereta/framework.cli",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.cli.git",
-                "reference": "0a605ed5d3370957b18e8cc24348d7dbad455792"
+                "reference": "85d7262e223c37ca362ad3673d8854a03cc9ca23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.cli/zipball/0a605ed5d3370957b18e8cc24348d7dbad455792",
-                "reference": "0a605ed5d3370957b18e8cc24348d7dbad455792",
+                "url": "https://api.github.com/repos/tereta-library/framework.cli/zipball/85d7262e223c37ca362ad3673d8854a03cc9ca23",
+                "reference": "85d7262e223c37ca362ad3673d8854a03cc9ca23",
                 "shasum": ""
             },
             "require": {
-                "tereta/framework.helper": "^0.0.10"
+                "tereta/framework.helper": "^0.0.14"
             },
             "type": "library",
             "autoload": {
@@ -81,26 +80,26 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.cli/issues",
-                "source": "https://github.com/tereta-library/framework.cli/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.cli/tree/0.0.14"
             },
-            "time": "2024-07-21T20:46:09+00:00"
+            "time": "2024-07-22T19:44:57+00:00"
         },
         {
             "name": "tereta/framework.config",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.config.git",
-                "reference": "de5dee82b034011b4581efa080364eaa0fd58a5c"
+                "reference": "5902ac5df3ce88d16486ac44e51e765a7b0b9599"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.config/zipball/de5dee82b034011b4581efa080364eaa0fd58a5c",
-                "reference": "de5dee82b034011b4581efa080364eaa0fd58a5c",
+                "url": "https://api.github.com/repos/tereta-library/framework.config/zipball/5902ac5df3ce88d16486ac44e51e765a7b0b9599",
+                "reference": "5902ac5df3ce88d16486ac44e51e765a7b0b9599",
                 "shasum": ""
             },
             "require": {
-                "tereta/framework.pattern": "^0.0.10"
+                "tereta/framework.pattern": "^0.0.14"
             },
             "type": "library",
             "autoload": {
@@ -117,56 +116,22 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.config/issues",
-                "source": "https://github.com/tereta-library/framework.config/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.config/tree/0.0.14"
             },
-            "time": "2024-07-21T20:46:14+00:00"
-        },
-        {
-            "name": "tereta/framework.controller",
-            "version": "0.0.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/tereta-library/framework.controller.git",
-                "reference": "84ead5c56598ce44acb7f489df6e0cb9a2fb48f8"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.controller/zipball/84ead5c56598ce44acb7f489df6e0cb9a2fb48f8",
-                "reference": "84ead5c56598ce44acb7f489df6e0cb9a2fb48f8",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Framework\\Controller\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "authors": [
-                {
-                    "name": "Tereta Alexander",
-                    "email": "tereta.alexander@gmail.com"
-                }
-            ],
-            "description": "PHP Framework to ease site development - Controller",
-            "support": {
-                "issues": "https://github.com/tereta-library/framework.controller/issues",
-                "source": "https://github.com/tereta-library/framework.controller/tree/0.0.10"
-            },
-            "time": "2024-07-07T07:38:50+00:00"
+            "time": "2024-07-22T19:45:04+00:00"
         },
         {
             "name": "tereta/framework.docker",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.docker.git",
-                "reference": "03c391ebe5c986567c22594ee76c3ab619baf2da"
+                "reference": "dca1e09d289ac3e9436a91051ccd24a9a77dc05c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.docker/zipball/03c391ebe5c986567c22594ee76c3ab619baf2da",
-                "reference": "03c391ebe5c986567c22594ee76c3ab619baf2da",
+                "url": "https://api.github.com/repos/tereta-library/framework.docker/zipball/dca1e09d289ac3e9436a91051ccd24a9a77dc05c",
+                "reference": "dca1e09d289ac3e9436a91051ccd24a9a77dc05c",
                 "shasum": ""
             },
             "type": "library",
@@ -184,13 +149,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.docker/issues",
-                "source": "https://github.com/tereta-library/framework.docker/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.docker/tree/0.0.14"
             },
-            "time": "2024-07-21T20:50:28+00:00"
+            "time": "2024-07-22T19:26:01+00:00"
         },
         {
             "name": "tereta/framework.helper",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.helper.git",
@@ -217,22 +182,22 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.helper/issues",
-                "source": "https://github.com/tereta-library/framework.helper/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.helper/tree/0.0.14"
             },
             "time": "2024-07-21T13:13:06+00:00"
         },
         {
             "name": "tereta/framework.http",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.http.git",
-                "reference": "0f76de8c803fe88bf4d93eccb848e606185ce6ef"
+                "reference": "44250450dc37a3198b3de5715b44ddc2162f5e3b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.http/zipball/0f76de8c803fe88bf4d93eccb848e606185ce6ef",
-                "reference": "0f76de8c803fe88bf4d93eccb848e606185ce6ef",
+                "url": "https://api.github.com/repos/tereta-library/framework.http/zipball/44250450dc37a3198b3de5715b44ddc2162f5e3b",
+                "reference": "44250450dc37a3198b3de5715b44ddc2162f5e3b",
                 "shasum": ""
             },
             "type": "library",
@@ -251,13 +216,13 @@
             "description": "Part of framework to process HTTP requests",
             "support": {
                 "issues": "https://github.com/tereta-library/framework.http/issues",
-                "source": "https://github.com/tereta-library/framework.http/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.http/tree/0.0.14"
             },
-            "time": "2024-07-07T12:26:46+00:00"
+            "time": "2024-07-22T19:45:41+00:00"
         },
         {
             "name": "tereta/framework.pattern",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.pattern.git",
@@ -284,13 +249,13 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.pattern/issues",
-                "source": "https://github.com/tereta-library/framework.pattern/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.pattern/tree/0.0.14"
             },
             "time": "2024-07-21T13:11:33+00:00"
         },
         {
             "name": "tereta/framework.process",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.process.git",
@@ -317,26 +282,26 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.process/issues",
-                "source": "https://github.com/tereta-library/framework.process/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.process/tree/0.0.14"
             },
             "time": "2024-07-20T13:34:33+00:00"
         },
         {
             "name": "tereta/framework.view",
-            "version": "0.0.10",
+            "version": "0.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tereta-library/framework.view.git",
-                "reference": "934fcfd89a2202c0e3ff383aca3cc279fe63bfa1"
+                "reference": "1f27a035df91c379c76fce7c69d5444e1d20b0ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tereta-library/framework.view/zipball/934fcfd89a2202c0e3ff383aca3cc279fe63bfa1",
-                "reference": "934fcfd89a2202c0e3ff383aca3cc279fe63bfa1",
+                "url": "https://api.github.com/repos/tereta-library/framework.view/zipball/1f27a035df91c379c76fce7c69d5444e1d20b0ae",
+                "reference": "1f27a035df91c379c76fce7c69d5444e1d20b0ae",
                 "shasum": ""
             },
             "require": {
-                "tereta/framework.pattern": "^0.0.10"
+                "tereta/framework.pattern": "^0.0.14"
             },
             "type": "library",
             "autoload": {
@@ -353,9 +318,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tereta-library/framework.view/issues",
-                "source": "https://github.com/tereta-library/framework.view/tree/0.0.10"
+                "source": "https://github.com/tereta-library/framework.view/tree/0.0.14"
             },
-            "time": "2024-07-21T20:46:50+00:00"
+            "time": "2024-07-22T19:46:18+00:00"
         }
     ],
     "packages-dev": [],
