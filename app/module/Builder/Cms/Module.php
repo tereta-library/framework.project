@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Application;
+namespace Builder\Cms;
 
 use Framework\Application\Interface\Module as ModuleInterface;
 

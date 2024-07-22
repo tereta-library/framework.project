@@ -14,6 +14,7 @@ for REPO in "${REPOSITORIES[@]}"; do
 
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git config pull.rebase false" | bash
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git pull" | bash
+  echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git add ." | bash
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git commit -am \"Release: $VERSION\"; git push" | bash
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git tag $VERSION; git push --tags" | bash
 done

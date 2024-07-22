@@ -9,8 +9,8 @@ return [
         'enabled' => true,
         'path' => 'vendor/tereta/framework.application/src',
     ],
-    'Vendor\\Module' => [
+    'Builder\\Cms' => [
         'enabled' => true,
-        'path' => 'app/module/Vendor/Module',
+        'path' => 'app/module/Builder/Cms',
     ],
 ];
