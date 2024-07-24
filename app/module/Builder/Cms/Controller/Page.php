@@ -3,6 +3,7 @@
 namespace Builder\Cms\Controller;
 
 use Framework\Http\Interface\Controller;
+use Framework\Application\Manager;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -23,12 +24,17 @@ use Framework\Http\Interface\Controller;
 class Page implements Controller
 {
     /**
+     * Sample url: http://127.0.0.1/cms/page/123
+     *
      * @router expression GET /^\/cms\/page\/(.*)$/Usi
      * @param string $identifier
      * @return string
      */
     public function render(string $identifier): string
     {
-        return json_encode(func_get_args());
+        $config = Manager::instance()->getConfig();
+        $manager = Manager::instance()->getAdapter();
+        $view = $manager->getView();
+        return (string) $view->load('cms');
     }
 }
