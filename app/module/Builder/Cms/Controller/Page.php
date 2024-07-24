@@ -23,12 +23,12 @@ use Framework\Http\Interface\Controller;
 class Page implements Controller
 {
     /**
-     * @router HttpRouterExpression METHOD_GET /^\/cms\/page\/(.*)$/Usi
+     * @router expression GET /^\/cms\/page\/(.*)$/Usi
      * @param string $identifier
-     * @return void
+     * @return string
      */
-    public function render(string $identifier)
+    public function render(string $identifier): string
     {
-
+        return json_encode(func_get_args());
     }
 }
