@@ -3,7 +3,6 @@
 REPOSITORIES=(
   "framework.application"
   "framework.cli"
-  "framework.config"
   "framework.docker"
   "framework.helper"
   "framework.http"
