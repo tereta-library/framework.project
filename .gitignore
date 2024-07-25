@@ -1,4 +1,5 @@
 cli.php
+composer.lock
 pub/index.php
 pub/.htaccess
 .idea
