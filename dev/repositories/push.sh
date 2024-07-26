@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ROOTDIR=$(realpath "$(dirname "$0")/../..")
+ROOTDIR=$(cd "$(dirname "$0")/../.." && pwd)
 
 source "$ROOTDIR/dev/repositories/include/config.sh"
 source "$ROOTDIR/dev/repositories/include/version.sh"
