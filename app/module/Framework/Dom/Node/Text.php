@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Dom;
-
-use Exception;
+namespace Framework\Dom\Node;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -15,31 +13,26 @@ use Exception;
  * ·······································································
  * ·······································································
  *
- * @class Framework\Dom\Document
- * @package Framework\Dom
+ * @class Framework\Dom\Node\Text
+ * @package Framework\Dom\Node
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Document
+class Text
 {
     /**
-     * @var array $documentTree
+     * @param string $text
      */
-    private array $documentTree = [];
-
-    /**
-     * @param string $document
-     */
-    public function __construct(private string $document)
-    {
+    public function __construct(
+        private string $text
+    ) {
     }
 
     /**
-     * @return array
-     * @throws Exception
+     * @return string
      */
-    public function getTree(): array
+    public function __toString(): string
     {
-        return (new Node($this->document))->getTags();
+        return trim($this->text);
     }
 }
