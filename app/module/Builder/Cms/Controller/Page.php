@@ -35,6 +35,10 @@ class Page implements Controller
         $config = Manager::instance()->getConfig();
         $manager = Manager::instance()->getAdapter();
         $view = $manager->getView();
-        return (string) $view->load('cms');
+        try {
+            return (string) $view->load('cms');
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }
