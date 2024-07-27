@@ -31,39 +31,121 @@ class Document
     private ?int $position = 0;
 
     /**
-     * @param string $document
+     * @var array|null $tagList
      */
-    public function __construct(private string $document)
+    private ?array $tagList = null;
+
+    /**
+     * @var array|null $tree
+     */
+    private ?array $tree = null;
+
+    /**
+     * @var array $nodeList
+     */
+    private array $nodeList = [];
+
+    /**
+     * @param string $document
+     * @param string $fileDebug
+     */
+    public function __construct(private string $document, private string $fileDebug = '')
     {
     }
 
     /**
+     * @param bool $update
      * @return array
      * @throws Exception
      */
-    public function getTree(): array
+    public function getNodeList(bool $update = false): array
     {
-        $pointer = null;
-        $rootArray = [];
-        foreach($this->fetchTags() as $tag) {
-            $this->processTag($rootArray, $pointer, $tag);
-        }
-
-        return $rootArray;
+        $this->getNodeTree($update);
+        return $this->nodeList;
     }
 
-    private function processTag(array &$rootArray, &$pointer, NodeInterface $tag): void
+    /**
+     * @param bool $update
+     * @return array
+     * @throws Exception
+     */
+    public function getNodeTree(bool $update = false): array
+    {
+        if ($this->tree && !$update) return $this->tree;
+
+        $nodeList = [];
+        $pointer = null;
+        $this->tree = [];
+        foreach($this->fetchTags($update) as $tag) {
+            $this->processTag($nodeList, $this->tree, $pointer, $tag);
+        }
+
+        $this->nodeList = $nodeList;
+
+        return $this->tree;
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function render(): string
+    {
+        $return = '';
+        foreach ($this->getNodeTree() as $node) {
+            $return .= $node->render();
+        }
+
+        return $return;
+    }
+
+
+    /**
+     * @param bool $update
+     * @return array
+     * @throws Exception
+     */
+    public function fetchTags(bool $update = false): array
+    {
+        if ($this->tagList && !$update) return $this->tagList;
+
+        $this->tagList = [];
+
+        while($this->position !== null) {
+            if ($text = $this->parseText()) $this->tagList[] = $text;
+            if ($this->position === null) break;
+
+            $tag = $this->parseTag();
+            $this->tagList[] = $tag;
+        }
+
+        $this->position = null;
+
+        return $this->tagList;
+    }
+
+    /**
+     * @param array $nodeList
+     * @param array $rootArray
+     * @param $pointer
+     * @param NodeInterface $tag
+     * @return void
+     * @throws Exception
+     */
+    private function processTag(array &$nodeList, array &$rootArray, &$pointer, NodeInterface $tag): void
     {
         if ($tag instanceof NodeText && $pointer) {
             $node = new Node();
             $node->setTag($tag);
             $pointer->addChildren($node);
             $node->setParent($pointer);
+            $nodeList[] = $node;
             return;
         } else if ($tag instanceof NodeText) {
             $node = new Node();
             $node->setTag($tag);
             $rootArray[] = $node;
+            $nodeList[] = $node;
             return;
         }
 
@@ -78,10 +160,13 @@ class Document
                     $rootArray[] = $node;
                 }
                 $pointer = $node;
+                $nodeList[] = $node;
                 break;
             case NodeTag::TAG_CLOSE:
                 if ($pointer->getName() !== $tag->getName()) {
-                    throw new Exception('Invalid tag at position ' . $tag->getPositionStart() . ' in document');
+                    throw new Exception(
+                        'Invalid close tag at ' . $this->getErrorDescription($tag->getPositionStart())
+                    );
                 }
                 $pointer->setTagClose($tag);
                 $pointer = $pointer->getParent();
@@ -95,26 +180,9 @@ class Document
                 } else {
                     $rootArray[] = $node;
                 }
+                $nodeList[] = $node;
                 break;
         }
-    }
-
-    /**
-     * @return array
-     * @throws Exception
-     */
-    public function fetchTags(): array
-    {
-        $array = [];
-        while($this->position !== null) {
-            if ($text = $this->parseText()) $array[] = $text;
-            if ($this->position === null) break;
-
-            $tag = $this->parseTag();
-            $array[] = $tag;
-        }
-
-        return $array;
     }
 
     /**
@@ -126,11 +194,21 @@ class Document
         $initialPosition = $this->position;
 
         $tagType = NodeTag::TAG_NOTSET;
-        $openTag = preg_match('/^\<\s*([\w_-]+)(\s|\>){1}/Usi', substr($this->document, $initialPosition),$matchesOpen);
-        $closeTag = preg_match('/^\<\s*\/\s*([\w_-]+)(\s|\>){1}/Usi', substr($this->document, $initialPosition), $matchesClose);
+        $openTag = preg_match(
+            '/^\<\s*([\w_-]+)(\s|\>){1}/Usi',
+            substr($this->document, $initialPosition),
+            $matchesOpen
+        );
+        $closeTag = preg_match(
+            '/^\<\s*\/\s*([\w_-]+)(\s|\>){1}/Usi',
+            substr($this->document, $initialPosition),
+            $matchesClose
+        );
 
         if (!$openTag && !$closeTag) {
-            throw new Exception('Invalid tag at position ' . $initialPosition . ' in document');
+            throw new Exception(
+                'Invalid open tag at: ' . $this->getErrorDescription($initialPosition)
+            );
         }
 
         if ($openTag) {
@@ -165,7 +243,9 @@ class Document
             $matches = $matchesSelfClose;
             $tagType = NodeTag::TAG_SELF_CLOSE;
         } else {
-            throw new Exception('Invalid tag at position ' . $offset . ' in document');
+            throw new Exception(
+                'Invalid tag at: ' . $this->getErrorDescription($offset)
+            );
         }
 
         $offset = $offset + strlen($matches[0]);
@@ -188,23 +268,13 @@ class Document
         $initialOffset = $offset;
         $string = substr($document, $offset);
 
-        $offsetInside = 0;
-        while (true) {
-            $offsetInside = strpos($string, $quote, $offsetInside);
-            $escapeCount = 0;
-            while (substr($string, $offsetInside - 1 - $escapeCount, 1) === '\\') {
-                $escapeCount++;
-            }
-
-            if ($escapeCount % 2 === 0) {
-                break;
-            }
-
-            $offsetInside = $offsetInside + 1;
-        }
+        $offsetInside = strpos($string, $quote);
         $offset = $offset + $offsetInside + 1;
 
-        return substr($document, $initialOffset, $offsetInside);
+        $value = substr($document, $initialOffset, $offsetInside);
+        $value = str_replace('\\' . $quote, $quote, $value);
+
+        return $value;
     }
 
     /**
@@ -227,5 +297,28 @@ class Document
         if (!trim($tag)) return null;
 
         return new NodeText($tag);
+    }
+
+    /**
+     * @param int $position
+     * @return string
+     */
+    private function getErrorDescription(int $position): string
+    {
+        $string = substr($this->document, 0, $position);
+        $lines = substr_count($string, "\n");
+        $col = strlen($string) - strrpos($string, "\n");
+
+        if ($this->fileDebug) return 'file: ' . $this->fileDebug . ', line: ' . $lines . ', column: ' . $col;
+        return 'line: ' . $lines . ', column: ' . $col;
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function __toString(): string
+    {
+        return $this->render();
     }
 }

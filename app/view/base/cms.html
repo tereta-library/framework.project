@@ -1,18 +1,14 @@
-<html lang="en" data-test-attribute='q\'w'>
-<head>
-    <title data-backend-content="title">
-        Title
-        Name
-    </title>
+<html lang="en">
+<head data-backend-merge="head">
+    <meta name="backend-update" content="index" />
 </head>
 <body>
-<header>Framework header</header>
-<content>
-    <div data-backend-attribute=":content"></div>
-    BR
-    <hr />
-    HR
-</content>
-<footer>Framework footer</footer>
+    <content data-backend-content="body > content">
+        <div id="test" data-backend-attribute='data-test:$content'>qwe</div>
+        <div data-backend-attribute="data-test:$content"></div>
+        BR
+        <hr />
+        HR
+    </content>
 </body>
 </html>

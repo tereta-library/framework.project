@@ -80,6 +80,16 @@ class Tag implements NodeInterface
         return $this->attributes;
     }
 
+
+    /**
+     * @param string $name
+     * @return string
+     */
+    public function getAttribute(string $name): string
+    {
+        return $this->attributes[$name] ?? '';
+    }
+
     /**
      * @param int $start
      * @param int $end
@@ -90,6 +100,14 @@ class Tag implements NodeInterface
         $this->positionStart = $start;
         $this->positionEnd = $end;
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPositionStart(): int
+    {
+        return $this->positionStart;
     }
 
     /**
@@ -134,8 +152,7 @@ class Tag implements NodeInterface
         $tag = $this->name;
 
         foreach ($this->attributes as $key => $value) {
-            $value = str_replace('\\', '\\\\', $value);
-            $value = str_replace('"', '\\"', $value);
+            $value = str_replace('"', '&quot;', $value);
             $tag .= " " . $key . "=\"" . $value . "\"";
         }
 
