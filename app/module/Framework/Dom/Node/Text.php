@@ -2,6 +2,8 @@
 
 namespace Framework\Dom\Node;
 
+use Framework\Dom\Interface\Node as NodeInterface;
+
 /**
  * ···························WWW.TERETA.DEV······························
  * ·······································································
@@ -18,7 +20,7 @@ namespace Framework\Dom\Node;
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Text
+class Text implements NodeInterface
 {
     /**
      * @param string $text
@@ -28,11 +30,16 @@ class Text
     ) {
     }
 
+    public function render(): string
+    {
+        return trim($this->text);
+    }
+
     /**
      * @return string
      */
     public function __toString(): string
     {
-        return trim($this->text);
+        return $this->render();
     }
 }

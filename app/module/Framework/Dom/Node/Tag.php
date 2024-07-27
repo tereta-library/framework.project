@@ -2,6 +2,8 @@
 
 namespace Framework\Dom\Node;
 
+use Framework\Dom\Interface\Node as NodeInterface;
+
 /**
  * ···························WWW.TERETA.DEV······························
  * ·······································································
@@ -18,7 +20,7 @@ namespace Framework\Dom\Node;
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Tag
+class Tag implements NodeInterface
 {
     const int TAG_NOTSET = 0;
     const int TAG_OPEN = 1;
@@ -71,6 +73,14 @@ class Tag
     }
 
     /**
+     * @return array $attributes
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
      * @param int $start
      * @param int $end
      * @return $this
@@ -93,9 +103,33 @@ class Tag
     }
 
     /**
+     * @return int
+     */
+    public function getType(): int
+    {
+        return $this->type;
+    }
+
+    /**
      * @return string
      */
     public function __toString(): string
+    {
+        return $this->render();
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function render(): string
     {
         $tag = $this->name;
 
