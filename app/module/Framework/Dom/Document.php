@@ -5,6 +5,7 @@ namespace Framework\Dom;
 use Framework\Dom\Node;
 use Framework\Dom\Node\Tag as NodeTag;
 use Framework\Dom\Node\Text as NodeText;
+use Framework\Dom\Node\Comment as NodeComment;
 use Exception;
 use Framework\Dom\Interface\Node as NodeInterface;
 
@@ -156,7 +157,21 @@ class Document
         } else if ($tag instanceof NodeText) {
             $node = new Node($this);
             $node->setTag($tag);
-            $rootArray[] = $node;
+            if ($pointer) {
+                $pointer->addChildren($node);
+            } else {
+                $rootArray[] = $node;
+            }
+            $nodeList[] = $node;
+            return;
+        } else if ($tag instanceof NodeComment) {
+            $node = new Node($this);
+            $node->setTag($tag);
+            if ($pointer) {
+                $pointer->addChildren($node);
+            } else {
+                $rootArray[] = $node;
+            }
             $nodeList[] = $node;
             return;
         }
@@ -198,19 +213,14 @@ class Document
     }
 
     /**
-     * @return NodeTag|null
+     * @return NodeInterface|null
      * @throws Exception
      */
-    private function parseTag(): ?NodeTag
+    private function parseTag(): ?NodeInterface
     {
         $initialPosition = $this->position;
 
         $tagType = NodeTag::TAG_NOTSET;
-        $commentTag = preg_match(
-            '/^\<\!--\s*([\w_-]+)(\s|--\>){1}/Usi',
-            substr($this->document, $initialPosition),
-            $matchesOpen
-        );
 
         $openTag = preg_match(
             '/^\<\s*([\w_-]+)(\s|\>){1}/Usi',
@@ -223,7 +233,13 @@ class Document
             $matchesClose
         );
 
-        if (!$openTag && !$closeTag) {
+        $commentTag = (!$openTag && !$closeTag) ? preg_match(
+            '/^\<\!--(.*)--\>/Usi',
+            substr($this->document, $initialPosition),
+            $matchesComment
+        ) : null;
+
+        if (!$openTag && !$closeTag && !$commentTag) {
             throw new Exception(
                 'Invalid open tag at: ' . $this->getErrorDescription($initialPosition)
             );
@@ -235,6 +251,10 @@ class Document
         } elseif ($closeTag) {
             $tagType = NodeTag::TAG_CLOSE;
             $matches = $matchesClose;
+        } elseif ($commentTag) {
+            $this->position = $this->position + strlen($matchesComment[0]);
+
+            return new NodeComment($matchesComment[1]);
         }
 
         $tagName = $matches[1];
@@ -266,9 +286,7 @@ class Document
             );
         }
 
-        $offset = $offset + strlen($matches[0]);
-
-        $this->position = $offset;
+        $this->position = $offset + strlen($matches[0]);
 
         return (new NodeTag)->setName($tagName)->setPosition($initialPosition, $this->position)
             ->setAttributes($attributes)->setType($tagType);

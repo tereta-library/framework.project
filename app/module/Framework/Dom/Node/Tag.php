@@ -27,6 +27,8 @@ class Tag implements NodeInterface
     const int TAG_CLOSE = 2;
     const int TAG_SELF_CLOSE = 3;
 
+    const int TAG_COMMENT = 4;
+
     /**
      * @var string
      */
