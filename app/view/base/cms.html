@@ -3,12 +3,17 @@
     <meta name="backend-update" content="index" />
 </head>
 <body>
-    <content data-backend-content="#content">
-        <div id="test" data-backend-attribute='data-test:$content'>qwe</div>
-        <div data-backend-attribute="data-test:$content"></div>
-        BR
+    <content data-backend-replace="#content" data-backend-block="Builder\Cms\Block\Content">
+        <hr />
+        <!--: if $content -->
+            <!--: foreach $content as $item -->
+                <div><!--: render $content --></div>
+            <!--: endforeach -->
+        <!--: endif -->
         <hr />
         HR
+        <br/>
+        BR
     </content>
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace Framework\Dom;
 use Framework\Dom\Interface\Node as NodeInterface;
 use Framework\Dom\Node\Tag as NodeTag;
 use Framework\Dom\Node\Text as NodeText;
+use Exception;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -51,6 +52,10 @@ class Node
      * @var Node|null
      */
     private ?Node $parent = null;
+
+    public function __construct(private Document &$document)
+    {
+    }
 
     /**
      * @return string
@@ -130,6 +135,33 @@ class Node
         return $this->parent;
     }
 
+    public function replaceChild(Node $oldNode, Node $newNode): static
+    {
+        $newNode->setParent($oldNode->getParent());
+        $children = $this->getChildren();
+        $newChildren = [];
+        foreach ($children as $child) {
+            if ($child === $oldNode) {
+                $newChildren[] = $newNode;
+            } else {
+                $newChildren[] = $child;
+            }
+        }
+
+        $this->clearChildren();
+        foreach ($newChildren as $child) {
+            $this->addChildren($child);
+        }
+
+        foreach ($this->document->getNodeList() as $key => $node) {
+            if ($node === $oldNode) {
+                $this->document->setNodeListItem($key, $newNode);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * @param Node $node
      * @return $this
@@ -182,6 +214,50 @@ class Node
         }
 
         return null;
+    }
+
+    /**
+     * @return array
+     */
+    public function export(): array
+    {
+        return [
+            'tagOpen' => $this->tagOpen,
+            'tagClose' => $this->tagClose,
+            'tag' => $this->tag,
+            'children' => $this->children,
+            'parent' => $this->parent,
+        ];
+    }
+
+    /**
+     * @param array $data
+     * @return $this
+     * @throws Exception
+     */
+    public function import(array $data): static
+    {
+        $params = [
+            'tagOpen',
+            'tagClose',
+            'tag',
+            'children',
+            'parent',
+        ];
+
+        foreach ($params as $param) {
+            if (!isset($data[$param])) {
+                throw new Exception('Missing parameter: ' . $param);
+            }
+        }
+
+        $this->tagOpen = $data['tagOpen'];
+        $this->tagClose = $data['tagClose'];
+        $this->tag = $data['tag'];
+        $this->children = $data['children'];
+        $this->parent = $data['parent'];
+
+        return $this;
     }
 
     /**

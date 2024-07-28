@@ -2,6 +2,7 @@
 
 namespace Framework\Dom;
 
+use Framework\Dom\Node;
 use Framework\Dom\Node\Tag as NodeTag;
 use Framework\Dom\Node\Text as NodeText;
 use Exception;
@@ -62,6 +63,17 @@ class Document
     {
         $this->getNodeTree($update);
         return $this->nodeList;
+    }
+
+    /**
+     * @param int $index
+     * @param Node $node
+     * @return $this
+     */
+    public function setNodeListItem(int $index, Node $node): static
+    {
+        $this->nodeList[$index] = $node;
+        return $this;
     }
 
     /**
@@ -135,14 +147,14 @@ class Document
     private function processTag(array &$nodeList, array &$rootArray, &$pointer, NodeInterface $tag): void
     {
         if ($tag instanceof NodeText && $pointer) {
-            $node = new Node();
+            $node = new Node($this);
             $node->setTag($tag);
             $pointer->addChildren($node);
             $node->setParent($pointer);
             $nodeList[] = $node;
             return;
         } else if ($tag instanceof NodeText) {
-            $node = new Node();
+            $node = new Node($this);
             $node->setTag($tag);
             $rootArray[] = $node;
             $nodeList[] = $node;
@@ -151,7 +163,7 @@ class Document
 
         switch($tag->getType()) {
             case NodeTag::TAG_OPEN:
-                $node = new Node();
+                $node = new Node($this);
                 $node->setTagOpen($tag);
                 if ($pointer) {
                     $pointer->addChildren($node);
@@ -172,7 +184,7 @@ class Document
                 $pointer = $pointer->getParent();
                 break;
             case NodeTag::TAG_SELF_CLOSE:
-                $node = new Node();
+                $node = new Node($this);
                 $node->setTagSelfClose($tag);
                 if ($pointer) {
                     $pointer->addChildren($node);
@@ -194,6 +206,12 @@ class Document
         $initialPosition = $this->position;
 
         $tagType = NodeTag::TAG_NOTSET;
+        $commentTag = preg_match(
+            '/^\<\!--\s*([\w_-]+)(\s|--\>){1}/Usi',
+            substr($this->document, $initialPosition),
+            $matchesOpen
+        );
+
         $openTag = preg_match(
             '/^\<\s*([\w_-]+)(\s|\>){1}/Usi',
             substr($this->document, $initialPosition),
