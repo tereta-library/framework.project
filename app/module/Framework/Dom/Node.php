@@ -3,6 +3,8 @@
 namespace Framework\Dom;
 
 use Framework\Dom\Interface\Node as NodeInterface;
+use Framework\Dom\Node\Tag as NodeTag;
+use Framework\Dom\Node\Text as NodeText;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -22,6 +24,9 @@ use Framework\Dom\Interface\Node as NodeInterface;
  */
 class Node
 {
+    const TYPE_TAG = 1;
+    const TYPE_TEXT = 2;
+
     /**
      * @var NodeInterface|null
      */
@@ -136,6 +141,16 @@ class Node
     }
 
     /**
+     * @return $this
+     */
+    public function clearChildren(): static
+    {
+        $this->children = [];
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getChildren(): array
@@ -143,9 +158,30 @@ class Node
         return $this->children;
     }
 
-    public function getAttribute(string $name): string
+    /**
+     * @param string $name
+     * @return string|null
+     */
+    public function getAttribute(string $name): ?string
     {
+        if (!$this->tagOpen) return null;
         return $this->tagOpen->getAttribute($name);
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getType(): ?int
+    {
+        if ($this->tagOpen instanceof NodeTag) {
+            return self::TYPE_TAG;
+        }
+
+        if ($this->tagOpen instanceof NodeText) {
+            return self::TYPE_TEXT;
+        }
+
+        return null;
     }
 
     /**
@@ -162,7 +198,7 @@ class Node
             $children .= $child->render();
         }
 
-        if ($this->tagClose) {
+        if ($this->tagClose && $this->tagClose->getType() != $this->tagClose::TAG_SELF_CLOSE) {
             return $tag . $children . $this->tagClose->render();
         }
 
