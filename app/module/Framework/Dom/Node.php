@@ -28,7 +28,6 @@ class Node
 {
     const int TYPE_TAG = 1;
     const int TYPE_TEXT = 2;
-
     const int TYPE_COMMENT = 3;
 
     /**
@@ -56,8 +55,20 @@ class Node
      */
     private ?Node $parent = null;
 
+    /**
+     * @var int
+     */
+    private int $nodeIndex = 0;
+
+    /**
+     * @var int
+     */
+    private static int $nodeStaticIndex = 0;
+
     public function __construct(private Document &$document)
     {
+        $this->nodeIndex = static::$nodeStaticIndex;
+        static::$nodeStaticIndex++;
     }
 
     /**
@@ -148,25 +159,11 @@ class Node
 
     public function replaceChild(Node $oldNode, Node $newNode): static
     {
-        $newNode->setParent($oldNode->getParent());
-        $children = $this->getChildren();
-        $newChildren = [];
-        foreach ($children as $child) {
+        $newNode->setParent($this);
+
+        foreach ($this->children as $key => $child) {
             if ($child === $oldNode) {
-                $newChildren[] = $newNode;
-            } else {
-                $newChildren[] = $child;
-            }
-        }
-
-        $this->clearChildren();
-        foreach ($newChildren as $child) {
-            $this->addChildren($child);
-        }
-
-        foreach ($this->document->getNodeList() as $key => $node) {
-            if ($node === $oldNode) {
-                $this->document->setNodeListItem($key, $newNode);
+                $this->children[$key] = $newNode;
             }
         }
 
@@ -270,6 +267,10 @@ class Node
         $this->tagClose = $data['tagClose'];
         $this->tag = $data['tag'];
         $this->children = $data['children'];
+        foreach ($this->children as $item) {
+            $item->setParent($this);
+        }
+
         $this->parent = $data['parent'];
 
         return $this;

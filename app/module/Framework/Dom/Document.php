@@ -43,11 +43,6 @@ class Document
     private ?array $tree = null;
 
     /**
-     * @var array $nodeList
-     */
-    private array $nodeList = [];
-
-    /**
      * @param string $document
      * @param string $fileDebug
      */
@@ -60,7 +55,7 @@ class Document
      * @return array
      * @throws Exception
      */
-    public function getNodeList(bool $update = false, bool $documentUpdate = false): array
+    public function getNodeList(bool $documentUpdate = false): array
     {
         $tree = $this->getNodeTree($documentUpdate);
 
@@ -70,7 +65,7 @@ class Document
             $this->getNodeListTree($nodeList, $item);
         }
 
-        return $this->nodeList = $nodeList;
+        return $nodeList;
     }
 
     private function getNodeListTree(array &$nodeList = [], $item)
@@ -79,17 +74,6 @@ class Document
             $nodeList[] = $item;
             $this->getNodeListTree($nodeList, $item);
         }
-    }
-
-    /**
-     * @param int $index
-     * @param Node $node
-     * @return $this
-     */
-    public function setNodeListItem(int $index, Node $node): static
-    {
-        $this->nodeList[$index] = $node;
-        return $this;
     }
 
     /**
