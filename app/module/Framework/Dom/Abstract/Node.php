@@ -1,9 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Dom\Node;
-
-use Framework\Dom\Interface\Node as NodeInterface;
-use Framework\Dom\Abstract\Node as NodeAbstract;
+namespace Framework\Dom\Abstract;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -16,42 +13,40 @@ use Framework\Dom\Abstract\Node as NodeAbstract;
  * ·······································································
  * ·······································································
  *
- * @class Framework\Dom\Node\Comment
- * @package Framework\Dom\Node
+ * @class Framework\Dom\Abstract\Node
+ * @package Framework\Dom\Abstract
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Comment extends NodeAbstract implements NodeInterface
+abstract class Node
 {
     /**
-     * @param string $content
+     * @var int $positionStart
      */
-    public function __construct(
-        private string $content
-    ) {
+    private int $positionStart;
+
+    /**
+     * @var int $positionEnd
+     */
+    private int $positionEnd;
+
+    /**
+     * @param int $start
+     * @param int $end
+     * @return $this
+     */
+    public function setPosition(int $start, int $end): static
+    {
+        $this->positionStart = $start;
+        $this->positionEnd = $end;
+        return $this;
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getContent(): string
+    public function getPositionStart(): int
     {
-        return $this->content;
-    }
-
-    /**
-     * @return string
-     */
-    public function render(): string
-    {
-        return "<!--{$this->content}-->";
-    }
-
-    /**
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->render();
+        return $this->positionStart;
     }
 }

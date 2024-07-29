@@ -3,6 +3,7 @@
 namespace Framework\Dom\Node;
 
 use Framework\Dom\Interface\Node as NodeInterface;
+use Framework\Dom\Abstract\Node as NodeAbstract;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -20,7 +21,7 @@ use Framework\Dom\Interface\Node as NodeInterface;
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Text implements NodeInterface
+class Text extends NodeAbstract implements NodeInterface
 {
     /**
      * @param string $text

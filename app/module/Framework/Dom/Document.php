@@ -60,10 +60,25 @@ class Document
      * @return array
      * @throws Exception
      */
-    public function getNodeList(bool $update = false): array
+    public function getNodeList(bool $update = false, bool $documentUpdate = false): array
     {
-        $this->getNodeTree($update);
-        return $this->nodeList;
+        $tree = $this->getNodeTree($documentUpdate);
+
+        $nodeList = [];
+        foreach($tree as $item) {
+            $nodeList[] = $item;
+            $this->getNodeListTree($nodeList, $item);
+        }
+
+        return $this->nodeList = $nodeList;
+    }
+
+    private function getNodeListTree(array &$nodeList = [], $item)
+    {
+        foreach ($item->getChildren() as $item) {
+            $nodeList[] = $item;
+            $this->getNodeListTree($nodeList, $item);
+        }
     }
 
     /**
@@ -86,14 +101,11 @@ class Document
     {
         if ($this->tree && !$update) return $this->tree;
 
-        $nodeList = [];
         $pointer = null;
         $this->tree = [];
         foreach($this->fetchTags($update) as $tag) {
-            $this->processTag($nodeList, $this->tree, $pointer, $tag);
+            $this->processTag($this->tree, $pointer, $tag);
         }
-
-        $this->nodeList = $nodeList;
 
         return $this->tree;
     }
@@ -145,34 +157,31 @@ class Document
      * @return void
      * @throws Exception
      */
-    private function processTag(array &$nodeList, array &$rootArray, &$pointer, NodeInterface $tag): void
+    private function processTag(array &$rootArray, &$pointer, NodeInterface $tag): void
     {
         if ($tag instanceof NodeText && $pointer) {
             $node = new Node($this);
             $node->setTag($tag);
             $pointer->addChildren($node);
             $node->setParent($pointer);
-            $nodeList[] = $node;
             return;
         } else if ($tag instanceof NodeText) {
             $node = new Node($this);
             $node->setTag($tag);
-            if ($pointer) {
-                $pointer->addChildren($node);
-            } else {
-                $rootArray[] = $node;
-            }
-            $nodeList[] = $node;
+            $rootArray[] = $node;
+            $node->setParent($pointer);
+            return;
+        } else if ($tag instanceof NodeComment && $pointer) {
+            $node = new Node($this);
+            $node->setTag($tag);
+            $pointer->addChildren($node);
+            $node->setParent($pointer);
             return;
         } else if ($tag instanceof NodeComment) {
             $node = new Node($this);
             $node->setTag($tag);
-            if ($pointer) {
-                $pointer->addChildren($node);
-            } else {
-                $rootArray[] = $node;
-            }
-            $nodeList[] = $node;
+            $rootArray[] = $node;
+            $node->setParent($pointer);
             return;
         }
 
@@ -207,7 +216,6 @@ class Document
                 } else {
                     $rootArray[] = $node;
                 }
-                $nodeList[] = $node;
                 break;
         }
     }

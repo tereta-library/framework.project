@@ -3,6 +3,7 @@
 namespace Framework\Dom\Node;
 
 use Framework\Dom\Interface\Node as NodeInterface;
+use Framework\Dom\Abstract\Node as NodeAbstract;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -20,29 +21,17 @@ use Framework\Dom\Interface\Node as NodeInterface;
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Tag implements NodeInterface
+class Tag extends NodeAbstract implements NodeInterface
 {
     const int TAG_NOTSET = 0;
     const int TAG_OPEN = 1;
     const int TAG_CLOSE = 2;
     const int TAG_SELF_CLOSE = 3;
 
-    const int TAG_COMMENT = 4;
-
     /**
      * @var string
      */
     private string $name;
-
-    /**
-     * @var int $positionStart
-     */
-    private int $positionStart;
-
-    /**
-     * @var int $positionEnd
-     */
-    private int $positionEnd;
 
     /**
      * @var int $type
@@ -90,26 +79,6 @@ class Tag implements NodeInterface
     public function getAttribute(string $name): string
     {
         return $this->attributes[$name] ?? '';
-    }
-
-    /**
-     * @param int $start
-     * @param int $end
-     * @return $this
-     */
-    public function setPosition(int $start, int $end): static
-    {
-        $this->positionStart = $start;
-        $this->positionEnd = $end;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPositionStart(): int
-    {
-        return $this->positionStart;
     }
 
     /**

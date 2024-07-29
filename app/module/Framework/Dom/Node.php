@@ -5,6 +5,7 @@ namespace Framework\Dom;
 use Framework\Dom\Interface\Node as NodeInterface;
 use Framework\Dom\Node\Tag as NodeTag;
 use Framework\Dom\Node\Text as NodeText;
+use Framework\Dom\Node\Comment as NodeComment;
 use Exception;
 
 /**
@@ -25,8 +26,10 @@ use Exception;
  */
 class Node
 {
-    const TYPE_TAG = 1;
-    const TYPE_TEXT = 2;
+    const int TYPE_TAG = 1;
+    const int TYPE_TEXT = 2;
+
+    const int TYPE_COMMENT = 3;
 
     /**
      * @var NodeInterface|null
@@ -101,6 +104,14 @@ class Node
         $this->tag = $tag;
 
         return $this;
+    }
+
+    /**
+     * @return NodeInterface
+     */
+    public function getTag(): NodeInterface
+    {
+        return $this->tag;
     }
 
     /**
@@ -213,6 +224,10 @@ class Node
             return self::TYPE_TEXT;
         }
 
+        if ($this->tag instanceof NodeComment) {
+            return self::TYPE_COMMENT;
+        }
+
         return null;
     }
 
@@ -246,7 +261,7 @@ class Node
         ];
 
         foreach ($params as $param) {
-            if (!isset($data[$param])) {
+            if (!in_array($param, array_keys($data))) {
                 throw new Exception('Missing parameter: ' . $param);
             }
         }
