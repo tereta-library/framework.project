@@ -2,13 +2,14 @@
 
 namespace Builder\Cms\Block;
 
-use Framework\View\Html\Block\Node;
+use Framework\View\Php\Template;
 
-class Content extends Node
+class Content extends Template
 {
     public function render(): string
     {
-        $return = parent::render();
-        return "<div><div>php</div><div>{$return}</div>";
+        $this->assign('content', 'Hello World!');
+
+        return parent::render();
     }
 }

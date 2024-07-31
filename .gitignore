@@ -5,3 +5,4 @@ pub/.htaccess
 .idea
 .DS_Store
 vendor
+var

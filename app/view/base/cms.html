@@ -6,10 +6,8 @@
     <content data-backend-replace="#content" data-backend-block="Builder\Cms\Block\Content">
         <hr />
         <!--: if $content -->
-            <!--: foreach $content['element'] as $key => $item -->
-                <div><!--: render $content --></div>
-                <div data-backend-block="Builder\Cms\Block\Time">xxx</div>
-            <!--: endForeach -->
+            <div><!--: render $content --></div>
+            <div data-backend-block="Builder\Cms\Block\Time">xxx</div>
         <!--: endif -->
         <hr />
         HR

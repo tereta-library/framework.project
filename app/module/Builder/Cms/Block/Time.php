@@ -2,8 +2,8 @@
 
 namespace Builder\Cms\Block;
 
-use Framework\View\Html\Block\Node;
+use Framework\View\Php\Template;
 
-class Time extends Node
+class Time extends Template
 {
 }
