@@ -1,7 +1,43 @@
 <html lang="en">
+<head>
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="https://tereta.dev/css/designer/section/header/linerColored/common.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="https://tereta.dev/css/designer/section/header/linerColored/tablet.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="https://tereta.dev/css/designer/section/header/linerColored/desktop.css" />
+</head>
 <body>
-<content data-backend-content="#header">
-    HEADER FROM FILE
-</content>
+    <header class="header" data-backend-replace="#header">
+        <div class="headerBox">
+            <a href="https://tereta.dev" class="headerLogo" data-admin-init='"site": {"field": "logo"}'>
+                <img src="https://tereta.dev/storage/site_5/logo.png" alt="Logo" />
+            </a>
+            <nav class="headerMenu">
+                <input type="checkbox" name="burger" class="burgerMenu" id="menu" />
+                <label for="menu" class="burgerMenu"><span class="iconBurger"></span></label>
+
+                <ul class="menu" data-admin-init='"menu": "default"'>
+                    <li class="menuItem">
+                        <a href="https://tereta.dev">
+                            Downloads
+                        </a>
+                    </li>
+                    <li class="menuItem">
+                        <a href="https://tereta.dev">
+                            Service
+                        </a>
+                    </li>
+                    <li class="menuItem">
+                        <a href="https://tereta.dev">
+                            Portfolio
+                        </a>
+                    </li>
+                    <li class="menuItem">
+                        <a href="https://tereta.dev">
+                            Call Us
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 </body>
 </html>
