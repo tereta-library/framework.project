@@ -6,3 +6,4 @@ pub/.htaccess
 .DS_Store
 vendor
 var
+generated

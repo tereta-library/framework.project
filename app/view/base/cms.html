@@ -1,6 +1,7 @@
 <html lang="en">
-<head data-backend-merge="head">
+<head>
     <meta name="backend-update" content="index" />
+    <script data-backend-add="#head">alert("-=1=-")</script>
 </head>
 <body>
     <content data-backend-replace="#content" data-backend-block="Builder\Cms\Block\Content">
@@ -13,6 +14,8 @@
         HR
         <br />
         BR
+
+        <script>alert("ok")</script>
     </content>
 </body>
 </html>

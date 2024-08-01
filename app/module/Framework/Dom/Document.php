@@ -85,10 +85,11 @@ class Document
     {
         if ($this->tree && !$update) return $this->tree;
 
+        $shift = 0;
         $pointer = null;
         $this->tree = [];
         foreach($this->fetchTags($update) as $tag) {
-            $this->processTag($this->tree, $pointer, $tag);
+            $this->processTag($this->tree, $pointer, $tag, $shift);
         }
 
         return $this->tree;
@@ -141,7 +142,7 @@ class Document
      * @return void
      * @throws Exception
      */
-    private function processTag(array &$rootArray, &$pointer, NodeInterface $tag): void
+    private function processTag(array &$rootArray, &$pointer, NodeInterface $tag, int &$shift = 0): void
     {
         if ($tag instanceof NodeText && $pointer) {
             $node = new Node($this);
@@ -180,7 +181,6 @@ class Document
                     $rootArray[] = $node;
                 }
                 $pointer = $node;
-                $nodeList[] = $node;
                 break;
             case NodeTag::TAG_CLOSE:
                 if ($pointer->getName() !== $tag->getName()) {

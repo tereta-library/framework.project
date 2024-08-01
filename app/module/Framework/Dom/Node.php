@@ -191,11 +191,48 @@ class Node
     }
 
     /**
+     * @return $this
+     */
+    public function remove($element = null): static
+    {
+        if (!$element) {
+            $this->getParent()->remove($this);
+
+            return $this;
+        }
+
+        foreach ($this->children as $key=>$child) {
+            if ($child === $element) {
+                unset($this->children[$key]);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return array
      */
     public function getChildren(): array
     {
         return $this->children;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        if (!$this->tagOpen) return [];
+        return $this->tagOpen->getAttributes();
+    }
+
+    public function setAttribute(string $name, ?string $value): static
+    {
+        if (!$this->tagOpen) return $this;
+        $this->tagOpen->setAttribute($name, $value);
+
+        return $this;
     }
 
     /**
@@ -282,7 +319,7 @@ class Node
     public function render(): string
     {
         if ($this->tagOpen) {
-            $tag = $this->tagOpen->render();
+            $tag = $this->tagOpen->render() . "\n";
         }
 
         $children = '';
@@ -291,10 +328,10 @@ class Node
         }
 
         if ($this->tagClose && $this->tagClose->getType() != $this->tagClose::TAG_SELF_CLOSE) {
-            return $tag . $children . $this->tagClose->render();
+            return $tag . $children . $this->tagClose->render() . "\n";
         }
 
-        return $this->tag->render();
+        return $this->tag->render() . "\n";
     }
 
     /**

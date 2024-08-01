@@ -64,13 +64,28 @@ class Tag extends NodeAbstract implements NodeInterface
     }
 
     /**
+     * @param string $name
+     * @param string|null $value
+     * @return $this
+     */
+    public function setAttribute(string $name, ?string $value): static
+    {
+        if ($value === null) {
+            unset($this->attributes[$name]);
+            return $this;
+        }
+
+        $this->attributes[$name] = $value;
+        return $this;
+    }
+
+    /**
      * @return array $attributes
      */
     public function getAttributes(): array
     {
         return $this->attributes;
     }
-
 
     /**
      * @param string $name
