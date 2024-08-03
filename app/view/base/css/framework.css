@@ -1,0 +1,63 @@
+.formElement.inputField {
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+.formElement.inputField input[type=text], .formElement.inputField input[type=password], .formElement.inputField select, .formElement.inputField textarea {
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 10px;
+}
+.formElement.inputTextArea {
+  height: 100px;
+}
+.formElement.inputTextArea textarea {
+  padding-top: 5px;
+}
+.formElement.checkbox {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #555;
+  background: #fff;
+}
+.formElement.checkbox input[type=checkbox] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 2;
+}
+.formElement.checkbox input[type=checkbox] + div {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  bottom: 5px;
+  right: 5px;
+  z-index: 1;
+}
+.formElement.checkbox input[type=checkbox]:checked + div {
+  background: #000;
+}
+.formElement.button {
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+.formElement.button button {
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 10px;
+}
+
+/*# sourceMappingURL=framework.css.map */

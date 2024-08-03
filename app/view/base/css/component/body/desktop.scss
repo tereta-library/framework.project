@@ -1,0 +1,11 @@
+@import "./desktop/general";
+@import "./desktop/main";
+
+@media (min-width: 1280px) {
+    body {
+        .main {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+    }
+}

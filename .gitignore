@@ -2,6 +2,7 @@ cli.php
 composer.lock
 pub/index.php
 pub/.htaccess
+pub/resource
 .idea
 .DS_Store
 vendor

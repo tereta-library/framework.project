@@ -13,6 +13,10 @@ return [
         'enabled' => true,
         'path' => 'vendor/tereta/framework.application/src',
     ],
+    'Builder\\Panel' => [
+        'enabled' => true,
+        'path' => 'app/module/Builder/Panel',
+    ],
     'Builder\\Cms' => [
         'enabled' => true,
         'path' => 'app/module/Builder/Cms',

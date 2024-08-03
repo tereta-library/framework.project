@@ -1,0 +1,71 @@
+$primary-color: #FFDF1B;
+$color2: #ffffff;
+$color3: #000000;
+
+.header {
+    &Box {
+    }
+
+    &Logo {
+        clear: none;
+        float: left;
+    }
+
+    &Menu {
+        clear: none;
+        padding: 24px 10px 0px 0px;
+
+        .burgerMenu {
+            display: none;
+        }
+
+        .menu {
+            display: block;
+            padding-top: 0;
+
+            & > .menuItem {
+                position: relative;
+
+                & > ul {
+                    position: absolute;
+                    top: auto;
+                    right: auto;
+                    left: 50%;
+                    width: auto;
+                    transform: translateX(-50%);
+                }
+            }
+
+            .menuItem, .menuSubmenuItem {
+                & > input[type=checkbox]:checked + label:before {
+                    opacity: 0;
+                }
+
+                & > input[type=checkbox]:checked + label + ul {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &:hover {
+                    & > input[type=checkbox] + label:before {
+                        opacity: 1;
+                    }
+
+                    & > input[type=checkbox] + label + ul {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+
+                    & > input[type=checkbox]:checked + label:before {
+                        opacity: 1;
+                    }
+
+                    & > input[type=checkbox]:checked + label + ul {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+                }
+            }
+        }
+    }
+}

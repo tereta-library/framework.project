@@ -1,0 +1,161 @@
+$primary-color: #FFDF1B;
+$color2: #ffffff;
+$color3: #000000;
+
+.header {
+    font-family: 'Montserrat', sans-serif;
+    background-color: $primary-color;
+
+    &Box {
+        text-align: center;
+        display: block;
+        max-width: 1300px;
+        margin: 0 auto;
+
+        &:after {
+            content: "";
+            clear: both;
+            display: block;
+        }
+    }
+
+    &Logo {
+        clear: both;
+        display: block;
+        align-self: center;
+        justify-self: start;
+        position: relative;
+        top: 1px;
+        padding: 5px;
+
+        img {
+            max-width: 240px;
+            max-height: 60px;
+            min-height: 60px;
+        }
+    }
+
+    &Menu {
+        clear: both;
+        margin: 0 auto 0 auto;
+        text-align: center;
+        align-self: center;
+        letter-spacing: 2px;
+        line-height: 23px;
+        text-transform: uppercase;
+        user-select: none;
+        font-size: 12px;
+        padding-bottom: 10px;
+
+        .burgerMenu{
+            display: block;
+
+            .iconBurger {
+                align-content: center;
+                background-color: #000;
+                color: #ffdf1b;
+                font-size: 30px;
+                justify-content: center;
+                min-height: 40px;
+                min-width: 40px;
+                display: inline-block;
+
+                &:before {
+                    color: #fff;
+                }
+            }
+        }
+
+        input.burgerMenu:checked {
+            & + label.burgerMenu + .menu {
+                display: block;
+            }
+        }
+
+        .menu {
+            display: none;
+            padding-top: 10px;
+
+            & > .menuItem {
+                margin: 0 10px;
+                position: static;
+
+                & > label, & > a {
+                    text-decoration: none;
+                    color: #000;
+                }
+
+                & > ul {
+                    position: absolute;
+                    top: auto;
+                    right: 0;
+                    left: 0;
+                    margin: 0px 10px;
+                    width: auto;
+                    transform: none;
+
+                    ul {
+                        left: 0px;
+                        right: 0px;
+                        width: auto;
+                    }
+                }
+            }
+
+            & > .menuSubMenu {
+                & > input[type=checkbox] + label {
+                    &:before {
+                        opacity: 0;
+                    }
+                }
+
+                & > input[type=checkbox]:checked + label {
+                    &:before {
+                        opacity: 1;
+                    }
+                }
+
+                & > label {
+                    position: relative;
+
+                    & > .textLabel {
+                        position: relative;
+                        z-index: 1;
+                    }
+
+                    &:before {
+                        z-index: 0;
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: -10px;
+                        bottom: -10px;
+                        right: -25px;
+                        left: -15px;
+                        background: #fff;
+                        opacity: 0;
+                        filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.5));
+                        transition: opacity 1s;
+                    }
+                }
+            }
+        }
+
+        .menuSubMenu {
+            &:after {
+                content: "\e5cf";
+                font-size: 13px;
+                margin-left: 0;
+                position: relative;
+                top: 2px;
+                font-family: 'Material Icons';
+            }
+        }
+
+        & [type="checkbox"] {
+            display: none;
+        }
+    }
+}
+
+@import "../menu";

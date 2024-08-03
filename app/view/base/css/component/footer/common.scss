@@ -1,0 +1,50 @@
+.footer {
+    background: #7cb331;
+
+    & > div {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 10px 0;
+
+        &:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .logo {
+            clear: both;
+            float: none;
+            text-align: center;
+            width: 100%;
+            display: block;
+            padding: 20px 0 0 0;
+        }
+
+        .contacts {
+            clear: both;
+            float: none;
+            text-align: center;
+            color: #fff;
+            padding: 14px;
+            height: 35px;
+
+            a {
+                display: block;
+                text-decoration: none;
+                color: #fff;
+                font-size: 15px;
+            }
+        }
+
+        .copy {
+            clear: both;
+            float: none;
+            text-align: center;
+            width: auto;
+            color: #fff;
+            font-size: 15px;
+            padding: 14px;
+        }
+    }
+}

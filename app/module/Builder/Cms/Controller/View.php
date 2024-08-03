@@ -16,12 +16,12 @@ use Framework\Application\Manager;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Cms\Controller\Page
+ * @class Builder\Cms\Controller\View
  * @package Builder\Cms\Controller
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Page implements Controller
+class View implements Controller
 {
     /**
      * Sample url: http://127.0.0.1/cms/page/123
@@ -33,8 +33,8 @@ class Page implements Controller
     public function render(string $identifier): string
     {
         $config = Manager::instance()->getConfig();
-        $manager = Manager::instance()->getAdapter();
-        $view = $manager->getView();
+        $view = Manager::instance()->getView();
+
         try {
             return (string) $view->render('cms');
         } catch (\Exception $e) {

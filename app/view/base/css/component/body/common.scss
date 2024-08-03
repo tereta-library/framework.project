@@ -1,0 +1,87 @@
+@import "./common/icons";
+@import "./common/general";
+@import "./common/framework";
+@import "./common/main";
+@import "./common/pages/restorePassword";
+
+body {
+    font-family: monospace;
+}
+
+.main {
+    margin: 0 10px;
+}
+
+.singleBanner {
+    background: rgba(252,239,60,0.8);
+    padding: 10px;
+    margin-bottom: 25px;
+
+    p {
+        margin-top: 10px;
+    }
+}
+
+.titledContainer {
+    color: #000;
+    margin-bottom: 25px;
+    position: relative;
+    padding: 30px 10px 10px 10px;
+
+    img {
+        max-width: 100%;
+    }
+
+    & > div:first-child {
+        border: 1px solid #000;
+        color: rgb(54 41 74);
+        position: absolute;
+        left: 30px;
+        top: 0;
+        padding: 0;
+        min-width: 200px;
+        transform: translateY(-50%);
+
+        & > span {
+            display: block;
+            padding: 10px;
+            position: relative;
+            background: #eeeeeeee;
+        }
+    }
+
+    & > div + div {
+        display: block;
+    }
+
+    &::after {
+        clear: both;
+        content: "";
+        display: block;
+    }
+
+    &.doubleTitledContainer {
+        & > div:first-child {
+            border: none;
+            background: transparent;
+
+            & > div {
+                display: inline-block;
+                border: 1px solid #000;
+                color: rgb(54 41 74);
+                position: relative;
+                left: 30px;
+                top: 0;
+                padding: 0;
+                min-width: 200px;
+
+                & > span {
+                    display: block;
+                    padding: 10px;
+                    position: relative;
+                    background: #eeeeeeee;
+                }
+            }
+        }
+    }
+}

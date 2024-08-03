@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$primary-color: #FFDF1B;
+$color2: #ffffff;
+$color3: #000000;
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  min-width: 375px;
+  overflow: hidden;
+}

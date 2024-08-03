@@ -1,0 +1,46 @@
+.footer {
+  background: #7cb331;
+}
+.footer > div {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+.footer > div:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.footer > div .logo {
+  clear: both;
+  float: none;
+  text-align: center;
+  width: 100%;
+  display: block;
+  padding: 20px 0 0 0;
+}
+.footer > div .contacts {
+  clear: both;
+  float: none;
+  text-align: center;
+  color: #fff;
+  padding: 14px;
+  height: 35px;
+}
+.footer > div .contacts a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  font-size: 15px;
+}
+.footer > div .copy {
+  clear: both;
+  float: none;
+  text-align: center;
+  width: auto;
+  color: #fff;
+  font-size: 15px;
+  padding: 14px;
+}
+
+/*# sourceMappingURL=common.css.map */

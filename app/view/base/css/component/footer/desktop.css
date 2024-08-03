@@ -1,0 +1,24 @@
+.footer > div {
+  padding: 0 10px;
+}
+.footer > div .logo {
+  float: left;
+  clear: none;
+  width: auto;
+  padding: 10px 0;
+}
+.footer > div .contacts {
+  float: left;
+  clear: none;
+  text-align: left;
+  padding: 24px 10px;
+}
+.footer > div .copy {
+  clear: none;
+  float: right;
+  width: 300px;
+  text-align: right;
+  padding: 24px 0 0 20px;
+}
+
+/*# sourceMappingURL=desktop.css.map */

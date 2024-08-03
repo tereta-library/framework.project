@@ -1,0 +1,49 @@
+.headerLogo {
+  clear: none;
+  float: left;
+}
+.headerMenu {
+  clear: none;
+  padding: 24px 10px 0px 0px;
+}
+.headerMenu .burgerMenu {
+  display: none;
+}
+.headerMenu .menu {
+  display: block;
+  padding-top: 0;
+}
+.headerMenu .menu > .menuItem {
+  position: relative;
+}
+.headerMenu .menu > .menuItem > ul {
+  position: absolute;
+  top: auto;
+  right: auto;
+  left: 50%;
+  width: auto;
+  transform: translateX(-50%);
+}
+.headerMenu .menu .menuItem > input[type=checkbox]:checked + label:before, .headerMenu .menu .menuSubmenuItem > input[type=checkbox]:checked + label:before {
+  opacity: 0;
+}
+.headerMenu .menu .menuItem > input[type=checkbox]:checked + label + ul, .headerMenu .menu .menuSubmenuItem > input[type=checkbox]:checked + label + ul {
+  opacity: 0;
+  pointer-events: none;
+}
+.headerMenu .menu .menuItem:hover > input[type=checkbox] + label:before, .headerMenu .menu .menuSubmenuItem:hover > input[type=checkbox] + label:before {
+  opacity: 1;
+}
+.headerMenu .menu .menuItem:hover > input[type=checkbox] + label + ul, .headerMenu .menu .menuSubmenuItem:hover > input[type=checkbox] + label + ul {
+  opacity: 1;
+  pointer-events: all;
+}
+.headerMenu .menu .menuItem:hover > input[type=checkbox]:checked + label:before, .headerMenu .menu .menuSubmenuItem:hover > input[type=checkbox]:checked + label:before {
+  opacity: 1;
+}
+.headerMenu .menu .menuItem:hover > input[type=checkbox]:checked + label + ul, .headerMenu .menu .menuSubmenuItem:hover > input[type=checkbox]:checked + label + ul {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/*# sourceMappingURL=desktop.css.map */
