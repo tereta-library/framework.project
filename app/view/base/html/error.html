@@ -1,11 +1,14 @@
 <html lang="en">
 <head>
     <meta name="backend-update" content="index" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/error/style.css" />
 </head>
 <body>
-    <content data-backend-replace="#content" id="content" data-backend-block="Framework\Application\Block\Error">
-        <!--: if $title -->
-            <h1><!--: echo $title --></h1>
+    <block data-backend-replace="#content" id="content" data-backend-block="Framework\Application\Block\Error">
+        <content class="contentError">
+            <!--: if $title -->
+                <h1><!--: echo $title --></h1>
+            <!--: endif -->
             <table>
                 <tr>
                     <th>Error Code</th>
@@ -19,10 +22,12 @@
                     <th>HTTP URL</th>
                     <td><!--: echo $url --></td>
                 </tr>
+                <!--: if $message -->
                 <tr>
                     <th>Error Message</th>
                     <td><!--: echo $message --></td>
                 </tr>
+                <!--: endif -->
                 <!--: if $backTrace -->
                 <tr>
                     <th>Error Backtrace</th>
@@ -30,7 +35,7 @@
                 </tr>
                 <!--: endif -->
             </table>
-        <!--: endif -->
-    </content>
+        </content>
+    </block>
 </body>
 </html>

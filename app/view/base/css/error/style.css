@@ -1,0 +1,11 @@
+.contentError table th {
+  text-align: left;
+  vertical-align: top;
+}
+.contentError table th:after {
+  content: ":";
+  float: right;
+  padding: 0 5px;
+}
+
+/*# sourceMappingURL=style.css.map */

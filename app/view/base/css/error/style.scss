@@ -1,0 +1,13 @@
+.contentError {
+  table {
+    th {
+      text-align: left;
+      vertical-align: top;
+      &:after {
+        content: ":";
+        float: right;
+        padding: 0 5px;
+      }
+    }
+  }
+}

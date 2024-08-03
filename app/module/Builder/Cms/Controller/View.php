@@ -35,7 +35,7 @@ class View implements Controller
     {
         $config = Manager::instance()->getConfig();
         $view = Manager::instance()->getView();
-throw new \Exception('eer');
+
         try {
             return $view->render('cms');
         } catch (Exception $e) {
