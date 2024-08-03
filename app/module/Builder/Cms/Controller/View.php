@@ -4,6 +4,7 @@ namespace Builder\Cms\Controller;
 
 use Framework\Http\Interface\Controller;
 use Framework\Application\Manager;
+use Exception;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -34,10 +35,10 @@ class View implements Controller
     {
         $config = Manager::instance()->getConfig();
         $view = Manager::instance()->getView();
-
+throw new \Exception('eer');
         try {
-            return (string) $view->render('cms');
-        } catch (\Exception $e) {
+            return $view->render('cms');
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
