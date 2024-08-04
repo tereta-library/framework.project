@@ -20,7 +20,10 @@ use Exception;
  * @class Builder\Cms\Controller\View
  * @package Builder\Cms\Controller
  * @link https://tereta.dev
+ * @since 2020-2024
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @author Tereta Alexander <tereta.alexander@gmail.com>
+ * @copyright 2020-2024 Tereta Alexander
  */
 class View implements Controller
 {
