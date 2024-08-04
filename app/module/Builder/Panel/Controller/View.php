@@ -5,6 +5,22 @@ namespace Builder\Panel\Controller;
 use Framework\Application\Manager;
 use Framework\Http\Interface\Controller;
 
+/**
+ * ···························WWW.TERETA.DEV······························
+ * ·······································································
+ * : _____                        _                     _                :
+ * :|_   _|   ___   _ __    ___  | |_    __ _        __| |   ___  __   __:
+ * :  | |    / _ \ | '__|  / _ \ | __|  / _` |      / _` |  / _ \ \ \ / /:
+ * :  | |   |  __/ | |    |  __/ | |_  | (_| |  _  | (_| | |  __/  \ V / :
+ * :  |_|    \___| |_|     \___|  \__|  \__,_| (_)  \__,_|  \___|   \_/  :
+ * ·······································································
+ * ·······································································
+ *
+ * @class Builder\Cms\Controller\View
+ * @package Builder\Cms\Controller
+ * @link https://tereta.dev
+ * @author Tereta Alexander <tereta.alexander@gmail.com>
+ */
 class View implements Controller
 {
     /**

@@ -46,7 +46,7 @@ export class Manager {
     async show()
     {
         if (!localStorage.getItem('adminToken')) {
-            return;
+            return this.showLogin();
         }
 
         if (!this.elementPanel) {
@@ -66,10 +66,6 @@ export class Manager {
      */
     async showLogin(logoutAction = null, params = [])
     {
-        if (localStorage.getItem('adminToken')) {
-            return;
-        }
-
         if (params.length == 1) {
             this.authorizeByKey(params[0], logoutAction);
             return;

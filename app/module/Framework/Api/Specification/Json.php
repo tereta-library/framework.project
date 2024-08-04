@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Panel;
+namespace Framework\Api\Specification;
 
-use Framework\Application\Interface\Module as ModuleInterface;
+use Framework\Api\Interface\Specification;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -15,11 +15,31 @@ use Framework\Application\Interface\Module as ModuleInterface;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Panel\Module
- * @package Builder\Panel\
+ * @class Framework\Api\Builder\Specification\Json
+ * @package Framework\Api\Builder\Specification
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Module implements ModuleInterface
+class Json implements Specification
 {
+    const string SPECIFICATION = 'json';
+
+    /**
+     * @param string $payload
+     * @return array
+     */
+    public function decode(string $payload): array
+    {
+        $return = json_decode($payload, true);
+        return $return ? $return : [];
+    }
+
+    /**
+     * @param mixed $data
+     * @return string
+     */
+    public function encode(mixed $data): string
+    {
+        return json_encode($data, JSON_PRETTY_PRINT);
+    }
 }

@@ -1,8 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Panel;
-
-use Framework\Application\Interface\Module as ModuleInterface;
+namespace Framework\Api\Interface;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -15,11 +13,12 @@ use Framework\Application\Interface\Module as ModuleInterface;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Panel\Module
- * @package Builder\Panel\
+ * @class Framework\Api\Interface\Specification
+ * @package Framework\Api\Interface
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Module implements ModuleInterface
+interface Specification
 {
+
 }

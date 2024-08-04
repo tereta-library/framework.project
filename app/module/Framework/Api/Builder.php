@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Panel;
+namespace Framework\Api;
 
-use Framework\Application\Interface\Module as ModuleInterface;
+use Exception;
+use Framework\Api\Interface\Specification as SpecificationInterface;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -15,11 +16,33 @@ use Framework\Application\Interface\Module as ModuleInterface;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Panel\Module
- * @package Builder\Panel\
+ * @class Framework\Api\Builder
+ * @package Framework\Api
  * @link https://tereta.dev
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  */
-class Module implements ModuleInterface
+class Builder
 {
+    private array $specifications = [
+        'json' => 'Framework\Api\Specification\Json'
+    ];
+
+    /**
+     * @param string $specification
+     * @return SpecificationInterface
+     * @throws Exception
+     */
+    public function create(string $specification)
+    {
+        if (isset($this->specifications[$specification])) {
+            $specification = $this->specifications[$specification];
+        }
+
+        $model = new $specification;
+        if (!$model instanceof SpecificationInterface) {
+            throw new Exception('Specification must implement ' . SpecificationInterface::class . ' interface.');
+        }
+
+        return $model;
+    }
 }
