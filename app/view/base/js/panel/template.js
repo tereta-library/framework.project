@@ -13,7 +13,7 @@ export default class Template {
 
         const self = this;
         const path = this.template;
-        const url = '/resources/html/' + path + '.html';
+        const url = '/resource/base/html/panel/' + path + '.html';
         const documentUrl = new URL(url, import.meta.url).href
 
         let documentHtml = null;

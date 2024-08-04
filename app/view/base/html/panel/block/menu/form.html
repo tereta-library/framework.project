@@ -1,0 +1,72 @@
+<form data-form="menu" class="formMenu frameworkAdmin">
+    <div class="close" data-event="click:onClose"></div>
+    <div data-if="showSuccessMessage" data-variable="successMessage" class="successMessage"></div>
+
+    <div class="adminButtons">
+        <div class="button formElement">
+            <div class="button formElement">
+                <button type="submit" data-variable="disabled:!isSave" data-event="click:saveForm" data-translate="Save"></button>
+            </div>
+        </div>
+    </div>
+
+    <fieldset>
+        <legend>Menu</legend>
+        <div class="formMenuFieldset">
+            <div class="menu_wrapper">
+                <div data-if="!menu.length">
+                    <button type="button" data-event="click:actionCreateFirst" data-translate="Create First"></button>
+                </div>
+                <div data-foreach="menu" class="menu_items" data-use="menuItem"></div>
+            </div>
+
+            <div class="menuItemEdit">
+                <div data-if="isSelected">
+                    <div class="menuButtonsAbove">
+                        <button type="button" data-event="click:actionAddBefore" data-translate="Add Before"></button>
+                    </div>
+                    <div>
+                        <div class="formElement inputField">
+                            <input type="text"
+                                   data-variable-className="class:filled:getItemData('label')"
+                                   data-event="change:actionChange('label')"
+                                   data-variable="attribute:value:getItemData('label')" />
+                            <label class="inputLabel">
+                                <span data-translate="Label"></span>
+                            </label>
+                        </div>
+                        <div class="formElement inputField">
+                            <input type="text"
+                                   data-variable-className="class:filled:getItemData('url')"
+                                   data-event="change:actionChange('url')"
+                                   data-variable="attribute:value:getItemData('url')" />
+                            <label class="inputLabel">
+                                <span data-translate="URL"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="menuButtons">
+                        <input type="button" data-event="click:actionAddSub" value="Add Sub Item" />
+                    </div>
+
+                    <div class="menuButtonsBelow">
+                        <button type="button" data-event="click:actionAddAfter" data-translate="Add After"></button>
+                    </div>
+                </div>
+                <div data-if="!isSelected" data-translate="Select menu item to edit"></div>
+            </div>
+        </div>
+        <div data-template="menuItem">
+            <div class="itemLine">
+                <label data-variable-id="attribute:for:adminId" data-event="actionEdit" data-variable="label" class="item_label"></label>
+                <div>
+                    <label data-variable-id="attribute:for:adminId" data-if="subMenu.length">&#8628;</label>
+                </div>
+                <div class="item_remove" data-event="actionRemove">&#10005;</div>
+            </div>
+            <input data-variable-id="attribute:id:adminId" data-variable="checked:!!opened" data-if="subMenu" type="checkbox" class="submenu_items_active">
+            <div data-foreach="subMenu" class="submenu_items" data-if="subMenu" data-use="menuItem"></div>
+        </div>
+    </fieldset>
+</form>

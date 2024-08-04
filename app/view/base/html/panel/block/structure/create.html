@@ -1,0 +1,20 @@
+<form data-form="create" class="formCreate frameworkAdmin">
+    <div class="label"><span data-translate="Create"></span>: </div>
+
+    <div data-if="showSuccessMessage" data-variable="successMessage" class="successMessage"></div>
+    <div class="close" data-event="click:onClose"></div>
+
+    <div class="adminButtons">
+        <div class="button formElement">
+            <button type="submit" data-variable="disabled:!isSave" data-event="click:createPage" data-translate="Create"></button>
+        </div>
+    </div>
+
+    <div class="formElement inputField selectType">
+        <select data-foreach="types" data-variable="value:typeSelected" data-event="change:typeChange">
+            <option data-variable="title" data-variable-key="value:key"></option>
+        </select>
+    </div>
+
+    <div data-form-types="container" class="newPageType"></div>
+</form>

@@ -1,0 +1,25 @@
+<div id="adminPanelLogin">
+    <form data-action="form" data-event="submit:submit">
+        <div class="close" data-action="close">&#10006;</div>
+
+        <div class="formTitle" data-translate="Login as administrator"></div>
+        <div class="message" data-if="isError" data-variable="errorMessage"></div>
+        <div class="formArea">
+            <div class="formElement inputField">
+                <input name="email" type="text" data-event="keyup:fieldChange" />
+                <label class="inputLabel">
+                    <span data-translate="Email"></span>
+                </label>
+            </div>
+            <div class="formElement inputField">
+                <input name="password" type="password" data-event="keyup:fieldChange" />
+                <label class="inputLabel">
+                    <span data-translate="Password"></span>
+                </label>
+            </div>
+            <div class="formElement button buttonEnter">
+                <button type="submit" data-translate="Enter"></button>
+            </div>
+        </div>
+    </form>
+</div>

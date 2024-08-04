@@ -1,0 +1,224 @@
+<form data-form="site" class="formSite frameworkAdmin">
+    <div class="label"><span data-translate="Site"></span>: </div>
+
+    <div data-if="showSuccessMessage" data-variable="successMessage" class="successMessage"></div>
+    <div class="close" data-event="click:onClose"></div>
+
+    <div class="adminButtons">
+        <div class="button formElement">
+            <button type="submit" data-variable="disabled:!isSave" data-translate="Save"></button>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <input type="radio" name="tab" id="form_site_general" checked />
+        <input type="radio" name="tab" id="form_site_contacts" />
+        <input type="radio" name="tab" id="form_site_theme" />
+        <input type="radio" name="tab" id="form_site_captcha" />
+        <input type="radio" name="tab" id="form_site_reseller" />
+        <input type="radio" name="tab" id="form_site_test" />
+        <div class="tabsBar">
+            <label for="form_site_general" data-translate="General"></label>
+            <label for="form_site_contacts" data-translate="Contacts"></label>
+            <label for="form_site_theme" data-translate="Theme"></label>
+            <label for="form_site_captcha" data-translate="Captcha"></label>
+            <label for="form_site_reseller" class="hidden" data-translate="Reseller" data-variable="class:show:resellerClass.enabled"></label>
+        </div>
+        <div class="tabsContainer">
+            <fieldset class="generalConfiguration">
+                <legend data-translate="General Configuration"></legend>
+
+                <div class="fields inline">
+                    <div class="formElement inputField inputSiteName">
+                        <input type="text" data-variable-className="class:filled:name" data-event="onChange('name')" data-event-keyup="onKeyup('name')" data-variable="value:name" />
+                        <label class="inputLabel">
+                            <span data-translate="Site Name"></span>
+                        </label>
+                    </div>
+                    <div class="formElement inputField inputTagLine">
+                        <input type="text" data-variable-className="class:filled:tagline" data-event="onChange('tagline')" data-event-keyup="onKeyup('tagline')" data-variable="value:tagline" />
+                        <label class="inputLabel">
+                            <span data-translate="Tagline"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="uploaderImage uploaderIcon">
+                    <div class="imageSelected">
+                        <img data-variable="attr:src:iconImage" alt="Icon" />
+                    </div>
+                    <div class="imageUploadArea">
+                        <label data-container="uploadZone" for="uploaderIcon" class="dropArea"></label>
+                        <div data-if="iconImage" data-translate="Icon Image Selected"></div>
+                        <div data-if="!iconImage" data-translate="Drug Icon Image Here"></div>
+                        <input type="file" id="uploaderIcon" class="hidden">
+                    </div>
+                </div>
+
+                <div class="uploaderImage uploaderLogo">
+                    <div class="imageSelected">
+                        <img data-variable="attr:src:logoImage" alt="Logo" />
+                    </div>
+                    <div class="imageUploadArea">
+                        <label data-container="uploadZone" for="uploaderLogo" class="dropArea"></label>
+                        <div data-if="logoImage" data-translate="Logo Image Selected"></div>
+                        <div data-if="!logoImage" data-translate="Drug Logo Image Here"></div>
+                        <input type="file" id="uploaderLogo" class="hidden">
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend data-translate="Contacts Configuration"></legend>
+                <div class="fields">
+                    <div class="formElement inputField">
+                        <input type="text" data-variable-className="class:filled:copyright" data-event="onChange('copyright')" data-event-keyup="onKeyup('copyright')" data-variable="value:copyright" />
+                        <label class="inputLabel">
+                            <span data-translate="Copyright"></span>
+                        </label>
+                    </div>
+                    <div class="formElement inputField">
+                        <input type="text" data-variable-className="class:filled:address" data-event="onChange('address')" data-event-keyup="onKeyup('address')" data-variable="value:address" />
+                        <label class="inputLabel">
+                            <span data-translate="Address"></span>
+                        </label>
+                    </div>
+                    <div class="formElement inputField">
+                        <input type="text" data-variable-className="class:filled:phone" data-event="onChange('phone')" data-event-keyup="onKeyup('phone')" data-variable="value:phone" />
+                        <label class="inputLabel">
+                            <span data-translate="Phone Number"></span>
+                        </label>
+                    </div>
+                    <div class="formElement inputField">
+                        <input type="text" data-variable-className="class:filled:email" data-event="onChange('email')" data-event-keyup="onKeyup('email')" data-variable="value:email" />
+                        <label class="inputLabel">
+                            <span data-translate="Email Address"></span>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="themeConfiguration">
+                <legend data-translate="Theme Configuration"></legend>
+
+                <div class="fields">
+                    <div class="formElement inputField inputSelectTheme" data-event="click:onClickTheme('themeHeader', 'header')">
+                        <select data-foreach="themeHeaderListing" data-event="change:onChangeTheme('themeHeader', 'header')" data-variable="value:themeHeader" class=" filled">
+                            <option data-variable="text:title" data-variable-key="attribute:value:themeId"></option>
+                        </select>
+
+                        <label class="inputLabel">
+                            <span data-translate="Header"></span>
+                        </label>
+                    </div>
+
+                    <div class="formElement inputField inputSelectTheme" data-event="click:onClickTheme('themeBody', 'body')">
+                        <select data-foreach="themeBodyListing" data-event="change:onChangeTheme('themeBody', 'body')" data-variable="value:themeBody">
+                            <option data-variable="text:title" data-variable-key="attribute:value:themeId"></option>
+                        </select>
+
+                        <label class="inputLabel">
+                            <span data-translate="Body"></span>
+                        </label>
+                    </div>
+
+                    <div class="formElement inputField inputSelectTheme" data-event="click:onClickTheme('themeFooter', 'footer')">
+                        <select data-foreach="themeFooterListing" data-event="change:onChangeTheme('themeFooter', 'footer')" data-variable="value:themeFooter">
+                            <option data-variable="text:title" data-variable-key="attribute:value:themeId"></option>
+                        </select>
+
+                        <label class="inputLabel">
+                            <span data-translate="Footer"></span>
+                        </label>
+                    </div>
+
+                    <div class="formElement inputField inputTextArea inputCss">
+                        <textarea data-event="onChange('themeCss')" data-event-keyup="onKeyup('themeCss')" data-variable-className="class:filled:themeCss" data-variable="value:themeCss"></textarea>
+
+                        <label class="inputLabel">
+                            <span data-translate="Additional CSS"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div data-window="themeWindow" id="adminPanelControl-themeWindow" class="frameworkAdmin"></div>
+            </fieldset>
+            <fieldset class="captchaConfiguration">
+                <legend data-translate="Captcha Configuration"></legend>
+
+                <div class="fields">
+                    <div class="formElement inputField">
+                        <input type="text"
+                               data-variable-className="class:filled:additional.captcha.publicKey"
+                               data-event="onChange('additional.captcha.publicKey')"
+                               data-event-keyup="onKeyup('additional.captcha.publicKey')"
+                               data-variable="value:additional.captcha.publicKey" />
+                        <label class="inputLabel">
+                            <span data-translate="Public Key"></span>
+                        </label>
+                    </div>
+
+                    <div class="formElement inputField">
+                        <input type="text"
+                               data-variable-className="class:filled:additional.captcha.secretKey"
+                               data-event="onChange('additional.captcha.secretKey')"
+                               data-event-keyup="onKeyup('additional.captcha.secretKey')"
+                               data-variable="value:additional.captcha.secretKey" />
+                        <label class="inputLabel">
+                            <span data-translate="Secret Key"></span>
+                        </label>
+                    </div>
+
+                    <div class="formElementCheckbox">
+                        <div data-translate="Enabled for Login"></div>
+                        <div class="formElement checkbox">
+                            <input type="checkbox" value="yes" data-event="onChange('additional.captcha.enabledLogin')" data-variable="value:additional.captcha.enabledLogin">
+                            <div></div>
+                        </div>
+                    </div>
+
+                    <div class="formElementCheckbox">
+                        <div data-translate="Enabled for Registration"></div>
+                        <div class="formElement checkbox">
+                            <input type="checkbox" value="yes" data-event="onChange('additional.captcha.enabledRegistration')" data-variable="value:additional.captcha.enabledRegistration">
+                            <div></div>
+                        </div>
+                    </div>
+
+                    <div class="formElementCheckbox">
+                        <div data-translate="Enabled for Restore Password"></div>
+                        <div class="formElement checkbox">
+                            <input type="checkbox" value="yes" data-event="onChange('additional.captcha.enabledRestore')" data-variable="value:additional.captcha.enabledRestore">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="resellerConfiguration">
+                <legend data-translate="Reseller Configuration"></legend>
+                <div class="fields">
+                    <ul class="fieldsList" data-foreach="resellerClass.domainList">
+                        <li>
+                            <div class="formElement inputField">
+                                <input type="text" data-variable="value:item" disabled="disabled" />
+                            </div>
+                            <div class="button formElement">
+                                <button type="button" data-event="click:removeDomain">Remove</button>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="fieldsAdd">
+                        <div class="formElement inputField">
+                            <input type="text" data-variable-className="class:filled:resellerClass.domainValue" data-variable="value:resellerClass.domainValue" data-event="keyup:onChange('resellerClass.domainValue')" />
+                            <label class="inputLabel">
+                                <span data-translate="Add Domain"></span>
+                            </label>
+                        </div>
+                        <div class="button formElement">
+                            <button type="button" data-variable="attribute:disabled:!resellerClass.domainValue" data-event="click:resellerClass.addDomainAction">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>

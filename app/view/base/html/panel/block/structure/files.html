@@ -1,0 +1,79 @@
+<form data-form="create" class="formFiles frameworkAdmin">
+    <div data-if="showSuccessMessage" data-variable="successMessage" class="successMessage"></div>
+    <div class="close" data-event="click:onClose"></div>
+
+    <div class="formFilesPath">
+        <div class="formFilesActions">
+            <span class="itemNew">
+                <label for="fileManagerUploadNewFile" class="addFile" >
+                    <img src="/img/fileManager/addFile.png">
+                    <span data-translate="Upload File"></span>
+                </label>
+                <input id="fileManagerUploadNewFile" type="file" data-event="change:changeUploadFile" />
+                <span class="addFolder" data-event="click:clickAddFolder">
+                    <img src="/img/fileManager/addFolder.png">
+                    <span data-translate="Create Folder"></span>
+                </span>
+            </span>
+        </div>
+        <div>
+            <div class="formElement inputField inputPath">
+                <input type="text" class="filled"
+                       data-event="change:changePathDir"
+                       data-variable="value:folderData.pathDir" />
+                <label class="inputLabel">
+                    <span data-translate="Directory Path"></span>
+                </label>
+            </div>
+            <span data-event="click:clickBackDir"><img class="backButton" src="/img/fileManager/goBack.png"></span>
+            <span data-event="click:clickEnterDir"><img class="enterButton" src="/img/fileManager/enterFolder.png"></span>
+            <span class="errorMessage" data-variable="class:show:folderData.error">
+                <span data-variable="folderData.error"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="formFilesArea" data-foreach="folderData.listing">
+        <div class="itemElement">
+            <span class="itemFolder" data-if="type = 'dir'">
+                <span class="image" data-event="click:clickFolderItem"><img src="/img/fileManager/folder.png"></span>
+                <span data-variable="name" data-event="click:clickFolderItem"></span>
+                <span class="removeButton">
+                    <span data-event="click:clickRemove">X</span>
+                </span>
+            </span>
+            <span class="itemFile" data-if="type = 'file'">
+                <span class="image" data-event="click:clickFileItem"><img src="/img/fileManager/file.png"></span>
+                <span data-variable="name" data-event="click:clickFileItem"></span>
+                <span>
+                    <span data-event="click:clickRemove" class="removeButton">X</span>
+                </span>
+            </span>
+        </div>
+    </div>
+    <div data-if="fileInfo.show" class="fileInfo">
+        <div class="background" data-event="click:closeFileInfo"></div>
+        <div class="border">
+            <div>
+                <table>
+                    <tr>
+                        <th><span data-translate="URL"></span></th>
+                        <td data-variable="fileInfo.url"></td>
+                    </tr>
+                    <tr>
+                        <th><span data-translate="Path"></span></th>
+                        <td data-variable="fileInfo.path"></td>
+                    </tr>
+                    <tr>
+                        <th><span data-translate="File Size"></span></th>
+                        <td data-variable="fileInfo.size"></td>
+                    </tr>
+                    <tr>
+                        <th><span data-translate="File Type"></span></th>
+                        <td data-variable="fileInfo.type"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

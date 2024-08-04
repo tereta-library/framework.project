@@ -1,0 +1,101 @@
+<form data-form="social" class="form_social frameworkAdmin">
+    <div class="adminButtons">
+        <div class="button formElement">
+            <button type="submit" data-variable="disabled:!isSave" data-event="click:saveForm" data-translate="Save"></button>
+        </div>
+    </div>
+
+    <div data-if="showSuccessMessage" data-variable="successMessage" class="successMessage"></div>
+    <div class="close" data-event="click:onClose"></div>
+
+    <fieldset>
+        <legend data-translate="Social Networks"></legend>
+
+        <div class="fields">
+            <div class="fields inline socialField">
+                <div class="formElement inputField">
+                    <input type="text"
+                           data-variable-className="class:filled:facebook"
+                           data-event="change:changeSocial('facebook')"
+                           data-event-keyup="keyup:changeSocial('facebook')"
+                           data-variable="value:facebook" />
+                    <label class="inputLabel">
+                        <span data-translate="Facebook [https://www.facebook.com/...]"></span>
+                    </label>
+                </div>
+                <div class="formElement checkbox">
+                    <input type="checkbox" data-variable="checked:!!facebook" data-variable-disabled="disabled:!facebook" data-event="click:clearSocial('facebook')">
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="fields inline socialField">
+                <div class="formElement inputField">
+                    <input type="text"
+                           data-variable-className="class:filled:instagram"
+                           data-event="change:changeSocial('instagram')"
+                           data-event-keyup="keyup:changeSocial('instagram')"
+                           data-variable="value:instagram" />
+                    <label class="inputLabel">
+                        <span data-translate="Instagram [https://www.instagram.com/...]"></span>
+                    </label>
+                </div>
+                <div class="formElement checkbox">
+                    <input type="checkbox" data-variable="checked:!!instagram" data-variable-disabled="disabled:!instagram" data-event="click:clearSocial('instagram')">
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="fields inline socialField">
+                <div class="formElement inputField">
+                    <input type="text"
+                           data-variable-className="class:filled:pinterest"
+                           data-event="change:changeSocial('pinterest')"
+                           data-event-keyup="keyup:changeSocial('pinterest')"
+                           data-variable="value:pinterest" />
+                    <label class="inputLabel">
+                        <span data-translate="Pinterest [https://www.pinterest.com/.../]"></span>
+                    </label>
+                </div>
+                <div class="formElement checkbox">
+                    <input type="checkbox" data-variable="checked:!!pinterest" data-variable-disabled="disabled:!pinterest" data-event="click:clearSocial('pinterest')">
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="fields inline socialField">
+                <div class="formElement inputField">
+                    <input type="text"
+                           data-variable-className="class:filled:linkedin"
+                           data-event="change:changeSocial('linkedin')"
+                           data-event-keyup="keyup:changeSocial('linkedin')"
+                           data-variable="value:linkedin" />
+                    <label class="inputLabel">
+                        <span data-translate="LinkedIn [https://www.linkedin.com/in/.../]"></span>
+                    </label>
+                </div>
+                <div class="formElement checkbox">
+                    <input type="checkbox" data-variable="checked:!!linkedin" data-variable-disabled="disabled:!linkedin" data-event="click:clearSocial('linkedin')">
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="fields inline socialField">
+                <div class="formElement inputField">
+                    <input type="text"
+                           data-variable-className="class:filled:youtube"
+                           data-event="change:changeSocial('youtube')"
+                           data-event-keyup="keyup:changeSocial('youtube')"
+                           data-variable="value:youtube" />
+                    <label class="inputLabel">
+                        <span data-translate="YouTube [https://www.youtube.com/channel/...]"></span>
+                    </label>
+                </div>
+                <div class="formElement checkbox">
+                    <input type="checkbox" data-variable="checked:!!youtube" data-variable-disabled="disabled:!youtube" data-event="click:clearSocial('youtube')">
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>

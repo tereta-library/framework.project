@@ -20,15 +20,17 @@ const adminSingletone = new class {
 export { adminSingletone };
 
 export class Manager {
-    syntax         = null;
-    elementCanvas  = null;
-    containerPanel = null;
-    elementPanel   = null;
-    loginPopup     = null;
+    syntax           = null;
+    elementCanvas    = null;
+    containerPanel   = null;
+    elementPanel     = null;
+    loginPopup       = null;
+    languageDirectory= null;
 
-    constructor(elementCanvas, containerPanel) {
+    constructor(elementCanvas, containerPanel, languageDirectory) {
         this.elementCanvas = elementCanvas;
         this.containerPanel = containerPanel;
+        this.languageDirectory = languageDirectory;
         this.block = new Block(this);
 
         adminSingletone.register(this);
@@ -56,6 +58,41 @@ export class Manager {
         }
     }
 
+    /**
+     *
+     * @param logoutAction
+     * @param params
+     * @returns {Promise<*>}
+     */
+    async showLogin(logoutAction = null, params = [])
+    {
+        if (localStorage.getItem('adminToken')) {
+            return;
+        }
+
+        if (params.length == 1) {
+            this.authorizeByKey(params[0], logoutAction);
+            return;
+        }
+
+        if (this.loginPopup) {
+            this.loginPopup.show();
+            return;
+        }
+
+        const loginPopup = await this.getBlock('block/login');
+        await loginPopup.render(this.containerPanel);
+        loginPopup.show();
+        loginPopup.setLogoutAction(logoutAction);
+
+        this.loginPopup = loginPopup;
+        return loginPopup;
+    }
+
+    /**
+     * @param code
+     * @returns {Promise<void>}
+     */
     async loadTranslation(code = null)
     {
         let translationMap = {};
@@ -68,7 +105,7 @@ export class Manager {
             code = 'en_US';
         }
 
-        await fetch(`/resource/base/json/lang/admin/${code}.json`, {
+        await fetch(`${this.languageDirectory}/${code}.json`, {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
@@ -122,55 +159,12 @@ export class Manager {
         });
     }
 
-    async showLogin(logoutAction = null, params = [])
-    {
-        if (params.length == 1) {
-            this.authorizeByKey(params[0], logoutAction);
-            return;
-        }
-
-        if (this.loginPopup) {
-            this.loginPopup.show();
-            return;
-        }
-
-        const loginPopup = await this.getBlock('block/login');
-        await loginPopup.render(this.containerPanel);
-        loginPopup.show();
-        loginPopup.setLogoutAction(logoutAction);
-
-        this.loginPopup = loginPopup;
-        return loginPopup;
-    }
-
     hideLogin() {
         if (!this.loginPopup) {
             return;
         }
 
         this.loginPopup.hide();
-    }
-
-    onHash(hash, callBackOn, callBackOff)
-    {
-        const retrieveHash = () => {
-            const hashArray = window.location.hash.split('/');
-            const hashAdmin = hashArray.shift();
-
-            return [hashAdmin, hashArray];
-        }
-
-        window.addEventListener("hashchange", function() {
-            if (retrieveHash()[0] === hash) {
-                callBackOn(retrieveHash()[1]);
-            } else {
-                callBackOff();
-            }
-        });
-
-        if (retrieveHash()[0] === hash) {
-            callBackOn(retrieveHash()[1]);
-        }
     }
 
     getToken()
