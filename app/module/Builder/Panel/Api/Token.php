@@ -7,11 +7,12 @@ use Framework\Api\Interface\Api;
 class Token implements Api
 {
     /**
-     * @return string|array|int
+     * @param array $input
+     * @return array
      * @api admin/token
      */
-    public function getToken(): string|array|int
+    public function getToken(array $input): array
     {
-        return ['token' => 'asd'];
+        return ['token' => 'asd', 'debug' => $input];
     }
 }

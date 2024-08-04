@@ -29,9 +29,9 @@ class Json implements Specification
 
     /**
      * @param string $payload
-     * @return array
+     * @return array|string|int
      */
-    public function decode(string $payload): array
+    public function decode(string $payload): array|string|int
     {
         $return = json_decode($payload, true);
         return $return ? $return : [];

@@ -16,7 +16,7 @@ use Framework\Api\Interface\Specification as SpecificationInterface;
  * ·······································································
  * ·······································································
  *
- * @class Framework\Api\Builder
+ * @class Framework\Api\Factory
  * @package Framework\Api
  * @link https://tereta.dev
  * @since 2020-2024
@@ -24,7 +24,7 @@ use Framework\Api\Interface\Specification as SpecificationInterface;
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  * @copyright 2020-2024 Tereta Alexander
  */
-class Builder
+class Factory
 {
     private array $specifications = [
         'json' => 'Framework\Api\Specification\Json'
@@ -35,7 +35,7 @@ class Builder
      * @return SpecificationInterface
      * @throws Exception
      */
-    public function create(string $specification)
+    public function create(string $specification): SpecificationInterface
     {
         if (isset($this->specifications[$specification])) {
             $specification = $this->specifications[$specification];
