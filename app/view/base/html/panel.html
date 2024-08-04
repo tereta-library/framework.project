@@ -1,8 +1,24 @@
 <html lang="en">
 <head>
-    <meta name="backend-update" content="index" />
+    <title>Web Site - Edit Panel</title>
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/panel/style.css" />
 </head>
-<body data-backend-replace="#body" class="panel">
-    <iframe src="http://127.0.0.1/cms/page/123" style="position: absolute; width: 100%; height: 100%; border: none;"></iframe>
+<body class="panel">
+    <iframe src="http://127.0.0.1/cms/page/123"></iframe>
+
+    <div id="adminPanel"></div>
+    <script type="module">
+        import { Manager } from '/resource/base/js/panel/manager.js';
+
+        const adminPanel = (new Manager(document.body, document.getElementById('adminPanel')));
+        adminPanel.showCss('/resource/base/css/panel/admin.css');
+        await adminPanel.loadTranslation();
+        adminPanel.onHash(
+            '#admin',
+            adminPanel.showLogin.bind(adminPanel, () => { window.location.hash = '' }),
+            adminPanel.hideLogin.bind(adminPanel)
+        );
+        adminPanel.show();
+    </script>
 </body>
 </html>

@@ -1,0 +1,68 @@
+.window {
+    position: fixed;
+    left:0;
+    right:0;
+    top: 0;
+    bottom: 0;
+    z-index: 999999;
+    display: none;
+
+    &-background {
+        position: absolute;
+        background: #ffffff88;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+    }
+
+    &-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #404e64;
+        padding: 10px;
+        color: #fff;
+    }
+
+    &.show {
+        display: block;
+    }
+
+    .extraForm{
+        #variables_header:checked + div {
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            background: #404e64;
+            overflow: auto;
+
+            .closeVariables {
+                float: right;
+            }
+
+            & > dl {
+                dt {
+                    float: left;
+                    width: 200px;
+                    padding: 2px;
+                }
+
+                dd {
+                    padding-bottom: 3px;
+                    margin-left: 100px;
+
+                    &:after {
+                        display: block;
+                        content: "";
+                        clear: both;
+                    }
+                }
+            }
+        }
+    }
+}

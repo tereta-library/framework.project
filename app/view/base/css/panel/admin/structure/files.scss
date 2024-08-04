@@ -1,0 +1,201 @@
+#adminPanelControl {
+    .formFiles {
+        .fileInfo {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+
+            & > div.background {
+                content: "";
+                background: #404e64aa;
+                position: absolute;
+                left: 0;
+                top: 0;
+                right: 0;
+                bottom: 0;
+            }
+
+            & > div.border {
+                width: 500px;
+                margin: 10px auto 0 auto;
+                height: calc(100% - 20px);
+                background: #404e64;
+                position: relative;
+                border: 1px solid #232c3a;
+                border-radius: 5px;
+
+                & > div {
+                    margin: 0;
+                    position: absolute;
+                    top: 50%;
+                    -ms-transform: translateY(-50%);
+                    transform: translateY(-50%);
+                    width: 100%;
+
+                    & > table {
+                        margin: 0 auto;
+                    }
+                }
+            }
+
+            table {
+                th {
+                    width: 100px;
+                }
+            }
+        }
+
+        .formFilesPath {
+            padding-bottom: 10px;
+
+            &:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            .errorMessage {
+                color: #f8b6b6;
+                padding: 0;
+                display: none;
+
+                & > span {
+                    margin-bottom: -8px;
+                    float: left;
+                }
+
+                &.show {
+                    display: inline-block;
+                }
+            }
+
+            .backButton {
+                width: 25px;
+                margin-bottom: -10px;
+                cursor: pointer;
+            }
+
+            .enterButton{
+                width: 25px;
+                margin-bottom: -10px;
+                cursor: pointer;
+            }
+
+            .inputPath {
+                float: left;
+                width: 200px;
+                margin: 0 10px 0 0;
+                padding: 0;
+            }
+        }
+
+        .formFilesArea {
+            max-height: 350px;
+            overflow: auto;
+            margin-top: 15px;
+            padding-right: 10px;
+
+            &:after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+
+            .itemElement {
+                position: relative;
+                float: left;
+                height: 105px;
+                width: 90px;
+                margin-right: 9px;
+                text-align: center;
+                overflow: hidden;
+
+                &> span {
+                    padding: 5px;
+                    text-overflow: ellipsis;
+                }
+
+                &:hover {
+                    overflow: visible;
+                    z-index: 10;
+                    position: relative;
+
+                    &> span {
+                        background: #1a202c;
+                    }
+                }
+
+                .itemFolder, .itemFile, itemNew {
+                    .image {
+                        display: block;
+                        width: 100%;
+                        padding-top: 15px;
+                        cursor: pointer;
+                    }
+
+                    .name {
+                        display: block;
+                    }
+                }
+
+                .image {
+                    img {
+                        width: 50%;
+                    }
+                }
+
+                .removeButton {
+                    cursor: pointer;
+                    position: absolute;
+                    top: 0;
+                    right: 5px;
+                }
+            }
+        }
+
+        .formFilesActions {
+            .itemNew {
+                float: right;
+                padding-bottom: 0;
+                padding-left: 5px;
+                text-align: center;
+                width: auto;
+                margin: 0 0 -15px 0;
+
+                .addFile {
+                    padding: 0 10px 0 0;
+                    float: left;
+                    cursor: pointer;
+
+                    img {
+                        width: 25px;
+                    }
+
+                    span {
+                        display: block;
+                    }
+
+                    & + #fileManagerUploadNewFile {
+                        display: none;
+                    }
+                }
+
+                .addFolder{
+                    padding: 0 0 0 0;
+                    float: left;
+                    cursor: pointer;
+
+                    img {
+                        width: 25px;
+                    }
+
+                    span {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

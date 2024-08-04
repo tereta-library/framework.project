@@ -1,0 +1,48 @@
+@import "structure/create";
+@import "structure/listing";
+@import "structure/files";
+
+#adminPanelControl {
+    .structure {
+        position: relative;
+
+        .background{
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+        }
+
+        #admin_structure_checkbox {
+            display: none;
+
+            & + label {
+                display: block;
+                cursor: pointer;
+            }
+            & + label + .background {
+                display: none;
+            }
+
+            & + label + .background + div {
+                display: none;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                transform: translate(100%, 0%);
+                background: #2d3748;
+                padding: 2px 5px;
+                box-shadow: -4px 4px 5px #000;
+            }
+
+            &:checked + label + .background {
+                display: block;
+            }
+
+            &:checked + label + .background + div {
+                display: block;
+            }
+        }
+    }
+}

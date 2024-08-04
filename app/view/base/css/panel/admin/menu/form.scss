@@ -1,0 +1,87 @@
+#adminPanelControl {
+    .formMenu{
+        padding: 10px;
+
+        .formMenuFieldset{
+            display: grid;
+            grid-template-columns: 200px auto;
+        }
+
+        .menuItemEdit{
+            margin: 0 10px 0 10px;
+            padding: 0 0 10px 0;
+
+            .menuButtonsAbove{
+                text-align: center;
+
+                &:after {
+                    content: '';
+                    margin-top: -10px;
+                    margin-bottom: 10px;
+                    display: block;
+                    height: 1px;
+                    border-bottom: #fff dashed 1px;
+                }
+            }
+
+            .menuButtons {
+                text-align: center;
+            }
+
+            .menuButtonsBelow {
+                text-align: center;
+                margin-top: 10px;
+
+                &:after {
+                    content: '';
+                    margin-top: -10px;
+                    margin-bottom: 10px;
+                    display: block;
+                    height: 1px;
+                    border-bottom: #fff dashed 1px;
+                }
+            }
+        }
+
+        .menu_items {
+            max-height: 177px;
+            overflow: auto;
+            padding: 10px;
+
+            .submenu_items {
+                display: none;
+                margin: 0 0 0 10px;
+            }
+
+            .itemLine {
+                clear: both;
+                width: 100%;
+                text-align: left;
+                display: grid;
+                grid-template-columns: auto 15px 15px;
+
+                .item_label {
+                    cursor: pointer;
+                    white-space: nowrap;
+                }
+
+                .item_remove {
+                    margin: 0 0 0 10px;
+                    cursor: pointer;
+                }
+
+                label {
+                    cursor: pointer;
+                }
+            }
+
+            .submenu_items_active {
+                display: none;
+
+                &:checked + .submenu_items{
+                    display: block;
+                }
+            }
+        }
+    }
+}

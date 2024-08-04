@@ -1,0 +1,38 @@
+#adminPanelControl {
+    .formCreate {
+        *[data-form-types="container"] {
+            & > * {
+                display: none;
+            }
+
+            & > .show {
+                display: block;
+            }
+        }
+
+        .label {
+            padding-top: 5px;
+        }
+
+        .selectType {
+            float: left;
+            width: 200px;
+            margin-right: 10px;
+        }
+
+        .newPageType {
+            clear: both;
+
+            .inputField {
+                width: 200px;
+                margin: 0;
+            }
+
+            table {
+                th, td {
+                    padding: 0 10px 0 0;
+                }
+            }
+        }
+    }
+}

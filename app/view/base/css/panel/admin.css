@@ -1,0 +1,977 @@
+.formElement.inputField {
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+.formElement.inputField input[type=text], .formElement.inputField input[type=password], .formElement.inputField select, .formElement.inputField textarea {
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 10px;
+}
+.formElement.inputTextArea {
+  height: 100px;
+}
+.formElement.inputTextArea textarea {
+  padding-top: 5px;
+}
+.formElement.checkbox {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #555;
+  background: #fff;
+}
+.formElement.checkbox input[type=checkbox] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  z-index: 2;
+}
+.formElement.checkbox input[type=checkbox] + div {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  bottom: 5px;
+  right: 5px;
+  z-index: 1;
+}
+.formElement.checkbox input[type=checkbox]:checked + div {
+  background: #000;
+}
+.formElement.button {
+  position: relative;
+  width: 100%;
+  height: 30px;
+}
+.formElement.button button {
+  border-radius: 5px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 10px;
+}
+
+#adminPanel {
+  font-family: monospace;
+}
+#adminPanel .formElement.inputField {
+  margin-bottom: 10px;
+}
+#adminPanel .formElement.inputField .inputLabel {
+  position: absolute;
+  color: #000;
+  left: 10px;
+  top: 6px;
+  transition: all 0.5s ease;
+  opacity: 0.5;
+  pointer-events: none;
+}
+#adminPanel .formElement.inputField .inputLabel span {
+  position: relative;
+}
+#adminPanel .formElement.inputField .inputLabel:before {
+  background: #fff;
+  border-radius: 10px;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  border: 1px solid #000;
+  transition: opacity 0.5s ease;
+}
+#adminPanel .formElement.inputField input:focus + .inputLabel, #adminPanel .formElement.inputField input.filled + .inputLabel, #adminPanel .formElement.inputField select + .inputLabel, #adminPanel .formElement.inputField textarea.filled + .inputLabel, #adminPanel .formElement.inputField textarea:focus + .inputLabel {
+  color: #000;
+  padding: 1px 10px;
+  left: 0;
+  top: -10px;
+  font-size: 10px;
+  opacity: 1;
+}
+#adminPanel .formElement.inputField input:focus + .inputLabel:before, #adminPanel .formElement.inputField input.filled + .inputLabel:before, #adminPanel .formElement.inputField select + .inputLabel:before, #adminPanel .formElement.inputField textarea.filled + .inputLabel:before, #adminPanel .formElement.inputField textarea:focus + .inputLabel:before {
+  opacity: 0.9;
+}
+#adminPanel .formElementCheckbox {
+  display: inline-block;
+  margin-right: 10px;
+}
+#adminPanel .formElementCheckbox > div:nth-child(1) {
+  float: left;
+  padding-right: 5px;
+}
+#adminPanel .formElementCheckbox > div:nth-child(2) {
+  float: left;
+}
+
+.frameworkAdmin {
+  padding: 10px;
+}
+.frameworkAdmin .hidden {
+  display: none;
+}
+.frameworkAdmin .show {
+  display: block;
+}
+.frameworkAdmin .successMessage {
+  text-align: center;
+  position: absolute;
+  top: -19px;
+  right: 50px;
+  font-size: 1em;
+  z-index: 1;
+  padding: 0 10px;
+  color: #000;
+  border-radius: 10px 10px 0 0;
+  background: rgba(255, 255, 255, 0.7333333333);
+  border: 1px solid #000;
+  transition: opacity 0.5s ease-in-out;
+}
+.frameworkAdmin .successMessage.hide {
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+}
+.frameworkAdmin .successMessage.show {
+  display: block;
+  opacity: 1;
+}
+.frameworkAdmin .close {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  height: 15px;
+  line-height: 12px;
+  top: -9px;
+  background: #982727;
+  padding: 0 10px;
+  transition: opacity 1s ease-out;
+  opacity: 0;
+}
+.frameworkAdmin .close:hover {
+  background: #d11313;
+}
+.frameworkAdmin .close:before {
+  content: "x";
+  color: #fff;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0 5px;
+}
+.frameworkAdmin > .label {
+  float: left;
+  padding-right: 10px;
+}
+.frameworkAdmin > fieldset {
+  clear: both;
+}
+.frameworkAdmin .tabs .fields.inline {
+  clear: both;
+  padding: 0 0 10px 0;
+}
+.frameworkAdmin .tabs .fields.inline:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.frameworkAdmin .tabs .fields.inline > * {
+  float: left;
+  padding: 0 10px 0 0;
+  width: auto;
+  clear: none;
+}
+.frameworkAdmin .tabs > input[type=radio] {
+  display: none;
+}
+.frameworkAdmin .tabs .tabsBar label {
+  float: left;
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 0 5px;
+}
+.frameworkAdmin .tabs .tabsContainer {
+  clear: both;
+}
+.frameworkAdmin .tabs .tabsContainer > * {
+  display: none;
+  padding: 10px;
+}
+.frameworkAdmin .tabs > input:nth-child(1):checked ~ .tabsBar label:nth-child(1) {
+  background: #fff;
+  color: #000;
+}
+.frameworkAdmin .tabs > input:nth-child(1):checked ~ .tabsBar + .tabsContainer > *:nth-child(1) {
+  display: block;
+}
+.frameworkAdmin .tabs > input:nth-child(2):checked ~ .tabsBar label:nth-child(2) {
+  background: #fff;
+  color: #000;
+}
+.frameworkAdmin .tabs > input:nth-child(2):checked ~ .tabsBar + .tabsContainer > *:nth-child(2) {
+  display: block;
+}
+.frameworkAdmin .tabs > input:nth-child(3):checked ~ .tabsBar label:nth-child(3) {
+  background: #fff;
+  color: #000;
+}
+.frameworkAdmin .tabs > input:nth-child(3):checked ~ .tabsBar + .tabsContainer > *:nth-child(3) {
+  display: block;
+}
+.frameworkAdmin .tabs > input:nth-child(4):checked ~ .tabsBar label:nth-child(4) {
+  background: #fff;
+  color: #000;
+}
+.frameworkAdmin .tabs > input:nth-child(4):checked ~ .tabsBar + .tabsContainer > *:nth-child(4) {
+  display: block;
+}
+.frameworkAdmin .tabs > input:nth-child(5):checked ~ .tabsBar label:nth-child(5) {
+  background: #fff;
+  color: #000;
+}
+.frameworkAdmin .tabs > input:nth-child(5):checked ~ .tabsBar + .tabsContainer > *:nth-child(5) {
+  display: block;
+}
+.frameworkAdmin .tabs > input:nth-child(6):checked ~ .tabsBar label:nth-child(6) {
+  background: #fff;
+  color: #000;
+}
+.frameworkAdmin .tabs > input:nth-child(6):checked ~ .tabsBar + .tabsContainer > *:nth-child(6) {
+  display: block;
+}
+.frameworkAdmin .adminButtons {
+  float: right;
+  margin: 0;
+  padding: 0 0 0 10px;
+}
+.frameworkAdmin .adminButtons > * {
+  float: right;
+  width: 100px;
+}
+
+.blockPages.show .frameworkAdmin .close {
+  opacity: 1;
+}
+
+#adminPanelControl .formSite .inputSiteName, #adminPanelControl .formSite .inputTagLine {
+  width: 200px;
+}
+#adminPanelControl .formSite .generalConfiguration .fields.inline {
+  padding-bottom: 0;
+}
+#adminPanelControl .formSite .themeConfiguration {
+  position: relative;
+}
+#adminPanelControl .formSite .themeConfiguration .fields .show {
+  display: inline;
+  cursor: pointer;
+}
+#adminPanelControl .formSite .themeConfiguration .fields .inputSelectTheme:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsList {
+  list-style: none;
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsList > li > div:nth-child(1) {
+  width: calc(100% - 120px);
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsList > li > div:nth-child(1) input:disabled {
+  background-color: #fff;
+  color: #000;
+  opacity: 0.7;
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsList > li > div:nth-child(2) {
+  width: 110px;
+  float: right;
+  margin-top: -38px;
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsAdd {
+  margin-top: 10px;
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsAdd > div:nth-child(1) {
+  width: calc(100% - 120px);
+}
+#adminPanelControl .formSite .resellerConfiguration .fields .fieldsAdd > div:nth-child(2) {
+  width: 110px;
+  float: right;
+  margin-top: -38px;
+}
+#adminPanelControl .formSite .uploaderImage.uploaderIcon {
+  height: 40px;
+}
+#adminPanelControl .formSite .uploaderImage.uploaderIcon .imageSelected {
+  height: 40px;
+  width: 40px;
+}
+#adminPanelControl .formSite .uploaderImage.uploaderIcon .imageUploadArea {
+  height: 30px;
+  margin: 10px 0 10px 50px;
+  padding-top: 5px;
+}
+#adminPanelControl .formSite .uploaderImage.uploaderIcon .imageUploadArea [data-if].show {
+  display: inline-block;
+}
+#adminPanelControl .formSite .uploaderImage .imageSelected {
+  float: left;
+  height: 100px;
+  width: 100px;
+  background: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+#adminPanelControl .formSite .uploaderImage .imageSelected img {
+  width: 100%;
+}
+#adminPanelControl .formSite .uploaderImage .imageUploadArea {
+  margin: 10px 0 10px 110px;
+  height: 60px;
+  border-radius: 15px;
+  border: 3px dashed #fff;
+  text-align: center;
+  padding-top: 35px;
+  font-size: 15pt;
+  position: relative;
+}
+#adminPanelControl .formSite .uploaderImage .imageUploadArea [type=file] {
+  display: none;
+}
+#adminPanelControl .formSite .uploaderImage .imageUploadArea .dropArea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: transparent;
+  display: block;
+}
+#adminPanelControl .formSite .uploaderImage .imageUploadArea .dropArea.highlight {
+  box-shadow: 4px -2px 23px 4px #0ff;
+}
+#adminPanelControl-themeWindow {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: rgba(26, 32, 44, 0.4);
+  z-index: 1000001;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  pointer-events: none;
+}
+#adminPanelControl-themeWindow.show {
+  opacity: 1;
+  pointer-events: all;
+}
+#adminPanelControl-themeWindow > div {
+  padding: 10px;
+  background: rgba(26, 32, 44, 0.9333333333);
+  color: #fff;
+  position: absolute;
+  top: 20px;
+  bottom: 20px;
+  right: 20px;
+  left: 20px;
+}
+#adminPanelControl-themeWindow .themeSelector {
+  height: 100%;
+  position: relative;
+  margin-top: -10px;
+}
+#adminPanelControl-themeWindow .themeSelector .showPrevious {
+  top: 50%;
+  left: 0;
+  position: absolute;
+  transform: translate(0, -50%);
+  width: 35px;
+  font-size: 40px;
+  line-height: 55px;
+  cursor: pointer;
+}
+#adminPanelControl-themeWindow .themeSelector .rightButtons {
+  top: 50%;
+  right: 0;
+  position: absolute;
+  transform: translate(0, -50%);
+  width: 70px;
+  font-size: 40px;
+  line-height: 55px;
+}
+#adminPanelControl-themeWindow .themeSelector .showNext {
+  float: right;
+  position: relative;
+  cursor: pointer;
+  width: 35px;
+}
+#adminPanelControl-themeWindow .themeSelector .applyCurrent {
+  float: left;
+  position: relative;
+  cursor: pointer;
+  width: 35px;
+}
+#adminPanelControl-themeWindow .themeSelector .applyCurrent.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+#adminPanelControl-themeWindow .themeSelector .showPreview {
+  height: 100%;
+  margin: 10px 60px;
+  text-align: center;
+}
+#adminPanelControl-themeWindow .themeSelector .showPreview img {
+  max-width: 100%;
+  max-height: 100%;
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+}
+#adminPanelControl-themeWindow .close {
+  opacity: 1;
+}
+
+#adminPanelLogin {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3333333333);
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  z-index: 9999;
+}
+#adminPanelLogin.show {
+  display: flex;
+}
+#adminPanelLogin form {
+  width: 300px;
+  background-color: #404e64;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+}
+#adminPanelLogin form .message {
+  color: #f1cbcb;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+#adminPanelLogin form .close {
+  cursor: pointer;
+  float: right;
+}
+#adminPanelLogin form .formTitle {
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+#adminPanelLogin form .buttonEnter {
+  float: right;
+  margin: 10px 0 0 0;
+}
+
+#adminPanelControl .formCreate *[data-form-types=container] > * {
+  display: none;
+}
+#adminPanelControl .formCreate *[data-form-types=container] > .show {
+  display: block;
+}
+#adminPanelControl .formCreate .label {
+  padding-top: 5px;
+}
+#adminPanelControl .formCreate .selectType {
+  float: left;
+  width: 200px;
+  margin-right: 10px;
+}
+#adminPanelControl .formCreate .newPageType {
+  clear: both;
+}
+#adminPanelControl .formCreate .newPageType .inputField {
+  width: 200px;
+  margin: 0;
+}
+#adminPanelControl .formCreate .newPageType table th, #adminPanelControl .formCreate .newPageType table td {
+  padding: 0 10px 0 0;
+}
+
+#adminPanelControl .form_listing > fieldset > table {
+  width: 100%;
+  padding: 10px 10px;
+}
+#adminPanelControl .form_listing > fieldset > table thead tr th:nth-child(3) {
+  width: 100px;
+}
+#adminPanelControl .form_listing > fieldset > table thead tr th:nth-child(3) a {
+  color: #fff;
+}
+#adminPanelControl .form_listing > fieldset > table tbody tr td:nth-child(3) {
+  text-align: center;
+}
+#adminPanelControl .form_listing > fieldset > table tbody tr td:nth-child(3) a {
+  color: #fff;
+}
+
+#adminPanelControl .formFiles .fileInfo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+#adminPanelControl .formFiles .fileInfo > div.background {
+  content: "";
+  background: rgba(64, 78, 100, 0.6666666667);
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+#adminPanelControl .formFiles .fileInfo > div.border {
+  width: 500px;
+  margin: 10px auto 0 auto;
+  height: calc(100% - 20px);
+  background: #404e64;
+  position: relative;
+  border: 1px solid #232c3a;
+  border-radius: 5px;
+}
+#adminPanelControl .formFiles .fileInfo > div.border > div {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 100%;
+}
+#adminPanelControl .formFiles .fileInfo > div.border > div > table {
+  margin: 0 auto;
+}
+#adminPanelControl .formFiles .fileInfo table th {
+  width: 100px;
+}
+#adminPanelControl .formFiles .formFilesPath {
+  padding-bottom: 10px;
+}
+#adminPanelControl .formFiles .formFilesPath:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#adminPanelControl .formFiles .formFilesPath .errorMessage {
+  color: #f8b6b6;
+  padding: 0;
+  display: none;
+}
+#adminPanelControl .formFiles .formFilesPath .errorMessage > span {
+  margin-bottom: -8px;
+  float: left;
+}
+#adminPanelControl .formFiles .formFilesPath .errorMessage.show {
+  display: inline-block;
+}
+#adminPanelControl .formFiles .formFilesPath .backButton {
+  width: 25px;
+  margin-bottom: -10px;
+  cursor: pointer;
+}
+#adminPanelControl .formFiles .formFilesPath .enterButton {
+  width: 25px;
+  margin-bottom: -10px;
+  cursor: pointer;
+}
+#adminPanelControl .formFiles .formFilesPath .inputPath {
+  float: left;
+  width: 200px;
+  margin: 0 10px 0 0;
+  padding: 0;
+}
+#adminPanelControl .formFiles .formFilesArea {
+  max-height: 350px;
+  overflow: auto;
+  margin-top: 15px;
+  padding-right: 10px;
+}
+#adminPanelControl .formFiles .formFilesArea:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement {
+  position: relative;
+  float: left;
+  height: 105px;
+  width: 90px;
+  margin-right: 9px;
+  text-align: center;
+  overflow: hidden;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement > span {
+  padding: 5px;
+  text-overflow: ellipsis;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement:hover {
+  overflow: visible;
+  z-index: 10;
+  position: relative;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement:hover > span {
+  background: #1a202c;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement .itemFolder .image, #adminPanelControl .formFiles .formFilesArea .itemElement .itemFile .image, #adminPanelControl .formFiles .formFilesArea .itemElement itemNew .image {
+  display: block;
+  width: 100%;
+  padding-top: 15px;
+  cursor: pointer;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement .itemFolder .name, #adminPanelControl .formFiles .formFilesArea .itemElement .itemFile .name, #adminPanelControl .formFiles .formFilesArea .itemElement itemNew .name {
+  display: block;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement .image img {
+  width: 50%;
+}
+#adminPanelControl .formFiles .formFilesArea .itemElement .removeButton {
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew {
+  float: right;
+  padding-bottom: 0;
+  padding-left: 5px;
+  text-align: center;
+  width: auto;
+  margin: 0 0 -15px 0;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFile {
+  padding: 0 10px 0 0;
+  float: left;
+  cursor: pointer;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFile img {
+  width: 25px;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFile span {
+  display: block;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFile + #fileManagerUploadNewFile {
+  display: none;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFolder {
+  padding: 0 0 0 0;
+  float: left;
+  cursor: pointer;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFolder img {
+  width: 25px;
+}
+#adminPanelControl .formFiles .formFilesActions .itemNew .addFolder span {
+  display: block;
+}
+
+#adminPanelControl .structure {
+  position: relative;
+}
+#adminPanelControl .structure .background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+#adminPanelControl .structure #admin_structure_checkbox {
+  display: none;
+}
+#adminPanelControl .structure #admin_structure_checkbox + label {
+  display: block;
+  cursor: pointer;
+}
+#adminPanelControl .structure #admin_structure_checkbox + label + .background {
+  display: none;
+}
+#adminPanelControl .structure #admin_structure_checkbox + label + .background + div {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(100%, 0%);
+  background: #2d3748;
+  padding: 2px 5px;
+  box-shadow: -4px 4px 5px #000;
+}
+#adminPanelControl .structure #admin_structure_checkbox:checked + label + .background {
+  display: block;
+}
+#adminPanelControl .structure #admin_structure_checkbox:checked + label + .background + div {
+  display: block;
+}
+
+#adminPanelControl .formMenu {
+  padding: 10px;
+}
+#adminPanelControl .formMenu .formMenuFieldset {
+  display: grid;
+  grid-template-columns: 200px auto;
+}
+#adminPanelControl .formMenu .menuItemEdit {
+  margin: 0 10px 0 10px;
+  padding: 0 0 10px 0;
+}
+#adminPanelControl .formMenu .menuItemEdit .menuButtonsAbove {
+  text-align: center;
+}
+#adminPanelControl .formMenu .menuItemEdit .menuButtonsAbove:after {
+  content: "";
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+  height: 1px;
+  border-bottom: #fff dashed 1px;
+}
+#adminPanelControl .formMenu .menuItemEdit .menuButtons {
+  text-align: center;
+}
+#adminPanelControl .formMenu .menuItemEdit .menuButtonsBelow {
+  text-align: center;
+  margin-top: 10px;
+}
+#adminPanelControl .formMenu .menuItemEdit .menuButtonsBelow:after {
+  content: "";
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+  height: 1px;
+  border-bottom: #fff dashed 1px;
+}
+#adminPanelControl .formMenu .menu_items {
+  max-height: 177px;
+  overflow: auto;
+  padding: 10px;
+}
+#adminPanelControl .formMenu .menu_items .submenu_items {
+  display: none;
+  margin: 0 0 0 10px;
+}
+#adminPanelControl .formMenu .menu_items .itemLine {
+  clear: both;
+  width: 100%;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto 15px 15px;
+}
+#adminPanelControl .formMenu .menu_items .itemLine .item_label {
+  cursor: pointer;
+  white-space: nowrap;
+}
+#adminPanelControl .formMenu .menu_items .itemLine .item_remove {
+  margin: 0 0 0 10px;
+  cursor: pointer;
+}
+#adminPanelControl .formMenu .menu_items .itemLine label {
+  cursor: pointer;
+}
+#adminPanelControl .formMenu .menu_items .submenu_items_active {
+  display: none;
+}
+#adminPanelControl .formMenu .menu_items .submenu_items_active:checked + .submenu_items {
+  display: block;
+}
+
+#adminPanelControl .form_social {
+  padding: 10px;
+}
+#adminPanelControl .form_social fieldset {
+  padding: 10px;
+}
+#adminPanelControl .form_social .socialField > div:nth-child(1) {
+  margin-right: 20px;
+  width: auto;
+}
+#adminPanelControl .form_social .socialField > div:nth-child(2) {
+  float: right;
+  margin-top: -34px;
+}
+
+/* @import "../../../js/library/editor/editor"; */
+#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(1) {
+  width: 60%;
+  margin: 0;
+  padding: 0;
+}
+#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(2) {
+  width: 40%;
+  margin: 0;
+  padding: 0;
+}
+
+#adminPanelControl {
+  position: fixed;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  transition: bottom 1s ease, opacity 1s ease;
+  color: #fff;
+  z-index: 999999;
+  opacity: 0.7;
+  margin: 0 10px;
+  border-radius: 5px 0 5px 0;
+}
+#adminPanelControl:hover {
+  opacity: 1;
+}
+#adminPanelControl.show {
+  bottom: 0;
+}
+#adminPanelControl .buttonArea {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 2;
+  background: #2d3748;
+  padding: 5px;
+}
+#adminPanelControl .block_list {
+  float: left;
+  cursor: pointer;
+}
+#adminPanelControl .language {
+  padding: 0 10px;
+  float: right;
+  cursor: pointer;
+}
+#adminPanelControl .log_out {
+  float: right;
+  cursor: pointer;
+}
+#adminPanelControl .blockFloating {
+  position: absolute;
+  bottom: 30px;
+  transform: translateY(calc(100% + 30px));
+  transition: transform 1s ease;
+  background: #2d3748;
+  border: 1px solid #fff;
+  padding: 5px;
+  z-index: 1;
+  margin-left: -1px;
+}
+#adminPanelControl .blockFloating > div {
+  cursor: pointer;
+}
+#adminPanelControl .blockFloating.show {
+  transform: translateY(0%);
+}
+#adminPanelControl .blockFloating.language {
+  right: 0;
+}
+#adminPanelControl .block_pages_wrapper {
+  position: relative;
+  top: 0;
+  width: 100%;
+}
+#adminPanelControl .block_pages_wrapper .blockPages {
+  width: 100%;
+  position: absolute;
+  transition: transform 1s ease;
+  transform: translateY(0);
+  background: #404e64;
+}
+#adminPanelControl .block_pages_wrapper .blockPages.show {
+  transform: translateY(-100%);
+}
+#adminPanelControl .block_pages_wrapper .blockPages > * {
+  display: none;
+}
+#adminPanelControl .block_pages_wrapper .blockPages > *.show {
+  display: block;
+}
+
+[data-if] {
+  display: none;
+}
+[data-if].show {
+  display: block;
+}
+[data-if].hide {
+  display: none;
+}
+
+.window {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999999;
+  display: none;
+}
+.window-background {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.5333333333);
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.window-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #404e64;
+  padding: 10px;
+  color: #fff;
+}
+.window.show {
+  display: block;
+}
+.window .extraForm #variables_header:checked + div {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background: #404e64;
+  overflow: auto;
+}
+.window .extraForm #variables_header:checked + div .closeVariables {
+  float: right;
+}
+.window .extraForm #variables_header:checked + div > dl dt {
+  float: left;
+  width: 200px;
+  padding: 2px;
+}
+.window .extraForm #variables_header:checked + div > dl dd {
+  padding-bottom: 3px;
+  margin-left: 100px;
+}
+.window .extraForm #variables_header:checked + div > dl dd:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+/*# sourceMappingURL=admin.css.map */

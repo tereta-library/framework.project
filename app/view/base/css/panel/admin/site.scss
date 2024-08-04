@@ -1,0 +1,49 @@
+@import "site/form";
+
+#adminPanelLogin{
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #00000055;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    z-index: 9999;
+
+    &.show{
+        display: flex;
+    }
+
+    form {
+        width: 300px;
+        background-color: #404e64;
+        text-align: center;
+        padding: 10px;
+        position: relative;
+
+        .message{
+            color: #f1cbcb;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+
+        .close{
+            cursor: pointer;
+            float: right;
+        }
+
+        .formTitle {
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .buttonEnter {
+            float: right;
+            margin: 10px 0 0 0;
+        }
+    }
+}
