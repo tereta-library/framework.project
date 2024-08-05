@@ -8,3 +8,4 @@ pub/resource
 vendor
 var
 generated
+app/etc/config.php
