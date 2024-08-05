@@ -5,6 +5,8 @@ namespace Builder\Cms\Controller;
 use Framework\Http\Interface\Controller;
 use Framework\Application\Manager;
 use Exception;
+use Builder\Panel\Model\Token as ModelToken;
+use Builder\Panel\Model\Resource\Token as ResourceModelToken;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -31,13 +33,17 @@ class View implements Controller
      * Sample url: http://127.0.0.1/cms/page/123
      *
      * @router expression GET /^\/cms\/page\/(.*)$/Usi
-     * @param string $identifier
+     * @param string $token
      * @return string
      */
-    public function render(string $identifier): string
+    public function render(string $token): string
     {
         $config = Manager::instance()->getConfig();
         $view = Manager::instance()->getView();
+
+        $resourceModelToken = new ResourceModelToken;
+        $modelToken = new ModelToken;
+        $resourceModelToken->load($modelToken, $token, 'token');
 
         try {
             return $view->render('cms');
