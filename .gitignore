@@ -9,3 +9,5 @@ vendor
 var
 generated
 app/etc/config.php
+app/etc/modules.php
+app/etc/docker.php
