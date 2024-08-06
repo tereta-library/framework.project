@@ -27,12 +27,13 @@ class Singleton
      * @param string $name
      * @return void
      */
-    public static function createConnection(string $host, string $user, string $password, string $name = 'default'): void
+    public static function createConnection(string $host, string $user, string $password, string $database, string $name = 'default'): void
     {
         static::$connectionConfigs[$name] = [
-            'host' => $host,
-            'user' => $user,
-            'password' => $password
+            'host'     => $host,
+            'user'     => $user,
+            'password' => $password,
+            'database' => $database
         ];
     }
 
@@ -50,7 +51,7 @@ class Singleton
         $config = static::$connectionConfigs[$name];
 
         static::$connectionInstances[$name] = new PDO(
-            "mysql:dbname={$name};host={$config['host']}",
+            "mysql:dbname={$config['database']};host={$config['host']}",
             $config['user'],
             $config['password']
         );

@@ -21,9 +21,15 @@ abstract class Model
         $select->from($this->table);
         $select->where($this->idField . ' = ?', $model->get('id'));
 
-        $pdo = SingletonDatabase::getConnection();
-        $pdo->prepare($select, $select->getParams());
+        $select = Factory::createSelect('*');
+        $select->from($this->table);
+        $select->where($this->idField . ' = ?', $model->get('id'));
 
+        $pdo = SingletonDatabase::getConnection();
+        $pdoStatement = $pdo->prepare($select->build(), $select->getParams());
+        $pdoStatement->execute($select->getParams());
+        $itemData = $pdoStatement->fetch();
+        var_dump($itemData);
         echo $select;
         $data = [];
         $model->setData($data);
