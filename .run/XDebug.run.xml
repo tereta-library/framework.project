@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="XDebug" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" filter_connections="FILTER" server_name="HTTP" session_id="xdebug">
+  <configuration default="false" name="XDebug" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug" filter_connections="FILTER" server_name="_" session_id="feda_php">
     <method v="2" />
   </configuration>
 </component>
