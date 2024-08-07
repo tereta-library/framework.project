@@ -32,7 +32,7 @@ class View implements Controller
     /**
      * Sample url: http://127.0.0.1/cms/page/123
      *
-     * @router expression GET /^\/cms\/page\/(.*)$/Usi
+     * @router expression GET /^\/cms\/page\/(.*)(\?.*)?$/Usi
      * @param string $token
      * @return string
      */
@@ -43,10 +43,13 @@ class View implements Controller
 
         $resourceModelToken = new ResourceModelToken;
         $modelToken = new ModelToken;
-        $resourceModelToken->load($modelToken, $token, 'token');
+        $resourceModelToken->load($modelToken, 1);
 
         try {
-            return $view->render('cms');
+            $view->initialize('cms')
+                ->getBlockById('content')
+                ->assign('content', '<pre>' . json_encode($modelToken->getData(), JSON_PRETTY_PRINT) . '</pre>');
+            return $view->render();
         } catch (Exception $e) {
             return $e->getMessage();
         }

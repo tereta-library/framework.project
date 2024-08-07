@@ -3,16 +3,10 @@
     <meta name="backend-update" content="index" />
 </head>
 <body>
-    <content data-backend-replace="#content" data-backend-block="Builder\Cms\Block\Content">
-        <hr />
+    <content data-backend-replace="#content" id="content" data-backend-block="Builder\Cms\Block\Content">
         <!--: if $content -->
             <div><!--: echo $content --></div>
-            <div data-backend-block="Builder\Cms\Block\Time">xxx</div>
         <!--: endif -->
-        <hr />
-        HR
-        <br />
-        BR
     </content>
 </body>
 </html>

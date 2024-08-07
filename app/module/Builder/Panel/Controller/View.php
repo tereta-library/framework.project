@@ -4,6 +4,7 @@ namespace Builder\Panel\Controller;
 
 use Framework\Application\Manager;
 use Framework\Http\Interface\Controller;
+use Exception;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -37,7 +38,7 @@ class View implements Controller
 
         try {
             return (string) $view->render('panel');
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }
