@@ -2,9 +2,9 @@
 
 namespace Framework\Database;
 
-use Framework\Database\Select\Factory as SelectFactory;
 use Framework\Database\Select\Builder as SelectBuilder;
-use Framework\Database\Describe\Builder as DescribeBuilder;
+use Framework\Database\Select\Factory as SelectFactory;
+use Framework\Database\Table\Describe\Builder as DescribeBuilder;
 
 /**
  * Class Factory

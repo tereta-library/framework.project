@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Database\Describe;
+namespace Framework\Database\Table\Describe;
 
 /**
  * @class Framework\Database\Describe\Builder
