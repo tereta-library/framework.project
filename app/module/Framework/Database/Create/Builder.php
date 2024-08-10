@@ -3,6 +3,7 @@
 namespace Framework\Database\Create;
 
 use Framework\Database\Create\Column\Builder as ColumnBuilder;
+use Framework\Database\Create\Foreign\Builder as ForeignBuilder;
 
 /**
  * @class Framework\Database\Create\Builder
@@ -123,6 +124,12 @@ class Builder
         }
 
         $column = new ColumnBuilder($column, ColumnBuilder::TYPE_INT);
+        $this->columns[] = $column;
+        return $column;
+    }
+
+    public function addForeign(string $string)
+    {
         $this->columns[] = $column;
         return $column;
     }

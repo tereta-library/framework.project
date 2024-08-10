@@ -2,8 +2,10 @@
 
 namespace Framework\User\Setup;
 
-use Framework\Cli\Symbol;
 use Framework\Application\Setup\Abstract\Upgrade;
+use Framework\Database\Factory;
+use Framework\Database\Value\Now as ValueNow;
+use PDO;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -27,10 +29,28 @@ use Framework\Application\Setup\Abstract\Upgrade;
 class Structure extends Upgrade
 {
     /**
+     * @setupTime 2024-08-10 21:04:33
+     * @param PDO $connection
      * @return void
      */
-    public function setup(): void
+    public function user(): void
     {
-        echo Symbol::COLOR_GREEN . "!!!...\n" . Symbol::COLOR_RESET;
+        $connection = $this->connection;
+        $tableQuery = Factory::createTable('user');
+        $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
+        $tableQuery->addString('identifier')->setNotNull()->setUnique();
+        $tableQuery->addString('password')->setNotNull();
+        $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());
+        $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow());
+        $connection->query($tableQuery->build());
+
+        $tableQuery = Factory::createTable('token');
+        $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
+        $tableQuery->addForeign('userId')->foreign('user', 'id');
+        $tableQuery->addString('token')->setNotNull();
+        $tableQuery->addString('ip')->setNotNull();
+        $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());
+        $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow());
+        $connection->query($tableQuery->build());
     }
 }

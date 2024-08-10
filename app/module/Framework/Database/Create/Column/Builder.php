@@ -3,6 +3,7 @@
 namespace Framework\Database\Create\Column;
 
 use InvalidArgumentException;
+use Framework\Database\Interface\Value;
 
 /**
  * @class Framework\Database\Table\Create\Column\Builder
@@ -76,6 +77,11 @@ class Builder
      */
     public function setDefault($value): static
     {
+        if ($value instanceof Value) {
+            $this->field .= " DEFAULT {$value->build()}";
+            return $this;
+        }
+
         $this->field .= " DEFAULT '{$value}'";
         return $this;
     }
