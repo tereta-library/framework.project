@@ -59,6 +59,14 @@ class Builder
         return $column;
     }
 
+    public function addDateTime(string $columnName): ColumnBuilder
+    {
+        $column = "{$columnName} DATETIME";
+        $column = new ColumnBuilder($column, ColumnBuilder::TYPE_DATETIME);
+        $this->columns[] = $column;
+        return $column;
+    }
+
     /**
      * @param string $columnName
      * @param int $length

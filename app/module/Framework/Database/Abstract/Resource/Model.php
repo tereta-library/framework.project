@@ -19,7 +19,15 @@ abstract class Model
      */
     private ?array $description = null;
 
+    /**
+     * @var PDO $connection
+     */
     private PDO $connection;
+
+    /**
+     * @var array $uniqueFields
+     */
+    private array $uniqueFields = [];
 
     /**
      * @param string $table
@@ -49,10 +57,15 @@ abstract class Model
         if ($this->description) return;
 
         $this->description = [];
-        foreach (Facade::describeTable(SingletonDatabase::getConnection(), $this->table) as $column) {
+        foreach (Facade::describeTable($this->connection, $this->table) as $column) {
             $this->description[$column['Field']] = $column;
-            if ($column['Key'] === 'PRI') {
+            if (isset($column['Key']) && $column['Key'] === 'PRI') {
                 $this->idField = $column['Field'];
+                $this->uniqueFields[] = $column['Field'];
+            }
+
+            if (isset($column['Key']) && $column['Key'] === 'UNI') {
+                $this->uniqueFields[] = $column['Field'];
             }
         }
     }
@@ -94,8 +107,9 @@ abstract class Model
      */
     public function save(ItemModel $model): void
     {
+        $this->prepareModel();
         $query = Factory::createInsert($this->table)->values($model->getData());
-        $query->updateOnDupilicate();
+        $query->updateOnDupilicate(...$this->uniqueFields);
 
         $pdoStat = $this->connection->prepare($query->build());
         $result = $pdoStat->execute($query->getParams());

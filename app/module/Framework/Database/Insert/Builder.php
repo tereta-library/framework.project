@@ -3,6 +3,7 @@
 namespace Framework\Database\Insert;
 
 use Exception;
+use Framework\Database\Interface\Value;
 
 class Builder
 {
@@ -51,7 +52,11 @@ class Builder
         return $this;
     }
 
-    public function updateOnDupilicate(array $fields)
+    /**
+     * @param ...$fields
+     * @return $this
+     */
+    public function updateOnDupilicate(...$fields): static
     {
         $this->onDuplicate = $fields;
         return $this;
@@ -66,6 +71,11 @@ class Builder
         foreach ($this->insertArray as $itemNumber => $itemData) {
             $preparedItem = [];
             foreach ($itemData as $itemKey => $itemValue) {
+                if ($itemValue instanceof Value) {
+                    $preparedItem[] = $itemValue->build();
+                    continue;
+                }
+
                 $insertKey = ":{$itemNumber}_{$itemKey}";
                 $this->values[$insertKey] = $itemValue;
                 $preparedItem[] = $insertKey;
@@ -73,6 +83,17 @@ class Builder
             $values[] = implode(", ", $preparedItem);
         }
         $query = "INSERT INTO {$this->table} (" . implode(", ", $this->fields) . ") VALUES (" . implode('), (', $values) . ")";
+
+        if ($this->onDuplicate) {
+            $query .= " ON DUPLICATE KEY UPDATE ";
+            $updateArray = [];
+
+            foreach ($this->fields as $field) {
+                if (in_array($field, $this->onDuplicate)) continue;
+                $updateArray[] = "{$field} = VALUES({$field})";
+            }
+            $query .= implode(", ", $updateArray);
+        }
 
         return $query;
     }

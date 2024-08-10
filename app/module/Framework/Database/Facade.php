@@ -16,8 +16,8 @@ class Facade
      */
     public static function describeTable(PDO $connection, string $table): array
     {
-        $smt = $connection->prepare('DESCRIBE TABLE :table');
-        $smt->bindParam(':table', $table);
+        $smt = $connection->prepare("DESCRIBE {$table}");
+        $smt->execute();
 
         return $smt->fetchAll(PDO::FETCH_ASSOC);
     }

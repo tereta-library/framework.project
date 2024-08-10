@@ -9,15 +9,16 @@ use InvalidArgumentException;
  */
 class Builder
 {
-    const TYPE_INT = '1';
-    const TYPE_DECIMAL = '2';
-    const TYPE_TEXT = '3';
+    const TYPE_INT = 1;
+    const TYPE_DECIMAL = 2;
+    const TYPE_TEXT = 3;
+    const TYPE_DATETIME = 4;
 
     /**
      * @param string $field
-     * @param string $type
+     * @param int $type
      */
-    public function __construct(private string $field, private string $type)
+    public function __construct(private string $field, private int $type)
     {
     }
 
