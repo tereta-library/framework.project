@@ -4,7 +4,10 @@ namespace Framework\Database;
 
 use Framework\Database\Select\Builder as SelectBuilder;
 use Framework\Database\Select\Factory as SelectFactory;
-use Framework\Database\Table\Describe\Builder as DescribeBuilder;
+use Framework\Database\Create\Builder as CreateBuilder;
+use Framework\Database\Create\Factory as CreateFactory;
+use Framework\Database\Insert\Builder as InsertBuilder;
+use Framework\Database\Insert\Factory as InsertFactory;
 
 /**
  * Class Factory
@@ -19,11 +22,24 @@ class Factory
      */
     public static function createSelect(...$columns): SelectBuilder
     {
-        return (new SelectFactory)->create($columns);
+        return SelectFactory::create($columns);
     }
 
-    public static function createDescribe(?string $table = null): DescribeBuilder
+    /**
+     * @param string $table
+     * @return CreateBuilder
+     */
+    public static function createTable(string $table): CreateBuilder
     {
-        return new DescribeBuilder($table);
+        return CreateFactory::create($table);
+    }
+
+    /**
+     * @param string $table
+     * @return InsertBuilder
+     */
+    public static function createInsert(string $table): InsertBuilder
+    {
+        return InsertFactory::create($table);
     }
 }

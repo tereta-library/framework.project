@@ -23,16 +23,21 @@ class Builder
     private array $where = [];
 
     /**
+     * @var int
+     */
+    private int $valueCounter = 0;
+
+    /**
      * @var array
      */
-    private array $leftJoin = [];
+    private array $params = [];
 
     /**
      * @param array $columns
      */
     public function __construct(array $columns = ['*'])
     {
-        $this->columns = $columns;
+        $this->columns($columns);
     }
 
     /**
@@ -54,10 +59,6 @@ class Builder
         $this->table = $table;
         return $this;
     }
-
-    private int $valueCounter = 0;
-
-    private array $params = [];
 
     /**
      * @param string $condition

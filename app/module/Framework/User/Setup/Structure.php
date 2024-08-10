@@ -2,8 +2,8 @@
 
 namespace Framework\User\Setup;
 
-use Framework\Application\Setup\Interface\Upgrade;
 use Framework\Cli\Symbol;
+use Framework\Application\Setup\Abstract\Upgrade;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -24,7 +24,7 @@ use Framework\Cli\Symbol;
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  * @copyright 2020-2024 Tereta Alexander
  */
-class Structure implements Upgrade
+class Structure extends Upgrade
 {
     /**
      * @return void

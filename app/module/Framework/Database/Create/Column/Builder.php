@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Database\Table\Create\Column;
+namespace Framework\Database\Create\Column;
 
 use InvalidArgumentException;
 

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Database\Table\Create;
+namespace Framework\Database\Create;
 
-use Framework\Database\Table\Create\Column\Builder as ColumnBuilder;
+use Framework\Database\Create\Column\Builder as ColumnBuilder;
 
 /**
- * @class Framework\Database\Table\Create\Builder
+ * @class Framework\Database\Create\Builder
  * Class Builder
  */
 class Builder
@@ -59,6 +59,12 @@ class Builder
         return $column;
     }
 
+    /**
+     * @param string $columnName
+     * @param int $length
+     * @param int $decimals
+     * @return ColumnBuilder
+     */
     public function addDecimal(string $columnName, int $length = 10, int $decimals = 2): ColumnBuilder
     {
         $column = "{$columnName} DECIMAL({$length}, {$decimals})";
@@ -73,7 +79,7 @@ class Builder
      * @param bool $signed
      * @return ColumnBuilder
      */
-    public function addInteger(string $columnName, int $length = 65535, bool $signed = false): ColumnBuilder
+    public function addInteger(string $columnName, int $length = 4294967295, bool $signed = false): ColumnBuilder
     {
         switch(true) {
             case($signed == true && $length > 2147483647):
@@ -123,6 +129,14 @@ class Builder
             $columns[] = $column->build();
         }
 
-        return "CREATE TABLE {$this->table} (\n  " . implode(",\n  ", $columns) . ")";
+        return "CREATE TABLE {$this->table} (\n  " . implode(",\n  ", $columns) . "\n)";
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return $this->build();
     }
 }

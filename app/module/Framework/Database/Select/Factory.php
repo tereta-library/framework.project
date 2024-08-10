@@ -9,7 +9,7 @@ use Framework\Database\Select\Builder;
  */
 class Factory
 {
-    public function create(array $columns = ['*']): Builder
+    public static function create(array $columns = ['*']): Builder
     {
         return new Builder($columns);
     }
