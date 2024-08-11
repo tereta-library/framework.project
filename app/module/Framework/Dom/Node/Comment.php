@@ -16,7 +16,7 @@ use Framework\Dom\Abstract\Node as NodeAbstract;
  * ·······································································
  * ·······································································
  *
- * @class Framework\Dom\Node\Comment
+ * @class Framework\Dom\Node\Node
  * @package Framework\Dom\Node
  * @link https://tereta.dev
  * @since 2020-2024

@@ -10,7 +10,23 @@ use Exception;
 use Framework\Database\Facade;
 
 /**
+ * ···························WWW.TERETA.DEV······························
+ * ·······································································
+ * : _____                        _                     _                :
+ * :|_   _|   ___   _ __    ___  | |_    __ _        __| |   ___  __   __:
+ * :  | |    / _ \ | '__|  / _ \ | __|  / _` |      / _` |  / _ \ \ \ / /:
+ * :  | |   |  __/ | |    |  __/ | |_  | (_| |  _  | (_| | |  __/  \ V / :
+ * :  |_|    \___| |_|     \___|  \__|  \__,_| (_)  \__,_|  \___|   \_/  :
+ * ·······································································
+ * ·······································································
+ *
  * @class Framework\Database\Abstract\Resource\Model
+ * @package Framework\Database\Abstract\Resource
+ * @link https://tereta.dev
+ * @since 2020-2024
+ * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
+ * @author Tereta Alexander <tereta.alexander@gmail.com>
+ * @copyright 2020-2024 Tereta Alexander
  */
 abstract class Model
 {
@@ -102,17 +118,18 @@ abstract class Model
 
     /**
      * @param ItemModel $model
-     * @return void
+     * @return Model
      * @throws Exception
      */
-    public function save(ItemModel $model): void
+    public function save(ItemModel $model): static
     {
         $this->prepareModel();
         $query = Factory::createInsert($this->table)->values($model->getData());
         $query->updateOnDupilicate(...$this->uniqueFields);
 
         $pdoStat = $this->connection->prepare($query->build());
-        $result = $pdoStat->execute($query->getParams());
-        $e=0;
+        $pdoStat->execute($query->getParams());
+
+        return $this;
     }
 }

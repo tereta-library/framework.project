@@ -32,6 +32,7 @@ class Structure extends Upgrade
      * @setupTime 2024-08-10 21:04:33
      * @param PDO $connection
      * @return void
+     * @throws \Exception
      */
     public function user(): void
     {
