@@ -46,7 +46,7 @@ export class AdminLogin extends AdminTemplate{
             }
         }).then((response) => response.json()).then((json) => {
             if (!json.token) {
-                this.syntax.set('errorMessage', json.message);
+                this.syntax.set('errorMessage', json.error);
                 this.syntax.set('isError', true);
                 this.syntax.update();
                 return;

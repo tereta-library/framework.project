@@ -3,7 +3,6 @@
 namespace Builder\Panel\Api;
 
 use Framework\Api\Interface\Api;
-use Framework\User\Model\Resource\User as UserResourceModel;
 use Framework\User\Model\User as UserModel;
 use Exception;
 

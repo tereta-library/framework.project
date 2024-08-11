@@ -3,7 +3,7 @@ import AdminSiteResellerForm from './form/reseller.js';
 import AdminSiteThemeSelectorForm from './form/themeSelector.js';
 
 export class AdminSiteForm extends AdminTemplateForm {
-    template            = 'admin/site/form';
+    template            = 'block/site/form';
     elementLogoUploadZone = null;
     elementLogoUploadFile = null;
     elementIconUploadZone = null;
@@ -186,7 +186,9 @@ export class AdminSiteForm extends AdminTemplateForm {
     show(config) {
         this.config = config;
 
-        this.syntax.get('resellerClass').setConfig(config.additional.reseller);
+        if (config.additional) {
+            this.syntax.get('resellerClass').setConfig(config.additional.reseller);
+        }
 
         this.syntax
             .set('logoImage', config.logoImage)
@@ -197,14 +199,7 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('name', config.name)
             .set('phone', config.phone)
             .set('tagline', config.tagline)
-            .set('themeCss', config.theme.css.replace("\r\n", "\n"))
-            .set('themeHeader', config.theme.header)
-            .set('themeBody', config.theme.body)
-            .set('themeFooter', config.theme.footer)
-            .set('themeHeaderListing', config.themeListing.header)
-            .set('themeBodyListing', config.themeListing.body)
-            .set('themeFooterListing', config.themeListing.footer)
-            .set('additional', config.additional)
+            .set('additionalData', config.additionalData)
             .set('onClickTheme', async (event, element, parameter) => {
                 this.themeSelector.open(element, parameter[1], this.syntax.get(parameter[0]));
             })

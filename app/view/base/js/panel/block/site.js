@@ -12,13 +12,12 @@ export class AdminSite extends AdminTemplate {
     }
 
     async buttonClick() {
-        // const config = this.config[0];
         const token = this.rootAdminJs.getToken();
 
         // Load form data
         let formData = null;
 
-        await fetch('/api/admin/site', {
+        await fetch('/api/json/site/configuration', {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
@@ -30,6 +29,6 @@ export class AdminSite extends AdminTemplate {
         });
 
         // Show admin form
-        this.form = await this.showForm('admin/site/form', formData, this.form);
+        this.form = await this.showForm('block/site/form', formData, this.form);
     }
 }

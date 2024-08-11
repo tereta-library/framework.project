@@ -3,7 +3,7 @@ import Syntax from '../../../syntax.js';
 
 export default class ThemeSelector extends Template
 {
-    template = 'admin/site/form/themeSelector';
+    template = 'block/site/form/themeSelector';
 
     page = 0;
     element = null;

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Framework\User\Setup;
+namespace Builder\Site\Setup;
 
 use Framework\Application\Setup\Abstract\Upgrade;
 use Framework\Database\Factory;
@@ -19,8 +19,8 @@ use Exception;
  * ·······································································
  * ·······································································
  *
- * @class Framework\User\Setup\Structure
- * @package Framework\User\Setup
+ * @class Builder\Site\Setup\Structure
+ * @package Builder\Site\Setup
  * @link https://tereta.dev
  * @since 2020-2024
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -30,28 +30,47 @@ use Exception;
 class Structure extends Upgrade
 {
     /**
-     * @setupTime 2024-08-10 21:04:33
+     * @setupTime 2024-08-10 00:00:00
      * @return void
      * @throws Exception
      */
     public function create(): void
     {
         $connection = $this->connection;
-        $tableQuery = Factory::createTable('user');
+        $tableQuery = Factory::createTable('site');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
         $tableQuery->addString('identifier')->setNotNull()->setUnique();
-        $tableQuery->addString('password', 128)->setNotNull();
+
+        $tableQuery->addString('name', 64);
+        $tableQuery->addString('tagline', 64);
+        $tableQuery->addString('logoImage', 254);
+        $tableQuery->addString('iconImage', 254);
+        $tableQuery->addString('phone', 64);
+        $tableQuery->addString('email', 64);
+        $tableQuery->addString('address', 127);
+        $tableQuery->addString('copyright', 127);
+        $tableQuery->addString('additionalData', $tableQuery::TYPE_TEXT);
+
         $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());
         $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow());
         $connection->query($tableQuery->build());
+    }
 
-        $tableQuery = Factory::createTable('userToken');
+    /**
+     * @setupTime 2024-08-11 00:00:00
+     * @return void
+     * @throws Exception
+     */
+    public function createConfiguration(): void
+    {
+        $connection = $this->connection;
+
+        $tableQuery = Factory::createTable('siteConfiguration');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
-        $tableQuery->addForeign($connection, 'userId')->foreign('user', 'id');
-        $tableQuery->addString('token')->setNotNull();
-        $tableQuery->addString('ip')->setNotNull();
-        $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());
-        $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow());
+        $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id');
+        $tableQuery->addString('path', 64);
+        $tableQuery->addString('value', 254);
+        $tableQuery->addUnique('siteId', 'path');
         $connection->query($tableQuery->build());
     }
 }

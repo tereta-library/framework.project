@@ -1,12 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Cms\Controller;
+namespace Builder\Site;
 
-use Framework\Http\Interface\Controller;
-use Framework\Application\Manager;
-use Exception;
-use Framework\User\Model\Token as ModelToken;
-use Framework\User\Model\Resource\Token as ResourceModelToken;
+use Framework\Application\Interface\Module as ModuleInterface;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -19,36 +15,14 @@ use Framework\User\Model\Resource\Token as ResourceModelToken;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Cms\Controller\View
- * @package Builder\Cms\Controller
+ * @class Builder\Site\Module
+ * @package Builder\Site
  * @link https://tereta.dev
  * @since 2020-2024
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
  * @author Tereta Alexander <tereta.alexander@gmail.com>
  * @copyright 2020-2024 Tereta Alexander
  */
-class View implements Controller
+class Module implements ModuleInterface
 {
-    /**
-     * Sample url: http://127.0.0.1/cms/page/123
-     *
-     * @router expression GET /^\/cms\/page\/(\w*)$/Usi
-     * @param string $token
-     * @return string
-     * @throws Exception
-     */
-    public function render(string $token): string
-    {
-        $config = Manager::instance()->getConfig();
-        $view = Manager::instance()->getView();
-
-        (new ResourceModelToken)->load($modelToken = new ModelToken, $token, 'token');
-
-        if (!$modelToken->validate($_SERVER['REMOTE_ADDR'])) throw new Exception('Invalid token');
-
-        $view->initialize('cms')
-            ->getBlockById('content')
-            ->assign('content', '<pre>' . json_encode($modelToken->getData(), JSON_PRETTY_PRINT) . '</pre>');
-        return $view->render();
-    }
 }
