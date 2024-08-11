@@ -9,4 +9,6 @@ REPOSITORIES=(
   "framework.pattern"
   "framework.process"
   "framework.view"
+  "framework.dom"
+  "framework.database"
 )
