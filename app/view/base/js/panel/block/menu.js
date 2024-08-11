@@ -2,7 +2,7 @@ import AdminTemplate from './template.js';
 import Syntax from "../syntax.js";
 
 export class AdminMenu extends AdminTemplate {
-    template = 'admin/menu';
+    template = 'block/menu';
 
     init() {
         this.syntax = (new Syntax(this.node));

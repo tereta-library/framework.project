@@ -2,7 +2,7 @@ import AdminTemplate from './template.js';
 import Syntax from "../syntax.js";
 
 export class AdminMenu extends AdminTemplate {
-    template = 'admin/social';
+    template = 'block/social';
     form = null;
 
     init() {

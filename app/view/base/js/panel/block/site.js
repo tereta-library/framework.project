@@ -2,7 +2,7 @@ import AdminTemplate from './template.js';
 import Syntax from '../syntax.js';
 
 export class AdminSite extends AdminTemplate {
-    template = 'admin/site';
+    template = 'block/site';
     form = null;
 
     init() {

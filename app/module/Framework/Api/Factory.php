@@ -37,9 +37,10 @@ class Factory
      */
     public function create(string $specification): SpecificationInterface
     {
-        if (isset($this->specifications[$specification])) {
-            $specification = $this->specifications[$specification];
+        if (!isset($this->specifications[$specification])) {
+            throw new Exception("The {$specification} specification not found.");
         }
+        $specification = $this->specifications[$specification];
 
         $model = new $specification;
         if (!$model instanceof SpecificationInterface) {

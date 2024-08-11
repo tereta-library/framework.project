@@ -5,8 +5,8 @@ namespace Builder\Cms\Controller;
 use Framework\Http\Interface\Controller;
 use Framework\Application\Manager;
 use Exception;
-use Builder\Panel\Model\Token as ModelToken;
-use Builder\Panel\Model\Resource\Token as ResourceModelToken;
+use Framework\User\Model\Token as ModelToken;
+use Framework\User\Model\Resource\Token as ResourceModelToken;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -35,17 +35,18 @@ class View implements Controller
      * @router expression GET /^\/cms\/page\/(\w*)$/Usi
      * @param string $token
      * @return string
+     * @throws Exception
      */
     public function render(string $token): string
     {
         $config = Manager::instance()->getConfig();
         $view = Manager::instance()->getView();
 
-        $resourceModelToken = new ResourceModelToken;
-        $modelToken = new ModelToken;
-        $resourceModelToken->load($modelToken, 1);
+        (new ResourceModelToken)->load($modelToken = new ModelToken, $token, 'token');
 
         try {
+            if (!$modelToken->validate($_SERVER['REMOTE_ADDR'])) throw new Exception('Invalid token');
+
             $view->initialize('cms')
                 ->getBlockById('content')
                 ->assign('content', '<pre>' . json_encode($modelToken->getData(), JSON_PRETTY_PRINT) . '</pre>');

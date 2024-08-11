@@ -38,7 +38,7 @@ export class AdminLogin extends AdminTemplate{
             'password': passwordInput.value
         };
 
-        fetch('/api/admin/token', {
+        fetch('/api/json/user/login', {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {

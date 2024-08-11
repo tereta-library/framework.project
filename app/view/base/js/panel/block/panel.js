@@ -5,7 +5,7 @@ import AdminLanguage from "./language.js";
 export class AdminPanel extends AdminTemplate{
     buttonLogout = null;
     containerList = null;
-    template = 'admin/panel';
+    template = 'block/toolbar';
 
     show() {
         if (!localStorage.getItem('adminToken')) {
@@ -96,7 +96,7 @@ export class AdminPanel extends AdminTemplate{
             }
         });
 
-        await fetch('/api/admin/modules', {
+        await fetch('/resource/base/json/modules.json', {
             method: "POST",
             body: JSON.stringify(modules),
             headers: {
@@ -108,7 +108,7 @@ export class AdminPanel extends AdminTemplate{
                 const moduleData = json.modules[moduleName];
                 moduleConfigsModule[moduleName] = moduleData;
                 moduleNames.push(moduleName);
-                moduleImport.push(import(/* @vite-ignore */ `/resources/js/${moduleData.js}.js`));
+                moduleImport.push(import(/* @vite-ignore */ `/resource/base/js/${moduleData.js}.js`));
             });
         }).catch((error) => {
             this.hideAllElements();

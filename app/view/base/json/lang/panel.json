@@ -1,0 +1,38 @@
+[
+  {
+    "code": "ru_RU",
+    "label": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439 (Russian)"
+  },
+  {
+    "code": "en_US",
+    "label": "English"
+  },
+  {
+    "code": "uk_UA",
+    "label": "\u0423\u043a\u0440\u0430\u0457\u0301\u043d\u0441\u044c\u043a\u0430 (Ukrainian)"
+  },
+  {
+    "code": "fr_FR",
+    "label": "Le fran\u00e7ais (French)"
+  },
+  {
+    "code": "es_ES",
+    "label": "Espa\u00f1ol (Spanish)"
+  },
+  {
+    "code": "it_IT",
+    "label": "Italiano (Italian)"
+  },
+  {
+    "code": "zh_HK",
+    "label": "\u6f22\u8a9e (Chinese)"
+  },
+  {
+    "code": "hi_IN",
+    "label": "\u0939\u093f\u0928\u094d\u0926\u0940, \u0939\u093f\u0902\u0926\u0940 (Hindi)"
+  },
+  {
+    "code": "ar_AE",
+    "label": "\u0627\u064e\u0644\u0652\u0639\u064e\u0631\u064e\u0628\u0650\u064a\u064e\u0651\u0629\u064f (Arabic)"
+  }
+]

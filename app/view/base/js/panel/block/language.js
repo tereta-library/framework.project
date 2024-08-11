@@ -3,7 +3,7 @@ import Syntax from "../syntax.js";
 import { singletone as syntaxTranslateSingletone } from '../syntax/translate.js';
 
 export default class AdminLanguage extends AdminTemplate {
-    template = 'admin/language';
+    template = 'block/language';
     listing = [];
 
     async init() {
@@ -49,7 +49,7 @@ export default class AdminLanguage extends AdminTemplate {
         // Load form data
         let formData = null;
 
-        await fetch('/api/admin/translate', {
+        await fetch('/resource/base/json/lang/panel.json', {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",

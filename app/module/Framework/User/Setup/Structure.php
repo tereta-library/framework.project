@@ -41,12 +41,12 @@ class Structure extends Upgrade
         $tableQuery = Factory::createTable('user');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
         $tableQuery->addString('identifier')->setNotNull()->setUnique();
-        $tableQuery->addString('password')->setNotNull();
+        $tableQuery->addString('password', 128)->setNotNull();
         $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());
         $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow());
         $connection->query($tableQuery->build());
 
-        $tableQuery = Factory::createTable('token');
+        $tableQuery = Factory::createTable('userToken');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
         $tableQuery->addForeign($connection, 'userId')->foreign('user', 'id');
         $tableQuery->addString('token')->setNotNull();
