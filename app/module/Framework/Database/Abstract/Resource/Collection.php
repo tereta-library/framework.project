@@ -6,8 +6,11 @@ use Framework\Database\Abstract\Resource\Model as ResourceModel;
 use Iterator;
 use Framework\Database\Select\Factory as SelectFactory;
 use Framework\Database\Singleton as SingletonConnection;
+use Framework\Database\Abstract\Model;
 use Exception;
 use PDO;
+use PDOStatement;
+use Framework\Database\Select\Builder as SelectBuilder;
 
 /**
  * @class Framework\Database\Abstract\Resource\Collection
@@ -33,6 +36,8 @@ abstract class Collection implements Iterator
 
     private $loadStatement = null;
 
+    private PDO $connection;
+
     /**
      * @param string $resourceModel
      * @param string $model
@@ -45,7 +50,11 @@ abstract class Collection implements Iterator
         $this->resourceModel = new $resourceModel;
     }
 
-    public function getSelect(bool $reset = false)
+    /**
+     * @param bool $reset
+     * @return SelectBuilder
+     */
+    public function getSelect(bool $reset = false): SelectBuilder
     {
         if ($this->select && !$reset) {
             return $this->select;
@@ -54,7 +63,11 @@ abstract class Collection implements Iterator
         return $this->select;
     }
 
-    private function load(bool $reset = false)
+    /**
+     * @param bool $reset
+     * @return PDOStatement
+     */
+    private function load(bool $reset = false): PDOStatement
     {
         if ($this->loadStatement && !$reset) {
             return $this->loadStatement;
@@ -69,25 +82,39 @@ abstract class Collection implements Iterator
         return $this->loadStatement = $pdoState;
     }
 
-    public function rewind() {
+    /**
+     * @return void
+     */
+    public function rewind(): void {
         $this->load(true);
     }
 
-    // Возвращаем текущий элемент
-    public function current() {
+    /**
+     * @return Model
+     */
+    public function current(): Model {
         $this->position++;
         $data = $this->loadStatement->fetch(PDO::FETCH_ASSOC);
         $model = $this->model;
         return new $model($data);
     }
 
-    public function key() {
+    /**
+     * @return int
+     */
+    public function key(): int {
         return $this->position;
     }
 
-    public function next() {
+    /**
+     * @return void
+     */
+    public function next(): void {
     }
 
+    /**
+     * @return bool
+     */
     public function valid(): bool {
         $this->load();
 

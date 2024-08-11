@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Framework\Database\Create\Column;
+namespace Framework\Database\Create;
 
-use InvalidArgumentException;
 use Framework\Database\Interface\Value;
+use InvalidArgumentException;
 
 /**
- * @class Framework\Database\Table\Create\Column\Builder
+ * @class Framework\Database\Create\ColumnBuilder
  */
-class Builder
+class ColumnBuilder
 {
     const TYPE_INT = 1;
     const TYPE_DECIMAL = 2;

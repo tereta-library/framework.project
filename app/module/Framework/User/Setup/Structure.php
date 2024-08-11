@@ -46,7 +46,7 @@ class Structure extends Upgrade
 
         $tableQuery = Factory::createTable('token');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
-        $tableQuery->addForeign('userId')->foreign('user', 'id');
+        $tableQuery->addForeign($connection, 'userId')->foreign('user', 'id');
         $tableQuery->addString('token')->setNotNull();
         $tableQuery->addString('ip')->setNotNull();
         $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());

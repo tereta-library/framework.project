@@ -2,8 +2,8 @@
 
 namespace Framework\Database\Create;
 
-use Framework\Database\Create\Column\Builder as ColumnBuilder;
-use Framework\Database\Create\Foreign\Builder as ForeignBuilder;
+use Framework\Database\Create\ColumnBuilder as ColumnBuilder;
+use PDO;
 
 /**
  * @class Framework\Database\Create\Builder
@@ -11,10 +11,28 @@ use Framework\Database\Create\Foreign\Builder as ForeignBuilder;
  */
 class Builder
 {
+
+    const TYPE_BIGINT = 2147483647 + 1;
+    const TYPE_INT = 8388607 + 1;
+    const TYPE_MEDIUMINT = 32767 + 1;
+    const TYPE_SMALLINT = 127 + 1;
+    const TYPE_TINYINT = 0;
+
+    const TYPE_BIGINT_UNSIGNED = 4294967295 + 1;
+    const TYPE_INT_UNSIGNED = 16777215 + 1;
+    const TYPE_MEDIUMINT_UNSIGNED = 65535 + 1;
+    const TYPE_SMALLINT_UNSIGNED = 255 + 1;
+    const TYPE_TINYINT_UNSIGNED = 0;
+
     /**
      * @var array $columns
      */
     private array $columns = [];
+
+    /**
+     * @var array $foreign
+     */
+    private array $foreign = [];
 
     /**
      * @param string|null $table
@@ -60,6 +78,10 @@ class Builder
         return $column;
     }
 
+    /**
+     * @param string $columnName
+     * @return ColumnBuilder
+     */
     public function addDateTime(string $columnName): ColumnBuilder
     {
         $column = "{$columnName} DATETIME";
@@ -128,10 +150,14 @@ class Builder
         return $column;
     }
 
-    public function addForeign(string $string)
+    /**
+     * @param PDO $connection
+     * @param string $string
+     * @return ForeignBuilder
+     */
+    public function addForeign(PDO $connection, string $string): ForeignBuilder
     {
-        $this->columns[] = $column;
-        return $column;
+        return $this->foreign[] = new ForeignBuilder($connection, $this, $string);
     }
 
     /**
@@ -144,7 +170,13 @@ class Builder
             $columns[] = $column->build();
         }
 
-        return "CREATE TABLE {$this->table} (\n  " . implode(",\n  ", $columns) . "\n)";
+        foreach($this->foreign as $foreign) {
+            $columns[] = $foreign->build();
+        }
+
+        $string = "CREATE TABLE {$this->table} (\n  " . implode(",\n  ", $columns) . "\n)";
+
+        return $string;
     }
 
     /**

@@ -22,6 +22,8 @@ class Builder
      */
     private ?array $onDuplicate = null;
 
+    private array $values = [];
+
     /**
      * @param string|null $table
      */
