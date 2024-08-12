@@ -33,12 +33,31 @@ class User extends Model
             throw new Exception('Invalid user model');
         }
 
-        $password = hash('sha256', $password);
+        $password = $this->passwordHash($password);
 
         if ($this->get('password') !== $password || !$password) {
             throw new Exception('Invalid password');
         }
         return true;
+    }
+
+    /**
+     * @param string $password
+     * @return $this
+     */
+    public function setPassword(string $password): static
+    {
+        $this->set('password', $this->passwordHash($password));
+        return $this;
+    }
+
+    /**
+     * @param string $password
+     * @return string
+     */
+    private function passwordHash(string $password): string
+    {
+        return hash('sha256', $password);
     }
 
     /**

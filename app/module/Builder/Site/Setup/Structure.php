@@ -30,7 +30,7 @@ use Exception;
 class Structure extends Upgrade
 {
     /**
-     * @setupTime 2024-08-10 00:00:00
+     * @createdAt 2024-08-10 00:00:00
      * @return void
      * @throws Exception
      */
@@ -57,7 +57,7 @@ class Structure extends Upgrade
     }
 
     /**
-     * @setupTime 2024-08-11 00:00:00
+     * @createdAt 2024-08-11 00:00:00
      * @return void
      * @throws Exception
      */
@@ -71,6 +71,41 @@ class Structure extends Upgrade
         $tableQuery->addString('path', 64);
         $tableQuery->addString('value', 254);
         $tableQuery->addUnique('siteId', 'path');
+        $connection->query($tableQuery->build());
+    }
+
+    /**
+     * @createdAt 2024-08-12 00:00:00
+     * @return void
+     * @throws Exception
+     */
+    public function createDomain(): void
+    {
+        $connection = $this->connection;
+
+        $tableQuery = Factory::createTable('siteDomain');
+        $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
+        $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id');
+        $tableQuery->addString('domain', 64)->setUnique();
+        $tableQuery->addInteger('primaryDomain', 1);
+        $connection->query($tableQuery->build());
+    }
+
+    /**
+     * @createdAt 2024-08-12 00:00:00
+     * @return void
+     * @throws Exception
+     */
+    public function createUserRelation(): void
+    {
+        $connection = $this->connection;
+
+        $tableQuery = Factory::createTable('siteUser');
+        $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
+        $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id');
+        $tableQuery->addForeign($connection, 'userId')->foreign('user', 'id');
+        $tableQuery->addInteger('acl', 1, false)->setNotNull()->setDefault(0);
+        $tableQuery->addUnique('siteId', 'userId');
         $connection->query($tableQuery->build());
     }
 }

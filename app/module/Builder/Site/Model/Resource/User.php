@@ -1,16 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Framework\User\Model\Resource;
+namespace Builder\Site\Model\Resource;
 
 use Framework\Database\Abstract\Resource\Model;
+use Exception;
 
-/**
- * @class Framework\User\Model\Resource\User
- */
 class User extends Model
 {
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
-        parent::__construct('user');
+        parent::__construct('siteUser');
     }
 }

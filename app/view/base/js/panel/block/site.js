@@ -18,7 +18,7 @@ export class AdminSite extends AdminTemplate {
         let formData = null;
 
         await fetch('/api/json/site/configuration', {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Cache-Control": "no-cache",
                 "Authorization": "Bearer " + token,

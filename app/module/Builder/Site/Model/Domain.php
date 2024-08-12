@@ -5,8 +5,8 @@ namespace Builder\Site\Model;
 use Framework\Database\Abstract\Model;
 
 /**
- * @class Builder\Site\Model\Entity
+ * @class Builder\Site\Model\Domain
  */
-class Entity extends Model
+class Domain extends Model
 {
 }
