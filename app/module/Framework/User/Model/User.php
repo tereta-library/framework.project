@@ -71,12 +71,17 @@ class User extends Model
         return $this;
     }
 
+    /**
+     * @param string $ip
+     * @return Token
+     * @throws Exception
+     */
     public function createToken(string $ip): TokenModel
     {
         $data = $this->getData();
         unset($data['password']);
         $tokenModel = (new TokenModel)->set(
-            'token', hash('sha256', implode(':', $data) . ':' . rand(0, 99999) . ':' . time())
+            'token', "{$this->get('id')}:" . hash('sha256', implode(':', $data) . ':' . rand(0, 99999) . ':' . time())
         )->set('userId', $this->get('id'))->set('ip', $ip);
 
         (new TokenResourceModel)->save($tokenModel);

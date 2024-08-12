@@ -68,6 +68,7 @@ class Make implements Controller
         $siteUserModel = new SiteUserModel();
         $siteUserModel->set('siteId', $siteId);
         $siteUserModel->set('userId', $userId);
+        $siteUserModel->set('acl', 1);
         $siteUserResourceModel->save($siteUserModel);
         echo Symbol::COLOR_GREEN . "Relating \"{$userModel->get('identifier')}\" to the \"{$siteModel->get('identifier')}\" site.\n" . Symbol::COLOR_RESET;
     }
