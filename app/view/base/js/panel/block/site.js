@@ -5,12 +5,20 @@ export class AdminSite extends AdminTemplate {
     template = 'block/site';
     form = null;
 
+    /**
+     * Initialize the class
+     */
     init() {
         this.syntax = new Syntax(this.node);
         this.syntax.update();
         this.node.addEventListener('click', this.buttonClick.bind(this));
     }
 
+    /**
+     * Button click event
+     *
+     * @returns {Promise<void>}
+     */
     async buttonClick() {
         const token = this.rootAdminJs.getToken();
 
@@ -18,10 +26,10 @@ export class AdminSite extends AdminTemplate {
         let formData = null;
 
         await fetch('/api/json/site/configuration', {
-            method: "POST",
+            method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
-                "Authorization": "Bearer " + token,
+                "API-Token": token,
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {
@@ -33,7 +41,7 @@ export class AdminSite extends AdminTemplate {
             this.rootAdminJs.elementPanel.actionLogout();
             return;
         }
-debugger;
+
         // Show admin form
         this.form = await this.showForm('block/site/form', formData, this.form);
     }

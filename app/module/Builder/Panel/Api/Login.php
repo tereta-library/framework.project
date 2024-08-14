@@ -12,7 +12,7 @@ class Login implements Api
      * @param array $data
      * @return array
      * @throws Exception
-     * @api user/login
+     * @api POST user/login
      */
     public function getToken(array $data): array
     {

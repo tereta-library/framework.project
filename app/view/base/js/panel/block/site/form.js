@@ -1,6 +1,4 @@
 import AdminTemplateForm from '../templateForm.js';
-import AdminSiteResellerForm from './form/reseller.js';
-import AdminSiteThemeSelectorForm from './form/themeSelector.js';
 
 export class AdminSiteForm extends AdminTemplateForm {
     template            = 'block/site/form';
@@ -8,15 +6,14 @@ export class AdminSiteForm extends AdminTemplateForm {
     elementLogoUploadFile = null;
     elementIconUploadZone = null;
     elementIconUploadFile = null;
-    themeSelector         = null;
     config                = null;
-    formData                    = new FormData();
+    formData         = new FormData();
 
+    /**
+     *
+     */
     init() {
         super.init();
-
-        this.themeSelector = new AdminSiteThemeSelectorForm(this);
-        this.themeSelector.render(this.node.querySelector('[data-window="themeWindow"]'));
 
         this.node.addEventListener('submit', this.save.bind(this));
 
@@ -37,16 +34,16 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('phone', '')
             .set('email', '')
             .set('name', '')
-            .set('copyright', '')
-            .set('themeSelector', this.themeSelector)
-            .set('resellerClass', new AdminSiteResellerForm(this))
-            .set('themeCss', null)
-            .set('themeHeaderListing', [])
-            .set('themeBodyListing', [])
-            .set('themeFooterListing', [])
-            .set('additional', []);
+            .set('copyright', '');
     }
 
+    /**
+     * Initialize the upload area
+     *
+     * @param elementFileUploadZone
+     * @param elementFileUploadFile
+     * @param variable
+     */
     initUploadArea(elementFileUploadZone, elementFileUploadFile, variable) {
         elementFileUploadZone.addEventListener('dragenter', (e) => {
             e.preventDefault();
@@ -66,6 +63,12 @@ export class AdminSiteForm extends AdminTemplateForm {
         elementFileUploadFile.addEventListener('change', (event) => this.uploadFile(event, variable));
     }
 
+    /**
+     * Upload file event
+     *
+     * @param event
+     * @param variable
+     */
     uploadFile(event, variable) {
         const element = event.target;
         const files = element.files;
@@ -76,6 +79,13 @@ export class AdminSiteForm extends AdminTemplateForm {
         }
     }
 
+    /**
+     * Drop file event
+     *
+     * @param element
+     * @param event
+     * @param variable
+     */
     dropFile(element, event, variable) {
         const files = event.dataTransfer.files;
         event.preventDefault();
@@ -88,6 +98,11 @@ export class AdminSiteForm extends AdminTemplateForm {
         }
     }
 
+    /**
+     * Apply the file to the form
+     * @param file
+     * @param variable
+     */
     applyFile(file, variable) {
         this.formData.append(variable, file);
         this.syntax.set('isSave', true);
@@ -105,6 +120,10 @@ export class AdminSiteForm extends AdminTemplateForm {
         }
     }
 
+    /**
+     * Save the form
+     * @param event
+     */
     save(event) {
         this.formData = new FormData();
 
@@ -114,9 +133,9 @@ export class AdminSiteForm extends AdminTemplateForm {
         event.preventDefault();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/site', true);
+        xhr.open('POST', '/api/json/site/configuration', true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
-        xhr.setRequestHeader('Authorization', "Bearer " + token);
+        xhr.setRequestHeader('API-Token', token);
 
         xhr.onload = function(xhr) {
             if (this.status === 200) {
@@ -148,47 +167,17 @@ export class AdminSiteForm extends AdminTemplateForm {
         if (this.syntax.get('logoImageFile')) {
             this.formData.append('logoImage', this.syntax.get('logoImageFile'));
         }
-        this.formData.append('theme[css]', this.syntax.get('themeCss').replace("\r\n", "\n"));
-        this.formData.append('theme[header]', this.syntax.get('themeHeader'));
-        this.formData.append('theme[body]', this.syntax.get('themeBody'));
-        this.formData.append('theme[footer]', this.syntax.get('themeFooter'));
-
-        this.getFormPaths(this.syntax.get('additional'), 'additional').forEach((item) => {
-            this.formData.append(item[0], !item[1] ? '' : item[1]);
-        });
-
-        this.getFormPaths(syntax.get('resellerClass').getData(), 'additional').forEach((item) => {
-            this.formData.append(item[0], item[1]);
-        });
 
         xhr.send(this.formData);
     }
 
-    getFormPaths(data, parentPath = '') {
-        let result = [];
-
-        for (const key in data) {
-            if (data.hasOwnProperty(key)) {
-                const currentPath = parentPath ? `${parentPath}[${key}]` : key;
-
-                // Проверяем, является ли текущее свойство объектом
-                if (typeof data[key] === 'object' && data[key] !== null) {
-                    result = result.concat(this.getFormPaths(data[key], currentPath));
-                } else {
-                    result.push([currentPath, data[key]]);
-                }
-            }
-        }
-
-        return result;
-    }
-
+    /**
+     * Show the form
+     *
+     * @param config
+     */
     show(config) {
         this.config = config;
-
-        if (config.additional) {
-            this.syntax.get('resellerClass').setConfig(config.additional.reseller);
-        }
 
         this.syntax
             .set('logoImage', config.logoImage)
@@ -199,10 +188,6 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('name', config.name)
             .set('phone', config.phone)
             .set('tagline', config.tagline)
-            .set('additionalData', config.additionalData)
-            .set('onClickTheme', async (event, element, parameter) => {
-                this.themeSelector.open(element, parameter[1], this.syntax.get(parameter[0]));
-            })
             .set('onChangeTheme', async (event, element, parameter) => {
                 this.syntax.set('isSave', true);
                 this.syntax.set(parameter[0], element.value);
