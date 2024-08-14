@@ -28,7 +28,7 @@ use Exception;
 class View implements Controller
 {
     /**
-     * @router expression GET /^\/panel\/(.*)$/Usi
+     * @router expression GET /^\/admin\/([^\?]+)$/Usi
      * @param string $identifier
      * @return string
      */

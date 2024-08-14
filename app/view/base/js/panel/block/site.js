@@ -28,6 +28,12 @@ export class AdminSite extends AdminTemplate {
             formData = json;
         });
 
+        if (formData.error) {
+            alert(formData.error);
+            this.rootAdminJs.elementPanel.actionLogout();
+            return;
+        }
+debugger;
         // Show admin form
         this.form = await this.showForm('block/site/form', formData, this.form);
     }

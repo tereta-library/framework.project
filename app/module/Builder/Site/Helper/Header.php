@@ -14,7 +14,7 @@ class Header
      */
     public static function getToken(): ?string
     {
-        preg_match('/^Bearer (\w+)$/Usi', HttpHeader::get('authorization'), $matches);
+        preg_match('/^Bearer ([a-z0-9:]+)$/Usi', HttpHeader::get('authorization'), $matches);
         return $matches[1] ?? null;
     }
 }

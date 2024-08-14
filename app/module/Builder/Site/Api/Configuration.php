@@ -10,6 +10,24 @@ use Builder\Site\Helper\Header as HelperHeader;
 class Configuration implements Api
 {
     /**
+     * @var EntityModel
+     */
+    private EntityModel $entityModel;
+
+    /**
+     * @throws Exception
+     */
+    public function __construct()
+    {
+        (new EntityResourceModel())->loadByToken(
+            $this->entityModel = new EntityModel(),
+            $_SERVER['HTTP_HOST'],
+            HelperHeader::getToken(),
+            $_SERVER['REMOTE_ADDR']
+        );
+    }
+
+    /**
      * @param array $data
      * @return array
      * @throws Exception
@@ -17,9 +35,6 @@ class Configuration implements Api
      */
     public function getConfiguration(array $data): array
     {
-        (new EntityResourceModel())->loadByToken(
-            $entityModel = new EntityModel(), $_SERVER['HTTP_HOST'], HelperHeader::getToken()
-        );
-        return $entityModel->getData();
+        return $this->entityModel->getData();
     }
 }

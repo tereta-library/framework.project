@@ -23,14 +23,16 @@ class User extends Model
     /**
      * @param UserModel $model
      * @param string $token
+     * @param string $ip
      * @return $this
      * @throws Exception
      */
-    public function loadByToken(UserModel $model, string $token): static
+    public function loadByToken(UserModel $model, string $token, string $ip): static
     {
         $tokenResourceModel = new TokenResourceModel;
         $tokenResourceModel->getSelect()->columns(['user.*'])
             ->innerJoin('user', 'user.id = userToken.userId');
+        $tokenResourceModel->where('userToken.ip = ?', $ip);
         $tokenResourceModel->load($model, $token, 'userToken.token');
         return $this;
     }

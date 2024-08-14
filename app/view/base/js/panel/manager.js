@@ -170,7 +170,7 @@ export class Manager {
             return null;
         }
 
-        return token.split(':').pop();
+        return token;
     }
 
     clearToken()

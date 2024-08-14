@@ -27,11 +27,20 @@ class Entity extends ResourceModel
      * @param EntityModel $entityModel
      * @param string $domain
      * @param string $token
-     * @return array
+     * @param string $ip
+     * @return Entity
      * @throws Exception
      */
-    public function loadByToken(EntityModel $entityModel, string $domain, string $token): static
+    public function loadByToken(EntityModel $entityModel, string $domain, string $token, string $ip): static
     {
+        $userResourceModel = new UserResourceModel;
+        $userResourceModel->loadByToken($userModel = new UserModel, $token, $ip);
+        $userId = $userModel->get('id');
+
+        if (!$userId) {
+            throw new Exception('User not found');
+        }
+
         $this->getSelect()->columns(['site.*'])
             ->innerJoin('siteDomain', 'siteDomain.siteId = site.id');
         $this->where('siteDomain.domain = ?', $domain);
@@ -42,14 +51,6 @@ class Entity extends ResourceModel
             throw new Exception('Site not found');
         }
 
-        $userResourceModel = new UserResourceModel;
-        $userResourceModel->loadByToken($userModel = new UserModel, $token, 'token');
-        $userId = $userModel->get('id');
-
-        if (!$userId) {
-            throw new Exception('User not found');
-        }
-
         $siteUserResourceModel = new SiteUserResourceModel;
         $siteUserResourceModel->loadByBound($siteUserModel = new SiteUserModel, $siteId, $userId);
         $aclId = $siteUserModel->get('acl');
@@ -57,6 +58,8 @@ class Entity extends ResourceModel
             $entityModel->setData([]);
             throw new Exception('Site not found');
         }
+
+        $entityModel->setUserModel($userModel);
 
         return $this;
     }
