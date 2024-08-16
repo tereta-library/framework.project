@@ -39,8 +39,8 @@ class View implements Controller
      */
     public function render(string $token): string
     {
-        $config = Manager::instance()->getConfig();
-        $view = Manager::instance()->getView();
+        $config = Manager::getInstance()->getConfig();
+        $view = Manager::getInstance()->getView();
 
         (new ResourceModelToken)->load($modelToken = new ModelToken, $token, 'token');
 

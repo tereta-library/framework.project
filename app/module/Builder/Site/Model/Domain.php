@@ -9,4 +9,8 @@ use Framework\Database\Abstract\Model;
  */
 class Domain extends Model
 {
+    public function isCurrent(): bool
+    {
+        return $this->get('domain') === $_SERVER['HTTP_HOST'];
+    }
 }

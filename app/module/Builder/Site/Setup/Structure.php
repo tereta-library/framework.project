@@ -49,7 +49,6 @@ class Structure extends Upgrade
         $tableQuery->addString('email', 64);
         $tableQuery->addString('address', 127);
         $tableQuery->addString('copyright', 127);
-        $tableQuery->addString('additionalData', $tableQuery::TYPE_TEXT);
 
         $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow());
         $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow());
@@ -67,10 +66,15 @@ class Structure extends Upgrade
 
         $tableQuery = Factory::createTable('siteConfiguration');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
-        $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id');
         $tableQuery->addString('path', 64);
+        $connection->query($tableQuery->build());
+
+        $tableQuery = Factory::createTable('siteConfigurationValue');
+        $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
+        $tableQuery->addForeign($connection, 'pathId')->foreign('siteConfiguration', 'id');
+        $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id');
         $tableQuery->addString('value', 254);
-        $tableQuery->addUnique('siteId', 'path');
+        $tableQuery->addUnique('pathId', 'siteId');
         $connection->query($tableQuery->build());
     }
 

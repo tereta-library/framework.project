@@ -33,19 +33,19 @@ class Configuration implements Api
     }
 
     /**
-     * @param array $data
      * @return array
      * @throws Exception
      * @api GET site/configuration
      */
-    public function getConfiguration(array $data): array
+    public function getConfiguration(): array
     {
-        return $this->entityModel->getData();
+        return $this->entityModel->getPublicData();
     }
 
     /**
      * @param array $data
      * @return array
+     * @throws Exception
      * @api POST site/configuration
      */
     public function setConfiguration(array $data): array
@@ -53,7 +53,9 @@ class Configuration implements Api
         $data['id'] = $this->entityModel->get('id');
         $data['identifier'] = $this->entityModel->get('identifier');
         $this->entityModel->setData($data);
+        $this->entityModel->setFiles($_FILES);
         $this->entityResourceModel->save($this->entityModel);
-        return $this->entityModel->getData();
+        $this->entityResourceModel->load($this->entityModel);
+        return $this->entityModel->getPublicData();
     }
 }

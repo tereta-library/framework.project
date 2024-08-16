@@ -34,7 +34,7 @@ class View implements Controller
      */
     public function render(string $identifier): string
     {
-        $view = Manager::instance()->getView();
+        $view = Manager::getInstance()->getView();
 
         try {
             return (string) $view->render('panel');
