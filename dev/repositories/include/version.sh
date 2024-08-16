@@ -1,3 +1,3 @@
 #!/bin/bash
 
-VERSION="0.0.20-candidate"
+VERSION="0.0.20.1"
