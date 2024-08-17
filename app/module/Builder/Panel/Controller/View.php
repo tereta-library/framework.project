@@ -36,10 +36,6 @@ class View implements Controller
     {
         $view = Manager::getInstance()->getView();
 
-        try {
-            return (string) $view->render('panel');
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
+        return (string)$view->render('panel');
     }
 }

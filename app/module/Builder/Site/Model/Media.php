@@ -4,6 +4,7 @@ namespace Builder\Site\Model;
 
 use Builder\Site\Model\Entity as SiteModel;
 use Builder\Site\Model\Resource\Domain\Collection as DomainCollection;
+use Exception;
 
 /**
  * @class Builder\Site\Model\Media
@@ -29,12 +30,12 @@ class Media
     /**
      * @param string $target
      * @return string
+     * @throws Exception
      */
     public function getUrl(string $target): string
     {
         $domainModel = $this->siteModel->getDomainModel();
-        $schema = $_SERVER['REQUEST_SCHEME'] ?? 'http';
-        return $schema . '://' . $domainModel->get('domain') . "/{$this->siteUri}/" . ltrim($target, '/');
+        return ($domainModel->get('secure') ? 'https' : 'http') . "://{$domainModel->get('domain')}/{$this->siteUri}/" . ltrim($target, '/');
     }
 
     /**

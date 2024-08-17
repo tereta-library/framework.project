@@ -6,6 +6,7 @@ use Exception;
 use Builder\Site\Model\Resource\Entity as EntityResourceModel;
 use Builder\Site\Model\Entity as EntityModel;
 use Builder\Site\Helper\Header as HelperHeader;
+use Builder\Site\Model\Repository as SiteRepository;
 
 class Configuration implements Api
 {
@@ -24,8 +25,7 @@ class Configuration implements Api
      */
     public function __construct()
     {
-        ($this->entityResourceModel = new EntityResourceModel())->loadByToken(
-            $this->entityModel = new EntityModel(),
+        $this->entityModel = SiteRepository::getInstance()->getByToken(
             $_SERVER['HTTP_HOST'],
             HelperHeader::getToken(),
             $_SERVER['REMOTE_ADDR']

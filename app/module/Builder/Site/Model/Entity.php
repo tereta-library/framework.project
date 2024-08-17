@@ -17,9 +17,14 @@ use Builder\Site\Model\Domain as DomainModel;
 class Entity extends Model
 {
     /**
-     * @var UserModel|null $userModel
+     * @var UserModel $userModel
      */
-    private ?UserModel $userModel = null;
+    private UserModel $userModel;
+
+    /**
+     * @var Domain $domainModel
+     */
+    private DomainModel $domainModel;
 
     /**
      * @var ApplicationManager $applicationManager
@@ -55,38 +60,17 @@ class Entity extends Model
 
     /**
      * @return DomainModel
+     * @throws Exception
      */
     public function getDomainModel(): DomainModel
     {
-        static $domainModel = null;
-        if ($domainModel) return $domainModel;
+        return $this->domainModel;
+    }
 
-        $domainCollection = (new DomainCollection)->load(
-            $this->get('id'),
-            'siteId',
-        );
-
-        $primaryDomainModel = null;
-        foreach ($domainCollection as $domainModelItem) {
-            if ($domainModelItem->get('primaryDomain')) {
-                $primaryDomainModel = $domainModelItem;
-            }
-
-            if ($domainModelItem->isCurrent()) {
-                $domainModel = $domainModelItem;
-                break;
-            }
-        }
-
-        if (!$domainModel) {
-            $domainModel = $primaryDomainModel;
-        }
-
-        if (!$domainModel) {
-            throw new Exception("Domain model not found for site {$this->get('id')}");
-        }
-
-        return $domainModel;
+    public function setDomainModel(DomainModel $domainModel): static
+    {
+        $this->domainModel = $domainModel;
+        return $this;
     }
 
     /**
