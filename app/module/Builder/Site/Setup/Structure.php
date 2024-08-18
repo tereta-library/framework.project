@@ -5,7 +5,6 @@ namespace Builder\Site\Setup;
 use Framework\Application\Setup\Abstract\Upgrade;
 use Framework\Database\Factory;
 use Framework\Database\Value\Now as ValueNow;
-use PDO;
 use Exception;
 
 /**
@@ -30,13 +29,14 @@ use Exception;
 class Structure extends Upgrade
 {
     /**
-     * @createdAt 2024-08-10 00:00:00
+     * @date 2024-08-10 00:00:00 Created
      * @return void
      * @throws Exception
      */
     public function create(): void
     {
         $connection = $this->connection;
+        // Create site
         $tableQuery = Factory::createTable('site');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Site ID');
         $tableQuery->addString('identifier')->setNotNull()->setUnique()->setComment('Site identifier');
@@ -53,22 +53,14 @@ class Structure extends Upgrade
         $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow())->setComment('Site created at');
         $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow())->setComment('Site updated at');
         $connection->query($tableQuery->build());
-    }
 
-    /**
-     * @createdAt 2024-08-11 00:00:00
-     * @return void
-     * @throws Exception
-     */
-    public function createConfiguration(): void
-    {
-        $connection = $this->connection;
-
+        // Create site configuration
         $tableQuery = Factory::createTable('siteConfiguration');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Configuration ID');
         $tableQuery->addString('path', $tableQuery::TYPE_VARCHAR)->setNotNull()->setUnique()->setComment('Configuration path');
         $connection->query($tableQuery->build());
 
+        // Create site configuration value
         $tableQuery = Factory::createTable('siteConfigurationValue');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Configuration value ID');
         $tableQuery->addForeign($connection, 'pathId')->foreign('siteConfiguration', 'id')->setComment('Configuration path ID');
@@ -76,17 +68,8 @@ class Structure extends Upgrade
         $tableQuery->addString('value', $tableQuery::TYPE_VARCHAR)->setDefault(null)->setComment('Configuration value');
         $tableQuery->addUnique('pathId', 'siteId');
         $connection->query($tableQuery->build());
-    }
 
-    /**
-     * @createdAt 2024-08-12 00:00:00
-     * @return void
-     * @throws Exception
-     */
-    public function createDomain(): void
-    {
-        $connection = $this->connection;
-
+        // Create site domain
         $tableQuery = Factory::createTable('siteDomain');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Domain ID');
         $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id')->setComment('Site ID');
@@ -94,17 +77,8 @@ class Structure extends Upgrade
         $tableQuery->addBoolean('secure')->setDefault(0)->setComment('Domain secure');
         $tableQuery->addInteger('primaryDomain', 1)->setComment('Primary domain');
         $connection->query($tableQuery->build());
-    }
 
-    /**
-     * @createdAt 2024-08-12 00:00:00
-     * @return void
-     * @throws Exception
-     */
-    public function createUserRelation(): void
-    {
-        $connection = $this->connection;
-
+        // Create site user
         $tableQuery = Factory::createTable('siteUser');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey();
         $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id')->setComment('Site ID');

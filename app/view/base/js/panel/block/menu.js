@@ -18,11 +18,11 @@ export class AdminMenu extends AdminTemplate {
         // Load form data
         let formData = null;
 
-        await fetch('/api/admin/menu', {
+        await fetch('/api/json/menu/configuration', {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
-                "Authorization": "Bearer " + token,
+                "API-Token": token,
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {

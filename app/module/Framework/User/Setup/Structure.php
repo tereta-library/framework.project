@@ -5,7 +5,6 @@ namespace Framework\User\Setup;
 use Framework\Application\Setup\Abstract\Upgrade;
 use Framework\Database\Factory;
 use Framework\Database\Value\Now as ValueNow;
-use PDO;
 use Exception;
 
 /**
@@ -30,7 +29,7 @@ use Exception;
 class Structure extends Upgrade
 {
     /**
-     * @setupTime 2024-08-10 21:04:33
+     * @date 2024-01-10 21:04:33 Created
      * @return void
      * @throws Exception
      */

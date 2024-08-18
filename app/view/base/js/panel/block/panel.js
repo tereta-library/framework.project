@@ -130,7 +130,6 @@ export class AdminPanel extends AdminTemplate{
             }
         }).then((response) => response.json()).then((json) => {
             Object.keys(json.modules).forEach((moduleName) => {
-                debugger;
                 if (!modules.includes(moduleName) && !['site', 'create'].includes(moduleName)) {
                     return;
                 }

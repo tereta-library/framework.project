@@ -182,10 +182,10 @@ export class AdminMenuForm extends AdminTemplateForm {
         const menu = this.clearMenu(menuClean);
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/menu', true);
+        xhr.open('POST', '/api/json/menu/configuration', true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader("Content-Type",  "application/json;charset=UTF-8");
-        xhr.setRequestHeader('Authorization', "Bearer " + token);
+        xhr.setRequestHeader('API-Token', token);
         xhr.onload = (xhr) => {
             if (xhr.target.status === 200) {
                 this.syntax.set('successMessage', 'Menu saved')
