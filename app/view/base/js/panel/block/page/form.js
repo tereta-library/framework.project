@@ -3,7 +3,7 @@ import Syntax from '../../syntax.js';
 import {Editor as EditorLibrary} from '../../library/editor/editor.js';
 
 export class AdminMenuForm extends AdminTemplateForm {
-    template = 'admin/page/form';
+    template = 'block/page/form';
     id = null;
     onChangeKeyTimeout = [];
 

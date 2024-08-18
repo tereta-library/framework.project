@@ -25,6 +25,7 @@ class Configuration implements Api
      */
     public function __construct()
     {
+        $this->entityResourceModel = new EntityResourceModel();
         $this->entityModel = SiteRepository::getInstance()->getByToken(
             $_SERVER['HTTP_HOST'],
             HelperHeader::getToken(),

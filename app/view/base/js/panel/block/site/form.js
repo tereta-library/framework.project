@@ -77,6 +77,9 @@ export class AdminSiteForm extends AdminTemplateForm {
             this.applyFile(file, variable);
             break;
         }
+
+        this.syntax.set('isSave', true);
+        this.syntax.update();
     }
 
     /**
@@ -96,6 +99,9 @@ export class AdminSiteForm extends AdminTemplateForm {
             this.applyFile(file, variable);
             break;
         }
+
+        this.syntax.set('isSave', true);
+        this.syntax.update();
     }
 
     /**

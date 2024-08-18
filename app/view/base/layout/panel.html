@@ -4,14 +4,14 @@
     <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/panel/style.css" />
 </head>
 <body class="panel">
-    <iframe src="http://127.0.0.1/cms/page/123"></iframe>
+    <iframe id="adminCanvas" src="http://sample.localhost/cms/page/123"></iframe>
 
     <div id="adminPanel"></div>
     <script type="module">
         import { Manager } from '/resource/base/js/panel/manager.js';
 
         const manager = (new Manager(
-            document.body,
+            document.getElementById('adminCanvas'),
             document.getElementById('adminPanel'),
             '/resource/base/json/lang/panel'
         ));

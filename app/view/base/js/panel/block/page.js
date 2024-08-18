@@ -4,6 +4,11 @@ import Syntax from "../syntax.js";
 export class AdminMenu extends AdminTemplate {
     template = 'block/page';
 
+    constructor(rootNode, config) {
+        debugger;
+        super(rootNode, config);
+    }
+
     init() {
         this.syntax = (new Syntax(this.node));
         this.syntax.update();

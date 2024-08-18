@@ -56,11 +56,37 @@ export class AdminPanel extends AdminTemplate{
         });
     }
 
+    useInitialComment(node, adminList) {
+        const item = node.nodeValue.match(/^ ?@dataAdmin +({.*}) *$/);
+        if (!item) {
+            return;
+        }
+
+        adminList.push({
+            'element': node.parentNode,
+            'init': JSON.parse(item[1])
+        });
+    }
+
+    handleInitialComments(node, adminList) {
+        if (node.nodeType === Node.COMMENT_NODE) {
+            this.useInitialComment(node, adminList);
+        }
+
+        for (let child = node.firstChild; child; child = child.nextSibling) {
+            this.handleInitialComments(child, adminList);
+        }
+    }
+
     async handleBlocks() {
         let adminList = [];
 
         this.containerList.innerHTML = '';
-        this.rootAdminJs.elementCanvas.querySelectorAll('[data-admin-init]').forEach((item) => {
+        const canvas = this.rootAdminJs.elementCanvas.contentWindow.document;
+
+        this.handleInitialComments(canvas, adminList);
+
+        canvas.querySelectorAll('[data-admin-init]').forEach((item) => {
             adminList.push({
                 'element': item,
                 'init': JSON.parse('{' + item.getAttribute('data-admin-init') + '}')
@@ -97,14 +123,18 @@ export class AdminPanel extends AdminTemplate{
         });
 
         await fetch('/resource/base/json/modules.json', {
-            method: "POST",
-            body: JSON.stringify(modules),
+            method: "GET",
             headers: {
                 "Authorization": "Bearer " + token,
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {
             Object.keys(json.modules).forEach((moduleName) => {
+                debugger;
+                if (!modules.includes(moduleName) && !['site', 'create'].includes(moduleName)) {
+                    return;
+                }
+
                 const moduleData = json.modules[moduleName];
                 moduleConfigsModule[moduleName] = moduleData;
                 moduleNames.push(moduleName);
