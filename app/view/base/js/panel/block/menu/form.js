@@ -2,7 +2,7 @@ import AdminTemplateForm from '../templateForm.js';
 import Syntax from '../../syntax.js';
 
 export class AdminMenuForm extends AdminTemplateForm {
-    template = 'admin/menu/form';
+    template = 'block/menu/form';
     uniqueId = 0;
     selectedMenuItem = null;
     menu = [];

@@ -1,42 +1,18 @@
 <?php declare(strict_types=1);
 
 namespace Builder\Site\Api;
+
 use Framework\Api\Interface\Api;
 use Exception;
-use Builder\Site\Model\Resource\Entity as EntityResourceModel;
-use Builder\Site\Model\Entity as EntityModel;
-use Builder\Site\Helper\Header as HelperHeader;
-use Builder\Site\Model\Repository as SiteRepository;
+use Builder\Site\Api\Abstract\Admin;
+use Framework\Application\Api\Parameter\Post as PostParameter;
 
-class Configuration implements Api
+class Configuration extends Admin implements Api
 {
-    /**
-     * @var EntityModel
-     */
-    private EntityModel $entityModel;
-
-    /**
-     * @var EntityResourceModel
-     */
-    private EntityResourceModel $entityResourceModel;
-
-    /**
-     * @throws Exception
-     */
-    public function __construct()
-    {
-        $this->entityResourceModel = new EntityResourceModel();
-        $this->entityModel = SiteRepository::getInstance()->getByToken(
-            $_SERVER['HTTP_HOST'],
-            HelperHeader::getToken(),
-            $_SERVER['REMOTE_ADDR']
-        );
-    }
-
     /**
      * @return array
      * @throws Exception
-     * @api GET site/configuration
+     * @api GET /^site\/configuration$/Usi
      */
     public function getConfiguration(): array
     {
@@ -44,13 +20,14 @@ class Configuration implements Api
     }
 
     /**
-     * @param array $data
+     * @param PostParameter $payload
      * @return array
      * @throws Exception
-     * @api POST site/configuration
+     * @api POST /^site\/configuration$/Usi
      */
-    public function setConfiguration(array $data): array
+    public function setConfiguration(PostParameter $payload): array
     {
+        $data = $payload->getData();
         $data['id'] = $this->entityModel->get('id');
         $data['identifier'] = $this->entityModel->get('identifier');
         $this->entityModel->setData($data);
