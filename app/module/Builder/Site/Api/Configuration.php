@@ -5,8 +5,11 @@ namespace Builder\Site\Api;
 use Framework\Api\Interface\Api;
 use Exception;
 use Builder\Site\Api\Abstract\Admin;
-use Framework\Application\Api\Parameter\Post as PostParameter;
+use Framework\Application\Manager\Http\Parameter\Post as PostParameter;
 
+/**
+ * @class Builder\Site\Api\Configuration
+ */
 class Configuration extends Admin implements Api
 {
     /**

@@ -4,6 +4,7 @@ namespace Builder\Panel\Controller;
 
 use Framework\Application\Manager;
 use Framework\Http\Interface\Controller;
+use Framework\Application\Manager\Http\Parameter\Get as GetParameter;
 use Exception;
 
 /**
@@ -30,9 +31,11 @@ class View implements Controller
     /**
      * @router expression GET /^\/admin\/([^\?]+)$/Usi
      * @param string $identifier
+     * @param GetParameter $get
      * @return string
+     * @throws Exception
      */
-    public function render(string $identifier): string
+    public function render(string $identifier, GetParameter $get): string
     {
         $view = Manager::getInstance()->getView();
 

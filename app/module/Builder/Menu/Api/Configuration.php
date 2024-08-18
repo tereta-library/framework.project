@@ -4,7 +4,12 @@ namespace Builder\Menu\Api;
 
 use Framework\Api\Interface\Api;
 use Builder\Site\Api\Abstract\Admin as AdminAbstract;
+use Framework\Application\Manager\Http\Parameter\Post as ParameterPost;
+use Framework\Application\Manager\Http\Parameter\Payload as ParameterPayload;
 
+/**
+ * @class Builder\Menu\Api\Configuration
+ */
 class Configuration extends AdminAbstract implements Api
 {
     /**
@@ -18,11 +23,11 @@ class Configuration extends AdminAbstract implements Api
     }
 
     /**
-     * @param array $payload
+     * @param ParameterPost $payload
      * @return array
      * @api POST /^menu\/configuration$/
      */
-    public function setConfiguration(array $payload): array
+    public function setConfiguration(ParameterPost $payload): array
     {
         return [];
     }
