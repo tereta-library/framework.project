@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Site\Command;
+namespace Builder\Site\Cli;
 
 use Framework\Cli\Interface\Controller;
 use Builder\Site\Model\Entity as SiteModel;
@@ -14,7 +14,7 @@ use Builder\Site\Model\User as SiteUserModel;
 use Builder\Site\Model\Resource\User as SiteUserResourceModel;
 
 /**
- * @class Builder\Site\Command\Make
+ * @class Builder\Site\Cli\Make
  */
 class Make implements Controller
 {
