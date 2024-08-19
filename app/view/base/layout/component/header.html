@@ -14,28 +14,42 @@
                 <input type="checkbox" name="burger" class="burgerMenu" id="menu" />
                 <label for="menu" class="burgerMenu"><span class="iconBurger"></span></label>
 
-                <ul class="menu" data-admin-init='"menu": "default"'>
-                    <li class="menuItem">
-                        <a href="https://tereta.dev">
-                            Downloads
-                        </a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="https://tereta.dev">
-                            Service
-                        </a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="https://tereta.dev">
-                            Portfolio
-                        </a>
-                    </li>
-                    <li class="menuItem">
-                        <a href="https://tereta.dev">
-                            Call Us
-                        </a>
-                    </li>
-                </ul>
+                <div data-backend-block="Builder\Menu\Block\Menu">
+                    <ul class="menu">
+                        <!--: comment $dataAdmin -->
+                        <!--: foreach $list as $item -->
+                        <li class="menuItem">
+                            <a data-backend-bind="attribute:href:$item['url']">
+                                <!--: echo $item['label'] -->
+                            </a>
+
+                            <!--: if $item['menu'] -->
+                                <ul class="menu">
+                                    <!--: foreach $item['menu'] as $item -->
+                                        <li class="menuItem">
+                                            <a data-backend-bind="attribute:href:$item['url']">
+                                                <!--: echo $item['label'] -->
+                                            </a>
+
+                                            <!--: if $item['menu'] -->
+                                            <ul class="menu">
+                                                <!--: foreach $item['menu'] as $item -->
+                                                <li class="menuItem">
+                                                    <a data-backend-bind="attribute:href:$item['url']">
+                                                        <!--: echo $item['label'] -->
+                                                    </a>
+                                                </li>
+                                                <!--: endforeach -->
+                                            </ul>
+                                            <!--: endif -->
+                                        </li>
+                                    <!--: endforeach -->
+                                </ul>
+                            <!--: endif -->
+                        </li>
+                        <!--: endforeach -->
+                    </ul>
+                </div>
             </nav>
         </div>
     </header>
