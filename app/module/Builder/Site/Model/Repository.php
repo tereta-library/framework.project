@@ -2,17 +2,17 @@
 
 namespace Builder\Site\Model;
 
-use Builder\Site\Helper\Header as HelperHeader;
 use Builder\Site\Model\Entity as EntityModel;
 use Builder\Site\Model\Resource\Domain\Collection as DomainCollection;
 use Builder\Site\Model\Resource\Entity as EntityResourceModel;
 use Exception;
+use Framework\Database\Abstract\Repository as AbstractRepository;
 use Framework\User\Model\Resource\User as UserResourceModel;
 
 /**
  * @class Builder\Site\Model\Repository
  */
-class Repository
+class Repository extends AbstractRepository
 {
     /**
      * @var array
@@ -25,11 +25,6 @@ class Repository
     private array $token = [];
 
     /**
-     * @var Repository|null $instance
-     */
-    private static ?self $instance = null;
-
-    /**
      * @var EntityResourceModel $entityResourceModel
      */
     private EntityResourceModel $entityResourceModel;
@@ -38,6 +33,11 @@ class Repository
      * @var UserResourceModel $userResourceModel
      */
     private UserResourceModel $userResourceModel;
+
+    /**
+     * @var array $registeredKeys
+     */
+    protected array $registeredKeys = ['id', ['domain', 'token', 'ip']];
 
     /**
      * @var EntityResourceModel $entityResourceModel
@@ -49,17 +49,6 @@ class Repository
     }
 
     /**
-     * @return static
-     */
-    public static function getInstance(): static
-    {
-        if (static::$instance === null) {
-            static::$instance = new static();
-        }
-        return static::$instance;
-    }
-
-    /**
      * @param string $domain
      * @param string $token
      * @param string $ip
@@ -68,8 +57,12 @@ class Repository
      */
     public function getByToken(string $domain, string $token, string $ip): Entity
     {
-        if (isset($this->token[$this->getKey($domain, $token, $ip)])) {
-            return $this->token[$this->getKey($domain, $token, $ip)];
+        if ($registeredModel = $this->getRegisterModel([
+            'domain' => $domain,
+            'token' => $token,
+            'ip' => $ip
+        ])) {
+            return $registeredModel;
         }
 
         $this->entityResourceModel->loadByToken(
@@ -119,33 +112,5 @@ class Repository
         }
 
         $entityModel->setDomainModel($domainModel);
-    }
-
-    /**
-     * @param Entity $entityModel
-     * @return Entity
-     * @throws Exception
-     */
-    private function registerModel(EntityModel $entityModel): EntityModel
-    {
-        if (!$entityModel->get('id')) {
-            throw new Exception('Site not found');
-        }
-
-        $this->id[$entityModel->get('id')] = $entityModel;
-        $this->token[
-            $this->getKey($entityModel->get('domain'), $entityModel->get('token'), $entityModel->get('ip'))
-        ] = $entityModel;
-
-        return $entityModel;
-    }
-
-    /**
-     * @param ...$params
-     * @return int
-     */
-    private function getKey(...$params): int
-    {
-        return crc32(implode(':', $params));
     }
 }

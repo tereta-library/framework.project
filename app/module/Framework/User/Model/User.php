@@ -13,8 +13,14 @@ use Framework\User\Model\Resource\Token as TokenResourceModel;
  */
 class User extends Model
 {
+    /**
+     * @var UserResourceModel $resourceModel
+     */
     private UserResourceModel $resourceModel;
 
+    /**
+     * @param array $data
+     */
     public function __construct(array $data = [])
     {
         $this->resourceModel = new UserResourceModel();

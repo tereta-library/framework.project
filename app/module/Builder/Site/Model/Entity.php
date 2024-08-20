@@ -6,8 +6,6 @@ use Framework\Database\Abstract\Model;
 use Framework\User\Model\User as UserModel;
 use Framework\Application\Manager as ApplicationManager;
 use Exception;
-use Builder\Site\Model\Resource\Domain as DomainResourceModel;
-use Builder\Site\Model\Resource\Domain\Collection as DomainCollection;
 use Builder\Site\Model\Domain as DomainModel;
 
 
