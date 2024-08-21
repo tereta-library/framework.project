@@ -3,9 +3,11 @@
 namespace Builder\Menu\Model\Menu;
 
 use Builder\Menu\Model\Resource\Menu as ResourceMenu;
+use Builder\Menu\Model\Resource\Menu\Item as ResourceMenuItem;
 use Builder\Menu\Model\Menu as MenuModel;
 use Exception;
 use Framework\Database\Abstract\Repository as AbstractRepository;
+use Builder\Menu\Helper\Converter as MenuConverter;
 
 /**
  * @class Builder\Menu\Model\Menu\Repository
@@ -16,6 +18,11 @@ class Repository extends AbstractRepository
      * @var ResourceMenu $resource
      */
     private ResourceMenu $resource;
+
+    /**
+     * @var ResourceMenuItem $resourceItem
+     */
+    private ResourceMenuItem $resourceItem;
 
     /**
      * @var Repository|null $instance
@@ -32,6 +39,7 @@ class Repository extends AbstractRepository
      */
     protected function __construct() {
         $this->resource = new ResourceMenu;
+        $this->resourceItem = new ResourceMenuItem;
     }
 
     /**
@@ -71,6 +79,18 @@ class Repository extends AbstractRepository
             'identifier' => $data['identifier'],
         ]);
         $this->resource->save($menuModel);
+
+        $menuData = json_decode($data['data'], true);
+        $menuTree = MenuConverter::toObject($menuData);
+        $menuModel->setListing($menuTree);
+
+        $objectList = MenuConverter::fetchAll($menuTree);
+        foreach ($objectList as $object) {
+            $object->set('parentId', $object->getParent()?->get('id') ?? null);
+            $object->set('menuId', $menuModel->get('id') ?? null);
+            $object->set('identifier', 'test');
+            $this->resourceItem->save($object);
+        }
 
         return $menuModel;
     }

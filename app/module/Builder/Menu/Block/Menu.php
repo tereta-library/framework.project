@@ -2,6 +2,7 @@
 
 namespace Builder\Menu\Block;
 
+use Builder\Menu\Helper\Converter as MenuConverter;
 use Framework\View\Php\Template;
 use Builder\Menu\Model\Menu\Repository as MenuRepository;
 use Exception;
@@ -11,6 +12,10 @@ use Exception;
  */
 class Menu extends Template
 {
+    /**
+     * @return void
+     * @throws Exception
+     */
     protected function construct(): void
     {
         try {
@@ -20,28 +25,25 @@ class Menu extends Template
                 'siteId' => 1,
                 'identifier' => $this->get('identifier'),
                 'data' => json_encode([
-                    ['label' => 'Home', 'url' => '/'],
-                    ['label' => 'About', 'url' => '/about']
+                    ['label' => 'Home', 'link' => '/'],
+                    ['label' => 'About', 'link' => '/about', 'menu' => [
+                        ['label' => 'History', 'link' => '/about/history'],
+                        ['label' => 'Vision', 'link' => '/about/vision', 'menu' => [
+                            ['label' => 'Submenu 1', 'link' => '/about/vision/submenu1'],
+                            ['label' => 'Submenu 2', 'link' => '/about/vision/submenu2'],
+                        ]],
+                        ['label' => 'Mission', 'link' => '/about/mission'],
+                    ]],
+                    ['label' => 'Service', 'link' => '/service'],
+                    ['label' => 'Product', 'link' => '/product'],
+                    ['label' => 'Contact', 'link' => '/contact'],
                 ]),
             ]);
         }
 
-        $dataAdmin = ['menu' => 'default'];
-        $this->assign('dataAdmin', "@dataAdmin " . json_encode($dataAdmin));
-        //$this->assign('dataAdmin', $dataAdmin);
-        $this->assign('list', [
-            ['label' => 'Home', 'url' => '/'],
-            ['label' => 'About', 'url' => '/about', 'menu' => [
-                ['label' => 'History', 'url' => '/about/history'],
-                ['label' => 'Vision', 'url' => '/about/vision', 'menu' => [
-                    ['label' => 'Submenu 1', 'url' => '/about/vision/submenu1'],
-                    ['label' => 'Submenu 2', 'url' => '/about/vision/submenu2'],
-                ]],
-                ['label' => 'Mission', 'url' => '/about/mission'],
-            ]],
-            ['label' => 'Service', 'url' => '/service'],
-            ['label' => 'Product', 'url' => '/product'],
-            ['label' => 'Contact', 'url' => '/contact'],
-        ]);
+        $list = MenuConverter::toArray($menuModel->getListing());
+
+        $this->assign('dataAdmin', "@dataAdmin " . json_encode(['menu' => 'default']));
+        $this->assign('list', $list);
     }
 }
