@@ -88,7 +88,6 @@ class Repository extends AbstractRepository
         foreach ($objectList as $object) {
             $object->set('parentId', $object->getParent()?->get('id') ?? null);
             $object->set('menuId', $menuModel->get('id') ?? null);
-            $object->set('identifier', 'test');
             $this->resourceItem->save($object);
         }
 

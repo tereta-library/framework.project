@@ -25,18 +25,9 @@ class Menu extends Template
                 'siteId' => 1,
                 'identifier' => $this->get('identifier'),
                 'data' => json_encode([
-                    ['label' => 'Home', 'link' => '/'],
-                    ['label' => 'About', 'link' => '/about', 'menu' => [
-                        ['label' => 'History', 'link' => '/about/history'],
-                        ['label' => 'Vision', 'link' => '/about/vision', 'menu' => [
-                            ['label' => 'Submenu 1', 'link' => '/about/vision/submenu1'],
-                            ['label' => 'Submenu 2', 'link' => '/about/vision/submenu2'],
-                        ]],
-                        ['label' => 'Mission', 'link' => '/about/mission'],
-                    ]],
-                    ['label' => 'Service', 'link' => '/service'],
-                    ['label' => 'Product', 'link' => '/product'],
-                    ['label' => 'Contact', 'link' => '/contact'],
+                    ['label' => 'Home', 'link' => '/', 'identifier' => 'home'],
+                    ['label' => 'About', 'link' => '/about'],
+                    ['label' => 'Contact', 'link' => '/contact']
                 ]),
             ]);
         }
