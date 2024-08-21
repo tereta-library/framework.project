@@ -10,13 +10,13 @@ export class AdminMenuForm extends AdminTemplateForm {
     syntax = null;
 
     show(config) {
-        this.menuOriginal = config.menu;
+        this.menuOriginal = config;
         this.menu = JSON.parse(JSON.stringify(this.menuOriginal));
         //this.menu = JSON.parse('[]');
-
+debugger;
         const parentNode = {
             'label': 'Root',
-            'subMenu': this.menu
+            'menu': this.menu
         }
         this.prepareMenu(this.menu, parentNode);
 
@@ -52,14 +52,14 @@ export class AdminMenuForm extends AdminTemplateForm {
         item.opened        = false;
         item.adminId       = 'unique_item_' + (this.uniqueId++);
         item.parent        = parentNode;
-        item.parentListing = parentNode ? parentNode.subMenu : [];
+        item.parentListing = parentNode ? parentNode.menu : [];
         item.actionEdit    = this.actionEdit.bind(this, item);
         item.actionRemove  = this.actionRemove.bind(this, item)
 
-        if (item.subMenu && item.subMenu.length > 0) {
-            this.prepareMenu(item.subMenu, item);
+        if (item.menu && item.menu.length > 0) {
+            this.prepareMenu(item.menu, item);
         } else {
-            item.subMenu = [];
+            item.menu = [];
         }
     }
 
@@ -72,10 +72,10 @@ export class AdminMenuForm extends AdminTemplateForm {
             delete item.actionRemove;
             delete item.opened;
 
-            if (item.subMenu && item.subMenu.length > 0) {
-                item.subMenu = this.clearMenu(item.subMenu);
+            if (item.menu && item.menu.length > 0) {
+                item.menu = this.clearMenu(item.menu);
             } else {
-                delete item.subMenu;
+                delete item.menu;
             }
         });
 
@@ -130,18 +130,18 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionAddSub() {
         let newItem = {
             'label': 'New item',
-            'url'  : ''
+            'link'  : ''
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem);
-        this.selectedMenuItem.subMenu.push(newItem)
+        this.selectedMenuItem.menu.push(newItem)
         this.syntax.set('isSave', true).update();
     }
 
     actionAddBefore() {
         let newItem = {
             'label': 'New item',
-            'url'  : ''
+            'link'  : ''
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem.parent);
@@ -152,7 +152,7 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionAddAfter() {
         let newItem = {
             'label': 'New item',
-            'url': ''
+            'link': ''
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem.parent);
@@ -165,7 +165,7 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionCreateFirst() {
         let newItem = {
             'label': 'New item',
-            'url': ''
+            'link': ''
         };
 
         this.prepareMenuItem(newItem, null);

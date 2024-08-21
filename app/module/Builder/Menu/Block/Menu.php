@@ -6,6 +6,7 @@ use Builder\Menu\Helper\Converter as MenuConverter;
 use Framework\View\Php\Template;
 use Builder\Menu\Model\Menu\Repository as MenuRepository;
 use Exception;
+use Builder\Site\Model\Repository as SiteRepository;
 
 /**
  * @class Builder\Menu\Block\Menu
@@ -19,7 +20,8 @@ class Menu extends Template
     protected function construct(): void
     {
         try {
-            $menuModel = MenuRepository::getInstance()->getByIdentifier($this->get('identifier'), 1);
+            $siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
+            $menuModel = MenuRepository::getInstance()->getByIdentifier($this->get('identifier'), $siteModel->get('id'));
         } catch (Exception $e) {
             $menuModel = MenuRepository::getInstance()->create([
                 'siteId' => 1,
@@ -34,7 +36,7 @@ class Menu extends Template
 
         $list = MenuConverter::toArray($menuModel->getListing());
 
-        $this->assign('dataAdmin', "@dataAdmin " . json_encode(['menu' => 'default']));
+        $this->assign('dataAdmin', "@dataAdmin " . json_encode(['menu' => $this->get('identifier')]));
         $this->assign('list', $list);
     }
 }

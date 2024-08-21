@@ -2,6 +2,7 @@
 
 namespace Builder\Site\Api;
 
+use Builder\Site\Model\Resource\Entity as EntityResourceModel;
 use Framework\Api\Interface\Api;
 use Exception;
 use Builder\Site\Api\Abstract\Admin;
@@ -12,6 +13,15 @@ use Framework\Application\Manager\Http\Parameter\Post as PostParameter;
  */
 class Configuration extends Admin implements Api
 {
+    /**
+     * @var EntityResourceModel $entityResourceModel
+     */
+    public function __construct()
+    {
+        $this->entityResourceModel = new EntityResourceModel();
+        parent::__construct();
+    }
+
     /**
      * @return array
      * @throws Exception

@@ -4,6 +4,8 @@ namespace Builder\Site\Model;
 
 use Builder\Site\Model\Entity as EntityModel;
 use Builder\Site\Model\Resource\Domain\Collection as DomainCollection;
+use Builder\Site\Model\Resource\Domain as DomainResourceModel;
+use Builder\Site\Model\Domain as DomainModel;
 use Builder\Site\Model\Resource\Entity as EntityResourceModel;
 use Exception;
 use Framework\Database\Abstract\Repository as AbstractRepository;
@@ -35,17 +37,41 @@ class Repository extends AbstractRepository
     private UserResourceModel $userResourceModel;
 
     /**
+     * @var DomainResourceModel $domainResourceModel
+     */
+    private DomainResourceModel $domainResourceModel;
+
+    /**
      * @var array $registeredKeys
      */
-    protected array $registeredKeys = ['id', ['domain', 'token', 'ip']];
+    protected array $registeredKeys = ['id', 'domain', ['domain', 'token', 'ip']];
 
     /**
      * @var EntityResourceModel $entityResourceModel
      */
-    private function __construct()
+    protected function __construct()
     {
         $this->userResourceModel = new UserResourceModel;
         $this->entityResourceModel = new EntityResourceModel();
+        $this->domainResourceModel = new DomainResourceModel();
+    }
+
+    /**
+     * @param string $domain
+     * @return Entity
+     * @throws Exception
+     */
+    public function getByDomain(string $domain): Entity
+    {
+        if ($registeredModel = $this->getRegisterModel(['domain' => $domain])) {
+            return $registeredModel;
+        }
+
+        $this->domainResourceModel->load($domainModel = new DomainModel(), $domain, 'domain');
+        $this->entityResourceModel->load($entityModel = new EntityModel(), $domainModel->get('siteId'));
+        $entityModel->setDomainModel($domainModel);
+
+        return $this->setRegisterModel($entityModel);
     }
 
     /**
@@ -74,7 +100,7 @@ class Repository extends AbstractRepository
 
         $this->loadDependencies($entityModel);
 
-        return $this->registerModel($entityModel);
+        return $this->setRegisterModel($entityModel);
     }
 
     /**

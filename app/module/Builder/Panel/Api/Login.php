@@ -5,17 +5,19 @@ namespace Builder\Panel\Api;
 use Framework\Api\Interface\Api;
 use Framework\User\Model\User as UserModel;
 use Exception;
+use Framework\Application\Manager\Http\Parameter\Payload as PayloadParameter;
 
 class Login implements Api
 {
     /**
-     * @param array $data
+     * @param PayloadParameter $payload
      * @return array
      * @throws Exception
      * @api POST /^user\/login$/Usi
      */
-    public function getToken(array $data): array
+    public function getToken(PayloadParameter $payload): array
     {
+        $data = $payload->getData();
         $email = $data['email'] ?? null;
         $password = $data['password'] ?? null;
         if (!$email || !$password) {

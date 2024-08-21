@@ -8,6 +8,7 @@ use Builder\Menu\Model\Menu as MenuModel;
 use Exception;
 use Framework\Database\Abstract\Repository as AbstractRepository;
 use Builder\Menu\Helper\Converter as MenuConverter;
+use Builder\Menu\Model\Resource\Menu\Item\Collection as ItemCollection;
 
 /**
  * @class Builder\Menu\Model\Menu\Repository
@@ -60,6 +61,34 @@ class Repository extends AbstractRepository
         if (!$menuModel->get('id')) {
             throw new Exception('Menu not found');
         }
+
+        $itemCollection = (new ItemCollection)->load($menuModel->get('id'), 'menuId');
+        $itemCollectionMap = [];
+        foreach ($itemCollection as $itemModel) {
+            $itemCollectionMap[$itemModel->get('id')] = $itemModel;
+        }
+
+        $rootListing = [];
+        $subMenuArray = [];
+        foreach ($itemCollectionMap as $itemModel) {
+            if (!$itemModel->get('parentId')) {
+                $rootListing[] = $itemModel;
+                continue;
+            }
+
+            if (!isset($subMenuArray[$itemModel->get('parentId')])) {
+                $subMenuArray[$itemModel->get('parentId')] = [];
+            }
+
+            $subMenuArray[$itemModel->get('parentId')][] = $itemModel;
+            $itemModel->setParent($itemCollectionMap[$itemModel->get('parentId')]);
+        }
+
+        foreach ($subMenuArray as $key => $subMenu) {
+            $itemCollectionMap[$key]->setMenu($subMenu);
+        }
+
+        $menuModel->setListing($rootListing);
 
         $this->setRegisterModel($menuModel);
 

@@ -5,7 +5,6 @@ namespace Builder\Site\Api\Abstract;
 use Builder\Site\Helper\Header as HelperHeader;
 use Builder\Site\Model\Entity as EntityModel;
 use Builder\Site\Model\Repository as SiteRepository;
-use Builder\Site\Model\Resource\Entity as EntityResourceModel;
 
 /**
  * @package Builder\Site\Api\Abstract
@@ -19,16 +18,10 @@ abstract class Admin
     protected EntityModel $entityModel;
 
     /**
-     * @var EntityResourceModel
-     */
-    protected EntityResourceModel $entityResourceModel;
-
-    /**
      * @throws Exception
      */
     public function __construct()
     {
-        $this->entityResourceModel = new EntityResourceModel();
         $this->entityModel = SiteRepository::getInstance()->getByToken(
             $_SERVER['HTTP_HOST'],
             HelperHeader::getToken(),

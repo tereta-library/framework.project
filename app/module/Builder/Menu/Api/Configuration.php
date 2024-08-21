@@ -2,6 +2,8 @@
 
 namespace Builder\Menu\Api;
 
+use Builder\Menu\Helper\Converter as MenuConverter;
+use Builder\Menu\Model\Menu\Repository as MenuRepository;
 use Framework\Api\Interface\Api;
 use Builder\Site\Api\Abstract\Admin as AdminAbstract;
 use Framework\Application\Manager\Http\Parameter\Post as ParameterPost;
@@ -19,7 +21,12 @@ class Configuration extends AdminAbstract implements Api
      */
     public function getConfiguration(string $identifier): array
     {
-        return [];
+        $menuModel = MenuRepository::getInstance()->getByIdentifier(
+            $identifier,
+            $this->entityModel->get('id')
+        );
+
+        return MenuConverter::toArray($menuModel->getListing());
     }
 
     /**
