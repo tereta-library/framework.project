@@ -3,10 +3,10 @@
 namespace Builder\Menu\Block;
 
 use Builder\Menu\Helper\Converter as MenuConverter;
-use Framework\View\Php\Template;
-use Builder\Menu\Model\Menu\Repository as MenuRepository;
-use Exception;
 use Builder\Site\Model\Repository as SiteRepository;
+use Exception;
+use Framework\Repository as MenuRepository;
+use Framework\View\Php\Template;
 
 /**
  * @class Builder\Menu\Block\Menu

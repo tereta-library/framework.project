@@ -2,7 +2,7 @@
 
 namespace Builder\Site\Model\Resource;
 
-use Builder\Site\Model\Entity as EntityModel;
+use Builder\Site\Model\Site as EntityModel;
 use Framework\Database\Abstract\Resource\Model as ResourceModel;
 use Exception;
 use Framework\User\Model\Resource\User as UserResourceModel;
@@ -11,9 +11,9 @@ use Builder\Site\Model\User as SiteUserModel;
 use Builder\Site\Model\Resource\User as SiteUserResourceModel;
 
 /**
- * @class Builder\Site\Model\Resource\Entity
+ * @class Builder\Site\Model\Resource\Site
  */
-class Entity extends ResourceModel
+class Site extends ResourceModel
 {
     /**
      * @throws Exception

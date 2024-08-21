@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Menu\Model\Menu;
+namespace Framework;
 
+use Builder\Menu\Helper\Converter as MenuConverter;
+use Builder\Menu\Model\Menu as MenuModel;
 use Builder\Menu\Model\Resource\Menu as ResourceMenu;
 use Builder\Menu\Model\Resource\Menu\Item as ResourceMenuItem;
-use Builder\Menu\Model\Menu as MenuModel;
+use Builder\Menu\Model\Resource\Menu\Item\Collection as ItemCollection;
 use Exception;
 use Framework\Database\Abstract\Repository as AbstractRepository;
-use Builder\Menu\Helper\Converter as MenuConverter;
-use Builder\Menu\Model\Resource\Menu\Item\Collection as ItemCollection;
 
 /**
  * @class Builder\Menu\Model\Menu\Repository

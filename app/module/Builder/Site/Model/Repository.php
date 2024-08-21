@@ -2,11 +2,11 @@
 
 namespace Builder\Site\Model;
 
-use Builder\Site\Model\Entity as EntityModel;
+use Builder\Site\Model\Site as SiteModel;
 use Builder\Site\Model\Resource\Domain\Collection as DomainCollection;
 use Builder\Site\Model\Resource\Domain as DomainResourceModel;
 use Builder\Site\Model\Domain as DomainModel;
-use Builder\Site\Model\Resource\Entity as EntityResourceModel;
+use Builder\Site\Model\Resource\Site as EntityResourceModel;
 use Exception;
 use Framework\Database\Abstract\Repository as AbstractRepository;
 use Framework\User\Model\Resource\User as UserResourceModel;
@@ -16,16 +16,6 @@ use Framework\User\Model\Resource\User as UserResourceModel;
  */
 class Repository extends AbstractRepository
 {
-    /**
-     * @var array
-     */
-    private array $id = [];
-
-    /**
-     * @var array
-     */
-    private array $token = [];
-
     /**
      * @var EntityResourceModel $entityResourceModel
      */
@@ -58,17 +48,17 @@ class Repository extends AbstractRepository
 
     /**
      * @param string $domain
-     * @return Entity
+     * @return SiteModel
      * @throws Exception
      */
-    public function getByDomain(string $domain): Entity
+    public function getByDomain(string $domain): SiteModel
     {
         if ($registeredModel = $this->getRegisterModel(['domain' => $domain])) {
             return $registeredModel;
         }
 
         $this->domainResourceModel->load($domainModel = new DomainModel(), $domain, 'domain');
-        $this->entityResourceModel->load($entityModel = new EntityModel(), $domainModel->get('siteId'));
+        $this->entityResourceModel->load($entityModel = new SiteModel(), $domainModel->get('siteId'));
         $entityModel->setDomainModel($domainModel);
 
         return $this->setRegisterModel($entityModel);
@@ -78,10 +68,10 @@ class Repository extends AbstractRepository
      * @param string $domain
      * @param string $token
      * @param string $ip
-     * @return Entity
+     * @return SiteModel
      * @throws Exception
      */
-    public function getByToken(string $domain, string $token, string $ip): Entity
+    public function getByToken(string $domain, string $token, string $ip): SiteModel
     {
         if ($registeredModel = $this->getRegisterModel([
             'domain' => $domain,
@@ -92,7 +82,7 @@ class Repository extends AbstractRepository
         }
 
         $this->entityResourceModel->loadByToken(
-            $entityModel = new EntityModel(),
+            $entityModel = new SiteModel(),
             $domain,
             $token,
             $ip
@@ -108,7 +98,7 @@ class Repository extends AbstractRepository
      * @return void
      * @throws Exception
      */
-    private function loadDependencies(EntityModel $entityModel): void
+    private function loadDependencies(SiteModel $entityModel): void
     {
         // Load domain model
         $domainModel = null;

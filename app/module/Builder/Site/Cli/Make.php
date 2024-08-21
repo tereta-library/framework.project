@@ -3,8 +3,8 @@
 namespace Builder\Site\Cli;
 
 use Framework\Cli\Interface\Controller;
-use Builder\Site\Model\Entity as SiteModel;
-use Builder\Site\Model\Resource\Entity as SiteResourceModel;
+use Builder\Site\Model\Site as SiteModel;
+use Builder\Site\Model\Resource\Site as SiteResourceModel;
 use Builder\Site\Model\Domain as DomainModel;
 use Builder\Site\Model\Resource\Domain as DomainResourceModel;
 use Framework\Cli\Symbol;

@@ -2,7 +2,7 @@
 
 namespace Builder\Site\Model;
 
-use Builder\Site\Model\Entity as SiteModel;
+use Builder\Site\Model\Site as SiteModel;
 use Builder\Site\Model\Resource\Domain\Collection as DomainCollection;
 use Exception;
 

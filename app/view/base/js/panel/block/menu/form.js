@@ -12,8 +12,7 @@ export class AdminMenuForm extends AdminTemplateForm {
     show(config) {
         this.menuOriginal = config;
         this.menu = JSON.parse(JSON.stringify(this.menuOriginal));
-        //this.menu = JSON.parse('[]');
-debugger;
+
         const parentNode = {
             'label': 'Root',
             'menu': this.menu

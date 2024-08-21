@@ -10,9 +10,9 @@ use Builder\Site\Model\Domain as DomainModel;
 
 
 /**
- * @class Builder\Site\Model\Entity
+ * @class Builder\Site\Model\Site
  */
-class Entity extends Model
+class Site extends Model
 {
     /**
      * @var UserModel $userModel

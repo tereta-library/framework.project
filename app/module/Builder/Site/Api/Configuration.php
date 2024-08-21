@@ -2,7 +2,7 @@
 
 namespace Builder\Site\Api;
 
-use Builder\Site\Model\Resource\Entity as EntityResourceModel;
+use Builder\Site\Model\Resource\Site as EntityResourceModel;
 use Framework\Api\Interface\Api;
 use Exception;
 use Builder\Site\Api\Abstract\Admin;

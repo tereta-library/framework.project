@@ -1,4 +1,4 @@
 #!/bin/bash
 
-VERSION="0.0.21"
+VERSION="0.0.22"
 COMMENT="Library bug fixing $VERSION"

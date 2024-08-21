@@ -3,7 +3,7 @@
 namespace Builder\Site\Api\Abstract;
 
 use Builder\Site\Helper\Header as HelperHeader;
-use Builder\Site\Model\Entity as EntityModel;
+use Builder\Site\Model\Site as EntityModel;
 use Builder\Site\Model\Repository as SiteRepository;
 
 /**

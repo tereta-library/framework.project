@@ -3,11 +3,11 @@
 namespace Builder\Menu\Api;
 
 use Builder\Menu\Helper\Converter as MenuConverter;
-use Builder\Menu\Model\Menu\Repository as MenuRepository;
-use Framework\Api\Interface\Api;
 use Builder\Site\Api\Abstract\Admin as AdminAbstract;
+use Exception;
+use Framework\Api\Interface\Api;
 use Framework\Application\Manager\Http\Parameter\Post as ParameterPost;
-use Framework\Application\Manager\Http\Parameter\Payload as ParameterPayload;
+use Framework\Repository as MenuRepository;
 
 /**
  * @class Builder\Menu\Api\Configuration
@@ -17,6 +17,7 @@ class Configuration extends AdminAbstract implements Api
     /**
      * @param string $identifier
      * @return array
+     * @throws Exception
      * @api GET /^menu\/configuration\/([a-zA-Z0-9_-]+)$/Usi
      */
     public function getConfiguration(string $identifier): array
