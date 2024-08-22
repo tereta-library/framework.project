@@ -5,21 +5,27 @@ namespace Builder\Site\Api;
 use Builder\Site\Model\Resource\Site as EntityResourceModel;
 use Framework\Api\Interface\Api;
 use Exception;
-use Builder\Site\Api\Abstract\Admin;
 use Framework\Application\Manager\Http\Parameter\Post as PostParameter;
+use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 
 /**
  * @class Builder\Site\Api\Configuration
  */
-class Configuration extends Admin implements Api
+class Configuration implements Api
 {
+    use AdministratorTrait;
+
     /**
-     * @var EntityResourceModel $entityResourceModel
+     * @var EntityResourceModel $siteResourceModel
+     */
+    private EntityResourceModel $siteResourceModel;
+
+    /**
+     * @throws Exception
      */
     public function __construct()
     {
-        $this->entityResourceModel = new EntityResourceModel();
-        parent::__construct();
+        $this->siteResourceModel = new EntityResourceModel();
     }
 
     /**
@@ -29,7 +35,7 @@ class Configuration extends Admin implements Api
      */
     public function getConfiguration(): array
     {
-        return $this->entityModel->getPublicData();
+        return $this->siteModel->getPublicData();
     }
 
     /**
@@ -41,12 +47,12 @@ class Configuration extends Admin implements Api
     public function setConfiguration(PostParameter $payload): array
     {
         $data = $payload->getData();
-        $data['id'] = $this->entityModel->get('id');
-        $data['identifier'] = $this->entityModel->get('identifier');
-        $this->entityModel->setData($data);
-        $this->entityModel->setFiles($_FILES);
-        $this->entityResourceModel->save($this->entityModel);
-        $this->entityResourceModel->load($this->entityModel);
-        return $this->entityModel->getPublicData();
+        $data['id'] = $this->siteModel->get('id');
+        $data['identifier'] = $this->siteModel->get('identifier');
+        $this->siteModel->setData($data);
+        $this->siteModel->setFiles($_FILES);
+        $this->siteResourceModel->save($this->siteModel);
+        $this->siteResourceModel->load($this->siteModel);
+        return $this->siteModel->getPublicData();
     }
 }

@@ -33,12 +33,16 @@ class Site extends ResourceModel
      */
     public function loadByToken(EntityModel $entityModel, string $domain, string $token, string $ip): static
     {
+        if (!$token) {
+            throw new Exception('Empty token');
+        }
+
         $userResourceModel = new UserResourceModel;
         $userResourceModel->loadByToken($userModel = new UserModel, $token, $ip);
         $userId = $userModel->get('id');
 
         if (!$userId) {
-            throw new Exception('User not found');
+            throw new Exception('Token not found');
         }
 
         $this->getSelect()->columns(['site.*'])

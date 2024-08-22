@@ -1,6 +1,16 @@
 import {SyntaxAbstract} from "./abstract.js";
 
+/**
+ * Additional functionality for JSON syntax
+ */
 export class SyntaxJson extends SyntaxAbstract{
+    /**
+     * Remove recursive objects from the given object
+     *
+     * @param obj
+     * @param seenObjects
+     * @returns {*|*[]|string}
+     */
     clean(obj, seenObjects = new Set()) {
         if (obj && typeof obj === 'object') {
             if (seenObjects.has(obj)) {

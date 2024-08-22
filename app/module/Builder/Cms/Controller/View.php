@@ -42,13 +42,9 @@ class View implements Controller
         $config = Manager::getInstance()->getConfig();
         $view = Manager::getInstance()->getView();
 
-        (new ResourceModelToken)->load($modelToken = new ModelToken, $token, 'token');
-
-        if (!$modelToken->validate($_SERVER['REMOTE_ADDR'])) throw new Exception('Invalid token');
-
         $view->initialize('cms')
             ->getBlockById('content')
-            ->assign('content', '<pre>' . json_encode($modelToken->getData(), JSON_PRETTY_PRINT) . '</pre>');
+            ->assign('content', 'Test content');
         return $view->render();
     }
 }

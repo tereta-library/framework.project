@@ -122,6 +122,7 @@ export class AdminMenuForm extends AdminTemplateForm {
             return;
         }
 
+        this.selectedMenuItem.isEdited = true;
         this.selectedMenuItem[parameter] = element.value;
         this.syntax.set('isSave', true).update();
     }
@@ -202,5 +203,16 @@ export class AdminMenuForm extends AdminTemplateForm {
         xhr.send(JSON.stringify({
             'menu': this.menuOriginal
         }));
+
+        this.unstateMenu(this.menu);
+    }
+
+    unstateMenu(menu) {
+        menu.forEach((item) => {
+            delete item.isEdited;
+            if (item.menu && item.menu.length > 0) {
+                this.unstateMenu(item.menu);
+            }
+        });
     }
 }

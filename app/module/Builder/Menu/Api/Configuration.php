@@ -4,6 +4,7 @@ namespace Builder\Menu\Api;
 
 use Builder\Menu\Helper\Converter as MenuConverter;
 use Builder\Site\Api\Abstract\Admin as AdminAbstract;
+use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 use Exception;
 use Framework\Api\Interface\Api;
 use Framework\Application\Manager\Http\Parameter\Post as ParameterPost;
@@ -12,8 +13,10 @@ use Framework\Repository as MenuRepository;
 /**
  * @class Builder\Menu\Api\Configuration
  */
-class Configuration extends AdminAbstract implements Api
+class Configuration implements Api
 {
+    use AdministratorTrait;
+
     /**
      * @param string $identifier
      * @return array
@@ -24,7 +27,7 @@ class Configuration extends AdminAbstract implements Api
     {
         $menuModel = MenuRepository::getInstance()->getByIdentifier(
             $identifier,
-            $this->entityModel->get('id')
+            $this->siteModel->get('id')
         );
 
         return MenuConverter::toArray($menuModel->getListing());

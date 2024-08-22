@@ -10,11 +10,11 @@ use Framework\Http\Header as HttpHeader;
 class Header
 {
     /**
-     * @return string|null
+     * @return string
      */
-    public static function getToken(): ?string
+    public static function getToken(): string
     {
-        preg_match('/^([a-z0-9:]+)$/Usi', HttpHeader::get('api-token'), $matches);
-        return $matches[1] ?? null;
+        preg_match('/^([a-z0-9:]+)$/Usi', (string) HttpHeader::get('api-token'), $matches);
+        return $matches[1] ?? '';
     }
 }
