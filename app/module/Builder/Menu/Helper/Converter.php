@@ -42,6 +42,8 @@ class Converter
                 'label'      => $value['label'],
                 'link'       => $value['link'],
                 'identifier' => $value['identifier'] ?? null,
+                'parentId'   => $value['parentId'] ?? null,
+                'isEdited'   => $value['isEdited'] ?? null,
             ]);
 
             if (isset($value['menu']) && $value['menu']) {

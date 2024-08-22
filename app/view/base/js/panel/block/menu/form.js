@@ -10,7 +10,8 @@ export class AdminMenuForm extends AdminTemplateForm {
     syntax = null;
 
     show(config) {
-        this.menuOriginal = config;
+        this.identifier = config.identifier;
+        this.menuOriginal = config.menu;
         this.menu = JSON.parse(JSON.stringify(this.menuOriginal));
 
         const parentNode = {
@@ -182,7 +183,7 @@ export class AdminMenuForm extends AdminTemplateForm {
         const menu = this.clearMenu(menuClean);
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/json/menu/configuration', true);
+        xhr.open('POST', `/api/json/menu/configuration/${this.identifier}`, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader("Content-Type",  "application/json;charset=UTF-8");
         xhr.setRequestHeader('API-Token', token);
@@ -190,12 +191,18 @@ export class AdminMenuForm extends AdminTemplateForm {
             if (xhr.target.status === 200) {
                 this.syntax.set('successMessage', 'Menu saved')
                     .set('showSuccessMessage', true)
-                    .set('isSave', false).update();
+                    .set('isSave', false);
+                this.menu = JSON.parse(xhr.target.responseText).menu;
+
+                debugger;
+                this.syntax.set('menu', this.menu);
+                this.syntax.update();
 
                 setTimeout(() => {
                     syntax.set('showSuccessMessage', false);
                     syntax.update();
                 }, 5000);
+
             }
         };
 

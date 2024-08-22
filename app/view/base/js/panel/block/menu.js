@@ -32,7 +32,7 @@ export class AdminMenu extends AdminTemplate {
         // Load form data
         let formData = null;
 
-        await fetch('/api/json/menu/configuration/' + element.config, {
+        await fetch(`/api/json/menu/configuration/${element.config}`, {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",

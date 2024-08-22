@@ -7,8 +7,12 @@ use Builder\Site\Api\Abstract\Admin as AdminAbstract;
 use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 use Exception;
 use Framework\Api\Interface\Api;
-use Framework\Application\Manager\Http\Parameter\Post as ParameterPost;
+use Framework\Application\Manager\Http\Parameter\Payload as PayloadPost;
 use Framework\Repository as MenuRepository;
+use Builder\Menu\Model\Resource\Menu\Item\Collection as MenuItemCollection;
+use Builder\Menu\Model\Resource\Menu\Item as MenuItemResource;
+use Builder\Menu\Model\Resource\Menu as MenuResource;
+use Builder\Menu\Model\Menu as MenuModel;
 
 /**
  * @class Builder\Menu\Api\Configuration
@@ -16,6 +20,16 @@ use Framework\Repository as MenuRepository;
 class Configuration implements Api
 {
     use AdministratorTrait;
+
+    private MenuResource $menuResource;
+
+    private MenuItemResource $menuItemResource;
+
+    public function __construct()
+    {
+        $this->menuResource = new MenuResource;
+        $this->menuItemResource = new MenuItemResource;
+    }
 
     /**
      * @param string $identifier
@@ -30,16 +44,75 @@ class Configuration implements Api
             $this->siteModel->get('id')
         );
 
-        return MenuConverter::toArray($menuModel->getListing());
+        return [
+            'identifier' => $identifier,
+            'menu' => MenuConverter::toArray($menuModel->getListing())
+        ];
     }
 
     /**
-     * @param ParameterPost $payload
+     * @param string $identifier
+     * @param PayloadPost $payload
      * @return array
-     * @api POST /^menu\/configuration$/
+     * @throws Exception
+     * @api POST /^menu\/configuration\/([a-zA-Z0-9_-]+)$/Usi
      */
-    public function setConfiguration(ParameterPost $payload): array
+    public function setConfiguration(string $identifier, PayloadPost $payload): array
     {
-        return [];
+        $menuModel = MenuRepository::getInstance()->getByIdentifier(
+            $identifier,
+            $this->siteModel->get('id')
+        );
+
+        $tree = MenuConverter::toObject($payload->get('menu'));
+        $listing = MenuConverter::fetchAll($tree);
+
+        $toSave = [];
+        $checkIds = [];
+
+        foreach ($listing as $menuItem)
+        {
+            if ($menuItem->get('id') && !$menuItem->get('isEdited')) {
+                continue;
+            }
+
+            $menuItem->set('menuId', $menuModel->get('id'));
+            $toSave[] = $menuItem;
+
+            if ($menuItem->get('parentId')) {
+                $checkIds[] = $menuItem->get('parentId');
+            }
+
+            if ($menuItem->get('id')) {
+                $checkIds[] = $menuItem->get('id');
+            }
+
+            if ($menuItem->getParent()) {
+                $menuItem->set('parentId', $menuItem->getParent()->get('id'));
+            }
+        }
+
+        // Security check
+        $menuItemCollection = [];
+        if ($checkIds) {
+            $menuItemCollection = (new MenuItemCollection)->where(
+                'id IN (' . implode(', ', array_map('intval', $checkIds)) . ')'
+            );
+        }
+        foreach ($menuItemCollection as $menuItem) {
+            if ($menuItem->get('menuId') != $menuModel->get('id')) {
+                throw new Exception('Menu declined by security reason.');
+            }
+        }
+
+        // Save
+        foreach ($toSave as $menuItem) {
+            $this->menuItemResource->save($menuItem);
+        }
+
+        return [
+            'identifier' => $identifier,
+            'menu' => MenuConverter::toArray($tree)
+        ];
     }
 }
