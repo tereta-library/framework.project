@@ -44,6 +44,7 @@ class Converter
                 'identifier' => $value['identifier'] ?? null,
                 'parentId'   => $value['parentId'] ?? null,
                 'isEdited'   => $value['isEdited'] ?? null,
+                'createId'   => $value['createId'] ?? null,
             ]);
 
             if (isset($value['menu']) && $value['menu']) {

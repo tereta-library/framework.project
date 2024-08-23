@@ -131,7 +131,8 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionAddSub() {
         let newItem = {
             'label': 'New item',
-            'link'  : ''
+            'link'  : '',
+            'createId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem);
@@ -142,7 +143,8 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionAddBefore() {
         let newItem = {
             'label': 'New item',
-            'link'  : ''
+            'link'  : '',
+            'createId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem.parent);
@@ -153,7 +155,8 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionAddAfter() {
         let newItem = {
             'label': 'New item',
-            'link': ''
+            'link': '',
+            'createId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem.parent);
@@ -166,7 +169,8 @@ export class AdminMenuForm extends AdminTemplateForm {
     actionCreateFirst() {
         let newItem = {
             'label': 'New item',
-            'link': ''
+            'link': '',
+            'createId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, null);
@@ -188,22 +192,20 @@ export class AdminMenuForm extends AdminTemplateForm {
         xhr.setRequestHeader("Content-Type",  "application/json;charset=UTF-8");
         xhr.setRequestHeader('API-Token', token);
         xhr.onload = (xhr) => {
-            if (xhr.target.status === 200) {
-                this.syntax.set('successMessage', 'Menu saved')
-                    .set('showSuccessMessage', true)
-                    .set('isSave', false);
-                this.menu = JSON.parse(xhr.target.responseText).menu;
-
-                debugger;
-                this.syntax.set('menu', this.menu);
-                this.syntax.update();
-
-                setTimeout(() => {
-                    syntax.set('showSuccessMessage', false);
-                    syntax.update();
-                }, 5000);
-
+            if (xhr.target.status !== 200) {
+                return;
             }
+
+            this.syntax.set('successMessage', 'Menu saved')
+                .set('showSuccessMessage', true)
+                .set('isSave', false);
+
+            this.applySavedData(JSON.parse(xhr.target.responseText));
+
+            setTimeout(() => {
+                syntax.set('showSuccessMessage', false);
+                syntax.update();
+            }, 5000);
         };
 
         this.menuOriginal = menu;
@@ -212,6 +214,34 @@ export class AdminMenuForm extends AdminTemplateForm {
         }));
 
         this.unstateMenu(this.menu);
+    }
+
+    applySavedData(data) {
+        const menuItems = this.fetchMenuListed(this.menu);
+        let createdIdMap = {};
+        menuItems.forEach((item) => {
+            if (item.createId) {
+                createdIdMap[item.createId] = item;
+            }
+        });
+
+        data.forEach((item) => {
+            if (createdIdMap[item.createId]) {
+                createdIdMap[item.createId].id = item.id;
+                createdIdMap[item.createId].createId = null;
+            }
+        });
+    }
+
+    fetchMenuListed(items, listing = []) {
+        items.forEach((item) => {
+            listing.push(item);
+            if (item.menu && item.menu.length > 0) {
+                this.fetchMenuListed(item.menu, listing);
+            }
+        });
+
+        return listing;
     }
 
     unstateMenu(menu) {

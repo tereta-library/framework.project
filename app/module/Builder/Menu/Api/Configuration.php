@@ -105,14 +105,13 @@ class Configuration implements Api
             }
         }
 
-        // Save
+        // Save & return
+        $return = [];
         foreach ($toSave as $menuItem) {
             $this->menuItemResource->save($menuItem);
+            $return[] = $menuItem->getData();
         }
 
-        return [
-            'identifier' => $identifier,
-            'menu' => MenuConverter::toArray($tree)
-        ];
+        return $return;
     }
 }
