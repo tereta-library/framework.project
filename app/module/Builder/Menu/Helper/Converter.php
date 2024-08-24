@@ -38,13 +38,14 @@ class Converter
         foreach ($data as $value) {
             $menu = [];
             $currentObject = new MenuItemModel([
-                'id'         => $value['id'] ?? null,
-                'label'      => $value['label'],
-                'link'       => $value['link'],
-                'identifier' => $value['identifier'] ?? null,
-                'parentId'   => $value['parentId'] ?? null,
-                'isEdited'   => $value['isEdited'] ?? null,
-                'clientId'   => $value['clientId'] ?? null,
+                'id'             => $value['id'] ?? null,
+                'label'          => $value['label'],
+                'link'           => $value['link'],
+                'identifier'     => $value['identifier'] ?? null,
+                'parentId'       => $value['parentId'] ?? null,
+                'isEdited'       => $value['isEdited'] ?? null,
+                'clientId'       => $value['clientId'] ?? null,
+                'parentClientId' => $parentObject?->get('clientId') ?? null,
             ]);
 
             if (isset($value['menu']) && $value['menu']) {
