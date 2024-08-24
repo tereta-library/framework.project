@@ -7,6 +7,7 @@ export class AdminMenuForm extends AdminTemplateForm {
     selectedMenuItem = null;
     menu = [];
     menuOriginal = [];
+    removeIds = [];
     syntax = null;
 
     show(config) {
@@ -50,7 +51,7 @@ export class AdminMenuForm extends AdminTemplateForm {
 
     prepareMenuItem(item, parentNode) {
         item.opened        = false;
-        item.adminId       = 'unique_item_' + (this.uniqueId++);
+        item.clientId      = (this.uniqueId++);
         item.parent        = parentNode;
         item.parentListing = parentNode ? parentNode.menu : [];
         item.actionEdit    = this.actionEdit.bind(this, item);
@@ -65,7 +66,6 @@ export class AdminMenuForm extends AdminTemplateForm {
 
     clearMenu(listing) {
         listing.forEach((item, index) => {
-            delete item.adminId;
             delete item.parent;
             delete item.parentListing;
             delete item.actionEdit;
@@ -101,20 +101,20 @@ export class AdminMenuForm extends AdminTemplateForm {
     }
 
     actionRemove(item) {
-        console.info('actionRemove');
-        console.info(item);
-
-        if (this.selectedMenuItem && item.adminId === this.selectedMenuItem.adminId) {
+        if (this.selectedMenuItem && item.clientId === this.selectedMenuItem.clientId) {
             this.selectedMenuItem = null;
             this.syntax.set('isSelected', false);
         }
 
         item.parentListing.forEach((listingItem, index) => {
-            if (listingItem.adminId === item.adminId) {
+            if (listingItem.clientId === item.clientId) {
                 item.parentListing.splice(index, 1);
             }
         });
 
+        if (item.id) {
+            this.removeIds.push(item.id);
+        }
         this.syntax.set('isSave', true).update();
     }
 
@@ -130,9 +130,9 @@ export class AdminMenuForm extends AdminTemplateForm {
 
     actionAddSub() {
         let newItem = {
-            'label': 'New item',
-            'link'  : '',
-            'createId': (this.uniqueId++)
+            'label'   : 'New item',
+            'link'    : '',
+            'clientId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem);
@@ -144,7 +144,7 @@ export class AdminMenuForm extends AdminTemplateForm {
         let newItem = {
             'label': 'New item',
             'link'  : '',
-            'createId': (this.uniqueId++)
+            'clientId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem.parent);
@@ -156,13 +156,11 @@ export class AdminMenuForm extends AdminTemplateForm {
         let newItem = {
             'label': 'New item',
             'link': '',
-            'createId': (this.uniqueId++)
+            'clientId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, this.selectedMenuItem.parent);
-
         this.selectedMenuItem.parentListing.splice(this.selectedMenuItem.parentListing.indexOf(this.selectedMenuItem) + 1, 0, newItem);
-
         this.syntax.set('isSave', true).update();
     }
 
@@ -170,7 +168,7 @@ export class AdminMenuForm extends AdminTemplateForm {
         let newItem = {
             'label': 'New item',
             'link': '',
-            'createId': (this.uniqueId++)
+            'clientId': (this.uniqueId++)
         };
 
         this.prepareMenuItem(newItem, null);
@@ -201,6 +199,7 @@ export class AdminMenuForm extends AdminTemplateForm {
                 .set('isSave', false);
 
             this.applySavedData(JSON.parse(xhr.target.responseText));
+            this.removeIds = [];
 
             setTimeout(() => {
                 syntax.set('showSuccessMessage', false);
@@ -210,6 +209,7 @@ export class AdminMenuForm extends AdminTemplateForm {
 
         this.menuOriginal = menu;
         xhr.send(JSON.stringify({
+            'removeIds': this.removeIds,
             'menu': this.menuOriginal
         }));
 
@@ -218,17 +218,17 @@ export class AdminMenuForm extends AdminTemplateForm {
 
     applySavedData(data) {
         const menuItems = this.fetchMenuListed(this.menu);
-        let createdIdMap = {};
+        let clientIdMap = {};
         menuItems.forEach((item) => {
-            if (item.createId) {
-                createdIdMap[item.createId] = item;
+            if (item.clientId) {
+                clientIdMap[item.clientId] = item;
             }
         });
 
         data.forEach((item) => {
-            if (createdIdMap[item.createId]) {
-                createdIdMap[item.createId].id = item.id;
-                createdIdMap[item.createId].createId = null;
+            if (clientIdMap[item.clientId]) {
+                clientIdMap[item.clientId].id = item.id;
+                clientIdMap[item.clientId].clientId = null;
             }
         });
     }

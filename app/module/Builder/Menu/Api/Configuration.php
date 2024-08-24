@@ -64,6 +64,9 @@ class Configuration implements Api
             $this->siteModel->get('id')
         );
 
+        $removeIds = $payload->get('removeIds');
+
+        // Save section
         $tree = MenuConverter::toObject($payload->get('menu'));
         $listing = MenuConverter::fetchAll($tree);
 
@@ -94,7 +97,7 @@ class Configuration implements Api
 
         // Security check
         $menuItemCollection = [];
-        if ($checkIds) {
+        if ($checkIds = array_merge($checkIds, $removeIds)) {
             $menuItemCollection = (new MenuItemCollection)->where(
                 'id IN (' . implode(', ', array_map('intval', $checkIds)) . ')'
             );
@@ -110,6 +113,11 @@ class Configuration implements Api
         foreach ($toSave as $menuItem) {
             $this->menuItemResource->save($menuItem);
             $return[] = $menuItem->getData();
+        }
+
+        // Delete section
+        if ($removeIds) {
+            $this->menuItemResource->delete($removeIds);
         }
 
         return $return;
