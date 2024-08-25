@@ -2,7 +2,7 @@ import AdminTemplateForm from '../templateForm.js';
 import Syntax from '../../syntax.js';
 
 export class AdminFilesForm extends AdminTemplateForm {
-    template = 'admin/structure/files';
+    template = 'block/page/files';
 
     async init() {
         const dataDir = await this.getDirectory('/');

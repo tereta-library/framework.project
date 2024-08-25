@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Cms\Block;
+namespace Builder\Content\Block;
 
 use Framework\View\Php\Template;
 

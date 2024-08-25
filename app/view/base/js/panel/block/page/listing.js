@@ -1,8 +1,8 @@
-import AdminTemplateForm from '/resources/js/admin/templateForm.js';
-import Syntax from '/resources/js/syntax.js';
+import AdminTemplateForm from '../templateForm.js';
+import Syntax from '../../syntax.js';
 
 export class AdminListingForm extends AdminTemplateForm {
-    template = 'admin/structure/listing';
+    template = 'block/page/listing';
 
     init() {
         this.syntax = (new Syntax(this.node, {
@@ -45,7 +45,7 @@ export class AdminListingForm extends AdminTemplateForm {
     async getListing(page = 1) {
         const formData = new FormData();
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/structure/urlListing', false);
+        xhr.open('POST', '/api/json/page/getListing', true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader('Authorization', "Bearer " + this.rootAdminJs.getToken());
         formData.append('page', page);

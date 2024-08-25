@@ -10,7 +10,7 @@ use Exception;
 class Structure extends Upgrade
 {
     /**
-     * @date 2024-08-18 00:00:00 Created
+     * @date 2024-08-25 14:00:00 Created
      * @return void
      * @throws Exception
      */
@@ -30,6 +30,7 @@ class Structure extends Upgrade
         $tableQuery->addInteger('id')->setAutoIncrement()->setPrimaryKey()->setComment('Item ID');
         $tableQuery->addForeign($connection, 'menuId')->foreign('menu', 'id')->setComment('Menu ID');
         $tableQuery->addForeign($connection, 'parentId')->foreign('menuItem', 'id')->setComment('Parent ID');
+        $tableQuery->addForeign($connection, 'typeId')->foreign('pageType', 'id')->setComment('Page type ID');
         $tableQuery->addString('identifier')->setComment('Item identifier, value can be in template "$string#$integer" for example "page#1" or null if not bounded link');
         $tableQuery->addString('label')->setNotNull()->setComment('Item label');
         $tableQuery->addString('link')->setNotNull()->setComment('Item link');

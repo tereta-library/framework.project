@@ -6,14 +6,14 @@
     "menu": {
       "js": "panel\/block\/menu"
     },
-    "page": {
-      "js": "panel\/block\/page"
+    "content": {
+      "js": "panel\/block\/content"
     },
     "social": {
       "js": "panel\/block\/social"
     },
     "create": {
-      "js": "panel\/block\/structure",
+      "js": "panel\/block\/page",
       "modules": {
         "page": {
           "label": "Page"

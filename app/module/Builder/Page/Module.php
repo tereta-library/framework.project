@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Cms;
+namespace Builder\Page;
 
 use Framework\Application\Interface\Module as ModuleInterface;
 
@@ -15,8 +15,8 @@ use Framework\Application\Interface\Module as ModuleInterface;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Cms\Controller\Module
- * @package Builder\Cms\Controller
+ * @class Builder\Page\Module
+ * @package Builder\Page
  * @link https://tereta.dev
  * @since 2020-2024
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

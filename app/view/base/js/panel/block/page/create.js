@@ -1,8 +1,8 @@
-import AdminTemplateForm from '/resources/js/admin/templateForm.js';
-import Syntax from '/resources/js/syntax.js';
+import AdminTemplateForm from '../templateForm.js';
+import Syntax from '../../syntax.js';
 
 export class AdminCreateForm extends AdminTemplateForm {
-    template = 'admin/structure/create';
+    template = 'block/page/create';
     formTypesContainer = null;
     nodeList = {};
     selectedData = null;
@@ -77,7 +77,7 @@ export class AdminCreateForm extends AdminTemplateForm {
 
     createPage(event, element, variable) {
         event.preventDefault();
-
+debugger;
         const token = this.rootAdminJs.getToken();
         const xhr = new XMLHttpRequest();
         const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/' + this.selectedData.controller));

@@ -1,30 +1,37 @@
 import AdminTemplate from './template.js';
 import Syntax from "../syntax.js";
 
-export class AdminMenu extends AdminTemplate {
+export class AdminCreate extends AdminTemplate {
     template = 'block/page';
-
-    constructor(rootNode, config) {
-        debugger;
-        super(rootNode, config);
-    }
 
     init() {
         this.syntax = (new Syntax(this.node));
         this.syntax.update();
 
-        this.node.addEventListener('click', this.buttonClick.bind(this));
+        this.node.querySelector('*[data-button=create]').addEventListener('click', this.buttonCreateAction.bind(this));
+        this.node.querySelector('*[data-button=listing]').addEventListener('click', this.buttonListingAction.bind(this));
+        this.node.querySelector('*[data-button=files]').addEventListener('click', this.buttonFilesAction.bind(this));
     }
 
-    async buttonClick() {
-        const config = this.config.elements[0];
+    async buttonFilesAction() {
+        this.formFilesAction = await this.showForm('block/page/files', [], this.formFilesAction);
+
+        this.node.querySelector('#admin_structure_checkbox').checked = false;
+    }
+
+    async buttonListingAction() {
+        this.formListingAction = await this.showForm('block/page/listing', [], this.formListingAction);
+
+        this.node.querySelector('#admin_structure_checkbox').checked = false;
+    }
+
+    async buttonCreateAction() {
         const token = this.rootAdminJs.getToken();
 
         // Load form data
-        let formData = null;
+        let receivedData = null;
 
-        const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/admin/page'));
-        url.searchParams.append('identifier', config.init.page);
+        const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/json/page/create'));
 
         await fetch(url, {
             method: "GET",
@@ -34,10 +41,11 @@ export class AdminMenu extends AdminTemplate {
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {
-            formData = json;
+            receivedData = json;
         });
 
         // Show admin form
-        this.form = await this.showForm('admin/page/form', formData, this.form);
+        this.formCreateAction = await this.showForm('block/page/create', receivedData, this.formCreateAction);
+        this.node.querySelector('#admin_structure_checkbox').checked = false;
     }
 }
