@@ -33,5 +33,7 @@ class Make implements Controller
             throw new Exception("The \"sample\" site not found");
         }
         echo Symbol::COLOR_GREEN . "The \"{$siteModel->get('identifier')}\" [{$siteId}] site will be used for the sample content page\n" . Symbol::COLOR_RESET;
+
+
     }
 }
