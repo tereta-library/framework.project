@@ -7,7 +7,7 @@ use Framework\Database\Factory;
 use Exception;
 
 /**
- * @class Builder\Page\Setup\Structure
+ * @class Builder\Content\Setup\Structure
  */
 class Structure extends Upgrade
 {
