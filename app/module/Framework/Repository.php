@@ -26,11 +26,6 @@ class Repository extends AbstractRepository
     private ResourceMenuItem $resourceItem;
 
     /**
-     * @var Repository|null $instance
-     */
-    protected static ?self $instance = null;
-
-    /**
      * @var array $registeredKeys
      */
     protected array $registeredKeys = ['id', ['siteId', 'identifier']];

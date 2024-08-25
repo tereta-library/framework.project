@@ -12,23 +12,47 @@ use Exception;
  */
 class Repository extends RepositoryAbstract
 {
-    protected static ?RepositoryAbstract $instance = null;
+    protected array $registeredKeys = ['id', 'identifier'];
+
+    public function getType(string $type): ?TypeModel
+    {
+        return $this->getTypeByIdentifier($type);
+    }
 
     /**
      * @param string $type
      * @return TypeModel|null
      * @throws Exception
      */
-    public function getType(string $type): ?TypeModel
+    public function getTypeByIdentifier(string $type): ?TypeModel
     {
         if ($typeModel = $this->getRegisterModel([
-            'type' => $type
+            'identifier' => $type
         ])) {
             return $typeModel;
         }
 
         $typeResourceModel = new TypeResourceModel;
         $typeResourceModel->load($typeModel = new TypeModel(), $type, 'identifier');
+
+        return $this->setRegisterModel($typeModel);
+    }
+
+    /**
+     * @param int $typeId
+     * @return TypeModel|null
+     * @throws Exception
+     */
+    public function getTypeById(int $typeId): ?TypeModel
+    {
+        if ($typeModel = $this->getRegisterModel([
+            'id' => $typeId
+        ])) {
+            return $typeModel;
+        }
+
+        $typeResourceModel = new TypeResourceModel;
+        $typeResourceModel->load($typeModel = new TypeModel(), $typeId, 'id');
 
         return $this->setRegisterModel($typeModel);
     }

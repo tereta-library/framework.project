@@ -5,6 +5,7 @@ namespace Builder\Content\Setup;
 use Framework\Application\Setup\Abstract\Upgrade;
 use Framework\Database\Factory;
 use Exception;
+use Builder\Content\Model\Resource\Content\Collection as ResourceContentCollection;
 
 /**
  * @class Builder\Content\Setup\Structure
@@ -34,7 +35,7 @@ class Structure extends Upgrade
         $connection->query($tableQuery->build());
 
         $query = Factory::createInsert('pageType')->values([
-            'identifier' => 'content'
+            'identifier' => ResourceContentCollection::class
         ])->updateOnDupilicate(['identifier']);
 
         $pdoStat = $connection->prepare($query->build());
