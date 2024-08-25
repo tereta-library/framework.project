@@ -11,6 +11,9 @@ class Domain extends Model
 {
     public function isCurrent(): bool
     {
+        if (!isset($_SERVER['HTTP_HOST'])) {
+            return false;
+        }
         return $this->get('domain') === $_SERVER['HTTP_HOST'];
     }
 }

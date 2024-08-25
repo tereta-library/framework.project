@@ -94,7 +94,25 @@ class Repository extends AbstractRepository
     }
 
     /**
-     * @param Entity $entityModel
+     * @param string $identifier
+     * @return Site
+     * @throws Exception
+     */
+    public function getByIdentifier(string $identifier): SiteModel
+    {
+        if ($siteModel = $this->getRegisterModel(['identifier' => $identifier])) {
+            return $siteModel;
+        }
+
+        $this->entityResourceModel->load($siteModel = new SiteModel(), $identifier, 'identifier');
+
+        $this->loadDependencies($siteModel);
+
+        return $this->setRegisterModel($siteModel);
+    }
+
+    /**
+     * @param SiteModel $entityModel
      * @return void
      * @throws Exception
      */

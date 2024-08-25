@@ -24,6 +24,7 @@ class Structure extends Upgrade
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Page url rewrite ID');
         $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id')->setComment('Site ID');
         $tableQuery->addString('identifier')->setNotNull()->setComment('Page identifier');
+        $tableQuery->addBoolean('status')->setNotNull()->setDefault(0)->setComment('Page status enabled/disabled');
         $tableQuery->addString('seoUri')->setNotNull()->setComment('Page seo URI');
         $tableQuery->addString('seoTitle')->setNotNull()->setComment('Page seo title');
         $tableQuery->addString('title')->setComment('Page title');
