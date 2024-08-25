@@ -12,6 +12,7 @@ use Framework\User\Model\User as UserModel;
 use Framework\User\Model\Resource\User as UserResourceModel;
 use Builder\Site\Model\User as SiteUserModel;
 use Builder\Site\Model\Resource\User as SiteUserResourceModel;
+use Exception;
 
 /**
  * @class Builder\Site\Cli\Make
@@ -19,10 +20,10 @@ use Builder\Site\Model\Resource\User as SiteUserResourceModel;
 class Make implements Controller
 {
     /**
-     * @cli make:site:sample
+     * @cli make:sample:site
      * @cliDescription Install site sample data
      * @return void
-     * @throws \Exception
+     * @throws Exception
      */
     public function make(): void
     {
