@@ -7,6 +7,10 @@ export class AdminPanel extends AdminTemplate{
     containerList = null;
     template = 'block/toolbar';
 
+    onCanvasLoaded = () => {
+        alert('ok');
+    }
+
     show() {
         if (!localStorage.getItem('adminToken')) {
             console.warn('Token not found');
@@ -79,6 +83,14 @@ export class AdminPanel extends AdminTemplate{
     }
 
     async handleBlocks() {
+        const hash = window.location.hash.startsWith('#') ? window.location.hash.substring(1) : window.location.hash;
+        const hashUrl = window.location.origin + (hash ? hash : '/');
+        if (hashUrl != this.rootAdminJs.elementCanvas.src) {
+            this.onCanvasLoaded = () => this.handleBlocks();
+            this.rootAdminJs.elementCanvas.src = hashUrl ;
+            return;
+        }
+
         let adminList = [];
 
         this.containerList.innerHTML = '';
@@ -174,6 +186,10 @@ export class AdminPanel extends AdminTemplate{
             'container': this.containerLanguage
         });
         this.languageBlock.render(this.containerLanguage);
+
+        window.addEventListener("hashchange", (event) => this.handleBlocks());
+
+        this.rootAdminJs.elementCanvas.addEventListener('load', () => this.onCanvasLoaded())
 
         this.syntax.update();
     }
