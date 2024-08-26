@@ -16,9 +16,9 @@
             <tbody data-foreach="listing">
                 <tr>
                     <td data-variable="title"></td>
-                    <td data-variable="url" data-translate="URL Data"></td>
+                    <td data-variable="uri" data-translate="URL Data"></td>
                     <td>
-                        <a href="#" data-variable="attribute:href:url" data-translate="Open"></a>
+                        <a data-event="click:openPage" href="#" data-variable="attribute:href:uri" data-translate="Open"></a>
                     </td>
                 </tr>
             </tbody>
