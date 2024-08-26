@@ -125,7 +125,7 @@ export class AdminPanel extends AdminTemplate{
         await fetch('/resource/base/json/modules.json', {
             method: "GET",
             headers: {
-                "Authorization": "Bearer " + token,
+                "API-Token": token,
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {

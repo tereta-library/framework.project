@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Panel;
+namespace Builder\Admin;
 
 use Framework\Application\Interface\Module as ModuleInterface;
 
@@ -15,8 +15,8 @@ use Framework\Application\Interface\Module as ModuleInterface;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Panel\Module
- * @package Builder\Panel\
+ * @class Builder\Admin\Module
+ * @package Builder\Admin\
  * @link https://tereta.dev
  * @since 2020-2024
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0

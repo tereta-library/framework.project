@@ -1,6 +1,6 @@
 import AdminTemplate from './template.js';
 import Syntax from "../syntax.js";
-import { singletone as syntaxTranslateSingletone } from '../syntax/translate.js';
+import { singleton as syntaxTranslateSingleton } from '../syntax/translate.js';
 
 export default class AdminLanguage extends AdminTemplate {
     template = 'block/language';
@@ -24,7 +24,7 @@ export default class AdminLanguage extends AdminTemplate {
 
         localStorage.setItem('language', item.code);
         await this.rootAdminJs.loadTranslation(item.code);
-        syntaxTranslateSingletone.update();
+        syntaxTranslateSingleton.update();
     }
 
     isShown() {
@@ -49,7 +49,7 @@ export default class AdminLanguage extends AdminTemplate {
         // Load form data
         let formData = null;
 
-        await fetch('/resource/base/json/lang/panel.json', {
+        await fetch('/resource/base/json/lang/admin.json', {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",

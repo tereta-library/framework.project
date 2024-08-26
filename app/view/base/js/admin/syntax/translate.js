@@ -1,6 +1,6 @@
 import {SyntaxAbstract} from './abstract.js';
 
-const syntaxTranslateSingletone = new class {
+const syntaxTranslateSingleton = new class {
     translateMap = {}
 
     elements = [];
@@ -38,14 +38,14 @@ const syntaxTranslateSingletone = new class {
 export class SyntaxTranslate extends SyntaxAbstract {
     update() {
         this.handleAttributes('data-translate', this.node, (element, attributeName) => {
-            syntaxTranslateSingletone.addElement(element);
-            syntaxTranslateSingletone.translateAttribute(element, attributeName);
+            syntaxTranslateSingleton.addElement(element);
+            syntaxTranslateSingleton.translateAttribute(element, attributeName);
         });
     }
 
     setTranslateMap(map) {
-        syntaxTranslateSingletone.setTranslateMap(map);
+        syntaxTranslateSingleton.setTranslateMap(map);
     }
 }
 
-export const singletone = syntaxTranslateSingletone;
+export const singleton = syntaxTranslateSingleton;

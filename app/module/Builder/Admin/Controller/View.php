@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Panel\Controller;
+namespace Builder\Admin\Controller;
 
 use Framework\Application\Manager;
 use Framework\Http\Interface\Controller;
@@ -18,8 +18,8 @@ use Exception;
  * ·······································································
  * ·······································································
  *
- * @class Builder\Cms\Controller\View
- * @package Builder\Cms\Controller
+ * @class Builder\Admin\Controller\View
+ * @package Builder\Admin\Controller
  * @link https://tereta.dev
  * @since 2020-2024
  * @license   http://www.apache.org/licenses/LICENSE-2.0  Apache License 2.0
@@ -29,16 +29,14 @@ use Exception;
 class View implements Controller
 {
     /**
-     * @router expression GET /^\/admin\/([^\?]+)$/Usi
-     * @param string $identifier
-     * @param GetParameter $get
+     * @router expression GET /^\/admin$/Usi
      * @return string
      * @throws Exception
      */
-    public function render(string $identifier, GetParameter $get): string
+    public function render(): string
     {
         $view = Manager::getInstance()->getView();
 
-        return (string)$view->render('panel');
+        return (string) $view->render('admin');
     }
 }

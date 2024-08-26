@@ -1,21 +1,21 @@
 <html lang="en">
 <head>
     <title>Web Site - Edit Panel</title>
-    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/panel/style.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/admin/style.css" />
 </head>
 <body class="panel">
     <iframe id="adminCanvas" src="http://sample.localhost/cms/page/123"></iframe>
 
     <div id="adminPanel"></div>
     <script type="module">
-        import { Manager } from '/resource/base/js/panel/manager.js';
+        import { Manager } from '/resource/base/js/admin/manager.js';
 
         const manager = (new Manager(
             document.getElementById('adminCanvas'),
             document.getElementById('adminPanel'),
-            '/resource/base/json/lang/panel'
+            '/resource/base/json/lang/admin'
         ));
-        manager.showCss('/resource/base/css/panel/admin.css');
+        manager.showCss('/resource/base/css/admin/admin.css');
         await manager.loadTranslation();
         manager.show();
     </script>

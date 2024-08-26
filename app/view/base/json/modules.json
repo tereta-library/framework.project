@@ -1,19 +1,19 @@
 {
   "modules": {
     "site": {
-      "js": "panel\/block\/site"
+      "js": "admin\/block\/site"
     },
     "menu": {
-      "js": "panel\/block\/menu"
+      "js": "admin\/block\/menu"
     },
     "content": {
-      "js": "panel\/block\/content"
+      "js": "admin\/block\/content"
     },
     "social": {
-      "js": "panel\/block\/social"
+      "js": "admin\/block\/social"
     },
     "create": {
-      "js": "panel\/block\/page",
+      "js": "admin\/block\/page",
       "modules": {
         "page": {
           "label": "Page"

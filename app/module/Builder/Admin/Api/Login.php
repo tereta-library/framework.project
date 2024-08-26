@@ -1,12 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Builder\Panel\Api;
+namespace Builder\Admin\Api;
 
 use Framework\Api\Interface\Api;
 use Framework\User\Model\User as UserModel;
 use Exception;
 use Framework\Application\Manager\Http\Parameter\Payload as PayloadParameter;
 
+/**
+ * @class Builder\Admin\Api\Login
+ */
 class Login implements Api
 {
     /**

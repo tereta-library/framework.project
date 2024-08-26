@@ -1,7 +1,7 @@
 import Block from './block.js';
-import { singletone as syntaxTranslateSingletone } from './syntax/translate.js';
+import { singleton as syntaxTranslateSingleton } from './syntax/translate.js';
 
-const adminSingletone = new class {
+const adminSingleton = new class {
     constructor(element = null) {
         this.instance = [];
     }
@@ -17,7 +17,7 @@ const adminSingletone = new class {
     }
 }
 
-export { adminSingletone };
+export { adminSingleton };
 
 export class Manager {
     syntax           = null;
@@ -33,7 +33,7 @@ export class Manager {
         this.languageDirectory = languageDirectory;
         this.block = new Block(this);
 
-        adminSingletone.register(this);
+        adminSingleton.register(this);
     }
 
     async getBlock(path) {
@@ -50,7 +50,7 @@ export class Manager {
         }
 
         if (!this.elementPanel) {
-            this.elementPanel = await this.getBlock('block/panel');
+            this.elementPanel = await this.getBlock('block/admin');
             await this.elementPanel.render(this.containerPanel);
             setTimeout(() => this.elementPanel.show(), 1000);
         } else {
@@ -111,7 +111,7 @@ export class Manager {
             translationMap = json;
         });
 
-        syntaxTranslateSingletone.setTranslateMap(translationMap);
+        syntaxTranslateSingleton.setTranslateMap(translationMap);
     }
 
     showCss(documentUrl)
