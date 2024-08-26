@@ -7,9 +7,7 @@ export class AdminPanel extends AdminTemplate{
     containerList = null;
     template = 'block/toolbar';
 
-    onCanvasLoaded = () => {
-        alert('ok');
-    }
+    onCanvasLoaded = () => {};
 
     show() {
         if (!localStorage.getItem('adminToken')) {
@@ -84,7 +82,12 @@ export class AdminPanel extends AdminTemplate{
 
     async handleBlocks() {
         const hash = window.location.hash.startsWith('#') ? window.location.hash.substring(1) : window.location.hash;
-        const hashUrl = window.location.origin + (hash ? hash : '/');
+        const hashUrl = window.location.origin + (
+            hash ? (
+                hash.startsWith('/') ? hash : '/' + hash
+            ) : '/'
+        );
+
         if (hashUrl != this.rootAdminJs.elementCanvas.src) {
             this.onCanvasLoaded = () => this.handleBlocks();
             this.rootAdminJs.elementCanvas.src = hashUrl ;
