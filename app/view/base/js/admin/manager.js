@@ -155,14 +155,6 @@ export class Manager {
         });
     }
 
-    hideLogin() {
-        if (!this.loginPopup) {
-            return;
-        }
-
-        this.loginPopup.hide();
-    }
-
     getToken()
     {
         const token = localStorage.getItem('adminToken');
@@ -171,10 +163,5 @@ export class Manager {
         }
 
         return token;
-    }
-
-    clearToken()
-    {
-        localStorage.removeItem('adminToken');
     }
 }

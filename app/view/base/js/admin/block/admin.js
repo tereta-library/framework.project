@@ -191,5 +191,6 @@ export class AdminPanel extends AdminTemplate{
         localStorage.removeItem('adminToken');
         this.hideAllElements();
         this.hide();
+        this.rootAdminJs.showLogin();
     }
 }
