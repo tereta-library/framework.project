@@ -22,10 +22,6 @@ export class AdminListingForm extends AdminTemplateForm {
             const data = await this.getListing(1);
             const config = data.config;
 
-            data.listing.forEach((item) => {
-                item.openPage = this.openPage.bind(this)
-            });
-
             this.syntax.set('config', config);
             this.syntax.set('listing', data.listing);
             this.syntax.update();
@@ -51,7 +47,12 @@ export class AdminListingForm extends AdminTemplateForm {
         formData.append('page', page);
         xhr.send(formData);
 
-        return JSON.parse(xhr.response);
+        let result = JSON.parse(xhr.response);
+        result.listing.forEach((item) => {
+            item.openPage = this.openPage.bind(this)
+        });
+
+        return result;
     }
 
     openPage(event, element) {
