@@ -12,7 +12,6 @@ use Framework\Repository as MenuRepository;
 use Builder\Menu\Model\Resource\Menu\Item\Collection as MenuItemCollection;
 use Builder\Menu\Model\Resource\Menu\Item as MenuItemResource;
 use Builder\Menu\Model\Resource\Menu as MenuResource;
-use Builder\Menu\Model\Menu as MenuModel;
 
 /**
  * @class Builder\Menu\Api\Configuration

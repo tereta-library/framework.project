@@ -20,15 +20,12 @@ export class AdminListingForm extends AdminTemplateForm {
 
         (async() => {
             const data = await this.getListing(1);
-debugger;
             const totalPages = data.totalPages;
             const config = data.config;
 
             this.syntax.set('config', config);
             this.syntax.set('listing', data.listing);
             this.syntax.update();
-
-            console.info(data);
         })();
 
         this.syntax.update();
@@ -47,7 +44,7 @@ debugger;
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/api/json/page/getListing', false);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
-        xhr.setRequestHeader('Authorization', "Bearer " + this.rootAdminJs.getToken());
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         formData.append('page', page);
         xhr.send(formData);
 

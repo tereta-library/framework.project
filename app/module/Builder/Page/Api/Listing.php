@@ -2,10 +2,12 @@
 
 namespace Builder\Page\Api;
 
+use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 use Framework\Api\Interface\Api;
 use Builder\Page\Model\Resource\Url\Collection as ModelUrlCollection;
 use Builder\Page\Model\Type\Repository as TypeRepository;
 use Exception;
+use Framework\Application\Manager\Http\Parameter\Post as PostData;
 
 /**
  * @class Builder\Page\Api\Listing
@@ -13,27 +15,44 @@ use Exception;
  */
 class Listing implements Api
 {
+    use AdministratorTrait;
+
     /**
+     * @param PostData $post
      * @return array
      * @throws Exception
      * @api POST /^page\/getListing$/Usi
      */
-    public function getListing(): array
+    public function getListing(PostData $post): array
     {
         $modelUrlCollection = new ModelUrlCollection;
-        $urlList = [];
+        $modelUrlCollection->where('siteId', $this->siteModel->get('id'));
+        $totalUrls = $modelUrlCollection->getSize();
+        $limitPerPage = 10;
+
+        $modelUrlCollection = new ModelUrlCollection;
+        $modelUrlCollection->where('siteId', $this->siteModel->get('id'));
+        $modelUrlCollection->setLimit($limitPerPage);
+        $modelUrlCollection->setPage((int) $post->get('page'));
+
         $byType = [];
         foreach ($modelUrlCollection as $item) {
-            $urlList[] = $item;
-            $byType[$item->get('id')][] = $item;
+            $byType[$item->get('typeId')][] = $item;
         }
 
-        $result = [];
+        $listing = [];
         foreach($byType as $typeId => $item) {
-            $this->getListingPrepare($typeId, $item, $result);
+            $this->getListingPrepare($typeId, $item, $listing);
         }
 
-        return $result;
+        return [
+            'config' => [
+                'page' => $post->get('page'),
+                'perPage' => $limitPerPage,
+                'totalPages' => ceil($totalUrls / $limitPerPage),
+            ],
+            'listing' => $listing
+        ];
     }
 
     /**
@@ -61,9 +80,19 @@ class Listing implements Api
         }
 
         foreach($urlModelList as $urlModel) {
+            if (!isset($collectionById[$urlModel->get('id')])) {
+                $result[] = [
+                    'id' => $urlModel->get('id'),
+                    'title' => 'Deleted',
+                    'uri' => $urlModel->get('uri'),
+                    'url' => $urlModel->get('uri'),
+                ];
+                continue;
+            }
+
             $model = $collectionById[$urlModel->get('id')];
             $result[] = [
-                'id' => $model->get('id'),
+                'id' => $urlModel->get('id'),
                 'title' => $model->get('title'),
                 'uri' => $urlModel->get('uri'),
                 'url' => $urlModel->get('uri'),
