@@ -43,12 +43,12 @@
             }
         }
 
-        .menu_items {
+        .menuItems {
             max-height: 177px;
             overflow: auto;
             padding: 10px;
 
-            .submenu_items {
+            .subMenuItems {
                 display: none;
                 margin: 0 0 0 10px;
             }
@@ -60,12 +60,12 @@
                 display: grid;
                 grid-template-columns: auto 15px 15px;
 
-                .item_label {
+                .itemLabel {
                     cursor: pointer;
                     white-space: nowrap;
                 }
 
-                .item_remove {
+                .itemRemove {
                     margin: 0 0 0 10px;
                     cursor: pointer;
                 }
@@ -75,10 +75,10 @@
                 }
             }
 
-            .submenu_items_active {
+            .subMenuItemsActive {
                 display: none;
 
-                &:checked + .submenu_items{
+                &:checked + .subMenuItems{
                     display: block;
                 }
             }

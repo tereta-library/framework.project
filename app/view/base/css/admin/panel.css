@@ -762,37 +762,37 @@
   height: 1px;
   border-bottom: #fff dashed 1px;
 }
-#adminPanelControl .formMenu .menu_items {
+#adminPanelControl .formMenu .menuItems {
   max-height: 177px;
   overflow: auto;
   padding: 10px;
 }
-#adminPanelControl .formMenu .menu_items .submenu_items {
+#adminPanelControl .formMenu .menuItems .subMenuItems {
   display: none;
   margin: 0 0 0 10px;
 }
-#adminPanelControl .formMenu .menu_items .itemLine {
+#adminPanelControl .formMenu .menuItems .itemLine {
   clear: both;
   width: 100%;
   text-align: left;
   display: grid;
   grid-template-columns: auto 15px 15px;
 }
-#adminPanelControl .formMenu .menu_items .itemLine .item_label {
+#adminPanelControl .formMenu .menuItems .itemLine .itemLabel {
   cursor: pointer;
   white-space: nowrap;
 }
-#adminPanelControl .formMenu .menu_items .itemLine .item_remove {
+#adminPanelControl .formMenu .menuItems .itemLine .itemRemove {
   margin: 0 0 0 10px;
   cursor: pointer;
 }
-#adminPanelControl .formMenu .menu_items .itemLine label {
+#adminPanelControl .formMenu .menuItems .itemLine label {
   cursor: pointer;
 }
-#adminPanelControl .formMenu .menu_items .submenu_items_active {
+#adminPanelControl .formMenu .menuItems .subMenuItemsActive {
   display: none;
 }
-#adminPanelControl .formMenu .menu_items .submenu_items_active:checked + .submenu_items {
+#adminPanelControl .formMenu .menuItems .subMenuItemsActive:checked + .subMenuItems {
   display: block;
 }
 
@@ -974,4 +974,4 @@
   clear: both;
 }
 
-/*# sourceMappingURL=admin.css.map */
+/*# sourceMappingURL=panel.css.map */

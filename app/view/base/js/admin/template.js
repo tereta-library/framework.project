@@ -13,7 +13,7 @@ export default class Template {
 
         const self = this;
         const path = this.template;
-        const url = '/resource/base/html/panel/' + path + '.html';
+        const url = '/resource/base/html/admin/' + path + '.html';
         const documentUrl = new URL(url, import.meta.url).href
 
         let documentHtml = null;
@@ -35,7 +35,6 @@ export default class Template {
 
         insertElement.childNodes.forEach(item => {
             if (item.nodeName === '#text') return;
-            if (item.nodeName === 'SCRIPT' && item.getAttribute('src') === '/@vite/client') return;
             nodeLength++;
             nodeChild = item;
         });

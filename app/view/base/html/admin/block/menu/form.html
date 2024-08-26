@@ -13,11 +13,11 @@
     <fieldset>
         <legend>Menu</legend>
         <div class="formMenuFieldset">
-            <div class="menu_wrapper">
+            <div class="menuWrapper">
                 <div data-if="!menu.length">
                     <button type="button" data-event="click:actionCreateFirst" data-translate="Create First"></button>
                 </div>
-                <div data-foreach="menu" class="menu_items" data-use="menuItem"></div>
+                <div data-foreach="menu" class="menuItems" data-use="menuItem"></div>
             </div>
 
             <div class="menuItemEdit">
@@ -59,14 +59,14 @@
         </div>
         <div data-template="menuItem">
             <div class="itemLine">
-                <label data-variable-id="attribute:for:adminId" data-event="actionEdit" data-variable="label" class="item_label"></label>
+                <label data-variable-id="attribute:for:clientId" data-event="actionEdit" data-variable="label" class="itemLabel"></label>
                 <div>
-                    <label data-variable-id="attribute:for:adminId" data-if="menu.length">&#8628;</label>
+                    <label data-variable-id="attribute:for:clientId" data-if="menu.length">&#8628;</label>
                 </div>
-                <div class="item_remove" data-event="actionRemove">&#10005;</div>
+                <div class="itemRemove" data-event="actionRemove">&#10005;</div>
             </div>
-            <input data-variable-id="attribute:id:adminId" data-variable="checked:!!opened" data-if="menu" type="checkbox" class="submenu_items_active">
-            <div data-foreach="menu" class="submenu_items" data-if="menu" data-use="menuItem"></div>
+            <input data-variable-id="attribute:id:clientId" data-variable="checked:!!opened" data-if="menu" type="checkbox" class="subMenuItemsActive">
+            <div data-foreach="menu" class="subMenuItems" data-if="menu" data-use="menuItem"></div>
         </div>
     </fieldset>
 </form>
