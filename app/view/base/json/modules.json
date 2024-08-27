@@ -1,24 +1,22 @@
 {
   "modules": {
+    "page": {
+      "js": "admin\/block\/page",
+      "permanent": true
+    },
     "site": {
-      "js": "admin\/block\/site"
+      "js": "admin\/block\/site",
+      "permanent": true
     },
     "menu": {
       "js": "admin\/block\/menu"
     },
     "content": {
-      "js": "admin\/block\/content"
+      "js": "admin\/block\/content",
+      "permanent": true
     },
     "social": {
       "js": "admin\/block\/social"
-    },
-    "create": {
-      "js": "admin\/block\/page",
-      "modules": {
-        "page": {
-          "label": "Page"
-        }
-      }
     }
   }
 }

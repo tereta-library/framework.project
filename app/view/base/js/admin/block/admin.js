@@ -145,14 +145,14 @@ export class AdminPanel extends AdminTemplate{
             }
         }).then((response) => response.json()).then((json) => {
             Object.keys(json.modules).forEach((moduleName) => {
-                if (!modules.includes(moduleName) && !['site', 'create'].includes(moduleName)) {
+                const moduleConfig = json.modules[moduleName];
+                if (!moduleConfig.permanent && !modules.includes(moduleName)) {
                     return;
                 }
 
-                const moduleData = json.modules[moduleName];
-                moduleConfigsModule[moduleName] = moduleData;
+                moduleConfigsModule[moduleName] = moduleConfig;
                 moduleNames.push(moduleName);
-                moduleImport.push(import(/* @vite-ignore */ `/resource/base/js/${moduleData.js}.js`));
+                moduleImport.push(import(`/resource/base/js/${moduleConfig.js}.js`));
             });
         }).catch((error) => {
             this.hideAllElements();

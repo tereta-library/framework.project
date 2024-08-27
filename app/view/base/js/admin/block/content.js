@@ -5,11 +5,11 @@ export class AdminMenu extends AdminTemplate {
     template = 'block/content';
 
     constructor(rootNode, config) {
-        debugger;
         super(rootNode, config);
     }
 
     init() {
+        debugger;
         this.syntax = (new Syntax(this.node));
         this.syntax.update();
 
@@ -17,6 +17,7 @@ export class AdminMenu extends AdminTemplate {
     }
 
     async buttonClick() {
+        debugger;
         const config = this.config.elements[0];
         const token = this.rootAdminJs.getToken();
 

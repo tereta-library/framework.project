@@ -688,27 +688,30 @@
   display: block;
 }
 
-#adminPanelControl .structure {
+#adminPanelControl .page {
   position: relative;
 }
-#adminPanelControl .structure .background {
+#adminPanelControl .page .hidden {
+  display: none;
+}
+#adminPanelControl .page .background {
   position: fixed;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
 }
-#adminPanelControl .structure #admin_structure_checkbox {
+#adminPanelControl .page #adminPageCheckbox, #adminPanelControl .page #adminPageCreateCheckbox {
   display: none;
 }
-#adminPanelControl .structure #admin_structure_checkbox + label {
+#adminPanelControl .page #adminPageCheckbox + label, #adminPanelControl .page #adminPageCreateCheckbox + label {
   display: block;
   cursor: pointer;
 }
-#adminPanelControl .structure #admin_structure_checkbox + label + .background {
+#adminPanelControl .page #adminPageCheckbox + label + .background, #adminPanelControl .page #adminPageCreateCheckbox + label + .background {
   display: none;
 }
-#adminPanelControl .structure #admin_structure_checkbox + label + .background + div {
+#adminPanelControl .page #adminPageCheckbox + label + .background + div, #adminPanelControl .page #adminPageCreateCheckbox + label + .background + div {
   display: none;
   position: absolute;
   bottom: 0;
@@ -718,10 +721,10 @@
   padding: 2px 5px;
   box-shadow: -4px 4px 5px #000;
 }
-#adminPanelControl .structure #admin_structure_checkbox:checked + label + .background {
+#adminPanelControl .page #adminPageCheckbox:checked + label + .background, #adminPanelControl .page #adminPageCreateCheckbox:checked + label + .background {
   display: block;
 }
-#adminPanelControl .structure #admin_structure_checkbox:checked + label + .background + div {
+#adminPanelControl .page #adminPageCheckbox:checked + label + .background + div, #adminPanelControl .page #adminPageCreateCheckbox:checked + label + .background + div {
   display: block;
 }
 
@@ -809,18 +812,6 @@
 #adminPanelControl .form_social .socialField > div:nth-child(2) {
   float: right;
   margin-top: -34px;
-}
-
-/* @import "../../../js/library/editor/editor"; */
-#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(1) {
-  width: 60%;
-  margin: 0;
-  padding: 0;
-}
-#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(2) {
-  width: 40%;
-  margin: 0;
-  padding: 0;
 }
 
 #adminPanelControl {

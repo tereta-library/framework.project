@@ -77,7 +77,7 @@ export class AdminCreateForm extends AdminTemplateForm {
 
     createPage(event, element, variable) {
         event.preventDefault();
-debugger;
+
         const token = this.rootAdminJs.getToken();
         const xhr = new XMLHttpRequest();
         const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/' + this.selectedData.controller));
