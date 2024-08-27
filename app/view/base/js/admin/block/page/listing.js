@@ -57,6 +57,6 @@ export class AdminListingForm extends AdminTemplateForm {
 
     openPage(event, element) {
         event.preventDefault();
-        console.info(element.getAttribute('href'));
+        window.location.hash = element.getAttribute('href');
     }
 }
