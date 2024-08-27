@@ -1,7 +1,7 @@
 import AdminTemplate from './template.js';
 import Syntax from "../syntax.js";
 
-export class AdminMenu extends AdminTemplate {
+export class AdminContent extends AdminTemplate {
     template = 'block/content';
 
     constructor(rootNode, config) {
@@ -9,15 +9,19 @@ export class AdminMenu extends AdminTemplate {
     }
 
     init() {
-        debugger;
         this.syntax = (new Syntax(this.node));
         this.syntax.update();
 
         this.node.addEventListener('click', this.buttonClick.bind(this));
     }
 
+    async render(element) {
+        element = element.querySelector('#adminPageCreateListing');
+
+        super.render(element);
+    }
+
     async buttonClick() {
-        debugger;
         const config = this.config.elements[0];
         const token = this.rootAdminJs.getToken();
 

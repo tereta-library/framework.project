@@ -45,6 +45,8 @@
             }
 
             &:checked + label + .background + div {
+                white-space: nowrap;
+                position: absolute;
                 display: block;
             }
         }

@@ -725,6 +725,8 @@
   display: block;
 }
 #adminPanelControl .page #adminPageCheckbox:checked + label + .background + div, #adminPanelControl .page #adminPageCreateCheckbox:checked + label + .background + div {
+  white-space: nowrap;
+  position: absolute;
   display: block;
 }
 

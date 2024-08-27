@@ -2,7 +2,7 @@ import AdminTemplate from './template.js';
 import Syntax from '../syntax.js';
 import AdminLanguage from "./language.js";
 
-export class AdminPanel extends AdminTemplate{
+export class Admin extends AdminTemplate{
     buttonLogout = null;
     containerList = null;
     template = 'block/toolbar';
@@ -109,6 +109,18 @@ export class AdminPanel extends AdminTemplate{
         });
 
         const objects = await this.loadHandleBlocks(adminList);
+
+        debugger;
+        // @todo need to create sequence of rendering
+        Object.keys(objects).forEach((moduleName) => {
+            const sequence = objects[moduleName].config.sequence;
+            if (!sequence) {
+                return;
+            }
+
+            objects[sequence].renderSequenceList.push(objects[moduleName]);
+            delete objects[moduleName];
+        });
 
         Object.keys(objects).forEach((moduleName) => {
             objects[moduleName].render(this.containerList);

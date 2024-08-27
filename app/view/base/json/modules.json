@@ -13,6 +13,7 @@
     },
     "content": {
       "js": "admin\/block\/content",
+      "sequence": "page",
       "permanent": true
     },
     "social": {

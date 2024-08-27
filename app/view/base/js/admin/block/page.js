@@ -1,7 +1,7 @@
 import AdminTemplate from './template.js';
 import Syntax from "../syntax.js";
 
-export class AdminCreate extends AdminTemplate {
+export class AdminPage extends AdminTemplate {
     template = 'block/page';
 
     init() {
