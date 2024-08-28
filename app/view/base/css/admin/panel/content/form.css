@@ -1,0 +1,66 @@
+.editorWrapper {
+  position: relative;
+  overflow: hidden;
+  clear: both;
+  padding-left: 14px;
+  border: 1px solid #000;
+  background: #fff;
+}
+.editorWrapper textarea, .editorWrapper .editorLayer .editorLine {
+  padding: 0px;
+  line-height: 15px;
+  font-size: 14px;
+}
+.editorWrapper textarea {
+  padding: 0px;
+  border: none;
+  resize: none;
+  white-space: pre;
+  background: transparent;
+  width: 100%;
+  height: 200px;
+}
+.editorWrapper textarea:focus {
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+.editorWrapper .editorLayer {
+  position: absolute;
+  pointer-events: none;
+  overflow: hidden;
+  right: 0px;
+  left: 0px;
+}
+.editorWrapper .editorLayer .editorLine {
+  float: left;
+  padding: 0px 10px 0px 5px;
+  position: relative;
+  background: #777;
+  color: #fff;
+}
+.editorWrapper .editorLayer .editorLine:before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 5px;
+  background: #fff;
+  height: 100%;
+}
+
+#adminPanelControl .formPage .tabContent {
+  background: #f00;
+}
+#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(1) {
+  width: 60%;
+  margin: 0;
+  padding: 0;
+}
+#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(2) {
+  width: 40%;
+  margin: 0;
+  padding: 0;
+}
+
+/*# sourceMappingURL=form.css.map */

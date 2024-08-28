@@ -110,7 +110,6 @@ export class Admin extends AdminTemplate{
 
         const objects = await this.loadHandleBlocks(adminList);
 
-        debugger;
         // @todo need to create sequence of rendering
         Object.keys(objects).forEach((moduleName) => {
             const sequence = objects[moduleName].config.sequence;

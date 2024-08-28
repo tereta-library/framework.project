@@ -1,0 +1,20 @@
+@import "../../../../js/library/editor/editor";
+
+#adminPanelControl {
+  .formPage {
+    .tabContent {
+      .fieldsUriHeader {
+        & > div:nth-child(1) {
+          width: 60%;
+          margin: 0;
+          padding: 0;
+        }
+        & > div:nth-child(2) {
+          width: 40%;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    }
+  }
+}

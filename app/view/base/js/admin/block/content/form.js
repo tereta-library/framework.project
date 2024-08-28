@@ -1,9 +1,9 @@
 import AdminTemplateForm from '../templateForm.js';
 import Syntax from '../../syntax.js';
-import {Editor as EditorLibrary} from '../../library/editor/editor.js';
+import {Editor as EditorLibrary} from '../../../library/editor/editor.js';
 
 export class AdminMenuForm extends AdminTemplateForm {
-    template = 'block/page/form';
+    template = 'block/content/form';
     id = null;
     onChangeKeyTimeout = [];
 

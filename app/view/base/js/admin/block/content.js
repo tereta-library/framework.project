@@ -22,20 +22,19 @@ export class AdminContent extends AdminTemplate {
     }
 
     async buttonClick() {
-        const config = this.config.elements[0];
-        const token = this.rootAdminJs.getToken();
-
         // Load form data
         let formData = null;
 
-        const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/admin/content'));
-        url.searchParams.append('identifier', config.init.page);
+        // api/json/site/configuration
+        const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/json/content/configuration'));
+        // @todo: Commented because made as create but need to add also edit method
+        //url.searchParams.append('identifier', elementConfig.identifier);
 
         await fetch(url, {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
-                "Authorization": "Bearer " + token,
+                "API-Token": this.rootAdminJs.getToken(),
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {
@@ -43,6 +42,6 @@ export class AdminContent extends AdminTemplate {
         });
 
         // Show admin form
-        this.form = await this.showForm('admin/content/form', formData, this.form);
+        this.form = await this.showForm('block/content/form', formData, this.form);
     }
 }
