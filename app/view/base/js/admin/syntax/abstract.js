@@ -13,8 +13,9 @@ export class SyntaxAbstract
 
     getVariable(attributePointer, variable) {
         const currentPointer = attributePointer.shift();
+        const keys = Object.keys(variable);
 
-        if (typeof variable[currentPointer] === 'undefined') {
+        if (keys.includes(currentPointer) === false) {
             console.error(`Variable '${currentPointer}' is not defined at the syntax class id #${this.syntax.id}.`)
             return null;
         }

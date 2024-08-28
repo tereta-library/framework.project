@@ -9,43 +9,51 @@ export class AdminMenuForm extends AdminTemplateForm {
 
     show(config) {
         this.id = config.id;
-        this.syntax.set('title', config.title);
+        this.syntax.set('id', config.id);
         this.syntax.set('identifier', config.identifier);
+        this.syntax.set('status', config.status);
+        this.syntax.set('seoUri', config.seoUri);
+        this.syntax.set('seoTitle', config.seoTitle);
         this.syntax.set('header', config.header);
+        this.syntax.set('description', config.description);
         this.syntax.set('content', config.content);
-        this.syntax.set('meta_keywords', config.meta_keywords);
-        this.syntax.set('meta_description', config.meta_description);
 
         this.syntax.update();
         super.show();
 
-        this.editorNode.update();
+        this.editorContentNode.update();
+        this.editorDescriptionNode.update();
     }
 
     init() {
         this.syntax = (new Syntax(this.node, {
-            successMessage: '',
+            successMessage    : '',
             showSuccessMessage: false,
-            title: '',
-            identifier: '',
-            header: '',
-            content: '',
-            meta_keywords: '',
-            meta_description: '',
-            isSave: false,
-            onRemove: this.onRemove.bind(this),
-            onClose: this.onClose.bind(this),
-            saveForm: this.saveForm.bind(this),
-            onKeyup: this.onKeyup.bind(this),
-            onChange: this.onChange.bind(this),
+            id                : '',
+            identifier        : '',
+            status            : '',
+            seoUri            : '',
+            seoTitle          : '',
+            header            : '',
+            description       : '',
+            content           : '',
+            isSave            : false,
+            onRemove          : this.onRemove.bind(this),
+            onClose           : this.onClose.bind(this),
+            saveForm          : this.saveForm.bind(this),
+            onKeyup           : this.onKeyup.bind(this),
+            onChange          : this.onChange.bind(this),
 
-            onPasteFile: this.onPasteFile.bind(this)
+            onPasteFile       : this.onPasteFile.bind(this)
         }));
 
         this.syntax.update();
 
-        this.editorNode = new EditorLibrary(this.node.querySelector('.page_editor'));
-        this.editorNode.show();
+        this.editorContentNode = new EditorLibrary(this.node.querySelector('.pageContentEditor'));
+        this.editorContentNode.show();
+
+        this.editorDescriptionNode = new EditorLibrary(this.node.querySelector('.pageDescriptionEditor'));
+        this.editorDescriptionNode.show();
     }
 
     onRemove(event, element, variable) {

@@ -8,23 +8,25 @@
         <div class="button formElement">
             <button type="submit" data-variable="disabled:!isSave" data-event="click:saveForm" data-translate="Save"></button>
         </div>
-        <div class="button formElement">
+        <div class="button formElement" data-variable="class:hidden:!id">
             <button type="button" data-event="click:onRemove" data-translate="Remove"></button>
         </div>
     </div>
 
     <div class="tabs">
-        <input type="radio" name="tab" id="formPageContent" checked />
+        <input type="radio" name="tab" id="formPageGeneral" checked />
+        <input type="radio" name="tab" id="formPageContent" />
         <input type="radio" name="tab" id="formPageSeo" />
         <div class="tabsBar">
+            <label for="formPageGeneral" data-translate="General"></label>
             <label for="formPageContent" data-translate="Content"></label>
             <label for="formPageSeo" data-translate="SEO"></label>
         </div>
         <div class="tabsContainer">
-            <fieldset class="formPageFields">
-                <legend data-translate="Content"></legend>
+            <fieldset>
+                <legend data-translate="General"></legend>
 
-                <div class="tabContent">
+                <div class="tabGeneral">
                     <div class="fields inline fieldsUriHeader">
                         <div>
                             <div class="formElement inputField">
@@ -34,7 +36,7 @@
                                        data-event-keyup="onKeyup('identifier')"
                                        data-variable="value:identifier" />
                                 <label class="inputLabel">
-                                    <span data-translate="Identifier (URI)"></span>
+                                    <span data-translate="Identifier"></span>
                                 </label>
                             </div>
                         </div>
@@ -52,46 +54,43 @@
                         </div>
                     </div>
 
-                    <textarea class="page_editor" data-event="onChange('content')" data-event-paste="paste:onPasteFile('content')" data-event-keyup="onKeyup('content')" data-variable="value:content"></textarea>
+                    <div class="fieldDescription">
+                        <label data-translate="Description"></label>
+                        <textarea class="pageDescriptionEditor" data-event="onChange('description')" data-event-keyup="onKeyup('description')" data-variable="value:description"></textarea>
+                    </div>
                 </div>
             </fieldset>
-            <fieldset class="tab_seo">
+            <fieldset>
+                <legend data-translate="Content"></legend>
+                <div>
+                    <textarea class="pageContentEditor" data-event="onChange('content')" data-event-paste="paste:onPasteFile('content')" data-event-keyup="onKeyup('content')" data-variable="value:content"></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
                 <legend data-translate="SEO"></legend>
 
-                <dl class="fields">
+                <div class="fields">
                     <div class="formElement inputField">
                         <input type="text"
-                               data-variable-className="class:filled:title"
-                               data-event="onChange('title')"
-                               data-event-keyup="onKeyup('title')"
-                               data-variable="value:title" />
+                               data-variable-className="class:filled:seoTitle"
+                               data-event="onChange('seoTitle')"
+                               data-event-keyup="onKeyup('seoTitle')"
+                               data-variable="value:seoTitle" />
                         <label class="inputLabel">
-                            <span data-translate="Title"></span>
+                            <span data-translate="SEO Title"></span>
                         </label>
                     </div>
-
                     <div class="formElement inputField">
                         <input type="text"
-                               data-variable-className="class:filled:meta_keywords"
-                               data-event="onChange('meta_keywords')"
-                               data-event-keyup="onKeyup('meta_keywords')"
-                               data-variable="value:meta_keywords" />
+                               data-variable-className="class:filled:seoUri"
+                               data-event="onChange('seoUri')"
+                               data-event-keyup="onKeyup('seoUri')"
+                               data-variable="value:seoUri" />
                         <label class="inputLabel">
-                            <span data-translate="Meta Keywords"></span>
+                            <span data-translate="SEO URI"></span>
                         </label>
                     </div>
-
-                    <div class="formElement inputField">
-                        <input type="text"
-                               data-variable-className="class:filled:meta_description"
-                               data-event="onChange('meta_description')"
-                               data-event-keyup="onKeyup('meta_description')"
-                               data-variable="value:meta_description" />
-                        <label class="inputLabel">
-                            <span data-translate="Meta Description"></span>
-                        </label>
-                    </div>
-                </dl>
+                </div>
             </fieldset>
         </div>
     </div>

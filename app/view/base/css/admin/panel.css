@@ -1018,15 +1018,29 @@
   height: 100%;
 }
 
-#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(1) {
+#adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:nth-child(1) {
   width: 60%;
   margin: 0;
   padding: 0;
 }
-#adminPanelControl .formPage .tabContent .fieldsUriHeader > div:nth-child(2) {
+#adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:nth-child(2) {
   width: 40%;
   margin: 0;
   padding: 0;
+}
+#adminPanelControl .formPage .tabGeneral .fieldDescription > label {
+  z-index: 9;
+  margin: -10px 0 0 10px;
+  color: #000;
+  font-size: 10px;
+  padding: 3px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid #777777;
+  position: absolute;
+}
+#adminPanelControl .formPage .tabGeneral .fieldDescription > .editorWrapper {
+  padding-top: 14px;
 }
 
 /*# sourceMappingURL=panel.css.map */

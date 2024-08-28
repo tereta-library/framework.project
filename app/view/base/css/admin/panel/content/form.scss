@@ -2,7 +2,7 @@
 
 #adminPanelControl {
   .formPage {
-    .tabContent {
+    .tabGeneral {
       .fieldsUriHeader {
         & > div:nth-child(1) {
           width: 60%;
@@ -13,6 +13,24 @@
           width: 40%;
           margin: 0;
           padding: 0;
+        }
+      }
+
+      .fieldDescription {
+        & > label {
+          z-index: 9;
+          margin: -10px 0 0 10px;
+          color: #000;
+          font-size: 10px;
+          padding: 3px;
+          background: #fff;
+          border-radius: 5px;
+          border: 1px solid #777777;
+          position: absolute;
+        }
+
+        & > .editorWrapper {
+          padding-top: 14px;
         }
       }
     }
