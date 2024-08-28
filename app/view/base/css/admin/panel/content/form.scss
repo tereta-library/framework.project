@@ -5,14 +5,29 @@
     .tabGeneral {
       .fieldsUriHeader {
         & > div:nth-child(1) {
-          width: 60%;
+          width: 50%;
           margin: 0;
           padding: 0;
         }
         & > div:nth-child(2) {
-          width: 40%;
+          width: calc(50% - 100px);
           margin: 0;
           padding: 0;
+        }
+        & > div:nth-child(3) {
+          width: 100px;
+          margin: 0;
+          padding: 0;
+        }
+        & > div:first-child {
+          input, select {
+            margin-left: 0;
+          }
+        }
+        & > div:last-child {
+          input, select {
+            margin-right: 0;
+          }
         }
       }
 

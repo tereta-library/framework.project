@@ -4,6 +4,8 @@ namespace Builder\Content\Api;
 
 use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 use Framework\Api\Interface\Api;
+use Framework\Application\Manager\Http\Parameter\Post as ParameterPost;
+use Framework\Application\Manager\Http\Parameter\Payload;
 
 /**
  * @class Builder\Content\Api\Configuration
@@ -28,5 +30,15 @@ class Configuration implements Api
             'description' => null,
             'content'     => null,
         ];
+    }
+
+    /**
+     * @api POST /^content\/save$/Usi
+     * @param Payload $payload
+     * @return array
+     */
+    public function saveContent(Payload $payload): array
+    {
+        return [];
     }
 }

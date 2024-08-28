@@ -38,6 +38,10 @@
                 background: #2d3748;
                 padding: 2px 5px;
                 box-shadow: -4px 4px 5px #000;
+
+                & > div {
+                    position: relative;
+                }
             }
 
             &:checked + label + .background {

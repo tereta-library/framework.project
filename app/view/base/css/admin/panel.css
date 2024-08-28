@@ -11,6 +11,8 @@
   top: 0;
   bottom: 0;
   padding: 0 10px;
+  border: none;
+  margin: 0 2px 0 2px;
 }
 .formElement.inputTextArea {
   height: 100px;
@@ -721,6 +723,9 @@
   padding: 2px 5px;
   box-shadow: -4px 4px 5px #000;
 }
+#adminPanelControl .page #adminPageCheckbox + label + .background + div > div, #adminPanelControl .page #adminPageCreateCheckbox + label + .background + div > div {
+  position: relative;
+}
 #adminPanelControl .page #adminPageCheckbox:checked + label + .background, #adminPanelControl .page #adminPageCreateCheckbox:checked + label + .background {
   display: block;
 }
@@ -1019,14 +1024,25 @@
 }
 
 #adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:nth-child(1) {
-  width: 60%;
+  width: 50%;
   margin: 0;
   padding: 0;
 }
 #adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:nth-child(2) {
-  width: 40%;
+  width: calc(50% - 100px);
   margin: 0;
   padding: 0;
+}
+#adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:nth-child(3) {
+  width: 100px;
+  margin: 0;
+  padding: 0;
+}
+#adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:first-child input, #adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:first-child select {
+  margin-left: 0;
+}
+#adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:last-child input, #adminPanelControl .formPage .tabGeneral .fieldsUriHeader > div:last-child select {
+  margin-right: 0;
 }
 #adminPanelControl .formPage .tabGeneral .fieldDescription > label {
   z-index: 9;

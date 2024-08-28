@@ -64,10 +64,10 @@ export class AdminMenuForm extends AdminTemplateForm {
         }
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/page/remove', true);
+        xhr.open('POST', '/api/json/content/remove', true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.setRequestHeader('Authorization', "Bearer " + token);
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         xhr.onload = (xhr) => {
             if (xhr.target.status !== 200) {
                 return;
@@ -121,9 +121,9 @@ export class AdminMenuForm extends AdminTemplateForm {
         let responseJson = null;
         const formData = new FormData();
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/page/uploadFile', false);
+        xhr.open('POST', '/api/json/content/uploadFile', false);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
-        xhr.setRequestHeader('Authorization', "Bearer " + this.rootAdminJs.getToken());
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         formData.append('fileName', file.name);
         formData.append('pageId', pageId);
         formData.append('file', file);
@@ -145,10 +145,10 @@ export class AdminMenuForm extends AdminTemplateForm {
         event.preventDefault();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/page', true);
+        xhr.open('POST', '/api/json/content/save', true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.setRequestHeader('Authorization', "Bearer " + token);
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         xhr.onload = (xhr) => {
             if (xhr.target.status !== 200) {
                 return;
@@ -172,12 +172,13 @@ export class AdminMenuForm extends AdminTemplateForm {
 
         xhr.send(JSON.stringify({
             id: this.id,
-            title: this.syntax.get('title'),
             identifier: this.syntax.get('identifier'),
+            status: this.syntax.get('status'),
+            seoUri: this.syntax.get('seoUri'),
+            seoTitle: this.syntax.get('seoTitle'),
             header: this.syntax.get('header'),
-            content: this.syntax.get('content'),
-            meta_keywords: this.syntax.get('meta_keywords'),
-            meta_description: this.syntax.get('meta_description')
+            description: this.syntax.get('description'),
+            content: this.syntax.get('content')
         }));
     }
 }
