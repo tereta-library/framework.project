@@ -28,7 +28,8 @@ class Structure extends Upgrade
         $tableQuery->addBoolean('status')->setNotNull()->setDefault(0)->setComment('Page status enabled/disabled');
         $tableQuery->addString('seoUri')->setNotNull()->setComment('Page seo URI');
         $tableQuery->addString('seoTitle')->setNotNull()->setComment('Page seo title');
-        $tableQuery->addString('title')->setComment('Page title');
+        $tableQuery->addString('header')->setComment('Page header');
+        $tableQuery->addString('description')->setComment('Page short description');
         $tableQuery->addString('content', $tableQuery::TYPE_TEXT)->setComment('Page content');
         $tableQuery->addUnique('siteId', 'identifier');
         $tableQuery->addUnique('siteId', 'seoUri');

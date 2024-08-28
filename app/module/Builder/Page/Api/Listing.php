@@ -94,7 +94,6 @@ class Listing implements Api
             $result[] = [
                 'id' => $urlModel->get('id'),
                 'title' => $model->get('title'),
-                'uri' => $urlModel->get('uri'),
                 'url' => $urlModel->get('uri'),
             ];
         }

@@ -24,13 +24,9 @@ export class AdminContent extends AdminTemplate {
     async buttonClick() {
         // Load form data
         let formData = null;
+        const identifier = '';
 
-        // api/json/site/configuration
-        const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/json/content/configuration'));
-        // @todo: Commented because made as create but need to add also edit method
-        //url.searchParams.append('identifier', elementConfig.identifier);
-
-        await fetch(url, {
+        await fetch(`/api/json/content/get/${identifier}`, {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
