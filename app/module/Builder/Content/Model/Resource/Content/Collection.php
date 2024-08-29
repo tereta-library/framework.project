@@ -22,18 +22,4 @@ class Collection extends AbstractCollectionModel
     {
         parent::__construct(ResourceModel::class, Model::class);
     }
-
-    /**
-     * @todo Need to move to separated trait!!!
-     * @param array $identifiers
-     * @return self
-     * @throws Exception
-     */
-    public function filterByIdentifiers(array $identifiers): self
-    {
-        $identifiers = array_filter($identifiers, 'is_int');
-        $this->getSelect()->where('id IN (' . implode(", ",  $identifiers) . ')');
-
-        return $this;
-    }
 }

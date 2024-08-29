@@ -73,7 +73,7 @@ class Listing implements Api
 
         $typeCollectionName = $typeModel->get('identifier');
         $typeCollection = new $typeCollectionName;
-        $typeCollection->filterByIdentifiers($collectIds);
+        $typeCollection->getCollectionByIdentifiers($collectIds);
         $collectionById = [];
         foreach($typeCollection as $item) {
             $collectionById[$item->get('id')] = $item;
