@@ -39,6 +39,24 @@ class Configuration implements Api
      * @param Payload $payload
      * @return array
      * @throws Exception
+     * @api POST /^content\/remove$/Usi
+     */
+    public function removeContent(Payload $payload): array
+    {
+        $id = (int) $payload->get('id');
+        ContentResource::getInstance()->load($contentModel = new ContentModel(['id' => $id]));
+
+        $this->securityCheck($contentModel);
+
+        ContentResource::getInstance()->delete($id);
+
+        return $contentModel->getData();
+    }
+
+    /**
+     * @param Payload $payload
+     * @return array
+     * @throws Exception
      * @api POST /^content\/save$/Usi
      */
     public function saveContent(Payload $payload): array
@@ -49,7 +67,7 @@ class Configuration implements Api
         $contentModel->set('siteId', $this->siteModel->get('id'));
         $contentModel->set('identifier', $payload->get('identifier') ?? '');
         $contentModel->set('status', $payload->get('status') ? 1 : 0);
-        $contentModel->set('seoUri', $payload->get('seoUri') ?? '');
+        $contentModel->set('seoUri', str_starts_with($payload->get('seoUri'), '/') ? $payload->get('seoUri') : '/' . $payload->get('seoUri'));
         $contentModel->set('seoTitle', $payload->get('seoTitle') ?? '');
         $contentModel->set('header', $payload->get('header') ?? '');
         $contentModel->set('description', $payload->get('description') ?? '');
@@ -74,13 +92,17 @@ class Configuration implements Api
      * @return void
      * @throws Exception
      */
-    private function securityCheck(?int $id): void
+    private function securityCheck(int|ContentModel|null $id): void
     {
         if (!$id) {
             return;
         }
 
-        ContentResource::getInstance()->load($contentModel = new ContentModel(['id' => $id]));
+        if (is_int($id)) {
+            ContentResource::getInstance()->load($contentModel = new ContentModel(['id' => $id]));
+        } else {
+            $contentModel = $id;
+        }
 
         if ($contentModel->get('siteId') !== $this->siteModel->get('id')) {
             throw new Exception('Access denied');

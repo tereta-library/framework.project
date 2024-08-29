@@ -28,7 +28,9 @@ export class AdminMenuForm extends AdminTemplateForm {
     init() {
         this.syntax = (new Syntax(this.node, {
             successMessage    : '',
+            errorMessage      : '',
             showSuccessMessage: false,
+            showErrorMessage  : false,
             id                : '',
             identifier        : '',
             status            : '',
@@ -73,21 +75,33 @@ export class AdminMenuForm extends AdminTemplateForm {
                 return;
             }
 
-            this.syntax.set('successMessage', 'Page removed')
-                .set('isSave', false)
-                .set('showSuccessMessage', true).update();
+            const responseText = JSON.parse(xhr.target.responseText);
+
+            if (responseText.error) {
+                this.syntax.set('errorMessage', responseText.error)
+                    .set('showSuccessMessage', false)
+                    .set('showErrorMessage', true)
+                    .update();
+            } else {
+                this.syntax.set('successMessage', 'Page successfully removed')
+                    .set('id', null)
+                    .set('isSave', true)
+                    .set('showSuccessMessage', true)
+                    .set('showErrorMessage', false)
+                    .update();
+            }
 
             setTimeout(() => {
-                syntax.set('showSuccessMessage', false);
-                syntax.update();
+                this.syntax.set('showSuccessMessage', false).set('showSuccessMessage', false).update();
             }, 5000);
 
-            const responseText = JSON.parse(xhr.target.responseText);
-            window.location.href=responseText.redirect;
+            if ('#' + responseText.seoUri == location.hash) {
+                window.location.hash = '';
+            }
         };
 
         xhr.send(JSON.stringify({
-            id: this.id
+            id: this.syntax.get('id')
         }));
     }
 
