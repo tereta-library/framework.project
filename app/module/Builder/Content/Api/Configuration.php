@@ -9,6 +9,9 @@ use Builder\Content\Model\Content as ContentModel;
 use Builder\Content\Model\Resource\Content as ContentResource;
 use Exception;
 use PDOException;
+use Builder\Page\Model\Url as UrlModel;
+use Builder\Page\Model\Type\Repository as UrlTypeRepository;
+use Builder\Page\Model\Resource\Url as UrlResource;
 
 /**
  * @class Builder\Content\Api\Configuration
@@ -84,11 +87,34 @@ class Configuration implements Api
             }
         }
 
-        return $contentModel->getData();
+        // Save URL rewrite
+        $urlModel = new UrlModel([
+            'siteId' => $this->siteModel->get('id'),
+            'typeId' => UrlTypeRepository::getInstance()->getType('Builder\Content\Model\Resource\Content\Collection')->get('id'),
+            'identifier' => $contentModel->get('id'),
+            'uri' => $contentModel->get('seoUri'),
+        ]);
+
+        UrlResource::getInstance()->load($loadUrl = new UrlModel, [
+            'siteId' => $urlModel->get('siteId'),
+            'typeId' => $urlModel->get('typeId'),
+            'identifier' => $urlModel->get('identifier'),
+        ]);
+
+        if ($loadUrl->get('id')) {
+            $urlModel->set('id', $loadUrl->get('id'));
+        }
+
+        UrlResource::getInstance()->save($urlModel);
+
+        return [
+            'content' => $contentModel->getData(),
+            'url'     => $urlModel->getData(),
+        ];
     }
 
     /**
-     * @param int|null $id
+     * @param int|ContentModel|null $id
      * @return void
      * @throws Exception
      */

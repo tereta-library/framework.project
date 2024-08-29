@@ -175,14 +175,16 @@ export class AdminMenuForm extends AdminTemplateForm {
                     .set('isSave', false)
                     .set('showSuccessMessage', false)
                     .set('showErrorMessage', true).update();
-
-                return;
-            } else if (responseText.id) {
+            } else if (responseText.content.id) {
                 this.syntax.set('successMessage', 'Page saved')
-                    .set('id', responseText.id)
+                    .set('id', responseText.content.id)
                     .set('isSave', false)
                     .set('showErrorMessage', false)
                     .set('showSuccessMessage', true).update();
+
+                if ('#' + responseText.url.seoUri != window.location.hash) {
+                    window.location.hash = responseText.content.seoUri;
+                }
             }
 
             setTimeout(() => {
