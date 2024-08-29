@@ -68,33 +68,32 @@ class Listing implements Api
 
         $collectIds = [];
         foreach($urlModelList as $urlModel) {
-            $collectIds[] = $urlModel->get('id');
+            $collectIds[] = $urlModel->get('identifier');
         }
 
         $typeCollectionName = $typeModel->get('identifier');
         $typeCollection = new $typeCollectionName;
-        $typeCollection->getCollectionByIdentifiers($collectIds);
+        $collection = $typeCollection->getCollectionByIdentifiers($collectIds);
         $collectionById = [];
-        foreach($typeCollection as $item) {
-            $collectionById[$item->get('id')] = $item;
+        foreach($collection as $item) {
+            $collectionById[$item['id']] = $item;
         }
 
         foreach($urlModelList as $urlModel) {
-            if (!isset($collectionById[$urlModel->get('id')])) {
+            if (!isset($collectionById[$urlModel->get('identifier')])) {
                 $result[] = [
                     'id' => $urlModel->get('id'),
                     'title' => 'Deleted',
                     'uri' => $urlModel->get('uri'),
-                    'url' => $urlModel->get('uri'),
                 ];
                 continue;
             }
 
-            $model = $collectionById[$urlModel->get('id')];
+            $model = $collectionById[$urlModel->get('identifier')];
             $result[] = [
                 'id' => $urlModel->get('id'),
-                'title' => $model->get('title'),
-                'url' => $urlModel->get('uri'),
+                'title' => $model['title'],
+                'uri' => $urlModel->get('uri'),
             ];
         }
     }
