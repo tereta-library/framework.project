@@ -23,7 +23,6 @@ export class AdminListingForm extends AdminTemplateForm {
             const config = data.config;
 
             this.syntax.set('config', config);
-            debugger;
             this.syntax.set('listing', data.listing);
             this.syntax.update();
         })();

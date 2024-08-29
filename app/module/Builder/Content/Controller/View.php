@@ -4,6 +4,8 @@ namespace Builder\Content\Controller;
 
 use Framework\Http\Interface\Controller;
 use Framework\Application\Manager;
+use Builder\Content\Model\Resource\Content as ResourceContent;
+use Builder\Content\Model\Content as ModelContent;
 use Exception;
 
 /**
@@ -30,19 +32,25 @@ class View implements Controller
     /**
      * Sample url: http://127.0.0.1/cms/page/123
      *
-     * @router expression GET /^\/cms\/page\/(\w*)$/Usi
-     * @param string $token
+     * @router url GET content
+     * @param string $id
      * @return string
      * @throws Exception
      */
-    public function render(string $token): string
+    public function render(string $id): string
     {
-        $config = Manager::getInstance()->getConfig();
+        ResourceContent::getInstance()->load($contentModel = new ModelContent, $id);
+
         $view = Manager::getInstance()->getView();
 
-        $view->initialize('cms')
-            ->getBlockById('content')
-            ->assign('content', 'Test content');
+        $layout = $view->initialize('cms');
+        $layout->getBlockById('headSeo')
+            ->assign('title', $contentModel->get('seoTitle'))
+            ->assign('description', $contentModel->get('description'));
+
+        $layout->getBlockById('content')
+            ->assign('content', $contentModel->get('content'))
+            ->assign('header', $contentModel->get('header'));
         return $view->render();
     }
 }

@@ -1,6 +1,16 @@
 <html lang="en">
 <head>
     <meta name="backend-update" content="index" />
+
+    <script id="headSeo" type="application/html" data-backend-replace="#headSeo" data-backend-block="Builder\Content\Block\Seo">
+        <!--: if $title -->
+            <title><!--: echo $title --></title>
+        <!--: endif -->
+
+        <!--: if $description -->
+            <meta name="description" data-backend-bind="attribute:content:$description" />
+        <!--: endif -->
+    </script>
 </head>
 <body>
     <content data-backend-replace="#content" id="content" data-backend-block="Builder\Content\Block\Content">

@@ -5,6 +5,7 @@ namespace Builder\Page\Model\Url;
 use Builder\Page\Model\Resource\Url as UrlResource;
 use Builder\Page\Model\Type\Repository as UrlTypeRepository;
 use Builder\Page\Model\Url as UrlModel;
+use Builder\Site\Model\Repository as SiteRepository;
 use Framework\Database\Abstract\Repository as AbstractRepository;
 use Exception;
 
@@ -20,6 +21,28 @@ class Repository extends AbstractRepository
      * @var array $registeredKeys
      */
     protected array $registeredKeys = ['id', ['siteId', 'identifier'], ['siteId', 'uri']];
+
+    /**
+     * @param string $host
+     * @param string $path
+     * @return UrlModel
+     * @throws Exception
+     */
+    public function getByUrl(string $host, string $path): UrlModel
+    {
+        if ($registeredModel = $this->getRegisterModel(['siteId' => $host, 'uri' => $path])) {
+            return $registeredModel;
+        }
+
+        $siteModel = SiteRepository::getInstance()->getByDomain($host);
+
+        UrlResource::getInstance()->load($urlModel = new UrlModel, [
+            'siteId' => $siteModel->get('id'),
+            'uri' => $path,
+        ]);
+
+        return $this->setRegisterModel($urlModel);
+    }
 
     /**
      * @param UrlModel $urlModel

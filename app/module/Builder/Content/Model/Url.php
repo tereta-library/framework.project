@@ -11,6 +11,8 @@ use Exception;
  */
 class Url
 {
+    const IDENTIFIER = 'content';
+
     /**
      * @param array $identifiers
      * @return array
