@@ -156,24 +156,32 @@ export class AdminMenuForm extends AdminTemplateForm {
 
             const responseText = JSON.parse(xhr.target.responseText);
 
-            this.syntax.set('successMessage', 'Page saved')
-                .set('isSave', false)
-                .set('showSuccessMessage', true).update();
+            if (responseText.error) {
+                this.syntax.set('errorMessage', responseText.error)
+                    .set('isSave', false)
+                    .set('showSuccessMessage', false)
+                    .set('showErrorMessage', true).update();
 
-            if (responseText.redirect) {
-                window.location.href=responseText.redirect;
+                return;
+            } else if (responseText.id) {
+                this.syntax.set('successMessage', 'Page saved')
+                    .set('id', responseText.id)
+                    .set('isSave', false)
+                    .set('showErrorMessage', false)
+                    .set('showSuccessMessage', true).update();
             }
 
             setTimeout(() => {
                 syntax.set('showSuccessMessage', false);
+                syntax.set('showErrorMessage', false);
                 syntax.update();
             }, 5000);
         };
 
         xhr.send(JSON.stringify({
-            id: this.id,
+            id: this.syntax.get('id'),
             identifier: this.syntax.get('identifier'),
-            status: this.syntax.get('status'),
+            status: this.syntax.get('status') === 'yes' ? true : false,
             seoUri: this.syntax.get('seoUri'),
             seoTitle: this.syntax.get('seoTitle'),
             header: this.syntax.get('header'),
