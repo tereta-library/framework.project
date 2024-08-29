@@ -19,7 +19,7 @@
                         <!--: comment $dataAdmin -->
                         <!--: foreach $list as $item -->
                         <li class="menuItem">
-                            <a data-backend-bind="attribute:href:$item['url']">
+                            <a data-backend-bind="attribute:href:$item['link']">
                                 <!--: echo $item['label'] -->
                             </a>
 
@@ -27,7 +27,7 @@
                                 <ul class="menu">
                                     <!--: foreach $item['menu'] as $item -->
                                         <li class="menuItem">
-                                            <a data-backend-bind="attribute:href:$item['url']">
+                                            <a data-backend-bind="attribute:href:$item['link']">
                                                 <!--: echo $item['label'] -->
                                             </a>
 
@@ -35,7 +35,7 @@
                                             <ul class="menu">
                                                 <!--: foreach $item['menu'] as $item -->
                                                 <li class="menuItem">
-                                                    <a data-backend-bind="attribute:href:$item['url']">
+                                                    <a data-backend-bind="attribute:href:$item['link']">
                                                         <!--: echo $item['label'] -->
                                                     </a>
                                                 </li>
