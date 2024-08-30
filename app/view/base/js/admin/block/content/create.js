@@ -1,30 +1,28 @@
-import AdminTemplate from './template.js';
-import Syntax from "../syntax.js";
+import AdminTemplate from '../template.js';
+import Syntax from "../../syntax.js";
 
 export class AdminContent extends AdminTemplate {
-    template = 'block/content';
+    template = 'block/content/create';
 
     constructor(rootNode, config) {
         super(rootNode, config);
     }
 
     init() {
-        const blockConfig = this.config.elements[0];
-
         this.syntax = (new Syntax(this.node));
         this.syntax.update();
 
-        this.node.addEventListener('click', this.buttonClick.bind(this, blockConfig));
+        this.node.addEventListener('click', this.buttonClick.bind(this));
     }
 
     async render(element) {
-        super.render(element.querySelector('#adminMenuPageListing'));
+        super.render(element.querySelector('#adminMenuPageCreateListing'));
     }
 
-    async buttonClick(blockConfig) {
+    async buttonClick() {
         // Load form data
         let formData = null;
-        const identifier = blockConfig.init.content;
+        const identifier = '';
 
         await fetch(`/api/json/content/get/${identifier}`, {
             method: "GET",

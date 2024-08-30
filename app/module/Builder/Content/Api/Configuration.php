@@ -27,15 +27,24 @@ class Configuration implements Api
      */
     public function getContent(?string $identifier = null): array
     {
-        return [
-            'id'          => null,
-            'identifier'  => null,
-            'seoUri'      => null,
-            'seoTitle'    => null,
-            'title'       => null,
-            'description' => null,
-            'content'     => null,
-        ];
+        if (!$identifier) {
+            return [
+                'id'          => null,
+                'identifier'  => null,
+                'seoUri'      => null,
+                'seoTitle'    => null,
+                'title'       => null,
+                'description' => null,
+                'content'     => null,
+            ];
+        }
+
+        ContentResource::getInstance()->load($contentModel = new ContentModel(), [
+            'identifier' => $identifier,
+            'siteId'     => $this->siteModel->get('id'),
+        ]);
+
+        return $contentModel->getData();
     }
 
     /**

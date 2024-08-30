@@ -13,6 +13,10 @@
     },
     "content": {
       "js": "admin\/block\/content",
+      "sequence": "page"
+    },
+    "content.create": {
+      "js": "admin\/block\/content\/create",
       "sequence": "page",
       "permanent": true
     },
