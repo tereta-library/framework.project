@@ -17,6 +17,7 @@ use Exception;
  */
 class Repository extends AbstractRepository 
 {
+
     /**
      * @var array $registeredKeys
      */
