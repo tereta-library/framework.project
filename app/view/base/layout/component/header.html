@@ -14,7 +14,7 @@
                 <input type="checkbox" name="burger" class="burgerMenu" id="menu" />
                 <label for="menu" class="burgerMenu"><span class="iconBurger"></span></label>
 
-                <backend:block data-backend-block="Builder\Menu\Block\Menu" data-backend-data='"identifier": "default"'>
+                <backend:container data-backend-block="Builder\Menu\Block\Menu" data-backend-data='"identifier": "default"'>
                     <ul class="menu">
                         <!--: foreach $list as $item -->
                         <li class="menuItem">
@@ -48,7 +48,7 @@
                         </li>
                         <!--: endforeach -->
                     </ul>
-                </backend:block>
+                </backend:container>
             </nav>
         </div>
     </header>

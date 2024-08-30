@@ -18,7 +18,7 @@
     <link rel="icon" type="image/x-icon" href="https://tereta.dev/img/logoSample.png" />
     <link rel="stylesheet" type="text/css" href="https://tereta.dev/css/file.css" />
 
-    <backend:block id="headSeo" type="application/html" data-backend-block="Builder\Content\Block\Seo"></backend:block>
+    <backend:container id="headSeo" type="application/html" data-backend-block="Builder\Content\Block\Seo"></backend:container>
 
     <meta name="backend-layout" content="root" />
     <meta name="backend-update" content="component/header" />
@@ -27,9 +27,7 @@
 <body class="page" id="body">
     <div class="wrapper">
         <header id="header"></header>
-        <main class="main">
-            <content id="content">xxx</content>
-        </main>
+        <main class="main" id="main"></main>
         <footer id="footer"></footer>
     </div>
 </body>

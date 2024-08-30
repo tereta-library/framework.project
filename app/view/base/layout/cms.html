@@ -2,7 +2,7 @@
 <head>
     <meta name="backend-update" content="index" />
 
-    <backend:block id="headSeo" type="application/html" data-backend-replace="#headSeo" data-backend-block="Builder\Content\Block\Seo">
+    <backend:container id="headSeo" type="application/html" data-backend-replace="#headSeo" data-backend-block="Builder\Content\Block\Seo">
         <!--: if $title -->
             <title><!--: echo $title --></title>
         <!--: endif -->
@@ -10,10 +10,10 @@
         <!--: if $description -->
             <meta name="description" data-backend-bind="attribute:content:$description" />
         <!--: endif -->
-    </backend:block>
+    </backend:container>
 </head>
 <body>
-    <content data-backend-replace="#content" id="content" data-backend-block="Builder\Content\Block\Content">
+    <main data-backend-replace="#main" id="main" data-backend-block="Builder\Content\Block\Content" class="main">
         <!--: if $header -->
             <h1><!--: echo $header --></h1>
         <!--: endif -->
@@ -21,6 +21,6 @@
         <!--: if $content -->
             <div><!--: echo $content --></div>
         <!--: endif -->
-    </content>
+    </main>
 </body>
 </html>
