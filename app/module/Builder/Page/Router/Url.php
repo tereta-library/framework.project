@@ -1,11 +1,10 @@
 <?php declare(strict_types=1);
 namespace Builder\Page\Router;
 
-use Builder\Site\Model\Repository as SiteRepository;
+use Builder\Page\Model\Interface\Url as InterfaceUrl;
 use Framework\Http\Interface\Router as RouterInterface;
 use Framework\Http\Router\Action;
 use Builder\Page\Model\Resource\Url as UrlResource;
-use Builder\Page\Model\Url as UrlModel;
 use Builder\Page\Model\Url\Repository as UrlRepository;
 use Exception;
 use Builder\Page\Model\Type\Repository as UrlTypeRepository;
@@ -60,11 +59,22 @@ class Url implements RouterInterface
         }
 
         static::$enabled = false;
-        $urlModel = UrlRepository::getInstance()->getByUrl($host, $path);
+        try {
+            $urlModel = UrlRepository::getInstance()->getByUrl($host, $path);
+        } catch (Exception $e) {
+            return null;
+        }
         $typeModel = UrlTypeRepository::getInstance()->getTypeById($urlModel->get('typeId'));
         $typeClass = $typeModel->get('identifier');
         $typeProcessor = new $typeClass;
+        if ($typeProcessor instanceof InterfaceUrl === false) {
+            throw new Exception('Type collection must implement ' . InterfaceUrl::class);
+        }
         $shortIdentifier = $typeProcessor::IDENTIFIER;
+        if (!$shortIdentifier) {
+            throw new Exception('Type collection must have IDENTIFIER constant to identify the controller for the URL');
+        }
+
 
         foreach (static::$routes as $route) {
             list ($routeMethod, $routeType) = $route['params'];

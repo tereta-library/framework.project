@@ -3,15 +3,15 @@
 namespace Builder\Content\Model;
 
 use Builder\Content\Model\Resource\Content\Collection;
-use Framework\Database\Abstract\Resource\Collection as AbstractCollectionModel;
 use Exception;
+use Builder\Page\Model\Interface\Url as InterfaceUrl;
 
 /**
  * @class Builder\Content\Model\Url
  */
-class Url
+class Url implements InterfaceUrl
 {
-    const IDENTIFIER = 'content';
+    const ?string IDENTIFIER = 'content';
 
     /**
      * @param array $identifiers

@@ -8,6 +8,7 @@ use Builder\Page\Model\Resource\Url\Collection as ModelUrlCollection;
 use Builder\Page\Model\Type\Repository as TypeRepository;
 use Exception;
 use Framework\Application\Manager\Http\Parameter\Post as PostData;
+use Builder\Page\Model\Interface\Url as InterfaceUrl;
 
 /**
  * @class Builder\Page\Api\Listing
@@ -73,6 +74,15 @@ class Listing implements Api
 
         $typeCollectionName = $typeModel->get('identifier');
         $typeCollection = new $typeCollectionName;
+        if ($typeCollection instanceof InterfaceUrl === false) {
+            throw new Exception('Type collection must implement ' . InterfaceUrl::class);
+        }
+
+        $identifier = $typeCollection::IDENTIFIER;
+        if (!$identifier) {
+            throw new Exception('Type collection must have IDENTIFIER constant to identify the controller for the URL');
+        }
+
         $collection = $typeCollection->getCollectionByIdentifiers($collectIds);
         $collectionById = [];
         foreach($collection as $item) {
