@@ -6,7 +6,7 @@
 </head>
 <body>
     <header class="header" data-backend-replace="#header">
-        <div class="headerBox">
+        <div class="headerBox" data-backend-block="Builder\Site\Block\Data">
             <a href="https://tereta.dev" class="headerLogo" data-admin-init='"site": {"field": "logo"}'>
                 <img src="https://tereta.dev/storage/site_5/logo.png" alt="Logo" />
             </a>
@@ -18,23 +18,23 @@
                     <ul class="menu">
                         <!--: foreach $list as $item -->
                         <li class="menuItem">
-                            <a data-backend-bind="attribute:href:$item['link']">
+                            <a data-backend-bind="attribute:href:$item[link]">
                                 <!--: echo $item['label'] -->
                             </a>
 
                             <!--: if $item['menu'] -->
                                 <ul class="menu">
-                                    <!--: foreach $item['menu'] as $item -->
+                                    <!--: foreach $item[menu] as $item -->
                                         <li class="menuItem">
-                                            <a data-backend-bind="attribute:href:$item['link']">
+                                            <a data-backend-bind="attribute:href:$item[link]">
                                                 <!--: echo $item['label'] -->
                                             </a>
 
-                                            <!--: if $item['menu'] -->
+                                            <!--: if $item[menu] -->
                                             <ul class="menu">
-                                                <!--: foreach $item['menu'] as $item -->
+                                                <!--: foreach $item[menu] as $item -->
                                                 <li class="menuItem">
-                                                    <a data-backend-bind="attribute:href:$item['link']">
+                                                    <a data-backend-bind="attribute:href:$item[link]">
                                                         <!--: echo $item['label'] -->
                                                     </a>
                                                 </li>
