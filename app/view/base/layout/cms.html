@@ -1,8 +1,8 @@
-<html lang="en">
+<html lang="en" xmlns:backend="http://example.com/backend">
 <head>
     <meta name="backend-update" content="index" />
 
-    <script id="headSeo" type="application/html" data-backend-replace="#headSeo" data-backend-block="Builder\Content\Block\Seo">
+    <backend:block id="headSeo" type="application/html" data-backend-replace="#headSeo" data-backend-block="Builder\Content\Block\Seo">
         <!--: if $title -->
             <title><!--: echo $title --></title>
         <!--: endif -->
@@ -10,7 +10,7 @@
         <!--: if $description -->
             <meta name="description" data-backend-bind="attribute:content:$description" />
         <!--: endif -->
-    </script>
+    </backend:block>
 </head>
 <body>
     <content data-backend-replace="#content" id="content" data-backend-block="Builder\Content\Block\Content">
