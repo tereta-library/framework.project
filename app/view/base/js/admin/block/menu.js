@@ -26,6 +26,7 @@ export class AdminMenu extends AdminTemplate {
      * @returns {Promise<void>}
      */
     async buttonClick() {
+        debugger;
         const element = this.config.elements[0];
         const token = this.rootAdminJs.getToken();
 

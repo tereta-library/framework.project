@@ -36,7 +36,16 @@ class Menu extends Template
 
         $list = MenuConverter::toArray($menuModel->getListing());
 
-        $this->assign('dataAdmin', "@dataAdmin " . json_encode(['menu' => $this->get('identifier')]));
         $this->assign('list', $list);
+    }
+
+    /**
+     * @return string
+     * @throws Exception
+     */
+    public function render(): string
+    {
+        return '<!-- @dataAdmin ' . json_encode(['menu' => $this->get('identifier')]) . ' -->' .
+            parent::render();
     }
 }

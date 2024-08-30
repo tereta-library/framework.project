@@ -14,6 +14,10 @@
 </head>
 <body>
     <content data-backend-replace="#content" id="content" data-backend-block="Builder\Content\Block\Content">
+        <!--: if $header -->
+            <h1><!--: echo $header --></h1>
+        <!--: endif -->
+
         <!--: if $content -->
             <div><!--: echo $content --></div>
         <!--: endif -->

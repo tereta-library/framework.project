@@ -48,9 +48,8 @@ class View implements Controller
             ->assign('title', $contentModel->get('seoTitle'))
             ->assign('description', $contentModel->get('description'));
 
-        $layout->getBlockById('content')
-            ->assign('content', $contentModel->get('content'))
-            ->assign('header', $contentModel->get('header'));
+        $layout->getBlockById('content')->setModel($contentModel);
+
         return $view->render();
     }
 }
