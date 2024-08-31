@@ -7,6 +7,7 @@ use Framework\Api\Interface\Api;
 use Exception;
 use Builder\Social\Model\Resource\Social as SocialResourceModel;
 use Builder\Social\Model\Social as SocialModel;
+use Framework\Application\Manager\Http\Parameter\Payload as PayloadParameter;
 
 /**
  * @class Builder\Social\Api\Configuration
@@ -40,8 +41,23 @@ class Configuration implements Api
      * @throws Exception
      * @api POST /^social\/configuration/Usi
      */
-    public function saveConfiguration(): array
+    public function saveConfiguration(PayloadParameter $payload): array
     {
-        return [];
+        $siteId = $this->siteModel->get('id');
+
+        $socialResourceModel = SocialResourceModel::getInstance();
+
+        $socialResourceModel->load($socialModel = new SocialModel, $siteId);
+
+        $socialModel->set('siteId', $siteId);
+        $socialModel->set('facebook', $payload->get('facebook'));
+        $socialModel->set('instagram', $payload->get('instagram'));
+        $socialModel->set('pinterest', $payload->get('pinterest'));
+        $socialModel->set('linkedin', $payload->get('linkedin'));
+        $socialModel->set('youtube', $payload->get('youtube'));
+
+        $socialResourceModel->save($socialModel);
+
+        return $socialModel->getData();
     }
 }
