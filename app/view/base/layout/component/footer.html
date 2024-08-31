@@ -8,10 +8,12 @@
     <footer class="footer" data-backend-replace="#footer" data-backend-block="Builder\Site\Block\Data">
         <div>
             <a href="#" class="logo">
-                <img src="https://tereta.dev/storage/site_5/logo.png" alt="Logo" />
+                <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
             </a>
             <div class="contacts">
-                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$this->concat('tel:', $this->phoneNumber($site[phone]))"><!--: echo $site[phone] --></a>
+                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$string->concat('tel:', $this->phoneNumber($site[phone]))">
+                    <!--: echo $site[phone] -->
+                </a>
                 <a href="" class="eMail"><!--: echo $site[email] --></a>
             </div>
             <div data-backend-block="Builder\Social\Block\Icons">

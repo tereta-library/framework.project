@@ -14,11 +14,12 @@
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/base/css/component/body/tablet.css" />
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="/resource/base/css/component/body/desktop.css" />
 
-    <link rel="shortcut icon" href="https://tereta.dev/img/logoSample.png" />
-    <link rel="icon" type="image/x-icon" href="https://tereta.dev/img/logoSample.png" />
-    <link rel="stylesheet" type="text/css" href="https://tereta.dev/css/file.css" />
+    <backend:container id="headSeo" data-backend-block="Builder\Content\Block\Seo"></backend:container>
 
-    <backend:container id="headSeo" type="application/html" data-backend-block="Builder\Content\Block\Seo"></backend:container>
+    <backend:container id="headIcon" data-backend-block="Builder\Site\Block\Data">
+        <link rel="shortcut icon" data-backend-bind="attribute:href:$siteIconImage" />
+        <link rel="icon" type="image/x-icon" data-backend-bind="attribute:href:$siteIconImage" />
+    </backend:container>
 
     <meta name="backend-layout" content="root" />
     <meta name="backend-update" content="component/header" />

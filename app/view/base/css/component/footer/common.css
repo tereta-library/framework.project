@@ -19,6 +19,9 @@
   display: block;
   padding: 20px 0 0 0;
 }
+.footer > div .logo img {
+  height: 60px;
+}
 .footer > div .contacts {
   clear: both;
   float: none;

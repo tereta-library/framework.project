@@ -8,7 +8,7 @@
     <header class="header" data-backend-replace="#header">
         <div class="headerBox" data-backend-block="Builder\Site\Block\Data">
             <a href="https://tereta.dev" class="headerLogo" data-admin-init='"site": {"field": "logo"}'>
-                <img src="https://tereta.dev/storage/site_5/logo.png" alt="Logo" />
+                <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
             </a>
             <nav class="headerMenu">
                 <input type="checkbox" name="burger" class="burgerMenu" id="menu" />

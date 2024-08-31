@@ -6,6 +6,7 @@ use Builder\Site\Model\Site as SiteModel;
 use Framework\View\Php\Template;
 use Builder\Site\Model\Repository as SiteRepository;
 use Exception;
+use Framework\Application\Manager as ApplicationManager;
 
 /**
  * @class Builder\Site\Block\Data
@@ -25,16 +26,19 @@ class Data extends Template
     {
         $this->siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST'] ?? new Exception('Domain not found'));
         $this->assign('site', $this->siteModel->getData());
+
+        $this->assign('siteLogoImage', $this->siteModel->getLogoImageUrl());
+        $this->assign('siteIconImage', $this->siteModel->getIconImageUrl());
+
+        parent::construct();
     }
 
-    public function phoneNumber($test): string
+    /**
+     * @param string $phoneNumber
+     * @return string
+     */
+    public function phoneNumber(string $phoneNumber): string
     {
-        return $test;
+        return preg_replace('/[^+0-9]/', '', $phoneNumber);
     }
-
-    public function concat($prefix, $test): string
-    {
-        return $prefix . $test;
-    }
-
 }
