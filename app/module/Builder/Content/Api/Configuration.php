@@ -23,7 +23,8 @@ class Configuration implements Api
     /**
      * @api GET /^content\/get\/([a-zA-Z0-9_-]+)?$/Usi
      * @param string|null $identifier
-     * @return array
+     * @return null[]
+     * @throws Exception
      */
     public function getContent(?string $identifier = null): array
     {

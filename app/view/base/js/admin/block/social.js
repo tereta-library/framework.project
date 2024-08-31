@@ -13,17 +13,14 @@ export class AdminMenu extends AdminTemplate {
     }
 
     async buttonClick() {
-        const config = this.config[0];
-        const token = this.rootAdminJs.getToken();
-
         // Load form data
         let formData = null;
 
-        await fetch('/api/admin/social', {
+        await fetch('/api/json/social/configuration', {
             method: "GET",
             headers: {
                 "Cache-Control": "no-cache",
-                "Authorization": "Bearer " + token,
+                "API-Token": this.rootAdminJs.getToken(),
                 "Content-type": "application/json; charset=UTF-8"
             }
         }).then((response) => response.json()).then((json) => {
@@ -31,6 +28,6 @@ export class AdminMenu extends AdminTemplate {
         });
 
         // Show admin form
-        this.form = await this.showForm('admin/social/form', formData, this.form);
+        this.form = await this.showForm('block/social/form', formData, this.form);
     }
 }

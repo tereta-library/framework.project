@@ -2,7 +2,7 @@ import AdminTemplateForm from '../templateForm.js';
 import Syntax from '../../syntax.js';
 
 export class AdminSocialForm extends AdminTemplateForm {
-    template = 'admin/social/form';
+    template = 'block/social/form';
 
     init() {
         this.syntax = (new Syntax(this.node, {
@@ -23,15 +23,14 @@ export class AdminSocialForm extends AdminTemplateForm {
     }
 
     saveForm(event, element, variable) {
-        const token = this.rootAdminJs.getToken();
         const syntax = this.syntax;
         event.preventDefault();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/social', true);
+        xhr.open('POST', '/api/json/social/configuration', true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.setRequestHeader('Authorization', "Bearer " + token);
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         xhr.onload = (xhr) => {
             if (xhr.target.status === 200) {
                 this.syntax.set('successMessage', 'Social links saved')
