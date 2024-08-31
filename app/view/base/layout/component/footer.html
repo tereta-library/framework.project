@@ -11,7 +11,7 @@
                 <img src="https://tereta.dev/storage/site_5/logo.png" alt="Logo" />
             </a>
             <div class="contacts">
-                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$this->phoneNumber($site[phone])"><!--: echo $site[phone] --></a>
+                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$this->concat('tel:', $this->phoneNumber($site[phone]))"><!--: echo $site[phone] --></a>
                 <a href="" class="eMail"><!--: echo $site[email] --></a>
             </div>
             <div data-backend-block="Builder\Social\Block\Icons">
