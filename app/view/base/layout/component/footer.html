@@ -1,4 +1,4 @@
-<html lang="en" xmlns:backend="http://example.com/backend">
+<html lang="en">
 <head>
     <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/component/footer/common.css" />
     <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/base/css/component/footer/tablet.css" />
@@ -11,14 +11,14 @@
                 <img src="https://tereta.dev/storage/site_5/logo.png" alt="Logo" />
             </a>
             <div class="contacts">
-                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$this->phoneNumber($site[phone])"><!--: echo $site['phone'] --></a>
-                <a href="" class="eMail"><!--: echo $site['email'] --></a>
+                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$this->phoneNumber($site[phone])"><!--: echo $site[phone] --></a>
+                <a href="" class="eMail"><!--: echo $site[email] --></a>
             </div>
             <div data-backend-block="Builder\Social\Block\Icons">
                 SOCIAL ICONS
             </div>
             <div class="copy">
-                <!--: echo $site['copyright'] -->
+                <!--: echo $site[copyright] -->
             </div>
         </div>
     </footer>

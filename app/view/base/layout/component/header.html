@@ -19,15 +19,15 @@
                         <!--: foreach $list as $item -->
                         <li class="menuItem">
                             <a data-backend-bind="attribute:href:$item[link]">
-                                <!--: echo $item['label'] -->
+                                <!--: echo $item[label] -->
                             </a>
 
-                            <!--: if $item['menu'] -->
+                            <!--: if $item[menu] -->
                                 <ul class="menu">
                                     <!--: foreach $item[menu] as $item -->
                                         <li class="menuItem">
                                             <a data-backend-bind="attribute:href:$item[link]">
-                                                <!--: echo $item['label'] -->
+                                                <!--: echo $item[label] -->
                                             </a>
 
                                             <!--: if $item[menu] -->
@@ -35,7 +35,7 @@
                                                 <!--: foreach $item[menu] as $item -->
                                                 <li class="menuItem">
                                                     <a data-backend-bind="attribute:href:$item[link]">
-                                                        <!--: echo $item['label'] -->
+                                                        <!--: echo $item[label] -->
                                                     </a>
                                                 </li>
                                                 <!--: endforeach -->

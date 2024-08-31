@@ -4,7 +4,7 @@
     <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/error/style.css" />
 </head>
 <body>
-    <block data-backend-replace="#content" id="content" data-backend-block="Framework\Application\Block\Error">
+    <main data-backend-replace="#main" id="main" data-backend-block="Framework\Application\Block\Error" class="main">
         <content class="contentError">
             <!--: if $title -->
                 <h1><!--: echo $title --></h1>
@@ -36,6 +36,6 @@
                 <!--: endif -->
             </table>
         </content>
-    </block>
+    </main>
 </body>
 </html>
