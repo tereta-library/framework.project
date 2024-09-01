@@ -1,0 +1,32 @@
+.socialHub {
+  list-style: none;
+  margin-left: 5px;
+
+  &Item {
+    float: left;
+    background: #eee;
+    margin-right: 5px;
+
+    & > a {
+      padding: 0;
+      display: block;
+      border: 1px solid #000;
+      text-decoration: none;
+      color: #000;
+      width: 25px;
+      height: 25px;
+      position: relative;
+
+      &:before {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      & > span {
+        display: none;
+      }
+    }
+  }
+}

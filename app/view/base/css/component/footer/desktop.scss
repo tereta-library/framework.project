@@ -21,7 +21,26 @@
             float: right;
             width: 300px;
             text-align: right;
-            padding: 24px 0 0 20px;
+            padding: 0 0 0 20px;
+            height: 82px;
+            display: flex;
+            align-items: center;
+
+            & > span {
+                max-height: 53px;
+                overflow: hidden;
+                width: 100%;
+            }
+        }
+    }
+
+    .socialHub {
+        position: absolute;
+        right: 0;
+        top: -14px;
+
+        &Item {
+            float: left;
         }
     }
 }

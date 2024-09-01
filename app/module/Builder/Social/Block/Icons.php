@@ -30,7 +30,6 @@ class Icons extends Template
 
     public function initialize(Layout $layout): void
     {
-        $layout->getBlockById('headStyles')->addStyle('!!!!!!!!!!!');
     }
 
 
@@ -49,10 +48,22 @@ class Icons extends Template
 
         $icons = [];
 
-        if ($socialModel->get('facebook')) {
-            $icons['facebook'] = [
-                'label' => 'Facebook',
-                'url' => $this->getUrl($socialModel->get('facebook'), 'facebook'),
+        $socialItems = [
+            'facebook' => 'Facebook',
+            'instagram' => 'Instagram',
+            'linkedin' => 'LinkedIn',
+            'youtube' => 'YouTube',
+            'pinterest' => 'Pinterest',
+        ];
+
+        foreach ($socialItems as $socialKey => $socialItem) {
+            if (!$socialModel->get($socialKey)) {
+                continue;
+            }
+
+            $icons[$socialKey] = [
+                'label' => $socialItem,
+                'url' => $this->getUrl($socialModel->get($socialKey), $socialKey),
             ];
         }
 

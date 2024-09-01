@@ -5,6 +5,7 @@
         max-width: 1300px;
         margin: 0 auto;
         padding: 10px 0;
+        position: relative;
 
         &:after {
             content: '';
@@ -53,10 +54,12 @@
     }
 
     .socialHub {
-        list-style: none;
+        position: relative;
+        text-align: center;
 
         &Item {
-            float: left;
+            float: none;
+            display: inline-block;
         }
     }
 }

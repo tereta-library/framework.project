@@ -18,7 +18,23 @@
   float: right;
   width: 300px;
   text-align: right;
-  padding: 24px 0 0 20px;
+  padding: 0 0 0 20px;
+  height: 82px;
+  display: flex;
+  align-items: center;
+}
+.footer > div .copy > span {
+  max-height: 53px;
+  overflow: hidden;
+  width: 100%;
+}
+.footer .socialHub {
+  position: absolute;
+  right: 0;
+  top: -14px;
+}
+.footer .socialHubItem {
+  float: left;
 }
 
 /*# sourceMappingURL=desktop.css.map */

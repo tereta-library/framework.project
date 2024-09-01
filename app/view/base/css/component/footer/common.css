@@ -5,6 +5,7 @@
   max-width: 1300px;
   margin: 0 auto;
   padding: 10px 0;
+  position: relative;
 }
 .footer > div:after {
   content: "";
@@ -46,10 +47,12 @@
   padding: 14px;
 }
 .footer .socialHub {
-  list-style: none;
+  position: relative;
+  text-align: center;
 }
 .footer .socialHubItem {
-  float: left;
+  float: none;
+  display: inline-block;
 }
 
 /*# sourceMappingURL=common.css.map */
