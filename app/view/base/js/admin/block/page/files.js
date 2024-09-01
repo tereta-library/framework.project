@@ -62,10 +62,9 @@ export class AdminFilesForm extends AdminTemplateForm {
         let responseJson = null;
         const formData = new FormData();
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/structure/files', false);
+        xhr.open('POST', `/api/json/files/${action}`, false);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
-        xhr.setRequestHeader('Authorization', "Bearer " + this.rootAdminJs.getToken());
-        formData.append('action', action);
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         formData.append('path', path);
         formData.append('pathDir', currentPathDir);
 
@@ -92,7 +91,7 @@ export class AdminFilesForm extends AdminTemplateForm {
         let responseJson = null;
         const formData = new FormData();
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/api/admin/structure/files', false);
+        xhr.open('POST', '/api/json/files/getDirectory', false);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader('Authorization', "Bearer " + this.rootAdminJs.getToken());
         formData.append('pathDir', pathDir);
