@@ -51,4 +51,12 @@
             padding: 14px;
         }
     }
+
+    .socialHub {
+        list-style: none;
+
+        &Item {
+            float: left;
+        }
+    }
 }

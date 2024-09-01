@@ -45,5 +45,11 @@
   font-size: 15px;
   padding: 14px;
 }
+.footer .socialHub {
+  list-style: none;
+}
+.footer .socialHubItem {
+  float: left;
+}
 
 /*# sourceMappingURL=common.css.map */

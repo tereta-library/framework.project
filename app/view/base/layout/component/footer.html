@@ -16,9 +16,17 @@
                 </a>
                 <a href="" class="eMail"><!--: echo $site[email] --></a>
             </div>
-            <div data-backend-block="Builder\Social\Block\Icons">
-                SOCIAL ICONS
-            </div>
+            <ul data-backend-block="Builder\Social\Block\Icons" class="socialHub">
+                <!--: foreach $icons -->
+                    <li class="socialHubItem">
+                        <a data-backend-bind="attribute:href:$item[url]">
+                            <span data-backend-bind="attribute:class:$string->concat('icon', $string->capitalUpperCase($key))">
+                                <!--: echo $item[label] -->
+                            </span>
+                        </a>
+                    </li>
+                <!--: endforeach -->
+            </ul>
             <div class="copy">
                 <!--: echo $site[copyright] -->
             </div>
