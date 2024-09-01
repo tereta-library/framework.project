@@ -3,6 +3,7 @@
 namespace Builder\Social\Block;
 
 use Builder\Site\Model\Repository as SiteRepository;
+use Framework\View\Html as Layout;
 use Framework\View\Php\Template;
 use Exception;
 use Builder\Social\Model\Social as SocialModel;
@@ -26,6 +27,12 @@ class Icons extends Template
         $this->socialResourceModel = new SocialResourceModel;
         parent::construct();
     }
+
+    public function initialize(Layout $layout): void
+    {
+        $layout->getBlockById('headStyles')->addStyle('!!!!!!!!!!!');
+    }
+
 
     /**
      * @return string

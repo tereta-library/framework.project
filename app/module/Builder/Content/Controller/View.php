@@ -50,6 +50,6 @@ class View implements Controller
 
         $layout->getBlockById('main')->setModel($contentModel);
 
-        return $view->render();
+        return $layout->render();
     }
 }
