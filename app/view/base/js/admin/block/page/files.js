@@ -93,7 +93,7 @@ export class AdminFilesForm extends AdminTemplateForm {
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/api/json/files/getDirectory', false);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
-        xhr.setRequestHeader('Authorization', "Bearer " + this.rootAdminJs.getToken());
+        xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
         formData.append('pathDir', pathDir);
         xhr.onload = function() {
             if (this.status !== 200) {

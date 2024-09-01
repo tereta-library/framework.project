@@ -17,7 +17,7 @@ class Media
     private string $sitePath;
 
     /**
-     * @param int $siteId
+     * @param Site $siteModel
      * @param string $path
      * @param string $uri
      */
@@ -35,15 +35,26 @@ class Media
     public function getUrl(string $target): string
     {
         $domainModel = $this->siteModel->getDomainModel();
-        return ($domainModel->get('secure') ? 'https' : 'http') . "://{$domainModel->get('domain')}/{$this->siteUri}/" . ltrim($target, '/');
+        $siteUrl = $this->siteUri;
+        if (str_starts_with($siteUrl, '/') === false) {
+            $siteUrl = '/' . $siteUrl;
+        }
+        return ($domainModel->get('secure') ? 'https' : 'http') . "://{$domainModel->get('domain')}{$this->siteUri}/" . ltrim($target, '/');
     }
 
     /**
      * @param string $target
      * @return string
+     * @throws Exception
      */
     public function getPath(string $target): string
     {
-        return $this->sitePath . '/' . ltrim($target, '/');
+        $path = $this->sitePath . '/' . ltrim($target, '/');
+
+        if (str_starts_with(realpath($this->sitePath), $this->sitePath) === false) {
+            throw new Exception('Invalid path');
+        }
+
+        return $path;
     }
 }
