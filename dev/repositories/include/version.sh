@@ -1,4 +1,4 @@
 #!/bin/bash
 
-VERSION="0.0.48"
+VERSION="0.0.49"
 COMMENT="Library bug fixing $VERSION"
