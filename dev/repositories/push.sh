@@ -12,6 +12,7 @@ mkdir -p "$ROOTDIR/dev/repositories/git"
 for REPO in "${REPOSITORIES[@]}"; do
   echo "-----$REPO-----"
 
+  echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git config core.sshCommand \"ssh -i ~/.ssh/personal.rsa\"" | bash
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git config pull.rebase false" | bash
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git pull" | bash
   echo "cd \"$ROOTDIR/vendor/tereta/$REPO\"; git add ." | bash
