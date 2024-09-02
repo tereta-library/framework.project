@@ -49,7 +49,12 @@ export class AdminFilesForm extends AdminTemplateForm {
                 this.syntax.update();
             }
             item.clickRemove = async () => {
-                const data = await this.itemAction('remove', item.path, this.syntax.get('pathDir'));
+                const appendFormData = {
+                    'path': item.path,
+                    'pathDir': this.syntax.get('pathDir'),
+                };
+
+                const data = await this.itemAction('remove', appendFormData);
                 this.updateDir(data);
             }
             return item;
@@ -58,15 +63,13 @@ export class AdminFilesForm extends AdminTemplateForm {
         return data;
     }
 
-    async itemAction(action, path, currentPathDir, appendFormData = null) {
+    async itemAction(action, appendFormData = null) {
         let responseJson = null;
         const formData = new FormData();
         const xhr = new XMLHttpRequest();
         xhr.open('POST', `/api/json/files/${action}`, false);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader('API-Token', this.rootAdminJs.getToken());
-        formData.append('path', path);
-        formData.append('pathDir', currentPathDir);
 
         if (!appendFormData) {
             appendFormData = {};
@@ -138,21 +141,26 @@ export class AdminFilesForm extends AdminTemplateForm {
         if (!name) {
             return;
         }
-
         const pathDirString = pathDir.replace(/\/$/g, '');
-        const data = await this.itemAction('createFolder', `${pathDirString}/${name}`, this.syntax.get('pathDir'));
+        const appendFormData = {
+            'path': `${pathDirString}/${name}`,
+            'pathDir': this.syntax.get('pathDir'),
+        };
+        const data = await this.itemAction('createFolder', appendFormData);
         this.updateDir(data);
     }
 
     async changeUploadFile(event) {
         const pathDir = this.syntax.get('pathDir');
         const files = event.target.files;
-        let formData = {};
+        let formData = {
+            'pathDir': this.syntax.get('pathDir'),
+        };
         for (let i = 0; i < files.length; i++) {
             formData['file'] = files[i];
         }
 
-        const data = await this.itemAction('uploadFile', pathDir, this.syntax.get('pathDir'), formData);
+        const data = await this.itemAction('uploadFile', formData);
         this.updateDir(data);
         event.target.value = '';
     }

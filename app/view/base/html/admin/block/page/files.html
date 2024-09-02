@@ -6,12 +6,12 @@
         <div class="formFilesActions">
             <span class="itemNew">
                 <label for="fileManagerUploadNewFile" class="addFile" >
-                    <img src="/img/fileManager/addFile.png">
+                    <img src="/resource/base/image/admin/page/files/addFile.png">
                     <span data-translate="Upload File"></span>
                 </label>
                 <input id="fileManagerUploadNewFile" type="file" data-event="change:changeUploadFile" />
                 <span class="addFolder" data-event="click:clickAddFolder">
-                    <img src="/img/fileManager/addFolder.png">
+                    <img src="/resource/base/image/admin/page/files/addFolder.png">
                     <span data-translate="Create Folder"></span>
                 </span>
             </span>
@@ -25,8 +25,8 @@
                     <span data-translate="Directory Path"></span>
                 </label>
             </div>
-            <span data-event="click:clickBackDir"><img class="backButton" src="/img/fileManager/goBack.png"></span>
-            <span data-event="click:clickEnterDir"><img class="enterButton" src="/img/fileManager/enterFolder.png"></span>
+            <span data-event="click:clickBackDir"><img class="backButton" src="/resource/base/image/admin/page/files/goBack.png"></span>
+            <span data-event="click:clickEnterDir"><img class="enterButton" src="/resource/base/image/admin/page/files/enterFolder.png"></span>
             <span class="errorMessage" data-variable="class:show:folderData.error">
                 <span data-variable="folderData.error"></span>
             </span>
@@ -36,14 +36,14 @@
     <div class="formFilesArea" data-foreach="folderData.listing">
         <div class="itemElement">
             <span class="itemFolder" data-if="type = 'dir'">
-                <span class="image" data-event="click:clickFolderItem"><img src="/img/fileManager/folder.png"></span>
+                <span class="image" data-event="click:clickFolderItem"><img src="/resource/base/image/admin/page/files/folder.png"></span>
                 <span data-variable="name" data-event="click:clickFolderItem"></span>
                 <span class="removeButton">
                     <span data-event="click:clickRemove">X</span>
                 </span>
             </span>
             <span class="itemFile" data-if="type = 'file'">
-                <span class="image" data-event="click:clickFileItem"><img src="/img/fileManager/file.png"></span>
+                <span class="image" data-event="click:clickFileItem"><img src="/resource/base/image/admin/page/files/file.png"></span>
                 <span data-variable="name" data-event="click:clickFileItem"></span>
                 <span>
                     <span data-event="click:clickRemove" class="removeButton">X</span>

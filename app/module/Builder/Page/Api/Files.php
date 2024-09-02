@@ -69,12 +69,10 @@ class Files implements Api
         $pathDirectory = $postData->get('path');
 
         $siteMedia = $this->siteModel->getMedia();
+        $target = $siteMedia->getPath($pathDirectory);
+        mkdir($target, 0777, true);
 
-        return [
-            'pathDir' => $postData->get('pathDir'),
-            'listing' => [],
-            'error' => null
-        ];
+        return $this->getDirectory($postData);
     }
 
     /**
@@ -85,23 +83,22 @@ class Files implements Api
      */
     public function uploadFile(PostData $postData): array
     {
-        $filePath = $postData->get('path');
         $pathDir = $postData->get('pathDir');
         $file = $_FILES['file'] ?? null;
 
         $siteMedia = $this->siteModel->getMedia();
+        $filePath = $siteMedia->getPath($pathDir . '/'. $file['name']);
 
-        return [
-            'pathDir' => $postData->get('pathDir'),
-            'listing' => [],
-            'error' => null
-        ];
+        move_uploaded_file($file['tmp_name'], $filePath);
+
+        return $this->getDirectory($postData);
     }
 
     /**
-     * @api POST /^files\/remove$/Usi
      * @param PostData $postData
      * @return array
+     * @throws Exception
+     * @api POST /^files\/remove$/Usi
      */
     public function remove(PostData $postData): array
     {
