@@ -106,12 +106,14 @@ export class AdminMenuForm extends AdminTemplateForm {
     }
 
     async onPasteFile(event, element, variable) {
-        const clipboardItems = event.clipboardData.items;
+        const clipboardItems = event.dataTransfer.items;
         const clipboardItem = clipboardItems[clipboardItems.length - 1];
-
+debugger;
         if (!['image/png', 'image/jpg', 'image/jpeg', 'image/webp', 'image/gif'].includes(clipboardItem.type)) {
             return;
         }
+
+        event.preventDefault();
 
         const file = clipboardItem.getAsFile();
         const cursorStart = element.selectionStart;

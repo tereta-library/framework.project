@@ -31,6 +31,7 @@ export default class AdminTemplateForm extends AdminTemplate {
     }
 
     onKeyup(event, element, parameter) {
+        debugger;
         this.onChange(event, element, parameter);
     }
 

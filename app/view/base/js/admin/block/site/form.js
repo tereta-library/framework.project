@@ -25,8 +25,11 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.elementIconUploadFile = this.node.querySelector('.uploaderIcon [type="file"]');
         this.initUploadArea(this.elementIconUploadZone, this.elementIconUploadFile, 'iconImage');
 
-        this.syntax.set('showSuccessMessage', false)
+        this.syntax
+            .set('showSuccessMessage', false)
             .set('successMessage', '')
+            .set('showErrorMessage', false)
+            .set('errorMessage', '')
             .set('logoImage', '')
             .set('iconImage', '')
             .set('tagline', '')
@@ -47,7 +50,6 @@ export class AdminSiteForm extends AdminTemplateForm {
     initUploadArea(elementFileUploadZone, elementFileUploadFile, variable) {
         elementFileUploadZone.addEventListener('dragenter', (e) => {
             e.preventDefault();
-            console.info('dragenter');
             elementFileUploadZone.classList.add('highlight');
         });
 
@@ -55,7 +57,6 @@ export class AdminSiteForm extends AdminTemplateForm {
 
         elementFileUploadZone.addEventListener('dragleave', (e) => {
             e.preventDefault();
-            console.info('dragleave');
             elementFileUploadZone.classList.remove('highlight');
         });
 
@@ -145,16 +146,25 @@ export class AdminSiteForm extends AdminTemplateForm {
 
         xhr.onload = function(xhr) {
             if (this.status === 200) {
-                syntax.set('isSave', false);
-                syntax.set('showSuccessMessage', true);
-                syntax.set('successMessage', 'Site Configuration Saved');
+                const jsonResponse = JSON.parse(this.responseText);
 
-                self.show(JSON.parse(this.responseText));
+                if (jsonResponse.error) {
+                    syntax.set('isSave', false);
+                    syntax.set('showSuccessMessage', false);
+                    syntax.set('showErrorMessage', true);
+                    syntax.set('errorMessage', 'Error: ' + jsonResponse.error);
+                } else {
+                    syntax.set('isSave', false);
+                    syntax.set('showSuccessMessage', true);
+                    syntax.set('successMessage', 'Site Configuration Saved');
+                }
 
+                self.show(jsonResponse);
                 syntax.update();
 
                 setTimeout(() => {
                     syntax.set('showSuccessMessage', false);
+                    syntax.set('showErrorMessage', false);
                     syntax.update();
                 }, 5000);
             }

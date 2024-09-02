@@ -146,7 +146,7 @@ class Site extends Model
     {
         if (!in_array(
             $file['type'],
-            ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp']
+            ['image/png', 'image/jpeg', 'image/gif', 'image/svg+xml', 'image/webp', 'image/avif']
         )) {
             throw new Exception("Invalid file type {$file['type']}");
         }

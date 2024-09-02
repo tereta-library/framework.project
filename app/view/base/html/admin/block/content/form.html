@@ -60,7 +60,7 @@
                                        data-event="onChange('status')"
                                        data-event-keyup="onKeyup('status')"
                                        data-variable="value:status">
-                                    <option value="yes" data-translate="Active"></option>
+                                    <option value="1" data-translate="Active"></option>
                                     <option value="" data-translate="Inactive"></option>
                                 </select>
                                 <label class="inputLabel">
@@ -79,7 +79,7 @@
             <fieldset>
                 <legend data-translate="Content"></legend>
                 <div>
-                    <textarea class="pageContentEditor" data-event="onChange('content')" data-event-paste="paste:onPasteFile('content')" data-event-keyup="onKeyup('content')" data-variable="value:content"></textarea>
+                    <textarea class="pageContentEditor" data-event="onChange('content')" data-event-drop="drop:onPasteFile('content')" data-event-keyup="onKeyup('content')" data-variable="value:content"></textarea>
                 </div>
             </fieldset>
             <fieldset>

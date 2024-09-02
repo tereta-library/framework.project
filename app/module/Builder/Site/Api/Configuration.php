@@ -49,10 +49,15 @@ class Configuration implements Api
         $data = $payload->getData();
         $data['id'] = $this->siteModel->get('id');
         $data['identifier'] = $this->siteModel->get('identifier');
-        $this->siteModel->setData($data);
-        $this->siteModel->setFiles($_FILES);
-        $this->siteResourceModel->save($this->siteModel);
-        $this->siteResourceModel->load($this->siteModel);
-        return $this->siteModel->getPublicData();
+        try {
+            $this->siteModel->setData($data);
+            $this->siteModel->setFiles($_FILES);
+            $this->siteResourceModel->save($this->siteModel);
+            $this->siteResourceModel->load($this->siteModel);
+            return $this->siteModel->getPublicData();
+        } catch (Exception $e) {
+            $this->siteResourceModel->load($this->siteModel);
+            return array_merge($this->siteModel->getPublicData(), ['error' => $e->getMessage()]);
+        }
     }
 }
