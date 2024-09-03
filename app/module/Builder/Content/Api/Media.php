@@ -37,6 +37,15 @@ class Media implements Api
             mkdir($dirName, 0777, true);
         }
 
+        if (is_file($fullPath) &&
+            $fileName == basename($fullPath) &&
+            hash_file('sha256', $file['tmp_name']) == hash_file('sha256', $fullPath)) {
+            $fileName = uniqid() . '_' . $fileName;
+            $filePath = "content/{$contentModel->get('id')}/{$fileName}";
+            $fullPath = $this->siteModel->getMedia()->getPath($filePath);
+            $fullUrl = $this->siteModel->getMedia()->getUrl($filePath);
+        }
+
         move_uploaded_file($file['tmp_name'], $fullPath);
 
         list($type) = explode('/', $file['type']);

@@ -8,10 +8,13 @@ use Framework\Application\Manager\Http\Parameter\Payload;
 use Builder\Content\Model\Content as ContentModel;
 use Builder\Content\Model\Resource\Content as ContentResource;
 use Exception;
+use Framework\Database\Singleton as SingletonDatabase;
+use Framework\Helper\File as FileHelper;
 use PDOException;
 use Builder\Page\Model\Url as UrlModel;
 use Builder\Page\Model\Url\Repository as UrlRepository;
 use Builder\Content\Model\Url as ContentUrlModel;
+use Builder\Page\Model\Resource\Url as UrlResource;;
 
 /**
  * @class Builder\Content\Api\Configuration
@@ -19,6 +22,31 @@ use Builder\Content\Model\Url as ContentUrlModel;
 class Configuration implements Api
 {
     use AdministratorTrait;
+
+    /**
+     * @var UrlResource $urlResource
+     */
+    private UrlResource $urlResource;
+
+    /**
+     * @var ContentResource $contentResource
+     */
+    private ContentResource $contentResource;
+
+    /**
+     * @var UrlRepository $urlRepository
+     */
+    private UrlRepository $urlRepository;
+
+    /**
+     * Configuration constructor.
+     */
+    public function __construct()
+    {
+        $this->urlResource = new UrlResource;
+        $this->contentResource = new ContentResource;
+        $this->urlRepository = new UrlRepository;
+    }
 
     /**
      * @api GET /^content\/get\/([a-zA-Z0-9_-]+)?$/Usi
@@ -40,7 +68,7 @@ class Configuration implements Api
             ];
         }
 
-        ContentResource::getInstance()->load($contentModel = new ContentModel(), [
+        $this->contentResource->load($contentModel = new ContentModel(), [
             'identifier' => $identifier,
             'siteId'     => $this->siteModel->get('id'),
         ]);
@@ -57,11 +85,31 @@ class Configuration implements Api
     public function removeContent(Payload $payload): array
     {
         $id = (int) $payload->get('id');
-        ContentResource::getInstance()->load($contentModel = new ContentModel(['id' => $id]));
+        $this->contentResource->load($contentModel = new ContentModel(['id' => $id]));
 
         $this->securityCheck($contentModel);
 
-        ContentResource::getInstance()->delete($id);
+        UrlRepository::getInstance()->loadUrl($urlModel = new UrlModel([
+            'siteId' => $this->siteModel->get('id'),
+            'typeClass' => ContentUrlModel::class,
+            'identifier' => $contentModel->get('id'),
+        ]));
+
+        SingletonDatabase::getConnection()->beginTransaction();
+        try {
+            $filePath = "content/{$contentModel->get('id')}/";
+            $fullPath = $this->siteModel->getMedia()->getPath($filePath);
+
+            $this->urlResource->delete($urlModel);
+            $this->contentResource->delete($id);
+
+            FileHelper::getInstance()->remove($fullPath);
+
+            SingletonDatabase::getConnection()->commit();
+        } catch (PDOException $e) {
+            SingletonDatabase::getConnection()->rollBack();
+            throw $e;
+        }
 
         return $contentModel->getData();
     }
@@ -76,6 +124,10 @@ class Configuration implements Api
     {
         $this->securityCheck((int) $payload->get('id'));
 
+        if (!$payload->get('seoUri')) {
+            throw new Exception('SEO URI is required');
+        }
+
         $contentModel = new ContentModel($payload->getData());
         $contentModel->set('siteId', $this->siteModel->get('id'));
         $contentModel->set('identifier', $payload->get('identifier') ?? '');
@@ -87,8 +139,20 @@ class Configuration implements Api
         $contentModel->set('content', $payload->get('content') ?? '');
 
         try {
+            SingletonDatabase::getConnection()->beginTransaction();
             ContentResource::getInstance()->save($contentModel);
+
+            // Save URL rewrite
+            UrlRepository::getInstance()->saveUrl($urlModel = new UrlModel([
+                'siteId' => $this->siteModel->get('id'),
+                'typeId' => ContentUrlModel::class,
+                'identifier' => $contentModel->get('id'),
+                'uri' => $contentModel->get('seoUri'),
+            ]));
+
+            SingletonDatabase::getConnection()->commit();
         } catch (PDOException $e) {
+            SingletonDatabase::getConnection()->rollBack();
             switch($e->getCode()) {
                 case 23000:
                     throw new Exception('Identifier or url key already exists');
@@ -96,14 +160,6 @@ class Configuration implements Api
                     throw new Exception('Error saving content');
             }
         }
-
-        // Save URL rewrite
-        UrlRepository::getInstance()->saveUrl($urlModel = new UrlModel([
-            'siteId' => $this->siteModel->get('id'),
-            'typeId' => ContentUrlModel::class,
-            'identifier' => $contentModel->get('id'),
-            'uri' => $contentModel->get('seoUri'),
-        ]));
 
         return [
             'content' => $contentModel->getData(),

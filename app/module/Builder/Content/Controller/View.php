@@ -7,6 +7,7 @@ use Framework\Application\Manager;
 use Builder\Content\Model\Resource\Content as ResourceContent;
 use Builder\Content\Model\Content as ModelContent;
 use Exception;
+use Framework\Application\Controller\Error as ErrorController;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -40,6 +41,9 @@ class View implements Controller
     public function render(string $id): string
     {
         ResourceContent::getInstance()->load($contentModel = new ModelContent, $id);
+        if (!$contentModel->get('id')) {
+            return (new ErrorController)->notFound();
+        }
 
         $view = Manager::getInstance()->getView();
 

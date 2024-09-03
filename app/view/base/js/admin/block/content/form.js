@@ -186,7 +186,7 @@ export class AdminMenuForm extends AdminTemplateForm {
                     .set('showSuccessMessage', true).update();
 
                 if ('#' + responseText.url.uri != window.location.hash) {
-                    window.location.hash = responseText.content.uri;
+                    window.location.hash = responseText.url.uri;
                 } else {
                     this.rootAdminJs.elementCanvas.contentWindow.location.reload();
                 }

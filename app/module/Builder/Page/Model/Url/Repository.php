@@ -45,6 +45,19 @@ class Repository extends AbstractRepository
         return $this->setRegisterModel($urlModel);
     }
 
+    public function loadUrl(UrlModel $urlModel): UrlModel
+    {
+        $typeId = UrlTypeRepository::getInstance()->getTypeByIdentifier($urlModel->get('typeClass'))->get('id');
+
+        UrlResource::getInstance()->load($urlModel, [
+            'siteId' => $urlModel->get('siteId'),
+            'typeId' => $typeId,
+            'identifier' => $urlModel->get('identifier'),
+        ]);
+
+        return $this->setRegisterModel($urlModel);
+    }
+
     /**
      * @param UrlModel $urlModel
      * @return UrlModel
