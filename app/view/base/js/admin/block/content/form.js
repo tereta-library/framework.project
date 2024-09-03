@@ -108,10 +108,6 @@ export class AdminMenuForm extends AdminTemplateForm {
     async onPasteFile(event, element, variable) {
         const clipboardItems = event.dataTransfer.items;
         const clipboardItem = clipboardItems[clipboardItems.length - 1];
-debugger;
-        if (!['image/png', 'image/jpg', 'image/jpeg', 'image/webp', 'image/gif'].includes(clipboardItem.type)) {
-            return;
-        }
 
         event.preventDefault();
 
@@ -124,9 +120,9 @@ debugger;
             text = text.substring(0, cursorStart) + text.substring(cursorEnd);
         }
 
-        const fileUrl = this.insertFile(this.id, file);
+        const fileResponse = this.insertFile(this.id, file);
 
-        const insertTag = `<img src="${fileUrl}" />`;
+        const insertTag = fileResponse.type == 'image' ? `<img src="${fileResponse.url}" />` : `<a href="${fileResponse.url}">${fileResponse.name}</a> />`;
 
         text = text.substring(0, cursorStart) + insertTag + text.substring(cursorStart);
         element.value = text;
@@ -152,7 +148,7 @@ debugger;
             responseJson = JSON.parse(this.responseText);
         };
         xhr.send(formData);
-        return responseJson.fileUrl;
+        return responseJson;
     }
 
     saveForm(event, element, variable) {
