@@ -37,6 +37,8 @@ export class AdminSocialForm extends AdminTemplateForm {
                     .set('isSave', false)
                     .set('showSuccessMessage', true).update();
 
+                this.rootAdminJs.elementCanvas.contentWindow.location.reload();
+
                 setTimeout(() => {
                     syntax.set('showSuccessMessage', false);
                     syntax.update();

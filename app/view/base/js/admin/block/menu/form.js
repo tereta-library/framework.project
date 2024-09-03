@@ -201,6 +201,8 @@ export class AdminMenuForm extends AdminTemplateForm {
             this.applySavedData(JSON.parse(xhr.target.responseText));
             this.removeIds = [];
 
+            this.rootAdminJs.elementCanvas.contentWindow.location.reload();
+
             setTimeout(() => {
                 syntax.set('showSuccessMessage', false);
                 syntax.update();

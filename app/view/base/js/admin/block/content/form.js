@@ -45,7 +45,6 @@ export class AdminMenuForm extends AdminTemplateForm {
             saveForm          : this.saveForm.bind(this),
             onKeyup           : this.onKeyup.bind(this),
             onChange          : this.onChange.bind(this),
-
             onPasteFile       : this.onPasteFile.bind(this)
         }));
 
@@ -122,11 +121,17 @@ export class AdminMenuForm extends AdminTemplateForm {
 
         const fileResponse = this.insertFile(this.id, file);
 
-        const insertTag = fileResponse.type == 'image' ? `<img src="${fileResponse.url}" />` : `<a href="${fileResponse.url}">${fileResponse.name}</a> />`;
+        const insertTag = fileResponse.type == 'image' ?
+            `<img src="${fileResponse.url}" />` :
+            `<a href="${fileResponse.url}">${fileResponse.name}</a>`;
 
         text = text.substring(0, cursorStart) + insertTag + text.substring(cursorStart);
         element.value = text;
         element.setSelectionRange(cursorStart + insertTag.length, cursorStart + insertTag.length);
+        this.syntax.set('content', text);
+        this.syntax.set('isSave', true);
+        this.syntax.update();
+        element.cursorStart = element.selectionEnd = cursorStart;
     }
 
     insertFile(pageId, file) {
@@ -180,8 +185,10 @@ export class AdminMenuForm extends AdminTemplateForm {
                     .set('showErrorMessage', false)
                     .set('showSuccessMessage', true).update();
 
-                if ('#' + responseText.url.seoUri != window.location.hash) {
-                    window.location.hash = responseText.content.seoUri;
+                if ('#' + responseText.url.uri != window.location.hash) {
+                    window.location.hash = responseText.content.uri;
+                } else {
+                    this.rootAdminJs.elementCanvas.contentWindow.location.reload();
                 }
             }
 

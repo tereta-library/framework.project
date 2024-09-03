@@ -120,7 +120,7 @@ class Configuration implements Api
         foreach ($savedModel as $menuItem) {
             if (!$menuItem->get('parentId')) {
                 $clientId = $menuItem->get('clientId');
-                $menuItem->set('parentId', $clientIdMap[$menuItem->get('parentClientId')]);
+                $menuItem->set('parentId', $menuItem->get('parentClientId') ? $clientIdMap[$menuItem->get('parentClientId')] : null);
                 $this->menuItemResource->save($menuItem);
                 $this->menuItemResource->load($menuItem);
                 $menuItem->set('clientId', $clientId);

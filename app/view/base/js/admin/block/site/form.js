@@ -162,6 +162,8 @@ export class AdminSiteForm extends AdminTemplateForm {
                 self.show(jsonResponse);
                 syntax.update();
 
+                self.rootAdminJs.elementCanvas.contentWindow.location.reload();
+
                 setTimeout(() => {
                     syntax.set('showSuccessMessage', false);
                     syntax.set('showErrorMessage', false);
