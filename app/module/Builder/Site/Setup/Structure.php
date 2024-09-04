@@ -2,6 +2,7 @@
 
 namespace Builder\Site\Setup;
 
+use Builder\Content\Model\Url as UrlTypeModel;
 use Framework\Application\Setup\Abstract\Upgrade;
 use Framework\Database\Factory;
 use Framework\Database\Value\Now as ValueNow;
@@ -86,5 +87,22 @@ class Structure extends Upgrade
         $tableQuery->addInteger('acl', 1, false)->setNotNull()->setDefault(0)->setComment('User ACL');
         $tableQuery->addUnique('siteId', 'userId');
         $connection->query($tableQuery->build());
+    }
+
+    /**
+     * @date 2024-09-04 22:37:00 Created
+     * @return void
+     * @throws Exception
+     */
+    public function setConfiguration(): void
+    {
+        $connection = $this->connection;
+
+        $query = Factory::createInsert('siteConfiguration')->values([
+            'path' => 'view.template'
+        ])->updateOnDupilicate(['path']);
+
+        $pdoStat = $connection->prepare($query->build());
+        $pdoStat->execute($query->getParams());
     }
 }
