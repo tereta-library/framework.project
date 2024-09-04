@@ -48,6 +48,12 @@ export class AdminListingForm extends AdminTemplateForm {
         xhr.send(formData);
 
         let result = JSON.parse(xhr.response);
+
+        if (result.error && result.errorCode == 401) {
+            this.rootAdminJs.elementPanel.actionLogout();
+            return;
+        }
+
         result.listing.forEach((item) => {
             item.openPage = this.openPage.bind(this)
         });

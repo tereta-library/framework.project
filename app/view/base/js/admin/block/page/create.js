@@ -81,6 +81,7 @@ export class AdminCreateForm extends AdminTemplateForm {
         const token = this.rootAdminJs.getToken();
         const xhr = new XMLHttpRequest();
         const url = (new URL(window.location.protocol + '//' + window.location.hostname + '/api/' + this.selectedData.controller));
+        const self = this;
 
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
@@ -92,11 +93,9 @@ export class AdminCreateForm extends AdminTemplateForm {
             }
 
             const responseJson = JSON.parse(this.responseText);
-            if (typeof responseJson.error != 'undefined') {
-                alert(responseJson.error);
-            }
-            if (typeof responseJson.redirect != 'undefined') {
-                window.location.href = responseJson.redirect;
+
+            if (formData.error && responseJson.errorCode == 401) {
+                self.rootAdminJs.elementPanel.actionLogout();
             }
         };
 

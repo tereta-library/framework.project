@@ -15,6 +15,8 @@ use Builder\Site\Model\Resource\User as SiteUserResourceModel;
  */
 class Site extends ResourceModel
 {
+    const EXCEPTION_CODE_TOKEN = 401;
+
     /**
      * @throws Exception
      */
@@ -34,7 +36,7 @@ class Site extends ResourceModel
     public function loadByToken(EntityModel $entityModel, string $domain, string $token, string $ip): static
     {
         if (!$token) {
-            throw new Exception('Empty token');
+            throw new Exception('Empty token', static::EXCEPTION_CODE_TOKEN);
         }
 
         $userResourceModel = new UserResourceModel;
@@ -42,7 +44,7 @@ class Site extends ResourceModel
         $userId = $userModel->get('id');
 
         if (!$userId) {
-            throw new Exception('Token not found');
+            throw new Exception('Token not found', static::EXCEPTION_CODE_TOKEN);
         }
 
         $this->getSelect()->columns(['site.*'])

@@ -36,8 +36,7 @@ export class AdminSite extends AdminTemplate {
             formData = json;
         });
 
-        if (formData.error) {
-            alert(formData.error);
+        if (formData.error && formData.errorCode == 401) {
             this.rootAdminJs.elementPanel.actionLogout();
             return;
         }

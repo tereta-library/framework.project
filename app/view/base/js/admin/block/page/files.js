@@ -151,7 +151,6 @@ export class AdminFilesForm extends AdminTemplateForm {
     }
 
     async changeUploadFile(event) {
-        const pathDir = this.syntax.get('pathDir');
         const files = event.target.files;
         let formData = {
             'pathDir': this.syntax.get('pathDir'),

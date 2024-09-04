@@ -43,6 +43,11 @@ export class AdminMenu extends AdminTemplate {
              formData = json;
         });
 
+        if (formData.error && formData.errorCode == 401) {
+            this.rootAdminJs.elementPanel.actionLogout();
+            return;
+        }
+
         // Show admin form
         this.form = await this.showForm('block/menu/form', formData, this.form);
     }
