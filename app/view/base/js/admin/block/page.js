@@ -14,13 +14,19 @@ export class AdminPage extends AdminTemplate {
 
     async buttonFilesAction() {
         this.formFilesAction = await this.showForm('block/page/files', [], this.formFilesAction);
-
         this.node.querySelector('#adminPageCheckbox').checked = false;
+        
+        if (!localStorage.getItem('adminToken')) {
+            this.rootAdminJs.elementPanel.actionLogout();
+        }
     }
 
     async buttonListingAction() {
         this.formListingAction = await this.showForm('block/page/listing', [], this.formListingAction);
-
         this.node.querySelector('#adminPageCheckbox').checked = false;
+
+        if (!localStorage.getItem('adminToken')) {
+            this.rootAdminJs.elementPanel.actionLogout();
+        }
     }
 }

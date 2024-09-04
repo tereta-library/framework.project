@@ -104,6 +104,10 @@ export class AdminFilesForm extends AdminTemplateForm {
             }
 
             responseJson = JSON.parse(this.responseText);
+
+            if (responseJson.error && responseJson.errorCode == 401) {
+                localStorage.removeItem('adminToken');
+            }
         };
         xhr.send(formData);
 

@@ -50,7 +50,7 @@ export class AdminListingForm extends AdminTemplateForm {
         let result = JSON.parse(xhr.response);
 
         if (result.error && result.errorCode == 401) {
-            this.rootAdminJs.elementPanel.actionLogout();
+            localStorage.removeItem('adminToken');
             return;
         }
 

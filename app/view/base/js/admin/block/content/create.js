@@ -35,6 +35,11 @@ export class AdminContent extends AdminTemplate {
             formData = json;
         });
 
+        if (formData.error && formData.errorCode == 401) {
+            this.rootAdminJs.elementPanel.actionLogout();
+            return;
+        }
+
         // Show admin form
         this.form = await this.showForm('block/content/form', formData, this.form);
     }
