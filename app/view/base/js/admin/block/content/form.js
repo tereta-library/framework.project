@@ -9,6 +9,7 @@ export class AdminMenuForm extends AdminTemplateForm {
 
     show(config) {
         this.id = config.id;
+        this.syntax.set('mode', config.id ? 'edit' : 'new');
         this.syntax.set('id', config.id);
         this.syntax.set('identifier', config.identifier);
         this.syntax.set('status', config.status);
@@ -23,6 +24,13 @@ export class AdminMenuForm extends AdminTemplateForm {
 
         this.editorContentNode.update();
         this.editorDescriptionNode.update();
+    }
+
+    getMode(name) {
+        if (!this.syntax.get('mode')) {
+            return name;
+        }
+        return name + this.syntax.get('mode').charAt(0).toUpperCase() + this.syntax.get('mode').slice(1)
     }
 
     init() {
@@ -45,7 +53,8 @@ export class AdminMenuForm extends AdminTemplateForm {
             saveForm          : this.saveForm.bind(this),
             onKeyup           : this.onKeyup.bind(this),
             onChange          : this.onChange.bind(this),
-            onPasteFile       : this.onPasteFile.bind(this)
+            onPasteFile       : this.onPasteFile.bind(this),
+            getMode           : this.getMode.bind(this)
         }));
 
         this.syntax.update();

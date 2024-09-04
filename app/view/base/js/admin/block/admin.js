@@ -46,6 +46,10 @@ export class Admin extends AdminTemplate{
     }
 
     hideMenu() {
+        this.containerList.querySelectorAll('input[type=checkbox]').forEach((item) => {
+            item.checked = false;
+        });
+
         this.containerList.classList.remove('show');
         this.languageBlock.hide();
     }
@@ -111,26 +115,33 @@ export class Admin extends AdminTemplate{
         const objects = await this.loadHandleBlocks(adminList);
 
         // @todo need to create sequence of rendering
+        const objectSkip = [];
         Object.keys(objects).forEach((moduleName) => {
             const sequence = objects[moduleName].config.sequence;
             if (!sequence) {
                 return;
             }
 
-            objects[sequence].renderSequenceList.push(objects[moduleName]);
-            delete objects[moduleName];
+            objects[sequence].renderSequenceList[moduleName] = (objects[moduleName]);
+            objectSkip.push(moduleName);
         });
 
         Object.keys(objects).forEach((moduleName) => {
+            if (objectSkip.includes(moduleName)) {
+                return;
+            }
+
             objects[moduleName].render(this.containerList);
         })
     }
+
+    moduleList = {};
 
     async loadHandleBlocks(moduleConfigs) {
         let modules = [];
         let moduleNames = [];
         let moduleImport = [];
-        let moduleList = {};
+        //let moduleList = {};
         let moduleConfigsNamed = {};
         let moduleConfigsModule = {};
         const token = this.rootAdminJs.getToken();
@@ -174,10 +185,13 @@ export class Admin extends AdminTemplate{
             const className = Object.keys(moduleItem)[0];
             const config = moduleConfigsModule[moduleNames[key]];
             config.elements = moduleConfigsNamed[moduleNames[key]];
-            moduleList[moduleNames[key]] = new (moduleItem[className])(this.rootAdminJs, config);
+            if (this.moduleList[moduleNames[key]]) {
+                return;
+            }
+            this.moduleList[moduleNames[key]] = new (moduleItem[className])(this.rootAdminJs, config);
         });
 
-        return moduleList;
+        return this.moduleList;
     }
 
     init() {

@@ -1,7 +1,7 @@
 import Template from '../template.js';
 
 export default class AdminTemplate extends Template {
-    renderSequenceList = [];
+    renderSequenceList = {};
 
     constructor(rootNode, config) {
         super();
@@ -22,13 +22,15 @@ export default class AdminTemplate extends Template {
         this.rootAdminJs.elementPanel.showForms();
         return itemForm;
     }
+
     async render(element) {
         await super.render(element);
         this.renderSequence(element);
     }
 
     renderSequence(element) {
-        this.renderSequenceList.forEach((item) => {
+        Object.keys(this.renderSequenceList).forEach((key) => {
+            const item = this.renderSequenceList[key];
             item.render(element);
         });
     }

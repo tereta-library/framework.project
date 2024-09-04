@@ -15,13 +15,13 @@
     </div>
 
     <div class="tabs">
-        <input type="radio" name="tab" id="formPageGeneral" checked />
-        <input type="radio" name="tab" id="formPageContent" />
-        <input type="radio" name="tab" id="formPageSeo" />
+        <input type="radio" name="tab" id="formPageGeneral" data-variable="attribute:id:getMode('formPageGeneral')" checked />
+        <input type="radio" name="tab" id="formPageContent" data-variable="attribute:id:getMode('formPageContent')" />
+        <input type="radio" name="tab" id="formPageSeo" data-variable="attribute:id:getMode('formPageSeo')" />
         <div class="tabsBar">
-            <label for="formPageGeneral" data-translate="General"></label>
-            <label for="formPageContent" data-translate="Content"></label>
-            <label for="formPageSeo" data-translate="SEO"></label>
+            <label for="formPageGeneral" data-translate="General" data-variable="attribute:for:getMode('formPageGeneral')"></label>
+            <label for="formPageContent" data-translate="Content" data-variable="attribute:for:getMode('formPageContent')"></label>
+            <label for="formPageSeo" data-translate="SEO" data-variable="attribute:for:getMode('formPageSeo')"></label>
         </div>
         <div class="tabsContainer">
             <fieldset>
