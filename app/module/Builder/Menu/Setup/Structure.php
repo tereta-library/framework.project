@@ -17,6 +17,7 @@ class Structure extends Upgrade
     public function create(): void
     {
         $connection = $this->connection;
+
         $tableQuery = Factory::createTable('menu');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Menu ID');
         $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id')->setComment('Site ID');
