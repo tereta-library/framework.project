@@ -1,12 +1,30 @@
-.slideSelectorCanvas {
+.sliderCanvas {
   display: block;
   position: relative;
   overflow: hidden;
 
+  &.slotLeft {
+    .wrapper {
+      left: 0;
+    }
+  }
+
+  &.slotRight {
+    .wrapper {
+      left: -200%;
+    }
+  }
+
+  &.replacement {
+    .wrapper {
+      transition: none;
+    }
+  }
+
   .wrapper {
     position: relative;
     width: 100%;
-    left: 0;
+    left: -100%;
     transition: all 0.5s ease;
     background: #ff0000;
     display: flex;
@@ -20,18 +38,6 @@
         justify-content: center;
         align-items: center;
         font-size: 24px;
-    }
-
-    .previous {
-        background: #f00;
-    }
-
-    .current {
-        background: #00f;
-    }
-
-    .next {
-        background: #0f0;
     }
   }
 }

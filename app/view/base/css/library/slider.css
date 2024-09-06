@@ -1,18 +1,27 @@
-.slideSelectorCanvas {
+.sliderCanvas {
   display: block;
   position: relative;
   overflow: hidden;
 }
-.slideSelectorCanvas .wrapper {
+.sliderCanvas.slotLeft .wrapper {
+  left: 0;
+}
+.sliderCanvas.slotRight .wrapper {
+  left: -200%;
+}
+.sliderCanvas.replacement .wrapper {
+  transition: none;
+}
+.sliderCanvas .wrapper {
   position: relative;
   width: 100%;
-  left: 0;
+  left: -100%;
   transition: all 0.5s ease;
   background: #ff0000;
   display: flex;
   justify-content: space-between;
 }
-.slideSelectorCanvas .wrapper > div {
+.sliderCanvas .wrapper > div {
   flex: 1 0 100%;
   height: 100%;
   text-align: center;
@@ -21,14 +30,5 @@
   align-items: center;
   font-size: 24px;
 }
-.slideSelectorCanvas .wrapper .previous {
-  background: #f00;
-}
-.slideSelectorCanvas .wrapper .current {
-  background: #00f;
-}
-.slideSelectorCanvas .wrapper .next {
-  background: #0f0;
-}
 
-/*# sourceMappingURL=slideSelector.css.map */
+/*# sourceMappingURL=slider.css.map */

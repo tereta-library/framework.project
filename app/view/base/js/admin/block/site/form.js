@@ -1,5 +1,5 @@
 import AdminTemplateForm from '../templateForm.js';
-import SlideSelector from '../../../library/slideSelector.js';
+import Slider from '../../../library/slider.js';
 
 export class AdminSiteForm extends AdminTemplateForm {
     template            = 'block/site/form';
@@ -31,11 +31,13 @@ export class AdminSiteForm extends AdminTemplateForm {
         const headElement = document.querySelector('head');
         const linkElement = document.createElement('link');
         linkElement.setAttribute('rel', 'stylesheet');
-        linkElement.setAttribute('href', '/resource/base/css/library/slideSelector.css');
+        linkElement.setAttribute('href', '/resource/base/css/library/slider.css');
         headElement.append(linkElement);
 
-        this.themeSelector = new SlideSelector(this.node.querySelector('#themeSelector'));
-        this.themeSelector.render();
+        this.themeSelector = new Slider(this.node.querySelector('#themeSelector'));
+        this.themeSelector.render('Current Element');
+
+        window.themeSelector = this.themeSelector;
 
         this.syntax
             .set('showSuccessMessage', false)
