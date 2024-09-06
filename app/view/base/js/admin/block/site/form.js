@@ -1,4 +1,5 @@
 import AdminTemplateForm from '../templateForm.js';
+import SlideSelector from '../../../library/slideSelector.js';
 
 export class AdminSiteForm extends AdminTemplateForm {
     template            = 'block/site/form';
@@ -6,8 +7,10 @@ export class AdminSiteForm extends AdminTemplateForm {
     elementLogoUploadFile = null;
     elementIconUploadZone = null;
     elementIconUploadFile = null;
+    themeSelector         = null;
     config                = null;
     formData         = new FormData();
+
 
     /**
      *
@@ -24,6 +27,15 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.elementIconUploadZone = this.node.querySelector('.uploaderIcon [data-container="uploadZone"]');
         this.elementIconUploadFile = this.node.querySelector('.uploaderIcon [type="file"]');
         this.initUploadArea(this.elementIconUploadZone, this.elementIconUploadFile, 'iconImage');
+
+        const headElement = document.querySelector('head');
+        const linkElement = document.createElement('link');
+        linkElement.setAttribute('rel', 'stylesheet');
+        linkElement.setAttribute('href', '/resource/base/css/library/slideSelector.css');
+        headElement.append(linkElement);
+
+        this.themeSelector = new SlideSelector(this.node.querySelector('#themeSelector'));
+        this.themeSelector.render();
 
         this.syntax
             .set('showSuccessMessage', false)
