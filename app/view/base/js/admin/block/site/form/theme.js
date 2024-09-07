@@ -46,6 +46,23 @@ export class AdminSiteFormTheme {
     themeLoad(themeNumber, callback) {
         this.locked = true;
         this.parent.syntax.update();
-        callback('Theme ' + themeNumber, themeNumber);
+
+        const token = this.parent.rootAdminJs.getToken();
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', '/api/json/site/configuration/theme/' + themeNumber, true);
+        xhr.setRequestHeader('Cache-Control', 'no-cache');
+        xhr.setRequestHeader('API-Token', token);
+
+        xhr.onload = function(xhr) {
+            if (this.status !== 200) {
+                return;
+            }
+
+            const jsonResponse = JSON.parse(this.responseText);
+            callback('Theme ' + jsonResponse.number, parseInt(jsonResponse.number));
+        }
+
+        xhr.send();
     }
 }

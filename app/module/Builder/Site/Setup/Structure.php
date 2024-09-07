@@ -2,7 +2,6 @@
 
 namespace Builder\Site\Setup;
 
-use Builder\Content\Model\Url as UrlTypeModel;
 use Framework\Application\Setup\Abstract\Upgrade;
 use Framework\Database\Factory;
 use Framework\Database\Value\Now as ValueNow;
