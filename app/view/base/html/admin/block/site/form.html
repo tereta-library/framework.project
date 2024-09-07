@@ -94,9 +94,11 @@
             </fieldset>
             <fieldset class="themeConfiguration">
                 <legend data-translate="Theme Configuration"></legend>
-                <div class="fields">
-                    <div id="themeSelector">
-                    </div>
+                <link href="/resource/base/css/library/slider.css" rel="stylesheet" />
+                <div class="fields" data-variable="class:locked:theme.locked">
+                    <div id="themeSelector"></div>
+                    <div class="previousButton" data-event="click:theme.previous">Previous</div>
+                    <div class="nextButton" data-event="click:theme.next">Next</div>
                 </div>
             </fieldset>
         </div>

@@ -269,6 +269,25 @@
 #adminPanelControl .formSite .themeConfiguration {
   position: relative;
 }
+#adminPanelControl .formSite .themeConfiguration .fields {
+  position: relative;
+}
+#adminPanelControl .formSite .themeConfiguration .fields .previousButton, #adminPanelControl .formSite .themeConfiguration .fields .nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+  left: 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+#adminPanelControl .formSite .themeConfiguration .fields .previousButton {
+  left: 0;
+  right: unset;
+}
+#adminPanelControl .formSite .themeConfiguration .fields .nextButton {
+  right: 0;
+  left: unset;
+}
 #adminPanelControl .formSite .themeConfiguration .fields .show {
   display: inline;
   cursor: pointer;
@@ -281,6 +300,9 @@
   right: 0;
   bottom: 0;
   top: 0;
+}
+#adminPanelControl .formSite .themeConfiguration .fields.locked .previousButton, #adminPanelControl .formSite .themeConfiguration .fields.locked .nextButton {
+  opacity: 0.5;
 }
 #adminPanelControl .formSite .resellerConfiguration .fields .fieldsList {
   list-style: none;

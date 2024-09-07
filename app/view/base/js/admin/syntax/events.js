@@ -75,21 +75,28 @@ export class SyntaxEvents extends SyntaxAbstract{
         }
 
         const keys = functionName.split('.');
-        let current = this.variables;
+        let functionLink = this.variables;
+        let functionLinkThis = null;
+        let functionParent = null;
 
-        for (let i = 0; i < keys.length - 1; i++) {
+        for (let i = 0; i < keys.length; i++) {
             const k = keys[i];
 
-            if (current[k] === undefined) {
+            if (functionLink[k] === undefined) {
                 throw new Error('Event handler is not defined: ' + functionName);
             }
 
-            current = current[k];
+            functionLink = functionLink[k];
+            functionLinkThis = functionParent;
+            functionParent = functionLink;
         }
 
-        let functionLink = current[keys[keys.length - 1]];
         if (typeof functionLink != 'function') {
             throw new Error('Event handler is not a function: ' + functionName);
+        }
+
+        if (functionLinkThis !== null) {
+            functionLink = functionLink.bind(functionLinkThis);
         }
 
         return (event) => {

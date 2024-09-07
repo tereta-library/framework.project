@@ -1,5 +1,6 @@
 import AdminTemplateForm from '../templateForm.js';
 import Slider from '../../../library/slider.js';
+import {AdminSiteFormTheme} from './form/theme.js';
 
 export class AdminSiteForm extends AdminTemplateForm {
     template            = 'block/site/form';
@@ -28,16 +29,8 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.elementIconUploadFile = this.node.querySelector('.uploaderIcon [type="file"]');
         this.initUploadArea(this.elementIconUploadZone, this.elementIconUploadFile, 'iconImage');
 
-        const headElement = document.querySelector('head');
-        const linkElement = document.createElement('link');
-        linkElement.setAttribute('rel', 'stylesheet');
-        linkElement.setAttribute('href', '/resource/base/css/library/slider.css');
-        headElement.append(linkElement);
-
         this.themeSelector = new Slider(this.node.querySelector('#themeSelector'));
-        this.themeSelector.render('Current Element');
-
-        window.themeSelector = this.themeSelector;
+        this.theme = new AdminSiteFormTheme(this, this.themeSelector);
 
         this.syntax
             .set('showSuccessMessage', false)
@@ -51,7 +44,10 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('phone', '')
             .set('email', '')
             .set('name', '')
-            .set('copyright', '');
+            .set('copyright', '')
+            .set('theme', this.theme);
+
+        this.theme.render();
     }
 
     /**
@@ -220,11 +216,8 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('name', config.name)
             .set('phone', config.phone)
             .set('tagline', config.tagline)
-            .set('onChangeTheme', async (event, element, parameter) => {
-                this.syntax.set('isSave', true);
-                this.syntax.set(parameter[0], element.value);
-                this.syntax.update();
-            }).update();
+            .set('theme', this.theme)
+            .update();
 
         super.show();
     }

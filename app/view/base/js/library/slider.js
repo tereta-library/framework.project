@@ -26,7 +26,7 @@ export default class Slider {
         this.elementRoot.append(this.elementWrapper);
     }
 
-    next(element) {
+    next(element, callback = null) {
         if (this.lock) {
             return false;
         }
@@ -38,21 +38,11 @@ export default class Slider {
         this.elementRoot.classList.remove('slotLeft');
 
         const time = this.getCssTime(this.elementWrapper);
-        setTimeout(() => this.currentPosition(element, time), time);
+        setTimeout(() => this.currentPosition(element, time, callback), time);
         return true;
     }
 
-    getCssTime(element) {
-        const transitionTime = window.getComputedStyle(element)['transition'];
-
-        if (transitionTime.endsWith('s')) {
-            return parseFloat(transitionTime.replace('s', '')) * 1000;
-        }
-
-        return 1000;
-    }
-
-    previous(element) {
+    previous(element, callback = null) {
         if (this.lock) {
             return false;
         }
@@ -65,12 +55,12 @@ export default class Slider {
         this.elementRoot.classList.remove('slotRight');
 
         const time = this.getCssTime(this.elementWrapper);
-        setTimeout(() => this.currentPosition(element, time), time);
+        setTimeout(() => this.currentPosition(element, time, callback), time);
 
         return true;
     }
 
-    currentPosition(element, time) {
+    currentPosition(element, time, callback) {
         this.elementRoot.classList.add('replacement');
         this.elementRoot.classList.remove('slotLeft');
         this.elementRoot.classList.remove('slotRight');
@@ -80,6 +70,20 @@ export default class Slider {
         setTimeout(() => {
             this.elementRoot.classList.remove('replacement');
             this.lock = false;
+            if (callback) {
+                callback();
+            }
         }, time);
+    }
+
+
+    getCssTime(element) {
+        const transitionTime = window.getComputedStyle(element)['transition'];
+
+        if (transitionTime.endsWith('s')) {
+            return parseFloat(transitionTime.replace('s', '')) * 1000;
+        }
+
+        return 1000;
     }
 }

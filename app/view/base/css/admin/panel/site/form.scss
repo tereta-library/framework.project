@@ -14,6 +14,27 @@
             position: relative;
 
             .fields {
+                position: relative;
+
+                .previousButton, .nextButton {
+                    position: absolute;
+                    top: 50%;
+                    transform: translate(0, -50%);
+                    left: 0;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+
+                .previousButton {
+                    left: 0;
+                    right: unset;
+                }
+
+                .nextButton {
+                    right: 0;
+                    left: unset;
+                }
+
                 .show{
                     display: inline;
                     cursor: pointer;
@@ -28,6 +49,12 @@
                         right: 0;
                         bottom: 0;
                         top: 0;
+                    }
+                }
+
+                &.locked {
+                    .previousButton, .nextButton {
+                        opacity: 0.5;
                     }
                 }
             }
