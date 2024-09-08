@@ -21,16 +21,16 @@ class User extends Model
 
     /**
      * @param SiteUserModel $model
-     * @param $siteId
-     * @param $userId
+     * @param int $siteId
+     * @param int $userId
      * @return $this
      * @throws Exception
      */
     public function loadByBound(SiteUserModel $model, int $siteId, int $userId): static
     {
-        $this->getSelect()->columns(['siteUser.*']);
-        $this->where('siteUser.siteId = ?', $siteId);
-        $this->where('siteUser.userId = ?', $userId);
+        $this->getSelect()->columns(['main.*']);
+        $this->where('main.siteId = ?', $siteId);
+        $this->where('main.userId = ?', $userId);
         $this->load($model);
         return $this;
     }

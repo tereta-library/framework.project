@@ -47,8 +47,8 @@ class Site extends ResourceModel
             throw new Exception('Token not found', static::EXCEPTION_CODE_TOKEN);
         }
 
-        $this->getSelect()->columns(['site.*'])
-            ->innerJoin('siteDomain', 'siteDomain.siteId = site.id');
+        $this->getSelect()->columns(['main.*'])
+            ->innerJoin('siteDomain', 'siteDomain.siteId = main.id');
         $this->where('siteDomain.domain = ?', $domain);
         $this->load($entityModel);
         $siteId = $entityModel->get('id');

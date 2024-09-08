@@ -31,9 +31,9 @@ class User extends Model
     {
         $tokenResourceModel = new TokenResourceModel;
         $tokenResourceModel->getSelect()->columns(['user.*'])
-            ->innerJoin('user', 'user.id = userToken.userId');
-        $tokenResourceModel->where('userToken.ip = ?', $ip);
-        $tokenResourceModel->load($model, $token, 'userToken.token');
+            ->innerJoin('user', 'user.id = main.userId');
+        $tokenResourceModel->where('main.ip = ?', $ip);
+        $tokenResourceModel->load($model, $token, 'main.token');
         return $this;
     }
 }

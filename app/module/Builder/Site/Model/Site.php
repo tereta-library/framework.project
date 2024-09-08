@@ -7,7 +7,7 @@ use Framework\User\Model\User as UserModel;
 use Framework\Application\Manager as ApplicationManager;
 use Exception;
 use Builder\Site\Model\Domain as DomainModel;
-
+use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
 
 /**
  * @class Builder\Site\Model\Site
@@ -30,12 +30,29 @@ class Site extends Model
     private ApplicationManager $applicationManager;
 
     /**
+     * @var null|ConfigurationRepository $configurationRepository
+     */
+    private ?ConfigurationRepository $configurationRepository = null;
+
+    /**
      * @param array $data
      */
     public function __construct(array $data = [])
     {
         $this->applicationManager = ApplicationManager::getInstance();
         parent::__construct($data);
+    }
+
+    /**
+     * @return ConfigurationRepository
+     * @throws Exception
+     */
+    public function getConfig(): ConfigurationRepository
+    {
+        if ($this->configurationRepository) {
+            return $this->configurationRepository;
+        }
+        return $this->configurationRepository = new ConfigurationRepository($this->get('id'));
     }
 
     /**

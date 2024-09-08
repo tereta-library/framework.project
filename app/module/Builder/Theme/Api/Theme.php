@@ -30,11 +30,16 @@ class Theme implements Api
      */
    public function getThemeCurrent(): array
     {
-        $this->siteModel;
-        $currentTheme = 'base';
-        $this->resourceTheme->load($modelTheme = new ModelTheme, [
-            'identifier' => $currentTheme
-        ]);
+        $siteConfig = $this->siteModel->getConfig();
+
+        try {
+            $currentTheme = $siteConfig->get('view.template');
+            $this->resourceTheme->load($modelTheme = new ModelTheme, [
+                'identifier' => $currentTheme
+            ]);
+        } catch (Exception $e) {
+            throw new Exception('Theme configuration not found');
+        }
 
         if (!$modelTheme->get('id')) {
             throw new Exception('Theme not found');
