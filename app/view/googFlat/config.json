@@ -1,0 +1,6 @@
+{
+  "name": "Goog Flat",
+  "description": "Colorized reader",
+  "imageDesktop": "config/desktop.png",
+  "imageMobile": "config/mobile.png"
+}

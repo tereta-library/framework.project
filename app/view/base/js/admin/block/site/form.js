@@ -29,8 +29,12 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.elementIconUploadFile = this.node.querySelector('.uploaderIcon [type="file"]');
         this.initUploadArea(this.elementIconUploadZone, this.elementIconUploadFile, 'iconImage');
 
-        this.themeSelector = new Slider(this.node.querySelector('#themeSelector'));
-        this.theme = new AdminSiteFormTheme(this, this.themeSelector);
+        const themeElement = this.node.querySelector('#themeSelector');
+        const themeItemTemplate = themeElement.innerHTML;
+        themeElement.innerHTML = '';
+
+        this.themeSelector = new Slider(themeElement);
+        this.theme = new AdminSiteFormTheme(this, this.themeSelector, themeItemTemplate);
 
         this.syntax
             .set('showSuccessMessage', false)

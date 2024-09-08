@@ -1,0 +1,6 @@
+{
+  "name": "Base",
+  "description": "Base view",
+  "imageDesktop": "config/desktop.png",
+  "imageMobile": "config/mobile.png"
+}

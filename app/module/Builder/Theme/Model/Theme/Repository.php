@@ -63,6 +63,38 @@ class Repository extends AbstractRepository
 
     /**
      * @param string $viewDirectory
+     * @param DirectoryIterator $item
+     * @return array
+     * @throws Exception
+     */
+    private function registerTheme(string $viewDirectory, DirectoryIterator $item): array
+    {
+        $themeDirectory = "{$viewDirectory}/{$item->getFilename()}";
+        $descriptionFile = "{$themeDirectory}/config.json";
+
+        $description = [];
+        if (is_file($descriptionFile)) {
+            $description = json_decode(file_get_contents($descriptionFile), true);
+        }
+
+        if (!$this->isValidDescription($description)) {
+            return [];
+        }
+
+        $this->themeResource->load($themeModel = new ThemeModel, ['identifier' => $item]);
+        if ($themeModel->get('id')) {
+            return [];
+        }
+
+        $themeModel->set('identifier', $item->getFilename());
+
+        $this->themeResource->save($themeModel);
+
+        return [$item->getFilename()];
+    }
+
+    /**
+     * @param string $viewDirectory
      * @param ThemeModel $themeModel
      * @return array
      * @throws Exception
@@ -70,7 +102,7 @@ class Repository extends AbstractRepository
     private function unregisterTheme(string $viewDirectory, ThemeModel $themeModel): array
     {
         $themeDirectory = "{$viewDirectory}/{$themeModel->get('identifier')}";
-        $descriptionFile = "{$themeDirectory}/view.json";
+        $descriptionFile = "{$themeDirectory}/config.json";
 
         $description = [];
         if (is_file($descriptionFile)) {
@@ -94,41 +126,9 @@ class Repository extends AbstractRepository
     {
         $allowed = isset($description['name']) && $description['name'];
         $allowed = $allowed && isset($description['description']) && $description['description'];
-        $allowed = $allowed && isset($description['imageTable']) && $description['imageTable'];
+        $allowed = $allowed && isset($description['imageDesktop']) && $description['imageDesktop'];
         $allowed = $allowed && isset($description['imageMobile']) && $description['imageMobile'];
         if (!$allowed) return false;
         return true;
-    }
-
-    /**
-     * @param string $viewDirectory
-     * @param DirectoryIterator $item
-     * @return array
-     * @throws Exception
-     */
-    private function registerTheme(string $viewDirectory, DirectoryIterator $item): array
-    {
-        $themeDirectory = "{$viewDirectory}/{$item->getFilename()}";
-        $descriptionFile = "{$themeDirectory}/view.json";
-
-        $description = [];
-        if (is_file($descriptionFile)) {
-            $description = json_decode(file_get_contents($descriptionFile), true);
-        }
-
-        if (!$this->isValidDescription($description)) {
-            return [];
-        }
-
-        $this->themeResource->load($themeModel = new ThemeModel, ['identifier' => $item]);
-        if ($themeModel->get('id')) {
-            return [];
-        }
-
-        $themeModel->set('identifier', $item->getFilename());
-
-        $this->themeResource->save($themeModel);
-
-        return [$item->getFilename()];
     }
 }

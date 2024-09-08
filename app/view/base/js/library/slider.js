@@ -18,7 +18,11 @@ export default class Slider {
         this.elementCurrent.classList.add('current');
         this.elementNext.classList.add('next');
 
-        this.elementCurrent.append(element);
+        if (typeof element == 'string') {
+            this.elementCurrent.innerHTML = element;
+        } else {
+            this.elementCurrent.append(element);
+        }
 
         this.elementWrapper.append(this.elementPrevious);
         this.elementWrapper.append(this.elementCurrent);
@@ -32,7 +36,12 @@ export default class Slider {
         }
         this.lock = true;
         this.elementNext.innerHTML = '';
-        this.elementNext.append(element);
+
+        if (typeof element == 'string') {
+            this.elementNext.innerHTML = element;
+        } else {
+            this.elementNext.append(element);
+        }
 
         this.elementRoot.classList.add('slotRight');
         this.elementRoot.classList.remove('slotLeft');
@@ -49,7 +58,12 @@ export default class Slider {
 
         this.lock = true;
         this.elementPrevious.innerHTML = '';
-        this.elementPrevious.append(element);
+
+        if (typeof element == 'string') {
+            this.elementPrevious.innerHTML = element;
+        } else {
+            this.elementPrevious.append(element);
+        }
 
         this.elementRoot.classList.add('slotLeft');
         this.elementRoot.classList.remove('slotRight');

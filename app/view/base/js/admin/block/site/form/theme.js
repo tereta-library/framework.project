@@ -1,56 +1,72 @@
+import Syntax from '../../../syntax.js';
+
 export class AdminSiteFormTheme {
     slider = null;
     parent = null;
     locked = false;
-    currentThemeNumber = 1;
+    themeId = 1;
+    themeItemTemplate = null;
 
-    constructor(parent, slider) {
+    constructor(parent, slider, themeItemTemplate) {
         this.slider = slider;
         this.parent = parent;
+        this.themeItemTemplate = themeItemTemplate;
     }
 
     render() {
         this.themeLoad(
-            this.currentThemeNumber,
-            (content, number) => {
+            this.themeId,
+            (data, themeId) => {
+                const content = this.renderItem(data);
                 this.slider.render(content);
-                this.themeLoaded(number);
+                this.themeLoaded(themeId);
             }
         );
     }
 
     previous() {
         this.themeLoad(
-            this.currentThemeNumber - 1,
-            (content, number) => {
-                this.slider.previous(content, this.themeLoaded.bind(this, number))
+            '<' + (this.themeId - 1),
+            (data, themeId) => {
+                const content = this.renderItem(data);
+                this.slider.previous(content, this.themeLoaded.bind(this, themeId))
             }
         );
     }
 
     next() {
         this.themeLoad(
-            this.currentThemeNumber + 1,
-            (content, number) => {
-                this.slider.next(content, this.themeLoaded.bind(this, number));
+            this.themeId + 1,
+            (data, themeId) => {
+                const content = this.renderItem(data);
+                this.slider.next(content, this.themeLoaded.bind(this, themeId));
             }
         );
     }
 
-    themeLoaded(themeNumber) {
-        this.locked = false;
-        this.parent.syntax.update();
-        this.currentThemeNumber = themeNumber;
+    renderItem(data) {
+        const element = document.createElement('div');
+        element.innerHTML = this.themeItemTemplate;
+
+        (new Syntax(element, data)).update();
+
+        return element;
     }
 
-    themeLoad(themeNumber, callback) {
+    themeLoaded(themeId) {
+        this.locked = false;
+        this.parent.syntax.update();
+        this.themeId = themeId;
+    }
+
+    themeLoad(themeId, callback) {
         this.locked = true;
         this.parent.syntax.update();
 
         const token = this.parent.rootAdminJs.getToken();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/json/site/configuration/theme/' + themeNumber, true);
+        xhr.open('GET', '/api/json/site/configuration/theme/' + themeId, true);
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader('API-Token', token);
 
@@ -60,7 +76,7 @@ export class AdminSiteFormTheme {
             }
 
             const jsonResponse = JSON.parse(this.responseText);
-            callback('Theme ' + jsonResponse.number, parseInt(jsonResponse.number));
+            callback(jsonResponse, parseInt(jsonResponse.id));
         }
 
         xhr.send();
