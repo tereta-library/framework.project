@@ -40,13 +40,6 @@ class Repository extends AbstractRepository
         $this->resourceConfiguration = new ResourceConfiguration;
     }
 
-    public function load(int $siteId, array $paths = []): void
-    {
-        foreach ($paths as $path) {
-
-        }
-    }
-
     /**
      * @param string $path
      * @return string|null
@@ -71,8 +64,6 @@ class Repository extends AbstractRepository
             $this->siteId,
             $path
         );
-
-        // @todo Loading the model from the database logic
 
         return $this->setRegisterModel($model);
     }
