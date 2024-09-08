@@ -4,7 +4,7 @@ export class AdminSiteFormTheme {
     slider = null;
     parent = null;
     locked = false;
-    themeId = 1;
+    themeId = null;
     themeItemTemplate = null;
 
     constructor(parent, slider, themeItemTemplate) {
@@ -66,7 +66,11 @@ export class AdminSiteFormTheme {
         const token = this.parent.rootAdminJs.getToken();
 
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/json/site/configuration/theme/' + themeId, true);
+        if (themeId === null) {
+            xhr.open('GET', '/api/json/site/configuration/theme/current', true);
+        } else {
+            xhr.open('GET', '/api/json/site/configuration/theme/' + themeId, true);
+        }
         xhr.setRequestHeader('Cache-Control', 'no-cache');
         xhr.setRequestHeader('API-Token', token);
 

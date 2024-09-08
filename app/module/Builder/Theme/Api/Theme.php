@@ -24,6 +24,26 @@ class Theme implements Api
     }
 
     /**
+     * @return array
+     * @throws Exception
+     * @api GET /^site\/configuration\/theme\/current$/Usi
+     */
+   public function getThemeCurrent(): array
+    {
+        $this->siteModel;
+        $currentTheme = 'base';
+        $this->resourceTheme->load($modelTheme = new ModelTheme, [
+            'identifier' => $currentTheme
+        ]);
+
+        if (!$modelTheme->get('id')) {
+            throw new Exception('Theme not found');
+        }
+
+        return $this->getThemeById((string) $modelTheme->get('id'));
+    }
+
+    /**
      * @param string $id
      * @return array
      * @throws Exception
