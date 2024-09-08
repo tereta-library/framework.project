@@ -20,9 +20,9 @@ class Themes extends Upgrade
     {
         $connection = $this->connection;
 
-        $tableQuery = Factory::createTable('siteThemes');
+        $tableQuery = Factory::createTable('theme');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Theme ID');
-        $tableQuery->addString('directory', $tableQuery::TYPE_VARCHAR)->setUnique()->setComment('Layout directory');
+        $tableQuery->addString('identifier', $tableQuery::TYPE_VARCHAR)->setUnique()->setComment('Layout directory name');
         $connection->query($tableQuery->build());
     }
 }
