@@ -11,7 +11,7 @@ export class AdminSiteForm extends AdminTemplateForm {
     themeSelector         = null;
     config                = null;
     formData         = new FormData();
-
+    extendedVariables      = {};
 
     /**
      *
@@ -159,31 +159,34 @@ export class AdminSiteForm extends AdminTemplateForm {
         xhr.setRequestHeader('API-Token', token);
 
         xhr.onload = function(xhr) {
-            if (this.status === 200) {
-                const jsonResponse = JSON.parse(this.responseText);
-
-                if (jsonResponse.error) {
-                    syntax.set('isSave', false);
-                    syntax.set('showSuccessMessage', false);
-                    syntax.set('showErrorMessage', true);
-                    syntax.set('errorMessage', 'Error: ' + jsonResponse.error);
-                } else {
-                    syntax.set('isSave', false);
-                    syntax.set('showSuccessMessage', true);
-                    syntax.set('successMessage', 'Site Configuration Saved');
-                }
-
-                self.show(jsonResponse);
-                syntax.update();
-
-                self.rootAdminJs.elementCanvas.contentWindow.location.reload();
-
-                setTimeout(() => {
-                    syntax.set('showSuccessMessage', false);
-                    syntax.set('showErrorMessage', false);
-                    syntax.update();
-                }, 5000);
+            if (this.status !== 200) {
+                return;
             }
+
+            const jsonResponse = JSON.parse(this.responseText);
+            self.extendedVariables = {};
+
+            if (jsonResponse.error) {
+                syntax.set('isSave', false);
+                syntax.set('showSuccessMessage', false);
+                syntax.set('showErrorMessage', true);
+                syntax.set('errorMessage', 'Error: ' + jsonResponse.error);
+            } else {
+                syntax.set('isSave', false);
+                syntax.set('showSuccessMessage', true);
+                syntax.set('successMessage', 'Site Configuration Saved');
+            }
+
+            self.show(jsonResponse);
+            syntax.update();
+
+            self.rootAdminJs.elementCanvas.contentWindow.location.reload();
+
+            setTimeout(() => {
+                syntax.set('showSuccessMessage', false);
+                syntax.set('showErrorMessage', false);
+                syntax.update();
+            }, 5000);
         };
 
         this.formData.append('copyright', this.syntax.get('copyright'));
@@ -192,6 +195,10 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.formData.append('phone', this.syntax.get('phone'));
         this.formData.append('email', this.syntax.get('email'));
         this.formData.append('name', this.syntax.get('name'));
+        Object.keys(this.extendedVariables).forEach((key) => {
+            const value = this.extendedVariables[key];
+            this.formData.append(`extendedVariables[${key}]`, value);
+        });
         if (this.syntax.get('iconImageFile')) {
             this.formData.append('iconImage', this.syntax.get('iconImageFile'));
         }

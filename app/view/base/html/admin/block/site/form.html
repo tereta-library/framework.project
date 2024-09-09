@@ -97,12 +97,11 @@
                 <link href="/resource/base/css/library/slider.css" rel="stylesheet" />
                 <div class="fields" data-variable="class:locked:theme.locked">
                     <div id="themeSelector">
-                        <a href="">
-                            <img data-variable="attribute:src:imageDesktop" />
-                        </a>
+                        <span class="checkButton" data-variable="class:locked:isLocked" data-event="click:theme.themeSelect">&check;</span>
+                        <img data-variable="attribute:src:imageDesktop" />
                     </div>
-                    <div class="previousButton" data-event="click:theme.previous">Previous</div>
-                    <div class="nextButton" data-event="click:theme.next">Next</div>
+                    <div class="previousButton" data-event="click:theme.previous">&#8678;</div>
+                    <div class="nextButton" data-event="click:theme.next">&#8680;</div>
                 </div>
             </fieldset>
         </div>

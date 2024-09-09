@@ -52,7 +52,7 @@ class Site extends Model
         if ($this->configurationRepository) {
             return $this->configurationRepository;
         }
-        return $this->configurationRepository = new ConfigurationRepository($this->get('id'));
+        return $this->configurationRepository = ConfigurationRepository::getSiteInstance($this->get('id'));
     }
 
     /**

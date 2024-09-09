@@ -6,6 +6,8 @@ export class AdminSiteFormTheme {
     locked = false;
     themeId = null;
     themeItemTemplate = null;
+    themeIdentifier = null;
+    themeIdentifierSelected = null;
 
     constructor(parent, slider, themeItemTemplate) {
         this.slider = slider;
@@ -13,10 +15,18 @@ export class AdminSiteFormTheme {
         this.themeItemTemplate = themeItemTemplate;
     }
 
+    themeSelect() {
+        this.parent.extendedVariables['view.template'] = this.themeIdentifier;
+        this.themeIdentifierSelected = this.themeIdentifier;
+        this.parent.syntax.set('isSave', true).update();
+        this.currentSyntax.set('isLocked', true).update();
+    }
+
     render() {
         this.themeLoad(
             this.themeId,
             (data, themeId) => {
+                this.themeIdentifierSelected = data.identifier;
                 const content = this.renderItem(data);
                 this.slider.render(content);
                 this.themeLoaded(themeId);
@@ -48,8 +58,12 @@ export class AdminSiteFormTheme {
         const element = document.createElement('div');
         element.innerHTML = this.themeItemTemplate;
 
-        (new Syntax(element, data)).update();
+        data.theme = this.parent.theme;
+        data.isLocked = (data.identifier === this.themeIdentifierSelected);
+        this.currentSyntax = (new Syntax(element, data));
+        this.currentSyntax.update();
 
+        this.themeIdentifier = data.identifier;
         return element;
     }
 

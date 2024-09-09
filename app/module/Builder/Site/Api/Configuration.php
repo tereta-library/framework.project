@@ -7,13 +7,14 @@ use Framework\Api\Interface\Api;
 use Exception;
 use Framework\Application\Manager\Http\Parameter\Post as PostParameter;
 use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
+use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
 
 /**
  * @class Builder\Site\Api\Configuration
  */
 class Configuration implements Api
 {
-    use AdministratorTrait;
+    use AdministratorTrait { construct as private constructTrait; }
 
     /**
      * @var EntityResourceModel $siteResourceModel
@@ -21,11 +22,22 @@ class Configuration implements Api
     private EntityResourceModel $siteResourceModel;
 
     /**
+     * @var ConfigurationRepository $configurationRepository
+     */
+    private ConfigurationRepository $configurationRepository;
+
+    /**
      * @throws Exception
      */
     public function __construct()
     {
-        $this->siteResourceModel = new EntityResourceModel();
+        $this->siteResourceModel = new EntityResourceModel;
+    }
+
+    public function construct() {
+        $this->constructTrait();
+
+        $this->configurationRepository = ConfigurationRepository::getSiteInstance($this->siteModel->get('id'));
     }
 
     /**
@@ -54,6 +66,11 @@ class Configuration implements Api
             $this->siteModel->setFiles($_FILES);
             $this->siteResourceModel->save($this->siteModel);
             $this->siteResourceModel->load($this->siteModel);
+
+            foreach ($payload->extendedVariables as $key => $value) {
+                $this->configurationRepository->set($key, $value);
+            }
+
             return $this->siteModel->getPublicData();
         } catch (Exception $e) {
             $this->siteResourceModel->load($this->siteModel);

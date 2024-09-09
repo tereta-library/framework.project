@@ -68,6 +68,7 @@ class Theme implements Api
 
         return [
             'id' => $modelTheme->get('id'),
+            'identifier' => $modelTheme->get('identifier'),
             'name' => 'Theme ' . $modelTheme->get('id'),
             'description' => 'Description of theme ' . $modelTheme->get('id'),
             'price' => 0.00,
