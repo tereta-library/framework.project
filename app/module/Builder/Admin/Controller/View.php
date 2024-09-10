@@ -28,6 +28,8 @@ use Exception;
  */
 class View implements Controller
 {
+    const THEME_DEFAULT = 'base';
+
     /**
      * @router expression GET /^\/admin$/Usi
      * @return string
@@ -35,8 +37,13 @@ class View implements Controller
      */
     public function render(): string
     {
-        $view = Manager::getInstance()->getView();
+        $config = Manager::getInstance()->getConfig();
+        $viewDirectory = $config->get('viewDirectory');
+        $generatedDirectory = $config->get('generatedDirectory');
+        $theme = static::THEME_DEFAULT;
+        $config->set('themeDirectory', "{$viewDirectory}/{$theme}/layout");
+        $config->set('generatedThemeDirectory', "{$generatedDirectory}/{$theme}/layout");
 
-        return (string) $view->render('admin');
+        return (string) Manager::getInstance()->getView()->render('admin');
     }
 }
