@@ -25,7 +25,7 @@ class Repository extends AbstractRepository
     /**
      * @var string
      */
-    protected string $registeredId = 'id';
+    protected string $registeredId = 'pathId';
 
     /**
      * @var int $siteId
@@ -83,6 +83,7 @@ class Repository extends AbstractRepository
     {
         $model = $this->getModel($key);
         $model->set('value', $value);
+        $model->set('siteId', $this->siteId);
 
         $this->resourceConfigurationValue->save($model);
 

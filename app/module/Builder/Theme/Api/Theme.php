@@ -34,6 +34,7 @@ class Theme implements Api
 
         try {
             $currentTheme = $siteConfig->get('view.template');
+            $currentTheme = $currentTheme ?? 'base';
             $this->resourceTheme->load($modelTheme = new ModelTheme, [
                 'identifier' => $currentTheme
             ]);

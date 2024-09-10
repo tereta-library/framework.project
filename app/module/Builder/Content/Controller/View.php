@@ -46,8 +46,7 @@ class View implements Controller
             return (new ErrorController)->notFound();
         }
 
-        $siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
-        $view = $siteModel->getView();
+        $view = Manager::getInstance()->getView();
 
         $layout = $view->initialize('cms');
         $layout->getBlockById('headSeo')

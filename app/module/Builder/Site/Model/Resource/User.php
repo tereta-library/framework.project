@@ -28,7 +28,7 @@ class User extends Model
      */
     public function loadByBound(SiteUserModel $model, int $siteId, int $userId): static
     {
-        $this->getSelect()->columns(['main.*']);
+        $this->getSelect()->columns('main.*');
         $this->where('main.siteId = ?', $siteId);
         $this->where('main.userId = ?', $userId);
         $this->load($model);

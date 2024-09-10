@@ -24,10 +24,10 @@ class Configuration extends AbstractResourceModel
 
     public function loadByPath(ModelConfiguration $model, int $siteId, string $path): void
     {
-        $this->getSelect()->innerJoin(
+        $this->getSelect()->leftJoin(
             ['scv' => 'siteConfigurationValue'],
-            'scv.siteId = main.id'
-        );
-        $this->load($model, ['siteId' => $siteId, 'path' => $path]);
+            'scv.pathId = main.id AND scv.siteId = ' . $siteId
+        )->columns(['main.id' => 'pathId'], ['scv.id' => 'id'], 'path', 'value', 'siteId');
+        $this->load($model, ['path' => $path]);
     }
 }

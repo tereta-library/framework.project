@@ -30,7 +30,7 @@ class User extends Model
     public function loadByToken(UserModel $model, string $token, string $ip): static
     {
         $tokenResourceModel = new TokenResourceModel;
-        $tokenResourceModel->getSelect()->columns(['user.*'])
+        $tokenResourceModel->getSelect()->columns('user.*')
             ->innerJoin('user', 'user.id = main.userId');
         $tokenResourceModel->where('main.ip = ?', $ip);
         $tokenResourceModel->load($model, $token, 'main.token');
