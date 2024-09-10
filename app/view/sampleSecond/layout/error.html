@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+    <meta name="backend-update" content="index" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/error/style.css" />
+</head>
+<body>
+    <main data-backend-replace="#main" id="main" data-backend-block="Framework\Application\Block\Error" class="main">
+        <content class="contentError">
+            <!--: if $title -->
+                <h1><!--: echo $title --></h1>
+            <!--: endif -->
+            <table>
+                <tr>
+                    <th>Error Code</th>
+                    <td><!--: echo $code --></td>
+                </tr>
+                <tr>
+                    <th>HTTP Method</th>
+                    <td><!--: echo $method --></td>
+                </tr>
+                <tr>
+                    <th>HTTP URL</th>
+                    <td><!--: echo $url --></td>
+                </tr>
+                <!--: if $message -->
+                <tr>
+                    <th>Error Message</th>
+                    <td><!--: echo $message --></td>
+                </tr>
+                <!--: endif -->
+                <!--: if $backTrace -->
+                <tr>
+                    <th>Error Backtrace</th>
+                    <td><pre><!--: echo $backTrace --></pre></td>
+                </tr>
+                <!--: endif -->
+            </table>
+        </content>
+    </main>
+</body>
+</html>

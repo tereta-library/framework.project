@@ -8,6 +8,7 @@ use Framework\Application\Manager as ApplicationManager;
 use Exception;
 use Builder\Site\Model\Domain as DomainModel;
 use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
+use Framework\View\Html;
 
 /**
  * @class Builder\Site\Model\Site
@@ -33,6 +34,11 @@ class Site extends Model
      * @var null|ConfigurationRepository $configurationRepository
      */
     private ?ConfigurationRepository $configurationRepository = null;
+
+    /**
+     * @var Html|null $view
+     */
+    private ?Html $view = null;
 
     /**
      * @param array $data
@@ -180,6 +186,33 @@ class Site extends Model
 
         $this->set($key, $fileName);
         return $this;
+    }
+
+    /**
+     * @return Html
+     * @throws Exception
+     */
+    public function getView(): Html
+    {
+        $theme = $this->getConfig()->get('view.template');
+        if (!$theme) {
+            return $this->applicationManager->getView();
+        }
+
+        if ($this->view) {
+            return $this->view;
+        }
+
+        $applicationConfig = $this->applicationManager->getConfig();
+        $viewDirectory = $applicationConfig->get('viewDirectory');
+        $generatedDirectory = $applicationConfig->get('generatedDirectory');
+        $themeDirectory = "{$viewDirectory}/{$theme}/layout";
+        $generatedThemeDirectory = "{$generatedDirectory}/{$theme}/layout";
+
+        return $this->view = new Html(
+            $themeDirectory,
+            $generatedThemeDirectory
+        );
     }
 
     /**

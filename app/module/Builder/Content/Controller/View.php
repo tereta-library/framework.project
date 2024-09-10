@@ -8,6 +8,7 @@ use Builder\Content\Model\Resource\Content as ResourceContent;
 use Builder\Content\Model\Content as ModelContent;
 use Exception;
 use Framework\Application\Controller\Error as ErrorController;
+use Builder\Site\Model\Repository as SiteRepository;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -45,7 +46,8 @@ class View implements Controller
             return (new ErrorController)->notFound();
         }
 
-        $view = Manager::getInstance()->getView();
+        $siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
+        $view = $siteModel->getView();
 
         $layout = $view->initialize('cms');
         $layout->getBlockById('headSeo')

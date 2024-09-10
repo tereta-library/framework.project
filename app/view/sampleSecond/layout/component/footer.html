@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/component/social/style.css" />
+
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/component/footer/common.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/base/css/component/footer/tablet.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="/resource/base/css/component/footer/desktop.css" />
+</head>
+<body>
+    <footer class="footer" data-backend-replace="#footer" data-backend-block="Builder\Site\Block\Data">
+        <div>
+            <a href="#" class="logo">
+                <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+            </a>
+            <div class="contacts">
+                <a href="" class="phoneNumber" data-backend-bind="attribute:href:$string->concat('tel:', $this->phoneNumber($site[phone]))">
+                    <!--: echo $site[phone] -->
+                </a>
+                <a href="" class="eMail"><!--: echo $site[email] --></a>
+            </div>
+            <ul data-backend-block="Builder\Social\Block\Icons" class="socialHub">
+                <!--: foreach $icons -->
+                    <li class="socialHubItem">
+                        <a data-backend-bind="attribute:href:$item[url]; attribute:class:$string->concat('icon', $string->capitalUpperCase($key))">
+                            <span>
+                                <!--: echo $item[label] -->
+                            </span>
+                        </a>
+                    </li>
+                <!--: endforeach -->
+            </ul>
+            <div class="copy">
+                <span>
+                    <!--: echo $site[copyright] -->
+                </span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
