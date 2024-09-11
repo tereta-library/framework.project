@@ -18,6 +18,9 @@ class Configuration
     public function viewConfig(array $arguments): void
     {
         $applicationManager = $arguments['manager'];
+        if (!isset($_SERVER['HTTP_HOST'])) {
+            return;
+        }
 
         $siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
         $theme = $siteModel->getConfig()->get('view.template');

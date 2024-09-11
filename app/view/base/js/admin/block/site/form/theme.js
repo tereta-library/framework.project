@@ -22,11 +22,20 @@ export class AdminSiteFormTheme {
         this.currentSyntax.set('isLocked', true).update();
     }
 
-    render() {
+    render(canLock = true) {
         this.themeLoad(
             this.themeId,
             (data, themeId) => {
+                if (data.errorCode && data.errorCode === 404) {
+                    this.themeId = 0;
+                    this.render(false);
+                    return;
+                }
+
                 this.themeIdentifierSelected = data.identifier;
+                if (!canLock) {
+                    data.isLocked = false;
+                }
                 const content = this.renderItem(data);
                 this.slider.render(content);
                 this.themeLoaded(themeId);
@@ -59,7 +68,9 @@ export class AdminSiteFormTheme {
         element.innerHTML = this.themeItemTemplate;
 
         data.theme = this.parent.theme;
-        data.isLocked = (data.identifier === this.themeIdentifierSelected);
+        if (data.isLocked === undefined) {
+            data.isLocked = (data.identifier === this.themeIdentifierSelected);
+        }
         this.currentSyntax = (new Syntax(element, data));
         this.currentSyntax.update();
 

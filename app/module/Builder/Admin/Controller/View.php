@@ -41,8 +41,8 @@ class View implements Controller
         $viewDirectory = $config->get('viewDirectory');
         $generatedDirectory = $config->get('generatedDirectory');
         $theme = static::THEME_DEFAULT;
-        $config->set('themeDirectory', "{$viewDirectory}/{$theme}/layout");
-        $config->set('generatedThemeDirectory', "{$generatedDirectory}/{$theme}/layout");
+        $config->set('themeDirectory', "{$viewDirectory}/{$theme}");
+        $config->set('generatedThemeDirectory', "{$generatedDirectory}/{$theme}");
 
         return (string) Manager::getInstance()->getView()->render('admin');
     }
