@@ -2,5 +2,6 @@
   "name": "Sample First",
   "description": "Sample First view",
   "imageDesktop": "config/desktop.png",
-  "imageMobile": "config/mobile.png"
+  "imageMobile": "config/mobile.png",
+  "dependency": "base"
 }

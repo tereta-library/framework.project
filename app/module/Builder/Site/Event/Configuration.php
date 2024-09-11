@@ -28,7 +28,7 @@ class Configuration
         $applicationConfig = $applicationManager->getConfig();
         $viewDirectory = $applicationConfig->get('viewDirectory');
         $generatedDirectory = $applicationConfig->get('generatedDirectory');
-        $applicationConfig->set('themeDirectory', "{$viewDirectory}/{$theme}/layout");
-        $applicationConfig->set('generatedThemeDirectory', "{$generatedDirectory}/{$theme}/layout");
+        $applicationConfig->set('themeDirectory', "{$viewDirectory}/{$theme}");
+        $applicationConfig->set('generatedThemeDirectory', "{$generatedDirectory}/{$theme}");
     }
 }
