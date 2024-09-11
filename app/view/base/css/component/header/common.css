@@ -1,6 +1,6 @@
 .header {
   font-family: "Montserrat", sans-serif;
-  background-color: #FFDF1B;
+  background-color: #dddddd;
 }
 .headerBox {
   text-align: center;
@@ -45,7 +45,6 @@
 .headerMenu .burgerMenu .iconBurger {
   align-content: center;
   background-color: #000;
-  color: #ffdf1b;
   font-size: 30px;
   justify-content: center;
   min-height: 40px;
