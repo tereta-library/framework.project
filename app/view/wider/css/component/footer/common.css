@@ -1,0 +1,134 @@
+.footer {
+  background: #F5F5F5;
+  font-family: "Montserrat", sans-serif;
+  display: grid;
+  grid-template: 45px min-content 25px/1fr;
+}
+.footerContainer {
+  grid-row: 2/3;
+  display: grid;
+  grid-template: 1fr/1fr minmax(auto, 1200px) 1fr;
+}
+.footerBox {
+  grid-column: 2/3;
+  padding: 0px 15px;
+  display: grid;
+  grid-template: min-content min-content 66px min-content/1fr;
+}
+.footerLogo {
+  grid-row: 1/2;
+  text-align: center;
+}
+.footerLogoLink img {
+  padding-top: 9px;
+  max-width: 156px;
+  max-height: 60px;
+}
+.footerColor {
+  color: #FFDF1B;
+}
+.footerLogoText {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+  line-height: 1.8;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.footerSh {
+  grid-row: 3/4;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+.footerContacts {
+  grid-row: 2/3;
+  display: grid;
+  grid-template: 1fr 1fr 1fr/1fr;
+  grid-column-gap: 30px;
+  text-align: center;
+}
+.footerContacts-container {
+  display: grid;
+  grid-template: 25px 36px min-content/1fr;
+}
+.footer .icon {
+  position: relative;
+  top: 6px;
+  font-size: 25px;
+}
+.footer .line {
+  background-color: #808080;
+  max-width: 100%;
+  width: 95px;
+  height: 2px;
+  border: 0;
+}
+.footer .socialHub {
+  list-style: none;
+  font-size: 16px;
+}
+.footer .socialHubItem {
+  overflow: hidden;
+  width: 25px;
+  font-size: 25px;
+  display: inline-block;
+  margin: 0 5px;
+  background: transparent;
+}
+.footer .socialHubItem a {
+  border: none;
+  text-decoration: none;
+  color: #000;
+}
+.footer .copy {
+  grid-row: 4/5;
+  text-align: center;
+  letter-spacing: 0px;
+  line-height: 1.8;
+  font-size: 13px;
+}
+.footer .copyLink {
+  text-decoration: none;
+  color: #000000;
+  transition: 0.3s;
+}
+.footer .copyLink:hover {
+  color: #FFDF1B;
+  transition: 0.3s;
+}
+
+.contactsLogo {
+  grid-row: 2/3;
+  display: grid;
+  grid-template: 1fr/1fr minmax(auto, 17%) 1fr;
+}
+.contactsLine-l {
+  display: inline-block;
+  padding: 20px 15px 20px 0px;
+  justify-self: end;
+}
+.contactsLine-r {
+  display: inline-block;
+  padding: 20px 0px 20px 15px;
+  justify-self: start;
+}
+.contactsText {
+  grid-row: 3/4;
+  display: inline-block;
+  padding-top: 15px;
+  line-height: 1.8;
+  font-size: 13px;
+}
+.contactsLink {
+  text-decoration: none;
+  color: #000000;
+  transition: 0.3s;
+}
+.contactsLink:hover {
+  color: #FFDF1B;
+  transition: 0.3s;
+}
+
+/*# sourceMappingURL=common.css.map */

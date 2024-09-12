@@ -1,0 +1,63 @@
+.headerLogo {
+    background: rgba(255, 162, 0, 0.9333333333);
+    padding: 0 5px 0 5px;
+    margin: 0 70px -16px 0;
+    height: 75px;
+}
+
+.header {
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.headerMenu {
+    padding: 0;
+
+    .menu {
+        & > .menuSubMenu {
+            & > label:before {
+                background: transparent;
+            }
+        }
+
+        & > .menuItem {
+            height: 25px;
+            float: left;
+
+            padding: 25px 20px 25px 20px;
+            color: #fff;
+            font-size: 20px;
+            font-weight: normal;
+            margin: 0 0 -15px 0;
+            text-transform: none;
+
+            & > label {
+                .textLabel {
+                    color: #fff;
+                }
+            }
+
+            & > a {
+                color: #fff;
+            }
+
+            &:nth-child(1) {
+                background: #ffa200ee;
+            }
+
+            &:nth-child(2) {
+                background: #15c1e5ee;
+            }
+
+            &:nth-child(3) {
+                background: #ca3535ee;
+            }
+
+            &:last-child {
+                background: #ffa200ee;
+                float: right;
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Wider",
+  "description": "Wider view",
+  "imageDesktop": "config/desktop.png",
+  "imageMobile": "config/mobile.png",
+  "dependency": "base"
+}

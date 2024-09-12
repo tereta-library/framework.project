@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/component/social/style.css" />
+
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/wider/css/component/footer/common.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/wider/css/component/footer/tablet.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="/resource/wider/css/component/footer/desktop.css" />
+
+    <meta name="backend-allowDependency" content="false" />
+</head>
+<body>
+    <footer class="footer" id="footer" data-backend-replace="#footer" data-backend-block="Builder\Site\Block\Data">
+        <div class="footerContainer">
+            <div class="footerBox">
+                <div class="footerLogo">
+                    <p>
+                        <a href="#" class="footerLogoLink">
+                            <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+                        </a>
+                    </p>
+                    <p><a href="#" class="footerLogoText"><!--: echo $site[tagline] --></a></p>
+                </div>
+
+                <div class="footerContacts">
+                    <!--: if $site[address] -->
+                    <div class="footerContacts-container" data-admin-init='"site": {"field": "address"}'>
+                        <div class="contactsLogo">
+                            <div class="contactsLine-l">
+                                <hr class="line" />
+                            </div>
+                            <span class="footerColor icon icon-user-plus"></span>
+                            <div class="contactsLine-r">
+                                <hr class="line" />
+                            </div>
+                        </div>
+                        <div class="contactsText"><!--: echo $site[address] --></div>
+                    </div>
+                    <!--: endif -->
+                    <!--: if $site[phone] -->
+                    <div class="footerContacts-container" data-admin-init='"site": {"field": "phone"}'>
+                        <div class="contactsLogo">
+                            <div class="contactsLine-l">
+                                <hr class="line" />
+                            </div>
+                            <span class="footerColor icon icon-phone"></span>
+                            <div class="contactsLine-r">
+                                <hr class="line" />
+                            </div>
+                        </div>
+                        <div class="contactsText"><span>Phone:</span>
+                            <a data-action="call" data-backend-bind="attribute:href:$string->concat('tel:', $this->phoneNumber($site[phone]))"
+                               class="contactsLink"><!--: echo $site[phone] --></a>
+                        </div>
+                    </div>
+                    <!--: endif -->
+                    <!--: if $site[email] -->
+                    <div class="footerContacts-container" data-admin-init='"site": {"field": "email"}'>
+                        <div class="contactsLogo">
+                            <div class="contactsLine-l">
+                                <hr class="line" />
+                            </div>
+                            <span class="footerColor icon icon-mail"></span>
+                            <div class="contactsLine-r">
+                                <hr class="line" />
+                            </div>
+                        </div>
+                        <div class="contactsText">
+                            <a data-backend-bind="attribute:href:$string->concat('mailto:', $site[email])"
+                               data-action="mail"
+                               class="contactsLink"><!--: echo $site[email] --></a>
+                        </div>
+                    </div>
+                    <!--: endif -->
+                </div>
+                <div class="footerSh">
+                    <ul data-backend-block="Builder\Social\Block\Icons" class="socialHub">
+                        <!--: foreach $icons -->
+                        <li class="socialHubItem">
+                            <a data-backend-bind="attribute:href:$item[url]; attribute:class:$string->concat('icon', $string->capitalUpperCase($key))">
+                            <span>
+                                <!--: echo $item[label] -->
+                            </span>
+                            </a>
+                        </li>
+                        <!--: endforeach -->
+                    </ul>
+                </div>
+                <div class="copy">
+                    <p><!--: echo $site[copyright] --></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
