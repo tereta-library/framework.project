@@ -1,0 +1,171 @@
+$primary-color: #FFDF1B;
+$color2: #ffffff;
+$color3: #000000;
+
+.footer {
+    background: #F5F5F5;
+    font-family: 'Montserrat', sans-serif;
+    display: grid;
+    grid-template: 45px min-content 25px / 1fr;
+
+    &Container {
+        grid-row: 2/3;
+        display: grid;
+        grid-template: 1fr / 1fr minmax(auto, 1200px) 1fr;
+    }
+
+    &Box {
+        grid-column: 2/3;
+        padding: 0px 15px;
+        display: grid;
+        grid-template: min-content min-content 66px min-content / 1fr;
+    }
+
+    &Logo {
+        grid-row: 1/2;
+        text-align: center;
+    }
+
+    &LogoLink {
+        img {
+            padding-top: 9px;
+            max-width: 156px;
+            max-height: 60px;
+        }
+    } 
+
+    &Color {
+        color: $primary-color;
+    }  
+
+    &LogoText { 
+        text-decoration: none;
+        color: $color3;
+        font-weight: 600;
+        line-height: 1.8;  
+        font-size: 12px; 
+        letter-spacing: 2px;   
+        text-transform: uppercase;
+    }
+ 
+    &Sh {
+        grid-row: 3/4;
+        display: grid;
+        align-items: center;
+        justify-items: center;
+    }
+
+    &Contacts {
+        grid-row: 2/3;
+        display: grid;
+        grid-template: 1fr 1fr 1fr / 1fr;
+        grid-column-gap: 30px;
+        text-align: center;
+
+        &-container {
+            display: grid;
+            grid-template: 25px 36px min-content / 1fr;
+        }
+    }
+
+    .icon {
+        position: relative;
+        top: 6px;
+        font-size: 25px;
+    }
+
+    .line {
+        background-color: #808080;
+        max-width: 100%;
+        width: 95px;
+        height: 2px;
+        border: 0;
+    }
+
+    .socialHub {
+        list-style: none;
+        font-size: 16px;
+
+        &Item {
+            overflow: hidden;
+            width: 25px;
+            font-size: 25px;
+            display: inline-block;
+            margin: 0 5px;
+            background: transparent;
+
+            a {
+                border: none;
+                text-decoration: none;
+                color: #000;
+            }
+        }
+    }
+
+    .copy {
+        grid-row: 4/5;
+        text-align: center;
+        letter-spacing: 0px;
+        line-height: 1.8;
+        font-size: 13px;
+
+        &Link {
+            text-decoration: none;
+            color: $color3;
+            transition: 0.3s;
+
+            &:hover {
+                color: $primary-color;
+                transition: 0.3s;
+            }
+        }
+    }
+}
+
+.contacts {
+    &Logo {
+        grid-row: 2/3;
+        display: grid;
+        grid-template: 1fr / 1fr minmax(auto, 17%) 1fr;
+    }
+
+    &Line-l {
+        display: inline-block;
+        padding: 20px 15px 20px 0px;
+        justify-self: end;
+    }
+
+    &Line-r {
+        display: inline-block;
+        padding: 20px 0px 20px 15px;
+        justify-self: start;
+    }
+
+    &Text {
+        grid-row: 3/4;
+        display: inline-block;
+        padding-top: 15px;
+        line-height: 1.8;
+        font-size: 13px;
+    }
+
+    &Link {
+        text-decoration: none;
+        color: $color3;
+        transition: 0.3s;
+
+        &:hover {
+            color: $primary-color;
+            transition: 0.3s;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+

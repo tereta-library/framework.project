@@ -1,0 +1,40 @@
+$primary-color: #FFDF1B;
+$color2: #ffffff;
+$color3: #000000;
+
+.footer {
+    grid-template: 45px min-content 25px / 1fr;
+
+    &Box {
+        padding: 0px;
+        grid-template: min-content min-content 66px min-content / 1fr;
+    }
+
+    &LogoLink {
+        font-size: 30px;
+        line-height: 1;
+    }
+
+    &Contacts {
+        grid-template: 1fr / 1fr 1fr 1fr;
+
+        &-container {
+            display: grid;
+            grid-template: 25px 32px min-content / 1fr;
+        }
+    } 
+}
+
+.icon {
+    top: 10px;
+    font-size: 20px;
+}
+
+.socialhub {
+    font-size: 16px;
+}
+
+.copy {
+    line-height: 1.8;
+    font-size: 13px;
+}

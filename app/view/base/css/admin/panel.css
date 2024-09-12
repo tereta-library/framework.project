@@ -275,6 +275,9 @@
 #adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .wrapper .previous > div, #adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .wrapper .current > div, #adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .wrapper .next > div {
   position: relative;
 }
+#adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .wrapper .previous > div img, #adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .wrapper .current > div img, #adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .wrapper .next > div img {
+  max-height: 300px;
+}
 #adminPanelControl .formSite .themeConfiguration .fields .sliderCanvas .checkButton {
   position: absolute;
   top: 0;

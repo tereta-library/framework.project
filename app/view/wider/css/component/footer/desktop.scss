@@ -1,0 +1,56 @@
+$primary-color: #FFDF1B;
+$color2: #ffffff;
+$color3: #000000;
+
+.footer {
+    grid-area: footer;
+
+    &Box {
+        grid-column: 2/3;
+        padding: 0px 15px;
+        display: grid;
+        grid-template: min-content 135px 118px min-content / 1fr;
+    }
+
+    &Logo {
+        grid-row: 1/2;
+        text-align: center;
+        
+        &Link {
+            font-size: 40px;
+            text-decoration: none;
+            color: black;
+            line-height: 1.2;
+            letter-spacing: 0px;
+        }
+    }
+
+    &Contacts {
+        &-container {
+            display: grid;
+            grid-template: 50px 42px 43px / 1fr;
+        }
+    }
+}
+
+.contacts {
+    &Text {
+        line-height: 2;
+        font-size: 14px;
+    }
+}
+
+
+.icon {
+    top: 6px;
+    font-size: 25px;
+}
+
+.socialhub {
+    font-size: 17px;
+}
+
+.copy {
+    line-height: 2;
+    font-size: 14px;
+}

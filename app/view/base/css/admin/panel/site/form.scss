@@ -21,6 +21,9 @@
                         .previous, .current, .next {
                             & > div {
                                 position: relative;
+                                img {
+                                    max-height: 300px;
+                                }
                             }
                         }
                     }
