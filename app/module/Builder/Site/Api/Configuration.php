@@ -67,7 +67,9 @@ class Configuration implements Api
             $this->siteResourceModel->save($this->siteModel);
             $this->siteResourceModel->load($this->siteModel);
 
-            foreach ($payload->extendedVariables as $key => $value) {
+            $extendedVariables = $payload->extendedVariables ?? [];
+
+            foreach ($extendedVariables as $key => $value) {
                 $this->configurationRepository->set($key, $value);
             }
 
