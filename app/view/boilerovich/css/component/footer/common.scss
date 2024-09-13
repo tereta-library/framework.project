@@ -1,0 +1,14 @@
+.footer {
+  background: #fbfbfb;
+  color: #000;
+
+  .menuLine {
+    background: #fcef3c;
+  }
+
+  & > div {
+    .copy {
+      color: #000;
+    }
+  }
+}

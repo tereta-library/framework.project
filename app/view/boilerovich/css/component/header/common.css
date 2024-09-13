@@ -1,0 +1,11 @@
+.header {
+  background: none;
+}
+.header .topLine .contacts li a {
+  color: #fff;
+}
+.header .mainLine {
+  background: #fcef3c;
+}
+
+/*# sourceMappingURL=common.css.map */

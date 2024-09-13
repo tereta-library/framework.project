@@ -1,0 +1,12 @@
+.footer {
+  background: #fbfbfb;
+  color: #000;
+}
+.footer .menuLine {
+  background: #fcef3c;
+}
+.footer > div .copy {
+  color: #000;
+}
+
+/*# sourceMappingURL=common.css.map */
