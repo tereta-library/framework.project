@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/base/css/component/social/style.css" />
+
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/boxter/css/component/footer/common.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/boxter/css/component/footer/tablet.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="/resource/boxter/css/component/footer/desktop.css" />
+</head>
+<body>
+    <footer class="footer" id="footer" data-backend-replace="#footer" data-backend-block="Builder\Site\Block\Data">
+        <div class="menuLine">
+            <div>
+                <div class="footerLogo">
+                    <a href="#" class="footerLogoLink">
+                        <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+                    </a>
+                    <a href="#" class="footerLogoText"><!--: echo $site[tagline] --></a>
+                </div>
+
+                <ul data-backend-block="Builder\Social\Block\Icons" class="socialHub">
+                    <!--: foreach $icons -->
+                    <li class="socialHubItem">
+                        <a data-backend-bind="attribute:href:$item[url]; attribute:class:$string->concat('icon', $string->capitalUpperCase($key))">
+                            <span>
+                                <!--: echo $item[label] -->
+                            </span>
+                        </a>
+                    </li>
+                    <!--: endforeach -->
+                </ul>
+
+                <!--: if $site[phone] -->
+                    <a data-backend-bind="attribute:href:$string->concat('tel:', $this->phoneNumber($site[phone]))" class="iconPhone">
+                        <!--: echo $site[phone] -->
+                    </a>
+                <!--: endif -->
+
+                <nav class="headerMenu">
+                    <input type="checkbox" name="burger" class="burgerMenu" id="menu" />
+                    <label for="menu" class="burgerMenu"><span class="iconBurger"></span></label>
+
+                    <backend:container data-backend-block="Builder\Menu\Block\Menu" data-backend-data='"identifier": "default"'>
+                        <ul class="menu">
+                            <!--: foreach $list as $item -->
+                            <li class="menuItem">
+                                <a data-backend-bind="attribute:href:$item[link]">
+                                    <!--: echo $item[label] -->
+                                </a>
+                            </li>
+                            <!--: endforeach -->
+                        </ul>
+                    </backend:container>
+                </nav>
+            </div>
+        </div>
+        <div class="subLine">
+            <div class="copy">
+            <span>
+                <!--: echo $site[copyright] -->
+            </span>
+            </div>
+            <div class="vendor">
+                <img alt="www.tereta.dev" src="{{ mix('img/vendor/developer-tereta-dev.png') }}" />
+                <a href="https://www.tereta.dev/">Design &amp; development www.tereta.dev</a>
+            </div>
+            <div class="message">
+            <span>
+                Дзвоніть з понеділка по неділю, з 9:00 до 19:00, за номером телефона +380687445501.
+            </span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

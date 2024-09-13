@@ -1,0 +1,80 @@
+<html lang="en" xmlns:backend="http://example.com/backend">
+<head>
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/boxter/css/component/header/common.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/boxter/css/component/header/tablet.css" />
+    <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="/resource/boxter/css/component/header/desktop.css" />
+</head>
+<body>
+    <header class="header" id="header" data-backend-replace="#header" data-backend-block="Builder\Site\Block\Data">
+        <div class="topLine">
+            <ul class="contacts">
+                <!--: if $site[phone] -->
+                <li>
+                    <a data-backend-bind="attribute:href:$string->concat('tel:', $this->phoneNumber($site[phone]))" class="iconPhone">
+                        <!--: echo $site[phone] -->
+                    </a>
+                </li>
+                <!--: endif -->
+            </ul>
+        </div>
+        <div class="mainLine">
+            <a href="..." class="logo" data-admin-init='"site": {"field": "logo"}'>
+                <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+                <!--: if $site[tagline] -->
+                <span class="tagline">
+                        <!--: echo $site[tagline] -->
+                    </span>
+                <!--: endif -->
+            </a>
+            <ul data-backend-block="Builder\Social\Block\Icons" class="socialHub">
+                <!--: foreach $icons -->
+                <li class="socialHubItem">
+                    <a data-backend-bind="attribute:href:$item[url]; attribute:class:$string->concat('icon', $string->capitalUpperCase($key))">
+                            <span>
+                                <!--: echo $item[label] -->
+                            </span>
+                    </a>
+                </li>
+                <!--: endforeach -->
+            </ul>
+        </div>
+        <menu>
+            <backend:container data-backend-block="Builder\Menu\Block\Menu" data-backend-data='"identifier": "default"'>
+                <ul class="menu">
+                    <!--: foreach $list as $item -->
+                    <li class="menuItem">
+                        <a data-backend-bind="attribute:href:$item[link]">
+                            <!--: echo $item[label] -->
+                        </a>
+
+                        <!--: if $item[menu] -->
+                        <ul class="menu">
+                            <!--: foreach $item[menu] as $item -->
+                            <li class="menuItem">
+                                <a data-backend-bind="attribute:href:$item[link]">
+                                    <!--: echo $item[label] -->
+                                </a>
+
+                                <!--: if $item[menu] -->
+                                <ul class="menu">
+                                    <!--: foreach $item[menu] as $item -->
+                                    <li class="menuItem">
+                                        <a data-backend-bind="attribute:href:$item[link]">
+                                            <!--: echo $item[label] -->
+                                        </a>
+                                    </li>
+                                    <!--: endforeach -->
+                                </ul>
+                                <!--: endif -->
+                            </li>
+                            <!--: endforeach -->
+                        </ul>
+                        <!--: endif -->
+                    </li>
+                    <!--: endforeach -->
+                </ul>
+            </backend:container>
+        </menu>
+    </header>
+</body>
+</html>

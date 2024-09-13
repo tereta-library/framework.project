@@ -1,0 +1,187 @@
+header {
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto 10px auto;
+    position: relative;
+
+    &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        background: #00000099;
+        z-index: -1;
+    }
+
+    &:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .topLine {
+        clear: both;
+        min-height: 23px;
+        font-size: 14px;
+        position: relative;
+        margin: 0 10px;
+
+        .contacts {
+            margin: 0;
+            float: right;
+            list-style: none;
+
+            li {
+                padding: 3px 0 0 45px;
+                float: left;
+                margin: 0;
+
+                a {
+                    color: #FFFFFF;
+                    text-decoration: none;
+
+                    &.iconPhone{
+                        &:before {
+                            padding: 0 5px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .mainLine {
+        background: #FCEF3C;
+        position: relative;
+        padding: 5px;
+
+        &:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .logo {
+            text-decoration: none;
+            float: left;
+
+            img {
+                display: block;
+                height: 55px;
+            }
+
+            .tagline {
+                font-size: 10px;
+                color: #000;
+                margin: 0;
+                padding: 0;
+                display: block;
+                text-transform: uppercase;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        }
+    }
+
+    menu {
+        position: relative;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        max-width: initial;
+        background: #fff;
+        min-height: 40px;
+        -webkit-box-shadow: -4px 4px 18px -7px rgba(0, 0, 0, 0.75);
+        -moz-box-shadow: -4px 4px 18px -7px rgba(0, 0, 0, 0.75);
+        box-shadow: -4px 4px 18px -7px rgba(0, 0, 0, 0.75);
+        text-transform: uppercase;
+
+        input[type=checkbox] {
+            display: none;
+        }
+
+        & > ul {
+            display: inline-block;
+            margin: 10px 0 0 0;
+            padding: 0;
+            text-align: center;
+
+            & > li {
+                text-align: left;
+
+                & > label, & > a {
+                    padding: 5px 10px;
+                    font-size: 16px;
+                    text-decoration: none;
+                    color: #000;
+                    cursor: pointer;
+                } 
+            }
+        }
+
+        .menu {
+            .menuItem {
+                position: static;
+                display: block;
+                text-align: center;
+
+                & > a, & > label {
+                    border-left: none;
+                }
+
+                & > ul {
+                    position: absolute;
+                    left: 5px;
+                    right: 5px;
+                    width: auto;
+                    bottom: auto;
+                    top: auto;
+                    transform: none;
+
+                    ul {
+                        margin-top: 5px;
+                        width: auto;
+                        left: 0px;
+                        right: 0px;
+                    }
+                }
+            }
+
+            .menuItem:hover > ul {
+                opacity: 0;
+            }
+        }
+    }
+
+    .socialHub {
+        list-style: none;
+        font-size: 16px;
+        float: right;
+        margin-right: 10px;
+        position: relative;
+        margin-top: 6px;
+        margin-bottom: 0;
+
+        .socialHubItem {
+            border: 1px solid #000;
+            width: 32px;
+            height: 32px;
+            text-align: center;
+            background: #eee;
+            display: inline-block;
+            position: relative;
+
+            a {
+                color: #000;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                height: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Boxter",
+  "description": "Boxter template",
+  "imageDesktop": "config/desktop.png",
+  "imageMobile": "config/mobile.png",
+  "dependency": "base"
+}

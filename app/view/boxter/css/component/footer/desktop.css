@@ -1,0 +1,102 @@
+.footer .menuLine {
+  text-align: initial;
+  margin: 30px 0 0 0;
+}
+.footer .menuLine .footerLogo {
+  clear: none;
+  float: left;
+  width: initial;
+  padding: 0 0 0 0;
+  margin: -30px 0 -30px 0;
+}
+.footer .menuLine .footerLogo .footerLogoLink {
+  float: none;
+}
+.footer .menuLine .socialHub {
+  float: right;
+  clear: none;
+  display: initial;
+  margin: -15px 0 0 10px;
+}
+.footer .menuLine .socialHub .socialHubItem {
+  float: left;
+}
+.footer .menuLine .iconPhone {
+  float: right;
+  display: initial;
+  clear: none;
+  padding: 12px 0 0 0;
+}
+.footer .menuLine .iconPhone:before {
+  float: left;
+  top: 0;
+}
+.footer .menuLine .menu {
+  padding: 0;
+}
+.footer .menuLine .menu > li {
+  display: inline-block;
+  height: 27px;
+  padding: 13px 0 0 0;
+}
+.footer .menuLine .menu > li > a:before, .footer .menuLine .menu > li > label:before {
+  content: "";
+  display: block;
+  width: 2px;
+  height: 16px;
+  background: #000;
+  float: left;
+  margin: 0 10px 0 2px;
+}
+.footer .menuLine .menu > li:last-child > ul {
+  right: 0;
+  left: auto;
+}
+.footer .menuLine .menu .menuItem input[type=checkbox]:checked + label + ul, .footer .menuLine .menu .menuItem input[type=checkbox] + label + ul, .footer .menuLine .menu .menuSubmenuItem input[type=checkbox]:checked + label + ul, .footer .menuLine .menu .menuSubmenuItem input[type=checkbox] + label + ul {
+  opacity: 0;
+  pointer-events: none;
+}
+.footer .menuLine .menu .menuItem:hover > ul, .footer .menuLine .menu .menuSubmenuItem:hover > ul {
+  opacity: 1;
+  pointer-events: all;
+}
+.footer .menuLine .menu .menuItem:hover > input[type=checkbox]:checked + label + ul, .footer .menuLine .menu .menuSubmenuItem:hover > input[type=checkbox]:checked + label + ul {
+  opacity: 1;
+  pointer-events: all;
+}
+.footer .menuLine .menu .menuItem:hover > input[type=checkbox] + label + ul, .footer .menuLine .menu .menuSubmenuItem:hover > input[type=checkbox] + label + ul {
+  opacity: 1;
+  pointer-events: all;
+}
+.footer .subLine {
+  padding: 20px 10px 0 10px;
+}
+.footer .subLine .copy {
+  float: left;
+  text-align: initial;
+  max-width: 33%;
+  padding: 0;
+  height: 80px;
+  display: table;
+}
+.footer .subLine .copy > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.footer .subLine .vendor {
+  float: right;
+  max-width: 33%;
+  text-align: right;
+}
+.footer .subLine .message {
+  max-width: 33%;
+  padding: 0 5px 0 5px;
+  height: 80px;
+  display: table;
+}
+.footer .subLine .message > span {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/*# sourceMappingURL=desktop.css.map */

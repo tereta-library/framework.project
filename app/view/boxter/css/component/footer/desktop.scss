@@ -1,0 +1,130 @@
+.footer {
+    .menuLine {
+        text-align: initial;
+        margin: 30px 0 0 0;
+
+        .footerLogo {
+            clear: none;
+            float: left;
+            width: initial;
+            padding: 0 0 0 0;
+            margin: -30px 0 -30px 0;
+
+            .footerLogoLink {
+                float: none;
+            }
+        }
+
+        .socialHub {
+            float: right;
+            clear: none;
+            display: initial;
+            margin: -15px 0 0 10px;
+
+            .socialHubItem {
+                float: left;
+            }
+        }
+
+        .iconPhone {
+            float: right;
+            display: initial;
+            clear: none;
+            padding: 12px 0 0 0;
+
+            &:before {
+                float: left;
+                top: 0;
+            }
+        }
+
+        .menu {
+            padding: 0;
+
+            & > li {
+                display: inline-block;
+                height: 27px;
+                padding: 13px 0 0 0;
+
+                & > a, & > label {
+                    &:before {
+                        content: "";
+                        display: block;
+                        width: 2px;
+                        height: 16px;
+                        background: #000;
+                        float: left;
+                        margin: 0 10px 0 2px;
+                    }
+                }
+
+                &:last-child {
+                    & > ul {
+                        right: 0;
+                        left: auto;
+                    }
+                }
+            }
+
+            .menuItem, .menuSubmenuItem {
+                input[type=checkbox]:checked + label + ul, input[type=checkbox] + label + ul {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &:hover {
+                    & > ul {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+    
+                    & > input[type=checkbox]:checked + label + ul {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+    
+                    & > input[type=checkbox] + label + ul {
+                        opacity: 1;
+                        pointer-events: all;
+                    }
+                }
+            }    
+        }
+    }
+
+    .subLine {
+        padding: 20px 10px 0 10px;
+
+        .copy {
+            float: left;
+            text-align: initial;
+            max-width: 33%;
+            padding: 0;
+            height: 80px;
+            display: table;
+
+            & > span {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+
+        .vendor {
+            float: right;
+            max-width: 33%;
+            text-align: right;
+        }
+
+        .message {
+            max-width: 33%;
+            padding: 0 5px 0 5px;
+            height: 80px;
+            display: table;
+
+            & > span {
+                display: table-cell;
+                vertical-align: middle;
+            }
+        }
+    }
+}
