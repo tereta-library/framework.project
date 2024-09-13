@@ -26,6 +26,7 @@ class Data extends Template
     {
         $this->siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST'] ?? new Exception('Domain not found'));
         $this->assign('site', $this->siteModel->getData());
+        $this->assign('siteModel', $this->siteModel);
 
         $this->assign('siteLogoImage', $this->siteModel->getLogoImageUrl());
         $this->assign('siteIconImage', $this->siteModel->getIconImageUrl());

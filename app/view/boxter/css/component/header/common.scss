@@ -40,7 +40,7 @@ header {
                 margin: 0;
 
                 a {
-                    color: #FFFFFF;
+                    color: #000; /* @todo: as configurable */
                     text-decoration: none;
 
                     &.iconPhone{
@@ -54,7 +54,7 @@ header {
     }
 
     .mainLine {
-        background: #FCEF3C;
+        background: #a9a9a9; /* @todo: as configurable */
         position: relative;
         padding: 5px;
 

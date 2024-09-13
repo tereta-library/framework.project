@@ -38,14 +38,14 @@ header .topLine .contacts li {
   margin: 0;
 }
 header .topLine .contacts li a {
-  color: #FFFFFF;
+  color: #000; /* @todo: as configurable */
   text-decoration: none;
 }
 header .topLine .contacts li a.iconPhone:before {
   padding: 0 5px;
 }
 header .mainLine {
-  background: #FCEF3C;
+  background: #a9a9a9; /* @todo: as configurable */
   position: relative;
   padding: 5px;
 }

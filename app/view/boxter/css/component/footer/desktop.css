@@ -1,6 +1,6 @@
 .footer .menuLine {
   text-align: initial;
-  margin: 30px 0 0 0;
+  margin: 30px auto 0 auto;
 }
 .footer .menuLine .footerLogo {
   clear: none;

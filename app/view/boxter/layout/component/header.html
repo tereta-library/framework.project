@@ -18,8 +18,8 @@
             </ul>
         </div>
         <div class="mainLine">
-            <a href="..." class="logo" data-admin-init='"site": {"field": "logo"}'>
-                <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+            <a data-backend-bind="attribute:href:$siteModel->getDomainModel()->getUrl()" class="logo" data-admin-init='"site": {"field": "logo"}'>
+                <img data-backend-bind="attribute:src:$siteLogoImage; attribute:alt:$site[tagline]" />
                 <!--: if $site[tagline] -->
                 <span class="tagline">
                         <!--: echo $site[tagline] -->

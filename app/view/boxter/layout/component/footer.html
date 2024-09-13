@@ -5,14 +5,16 @@
     <link data-backend-add="#head" rel="stylesheet" type="text/css" href="/resource/boxter/css/component/footer/common.css" />
     <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 768px)" href="/resource/boxter/css/component/footer/tablet.css" />
     <link data-backend-add="#head" rel="stylesheet" type="text/css" media="screen and (min-width: 1024px)" href="/resource/boxter/css/component/footer/desktop.css" />
+
+    <meta name="backend-allowDependency" content="false" />
 </head>
 <body>
     <footer class="footer" id="footer" data-backend-replace="#footer" data-backend-block="Builder\Site\Block\Data">
         <div class="menuLine">
             <div>
                 <div class="footerLogo">
-                    <a href="#" class="footerLogoLink">
-                        <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+                    <a data-backend-bind="attribute:href:$siteModel->getDomainModel()->getUrl()" class="footerLogoLink">
+                        <img data-backend-bind="attribute:src:$siteLogoImage; attribute:alt:$site[tagline]" />
                     </a>
                     <a href="#" class="footerLogoText"><!--: echo $site[tagline] --></a>
                 </div>
@@ -35,11 +37,8 @@
                     </a>
                 <!--: endif -->
 
-                <nav class="headerMenu">
-                    <input type="checkbox" name="burger" class="burgerMenu" id="menu" />
-                    <label for="menu" class="burgerMenu"><span class="iconBurger"></span></label>
-
-                    <backend:container data-backend-block="Builder\Menu\Block\Menu" data-backend-data='"identifier": "default"'>
+                <backend:container data-backend-block="Builder\Menu\Block\Menu" data-backend-data='"identifier": "footer"'>
+                    <nav class="footerMenu">
                         <ul class="menu">
                             <!--: foreach $list as $item -->
                             <li class="menuItem">
@@ -49,8 +48,8 @@
                             </li>
                             <!--: endforeach -->
                         </ul>
-                    </backend:container>
-                </nav>
+                    </nav>
+                </backend:container>
             </div>
         </div>
         <div class="subLine">
@@ -60,7 +59,7 @@
             </span>
             </div>
             <div class="vendor">
-                <img alt="www.tereta.dev" src="{{ mix('img/vendor/developer-tereta-dev.png') }}" />
+                <img alt="www.tereta.dev" src="/resource/base/image/tereta.png" />
                 <a href="https://www.tereta.dev/">Design &amp; development www.tereta.dev</a>
             </div>
             <div class="message">

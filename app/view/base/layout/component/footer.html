@@ -9,8 +9,8 @@
 <body>
     <footer class="footer" id="footer" data-backend-replace="#footer" data-backend-block="Builder\Site\Block\Data">
         <div>
-            <a href="#" class="logo">
-                <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+            <a data-backend-bind="attribute:href:$siteModel->getDomainModel()->getUrl()" class="logo">
+                <img data-backend-bind="attribute:src:$siteLogoImage; attribute:alt:$site[tagline]" />
             </a>
             <div class="contacts">
                 <a href="" class="phoneNumber" data-backend-bind="attribute:href:$string->concat('tel:', $this->phoneNumber($site[phone]))">

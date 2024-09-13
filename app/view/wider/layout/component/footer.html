@@ -14,8 +14,8 @@
             <div class="footerBox">
                 <div class="footerLogo">
                     <p>
-                        <a href="#" class="footerLogoLink">
-                            <img data-backend-bind="attribute:src:$siteLogoImage" alt="Logo" />
+                        <a data-backend-bind="attribute:href:$siteModel->getDomainModel()->getUrl()" class="footerLogoLink">
+                            <img data-backend-bind="attribute:src:$siteLogoImage; attribute:alt:$site[tagline]" />
                         </a>
                     </p>
                     <p><a href="#" class="footerLogoText"><!--: echo $site[tagline] --></a></p>

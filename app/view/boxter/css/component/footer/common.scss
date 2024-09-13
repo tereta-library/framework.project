@@ -1,7 +1,10 @@
 .footer {
+    color: #000; /* @todo: variable */
+    background: #ddd; /* @todo: variable */
+
     .menuLine {
         text-align: center;
-        background: #FCEF3C;
+        background: #eee;
 
         & > div {
             max-width: 1300px;
