@@ -82,6 +82,10 @@ class Site extends Model
         return $this->domainModel;
     }
 
+    /**
+     * @param Domain $domainModel
+     * @return $this
+     */
     public function setDomainModel(DomainModel $domainModel): static
     {
         $this->domainModel = $domainModel;

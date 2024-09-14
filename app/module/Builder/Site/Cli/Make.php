@@ -2,6 +2,7 @@
 
 namespace Builder\Site\Cli;
 
+use Builder\Site\Facade\Manager as SiteManagerFacade;
 use Framework\Cli\Interface\Controller;
 use Builder\Site\Model\Site as SiteModel;
 use Builder\Site\Model\Resource\Site as SiteResourceModel;
@@ -27,50 +28,40 @@ class Make implements Controller
      */
     public function make(): void
     {
-        // Make a new site
-        $siteResourceModel = (new SiteResourceModel);
-        $siteResourceModel->load($siteModel = new SiteModel(), 'sample', 'identifier');
+        $identifier = 'sample';
+        $site = [
+            'name' => 'Sample Site',
+            'tagline' => 'Sample Tagline',
+            'phone' => 'Sample Phone',
+            'email' => 'Sample Email',
+            'address' => 'Sample Address',
+            'copyright' => '© 2024 Tereta Alexander (www.tereta.dev)',
+        ];
 
-        $siteModel->set('identifier', 'sample');
-        $siteModel->set('name', 'Sample Site');
-        $siteModel->set('tagline', 'This is a sample site');
-        $siteModel->set('phone', '+1234567890');
-        $siteModel->set('email', 'tereta.alexander@gmail.com');
-        $siteModel->set('address', '1234 Sample Street, Sample City, Sample Country');
-        $siteModel->set('copyright', '© 2024 Sample by Tereta');
-        $siteResourceModel->save($siteModel);
+        $sitePrimaryDomain = 'sample.localhost';
 
-        $siteId = $siteModel->get('id');
-        echo Symbol::COLOR_GREEN . "The \"{$siteModel->get('identifier')}\" site created with the \"{$siteId}\" ID\n" . Symbol::COLOR_RESET;
+        $administrator = [
+            'email' => "admin@sample.localhost",
+            'password' => "admin"
+        ];
 
-        // Make a new domain
-        $domainResourceModel = (new DomainResourceModel);
-        $domainResourceModel->where('primaryDomain = 1')->load($domainModel = new DomainModel(), $siteId, 'siteId');
-
-        $domainModel->set('siteId', $siteId);
-        $domainModel->set('primaryDomain', 1);
-        $domainModel->set('domain', 'sample.localhost');
-        $domainResourceModel->save($domainModel);
-        echo Symbol::COLOR_GREEN . "The \"{$domainModel->get('domain')}\" domain created with the \"{$domainModel->get('id')}\" ID.\n" . Symbol::COLOR_RESET;
-
-        // Make a new user
-        $identifier = 'admin@sample.localhost';
-        $userResourceModel = (new UserResourceModel);
-        $userModel = new UserModel();
-        $userResourceModel->load($userModel, 'admin@sample.localhost', 'identifier');
-        $userModel->set('identifier', $identifier);
-        $userModel->setPassword('admin');
-        $userResourceModel->save($userModel);
-        $userId = $userModel->get('id');
-        echo Symbol::COLOR_GREEN . "The \"{$userModel->get('identifier')}\" user created with the \"{$userModel->get('id')}\" ID.\n" . Symbol::COLOR_RESET;
-
-        // Make relation between site and user
-        $siteUserResourceModel = (new SiteUserResourceModel);
-        $siteUserModel = new SiteUserModel();
-        $siteUserModel->set('siteId', $siteId);
-        $siteUserModel->set('userId', $userId);
-        $siteUserModel->set('acl', 1);
-        $siteUserResourceModel->save($siteUserModel);
-        echo Symbol::COLOR_GREEN . "Relating \"{$userModel->get('identifier')}\" to the \"{$siteModel->get('identifier')}\" site.\n" . Symbol::COLOR_RESET;
+        foreach((new SiteManagerFacade)->createSite($identifier, $site, $sitePrimaryDomain, $administrator) as $message) {
+            switch ($message->getType()) {
+                case($message::TYPE_ERROR):
+                    echo Symbol::COLOR_RED . $message . Symbol::COLOR_RESET . "\n";
+                    break;
+                case($message::TYPE_WARNING):
+                    echo Symbol::COLOR_YELLOW . $message . Symbol::COLOR_RESET . "\n";
+                    break;
+                case($message::TYPE_INFO):
+                    echo Symbol::COLOR_GREEN . $message . Symbol::COLOR_RESET . "\n";
+                    break;
+                default:
+                    echo $message;
+            }
+        }
+        echo Symbol::COLOR_GREEN . "Primary domain: {$sitePrimaryDomain}.\n" . Symbol::COLOR_RESET;
+        echo Symbol::COLOR_GREEN . "Administrator email: {$administrator['email']}.\n" . Symbol::COLOR_RESET;
+        echo Symbol::COLOR_GREEN . "Administrator password: {$administrator['password']}.\n" . Symbol::COLOR_RESET;
     }
 }

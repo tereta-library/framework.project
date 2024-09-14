@@ -10,6 +10,7 @@ use Builder\Site\Model\Resource\Site as EntityResourceModel;
 use Exception;
 use Framework\Database\Abstract\Repository as AbstractRepository;
 use Framework\User\Model\Resource\User as UserResourceModel;
+use Builder\Site\Model\Domain\Exception as DomainException;
 
 /**
  * @class Builder\Site\Model\Repository
@@ -58,6 +59,9 @@ class Repository extends AbstractRepository
         }
 
         $this->domainResourceModel->load($domainModel = new DomainModel(), $domain, 'domain');
+        if (!$domainModel->get('siteId')) {
+            throw new DomainException("Site not found for domain {$domain}");
+        }
         $this->entityResourceModel->load($entityModel = new SiteModel(), $domainModel->get('siteId'));
         $entityModel->setDomainModel($domainModel);
 
