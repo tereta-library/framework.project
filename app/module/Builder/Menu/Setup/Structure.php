@@ -21,7 +21,7 @@ class Structure extends Upgrade
         $tableQuery = Factory::createTable('menu');
         $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Menu ID');
         $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id')->setComment('Site ID');
-        $tableQuery->addString('identifier')->setNotNull()->setUnique()->setComment('Menu identifier');
+        $tableQuery->addString('identifier')->setNotNull()->setComment('Menu identifier');
         $tableQuery->addDateTime('createdAt')->setDefault(new ValueNow())->setComment('Site created at');
         $tableQuery->addDateTime('updatedAt')->setDefault(new ValueNow())->setComment('Site updated at');
         $tableQuery->addUnique('siteId', 'identifier');

@@ -79,12 +79,6 @@ class Manager implements Controller
 
         foreach((new SiteManagerFacade)->createSite($identifier, $site, $sitePrimaryDomain, $administrator) as $message) {
             switch ($message->getType()) {
-                case($message::TYPE_ERROR):
-                    echo Symbol::COLOR_RED . $message . Symbol::COLOR_RESET . "\n";
-                    break;
-                case($message::TYPE_WARNING):
-                    echo Symbol::COLOR_YELLOW . $message . Symbol::COLOR_RESET . "\n";
-                    break;
                 case($message::TYPE_INFO):
                     echo Symbol::COLOR_GREEN . $message . Symbol::COLOR_RESET . "\n";
                     break;

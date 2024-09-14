@@ -24,7 +24,7 @@ class Menu extends Template
             $menuModel = MenuRepository::getInstance()->getByIdentifier($this->get('identifier'), $siteModel->get('id'));
         } catch (Exception $e) {
             $menuModel = MenuRepository::getInstance()->create([
-                'siteId' => 1,
+                'siteId' => $siteModel->get('id'),
                 'identifier' => $this->get('identifier'),
                 'data' => json_encode([
                     ['label' => 'Home', 'link' => '/', 'identifier' => 'home'],
