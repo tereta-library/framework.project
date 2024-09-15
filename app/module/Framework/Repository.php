@@ -99,8 +99,9 @@ class Repository extends AbstractRepository
     {
         $menuModel = new MenuModel;
         $menuModel->setData([
-            'siteId' => $data['siteId'],
+            'siteId'     => $data['siteId'],
             'identifier' => $data['identifier'],
+            'label'      => $data['label'],
         ]);
         $this->resource->save($menuModel);
 

@@ -100,7 +100,7 @@ class Theme implements Api
         }
 
         if (!$modelTheme->get('id')) {
-            throw new Exception('Theme not found');
+            throw new Exception('Theme not found', 404);
         }
 
         return $modelTheme;

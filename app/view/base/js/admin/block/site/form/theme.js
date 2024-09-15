@@ -8,6 +8,7 @@ export class AdminSiteFormTheme {
     themeItemTemplate = null;
     themeIdentifier = null;
     themeIdentifierSelected = null;
+    reloadCurrentAttempted = false;
 
     constructor(parent, slider, themeItemTemplate) {
         this.slider = slider;
@@ -26,8 +27,14 @@ export class AdminSiteFormTheme {
         this.themeLoad(
             this.themeId,
             (data, themeId) => {
+                if (this.reloadCurrentAttempted && data.error && data.errorCode === 404) {
+                    this.slider.render(data.error);
+                    return;
+                }
+
                 if (data.errorCode && data.errorCode === 404) {
                     this.themeId = 0;
+                    this.reloadCurrentAttempted = true;
                     this.render(false);
                     return;
                 }
@@ -47,6 +54,11 @@ export class AdminSiteFormTheme {
         this.themeLoad(
             '<' + (this.themeId - 1),
             (data, themeId) => {
+                if (data.errorCode && data.errorCode === 404) {
+                    this.slider.previous(data.error);
+                    return;
+                }
+
                 const content = this.renderItem(data);
                 this.slider.previous(content, this.themeLoaded.bind(this, themeId))
             }
@@ -57,6 +69,11 @@ export class AdminSiteFormTheme {
         this.themeLoad(
             this.themeId + 1,
             (data, themeId) => {
+                if (data.errorCode && data.errorCode === 404) {
+                    this.slider.next(data.error);
+                    return;
+                }
+
                 const content = this.renderItem(data);
                 this.slider.next(content, this.themeLoaded.bind(this, themeId));
             }

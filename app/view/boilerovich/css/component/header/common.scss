@@ -1,6 +1,12 @@
 .header {
   background: none;
 
+  &:before {
+    left: -100%;
+    right: -100%;
+    z-index: 0;
+  }
+
   .topLine {
     .contacts {
       li {

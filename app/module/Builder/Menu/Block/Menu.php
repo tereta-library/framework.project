@@ -26,6 +26,7 @@ class Menu extends Template
             $menuModel = MenuRepository::getInstance()->create([
                 'siteId' => $siteModel->get('id'),
                 'identifier' => $this->get('identifier'),
+                'label' => $this->get('label'),
                 'data' => json_encode([
                     ['label' => 'Home', 'link' => '/', 'identifier' => 'home'],
                     ['label' => 'About', 'link' => '/about'],
@@ -45,7 +46,7 @@ class Menu extends Template
      */
     public function render(): string
     {
-        return '<!-- @dataAdmin ' . json_encode(['menu' => $this->get('identifier')]) . ' -->' .
+        return '<!-- @dataAdmin ' . json_encode(['menu' => $this->get('identifier'), 'label' => $this->get('label')]) . ' -->' .
             parent::render();
     }
 }
