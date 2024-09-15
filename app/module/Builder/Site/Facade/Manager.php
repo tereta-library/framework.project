@@ -67,12 +67,14 @@ class Manager
             // Make a new user
             $userResourceModel = (new UserResourceModel);
             $userModel = new UserModel();
-            $userResourceModel->load($userModel, $administrator['email'], 'identifier');
-            $userModel->set('identifier', $administrator['email']);
+            $userIdentifier = "{$siteId}:{$administrator['email']}";
+            $userResourceModel->load($userModel, ['identifier' => $administrator['email'], 'siteId' => $siteId]);
+            $userModel->set('siteId', $siteId);
+            $userModel->set('identifier', $userIdentifier);
             $userModel->setPassword($administrator['password']);
             $userResourceModel->save($userModel);
             $userId = $userModel->get('id');
-            yield new Message("The \"{$userModel->get('identifier')}\" user will be created with the \"{$userModel->get('id')}\" ID.", Message::TYPE_INFO);
+            yield new Message("The \"{$administrator['email']}\" user will be created with the \"{$userModel->get('id')}\" ID.", Message::TYPE_INFO);
 
             // Make relation between site and user
             $siteUserResourceModel = (new SiteUserResourceModel);
@@ -81,8 +83,8 @@ class Manager
             $siteUserModel->set('userId', $userId);
             $siteUserModel->set('acl', 1);
             $siteUserResourceModel->save($siteUserModel);
-            yield new Message("The \"{$userModel->get('identifier')}\" site is successfully created.", Message::TYPE_INFO);
-            yield new Message("Relating \"{$userModel->get('identifier')}\" to the \"{$siteModel->get('identifier')}\" site.", Message::TYPE_INFO);
+            yield new Message("The \"{$administrator['email']}\" site is successfully created.", Message::TYPE_INFO);
+            yield new Message("The \"{$administrator['email']}\" user is related to the \"{$siteModel->get('identifier')}\" site.", Message::TYPE_INFO);
             SingletonDatabase::getConnection()->commit();
         } catch (Exception $e) {
             SingletonDatabase::getConnection()->rollBack();

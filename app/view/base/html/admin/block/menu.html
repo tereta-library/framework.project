@@ -1,1 +1,8 @@
-<div data-translate="Menu"></div>
+<div class="menu subMenu">
+    <input type="checkbox" id="adminMenuCheckbox" class="hidden">
+    <label for="adminMenuCheckbox" data-translate="Menu"></label>
+    <label for="adminMenuCheckbox" class="background"></label>
+    <div id="adminMenuListing" data-foreach="listing">
+        <div data-event="click:clickMenuItem" data-variable="config"></div>
+    </div>
+</div>

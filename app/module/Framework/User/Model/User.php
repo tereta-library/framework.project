@@ -16,7 +16,7 @@ class User extends Model
     /**
      * @var UserResourceModel $resourceModel
      */
-    private UserResourceModel $resourceModel;
+    protected UserResourceModel $resourceModel;
 
     /**
      * @param array $data

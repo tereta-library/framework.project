@@ -116,6 +116,51 @@
   float: left;
 }
 
+#adminPanelControl .subMenu {
+  position: relative;
+}
+#adminPanelControl .subMenu .hidden {
+  display: none;
+}
+#adminPanelControl .subMenu .background {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child {
+  display: none;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child + label {
+  display: block;
+  cursor: pointer;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child + label + .background {
+  display: none;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child + label + .background + div {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(100%, 0%);
+  background: #2d3748;
+  padding: 2px 5px;
+  box-shadow: -4px 4px 5px #000;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child + label + .background + div > div {
+  position: relative;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child:checked + label + .background {
+  display: block;
+}
+#adminPanelControl .subMenu input[type=checkbox]:first-child:checked + label + .background + div {
+  white-space: nowrap;
+  position: absolute;
+  display: block;
+}
+
 .frameworkAdmin {
   padding: 10px;
 }
@@ -619,51 +664,6 @@
   width: 25px;
 }
 #adminPanelControl .formFiles .formFilesActions .itemNew .addFolder span {
-  display: block;
-}
-
-#adminPanelControl .page {
-  position: relative;
-}
-#adminPanelControl .page .hidden {
-  display: none;
-}
-#adminPanelControl .page .background {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-}
-#adminPanelControl .page #adminPageCheckbox, #adminPanelControl .page #adminPageCreateCheckbox {
-  display: none;
-}
-#adminPanelControl .page #adminPageCheckbox + label, #adminPanelControl .page #adminPageCreateCheckbox + label {
-  display: block;
-  cursor: pointer;
-}
-#adminPanelControl .page #adminPageCheckbox + label + .background, #adminPanelControl .page #adminPageCreateCheckbox + label + .background {
-  display: none;
-}
-#adminPanelControl .page #adminPageCheckbox + label + .background + div, #adminPanelControl .page #adminPageCreateCheckbox + label + .background + div {
-  display: none;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  transform: translate(100%, 0%);
-  background: #2d3748;
-  padding: 2px 5px;
-  box-shadow: -4px 4px 5px #000;
-}
-#adminPanelControl .page #adminPageCheckbox + label + .background + div > div, #adminPanelControl .page #adminPageCreateCheckbox + label + .background + div > div {
-  position: relative;
-}
-#adminPanelControl .page #adminPageCheckbox:checked + label + .background, #adminPanelControl .page #adminPageCreateCheckbox:checked + label + .background {
-  display: block;
-}
-#adminPanelControl .page #adminPageCheckbox:checked + label + .background + div, #adminPanelControl .page #adminPageCreateCheckbox:checked + label + .background + div {
-  white-space: nowrap;
-  position: absolute;
   display: block;
 }
 

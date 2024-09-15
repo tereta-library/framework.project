@@ -3,9 +3,10 @@
 namespace Builder\Admin\Api;
 
 use Framework\Api\Interface\Api;
-use Framework\User\Model\User as UserModel;
+use Builder\User\Model\User as UserModel;
 use Exception;
 use Framework\Application\Manager\Http\Parameter\Payload as PayloadParameter;
+use Builder\Site\Model\Repository;
 
 /**
  * @class Builder\Admin\Api\Login
@@ -28,7 +29,9 @@ class Login implements Api
         }
 
         try {
-            $userModel = (new UserModel())->loadByIdentifier($email);
+            $siteModel = Repository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
+            $userIdentifier = "{$siteModel->get('id')}:{$email}";
+            $userModel = (new UserModel())->loadBySiteIdentifier($siteModel->get('id'), $userIdentifier);
             $userModel->validatePassword($password);
             $tokenModel = $userModel->createToken($_SERVER['REMOTE_ADDR'] ?? null);
 

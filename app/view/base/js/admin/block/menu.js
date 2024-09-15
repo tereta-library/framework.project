@@ -15,18 +15,26 @@ export class AdminMenu extends AdminTemplate {
      * Initialize the class
      */
     init() {
-        this.syntax = (new Syntax(this.node));
-        this.syntax.update();
+        let subMenus = this.config.elements;
+        subMenus.forEach((subMenu, subMenuNumber) => {
+            subMenu['clickMenuItem'] = this.subMenuClick.bind(this, subMenuNumber);
+        });
 
-        this.node.addEventListener('click', this.buttonClick.bind(this));
+        this.syntax = (new Syntax(
+            this.node, {
+                'listing': subMenus
+            }
+        ));
+
+        this.syntax.update();
     }
 
     /**
      * Button click event
      * @returns {Promise<void>}
      */
-    async buttonClick() {
-        const element = this.config.elements[0];
+    async subMenuClick(menuNumber) {
+        const element = this.config.elements[menuNumber];
         const token = this.rootAdminJs.getToken();
 
         // Load form data
