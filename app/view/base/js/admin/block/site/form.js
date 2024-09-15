@@ -1,6 +1,7 @@
 import AdminTemplateForm from '../templateForm.js';
 import Slider from '../../../library/slider.js';
 import {AdminSiteFormTheme} from './form/theme.js';
+import {AdminSiteFormConfig} from './form/config.js';
 
 export class AdminSiteForm extends AdminTemplateForm {
     template            = 'block/site/form';
@@ -8,8 +9,8 @@ export class AdminSiteForm extends AdminTemplateForm {
     elementLogoUploadFile = null;
     elementIconUploadZone = null;
     elementIconUploadFile = null;
-    themeSelector         = null;
-    config                = null;
+    themeSectionSlider    = null;
+    siteData              = null;
     formData         = new FormData();
     extendedVariables      = {};
 
@@ -29,12 +30,13 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.elementIconUploadFile = this.node.querySelector('.uploaderIcon [type="file"]');
         this.initUploadArea(this.elementIconUploadZone, this.elementIconUploadFile, 'iconImage');
 
-        const themeElement = this.node.querySelector('#themeSelector');
+        const themeElement = this.node.querySelector('#themeSection');
         const themeItemTemplate = themeElement.innerHTML;
         themeElement.innerHTML = '';
 
-        this.themeSelector = new Slider(themeElement);
-        this.theme = new AdminSiteFormTheme(this, this.themeSelector, themeItemTemplate);
+        this.themeSectionSlider = new Slider(themeElement);
+        this.themeSection = new AdminSiteFormTheme(this, this.themeSectionSlider, themeItemTemplate);
+        this.configSection = new AdminSiteFormConfig(this, this.node.querySelector('#configSection'));
 
         this.syntax
             .set('showSuccessMessage', false)
@@ -49,9 +51,10 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('email', '')
             .set('name', '')
             .set('copyright', '')
-            .set('theme', this.theme);
+            .set('themeSection', this.themeSection)
+            .set('configSection', this.configSection);
 
-        this.theme.render();
+        this.themeSection.render();
     }
 
     /**
@@ -213,22 +216,25 @@ export class AdminSiteForm extends AdminTemplateForm {
     /**
      * Show the form
      *
-     * @param config
+     * @param siteData
      */
-    show(config) {
-        this.config = config;
+    show(siteData) {
+        this.siteData = siteData;
 
         this.syntax
-            .set('logoImage', config.logoImage)
-            .set('iconImage', config.iconImage)
-            .set('address', config.address)
-            .set('copyright', config.copyright)
-            .set('email', config.email)
-            .set('name', config.name)
-            .set('phone', config.phone)
-            .set('tagline', config.tagline)
-            .set('theme', this.theme)
+            .set('logoImage', siteData.logoImage)
+            .set('iconImage', siteData.iconImage)
+            .set('address', siteData.address)
+            .set('copyright', siteData.copyright)
+            .set('email', siteData.email)
+            .set('name', siteData.name)
+            .set('phone', siteData.phone)
+            .set('tagline', siteData.tagline)
+            .set('themeSection', this.themeSection)
+            .set('configSection', this.configSection)
             .update();
+
+        this.configSection.show(siteData);
 
         super.show();
     }

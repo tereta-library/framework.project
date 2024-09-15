@@ -9,9 +9,12 @@ export class AdminSite extends AdminTemplate {
      * Initialize the class
      */
     init() {
-        this.syntax = new Syntax(this.node);
+        this.syntax = new Syntax(this.node, {
+            'openConfiguration': () => {
+                this.openConfiguration();
+            }
+        });
         this.syntax.update();
-        this.node.addEventListener('click', this.buttonClick.bind(this));
     }
 
     /**
@@ -19,7 +22,7 @@ export class AdminSite extends AdminTemplate {
      *
      * @returns {Promise<void>}
      */
-    async buttonClick() {
+    async openConfiguration() {
         const token = this.rootAdminJs.getToken();
 
         // Load form data
@@ -40,6 +43,8 @@ export class AdminSite extends AdminTemplate {
             this.rootAdminJs.elementPanel.actionLogout();
             return;
         }
+
+        formData.configs = this.config.elements;
 
         // Show admin form
         this.form = await this.showForm('block/site/form', formData, this.form);

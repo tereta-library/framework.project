@@ -15,10 +15,12 @@
         <input type="radio" name="tab" id="form_site_general" checked />
         <input type="radio" name="tab" id="form_site_contacts" />
         <input type="radio" name="tab" id="form_site_theme" />
+        <input type="radio" name="tab" id="form_site_config" />
         <div class="tabsBar">
             <label for="form_site_general" data-translate="General"></label>
             <label for="form_site_contacts" data-translate="Contacts"></label>
             <label for="form_site_theme" data-translate="Theme"></label>
+            <label for="form_site_config" data-translate="Configurations"></label>
         </div>
         <div class="tabsContainer">
             <fieldset class="generalConfiguration">
@@ -95,13 +97,27 @@
             <fieldset class="themeConfiguration">
                 <legend data-translate="Theme Configuration"></legend>
                 <link href="/resource/base/css/library/slider.css" rel="stylesheet" />
-                <div class="fields" data-variable="class:locked:theme.locked">
-                    <div id="themeSelector">
-                        <span class="checkButton" data-variable="class:locked:isLocked" data-event="click:theme.themeSelect">&check;</span>
+                <div class="fields" data-variable="class:locked:themeSection.locked">
+                    <div id="themeSection">
+                        <span class="checkButton" data-variable="class:locked:isLocked" data-event="click:themeSection.themeSelect">&check;</span>
                         <img data-variable="attribute:src:imageDesktop" />
                     </div>
-                    <div class="previousButton" data-event="click:theme.previous">&#8678;</div>
-                    <div class="nextButton" data-event="click:theme.next">&#8680;</div>
+                    <div class="previousButton" data-event="click:themeSection.previous">&#8678;</div>
+                    <div class="nextButton" data-event="click:themeSection.next">&#8680;</div>
+                </div>
+            </fieldset>
+            <fieldset class="configurationsSection">
+                <legend data-translate="Configurations"></legend>
+                <div class="fields" id="configSection" data-foreach="configSection.configStructure">
+                    <div>
+                        <div data-variable="text:key"></div>
+                        <table data-foreach="value">
+                            <tr>
+                                <th data-variable="text:key"></th>
+                                <td><input type="text" data-variable="attribute:name:value" /></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </fieldset>
         </div>

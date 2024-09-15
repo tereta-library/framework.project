@@ -2,11 +2,7 @@
 
 namespace Builder\Site\Block;
 
-use Builder\Site\Model\Site as SiteModel;
-use Framework\View\Html as Layout;
 use Framework\View\Php\Template;
-use Builder\Site\Model\Repository as SiteRepository;
-use Exception;
 
 /**
  * @class Builder\Site\Block\Data

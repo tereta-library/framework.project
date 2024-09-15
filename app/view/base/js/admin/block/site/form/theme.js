@@ -84,7 +84,7 @@ export class AdminSiteFormTheme {
         const element = document.createElement('div');
         element.innerHTML = this.themeItemTemplate;
 
-        data.theme = this.parent.theme;
+        data.themeSection = this.parent.themeSection;
         if (data.isLocked === undefined) {
             data.isLocked = (data.identifier === this.themeIdentifierSelected);
         }

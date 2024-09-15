@@ -7,7 +7,7 @@
 <body>
     <header class="header" id="header" data-backend-replace="#header">
         <div class="headerBox" data-backend-block="Builder\Site\Block\Data">
-            <a data-backend-bind="attribute:href:$siteModel->getDomainModel()->getUrl()" class="headerLogo" data-admin-init='"site": {"field": "logo"}'>
+            <a data-backend-bind="attribute:href:$siteModel->getDomainModel()->getUrl()" class="headerLogo">
                 <img data-backend-bind="attribute:src:$siteLogoImage; attribute:alt:$site[tagline]" />
             </a>
             <nav class="headerMenu">

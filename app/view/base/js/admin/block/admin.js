@@ -6,6 +6,7 @@ export class Admin extends AdminTemplate{
     buttonLogout = null;
     containerList = null;
     template = 'block/toolbar';
+    moduleList = {};
 
     onCanvasLoaded = () => {};
 
@@ -135,8 +136,6 @@ export class Admin extends AdminTemplate{
         })
     }
 
-    moduleList = {};
-
     async loadHandleBlocks(moduleConfigs) {
         let modules = [];
         let moduleNames = [];
@@ -147,6 +146,9 @@ export class Admin extends AdminTemplate{
         const token = this.rootAdminJs.getToken();
 
         moduleConfigs.forEach((item) => {
+            if (Object.keys(item.init).length !== 1) {
+                throw new Error('Only one module can be initialized for a block');
+            }
             item.module = Object.keys(item.init)[0];
             item.config = item.init[item.module];
             if (typeof moduleConfigsNamed[item.module] === 'undefined') {

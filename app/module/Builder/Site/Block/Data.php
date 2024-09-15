@@ -6,7 +6,6 @@ use Builder\Site\Model\Site as SiteModel;
 use Framework\View\Php\Template;
 use Builder\Site\Model\Repository as SiteRepository;
 use Exception;
-use Framework\Application\Manager as ApplicationManager;
 
 /**
  * @class Builder\Site\Block\Data

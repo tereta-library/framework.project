@@ -46,7 +46,7 @@ class Menu extends Template
      */
     public function render(): string
     {
-        return '<!-- @dataAdmin ' . json_encode(['menu' => $this->get('identifier'), 'label' => $this->get('label')]) . ' -->' .
+        return '<!-- @dataAdmin ' . json_encode(['menu' => ['identifier' => $this->get('identifier'), 'label' => $this->get('label')]]) . ' -->' .
             parent::render();
     }
 }

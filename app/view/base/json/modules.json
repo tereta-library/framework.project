@@ -22,6 +22,9 @@
     },
     "social": {
       "js": "admin\/block\/social"
+    },
+    "config": {
+      "js": "admin\/block\/config"
     }
   }
 }
