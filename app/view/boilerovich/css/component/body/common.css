@@ -17,6 +17,7 @@ body {
   max-width: 1500px;
   margin: 0px auto;
   padding: 0px 10px;
+  position: relative;
 }
 
 .singleBanner {
