@@ -180,6 +180,8 @@ export class AdminSiteForm extends AdminTemplateForm {
                 syntax.set('successMessage', 'Site Configuration Saved');
             }
 
+            jsonResponse.configs = self.siteData.configs;
+
             self.show(jsonResponse);
             syntax.update();
 
@@ -209,6 +211,17 @@ export class AdminSiteForm extends AdminTemplateForm {
         if (this.syntax.get('logoImageFile')) {
             this.formData.append('logoImage', this.syntax.get('logoImageFile'));
         }
+
+        const additionalConfigs = this.syntax.get('additionalConfig') ?? {};
+
+        Object.keys(additionalConfigs).forEach((key) => {
+            const value = additionalConfigs[key];
+
+            this.formData.append(
+                `additionalConfig[${key}]`,
+                value
+            );
+        });
 
         xhr.send(this.formData);
     }

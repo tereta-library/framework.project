@@ -67,13 +67,13 @@ class Configuration implements Api
             $this->siteResourceModel->save($this->siteModel);
             $this->siteResourceModel->load($this->siteModel);
 
-            $extendedVariables = $payload->extendedVariables ?? [];
+            $additionalConfig = $payload->get('additionalConfig') ?? [];
 
-            foreach ($extendedVariables as $key => $value) {
+            foreach ($additionalConfig as $key => $value) {
                 $this->configurationRepository->set($key, $value);
             }
 
-            return $this->siteModel->getPublicData();
+            return array_merge($this->siteModel->getPublicData(), ['additionalConfig' => $additionalConfig]);
         } catch (Exception $e) {
             $this->siteResourceModel->load($this->siteModel);
             return array_merge($this->siteModel->getPublicData(), ['error' => $e->getMessage()]);

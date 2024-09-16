@@ -114,7 +114,7 @@
                         <table data-foreach="item">
                             <tr>
                                 <th data-variable="text:key"></th>
-                                <td><input type="text" data-variable="attribute:name:item" /></td>
+                                <td><input type="text" data-variable="attribute:value:item.getValue" data-event="keyup:item.keyUp" data-event-change="change:item.onChange" /></td>
                             </tr>
                         </table>
                     </div>

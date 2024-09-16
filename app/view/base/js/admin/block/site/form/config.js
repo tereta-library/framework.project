@@ -19,7 +19,6 @@ export class AdminSiteFormConfig {
         });
 
         this.configStructure = this.encodeConfigStructure(configStructure);
-        debugger;
     }
 
     encodeConfigStructure(configStructure) {
@@ -39,6 +38,30 @@ export class AdminSiteFormConfig {
             configStructure[namespace] = {};
         }
 
-        configStructure[namespace][label] = identifier;
+        configStructure[namespace][label] = {
+            'key': identifier,
+            'keyUp': this.onKeyup.bind(this, identifier),
+            'onChange': this.onChange.bind(this, identifier),
+            'getValue': this.getValue.bind(this, identifier)
+        };
+    }
+
+    getValue(identifier) {
+        if (!this.parent.syntax.get('additionalConfig')) {
+            return '';
+        }
+
+        return this.parent.syntax.get('additionalConfig')[identifier] ?? '';
+    }
+
+    onChange(identifier, event) {
+        this.parent.syntax.set('isSave', true).update();
+    }
+
+    onKeyup(identifier, event, element) {
+        if (!this.parent.syntax.get('additionalConfig')) {
+            this.parent.syntax.set('additionalConfig', {});
+        }
+        this.parent.syntax.get('additionalConfig')[identifier] = element.value;
     }
 }
