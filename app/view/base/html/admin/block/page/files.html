@@ -35,18 +35,18 @@
 
     <div class="formFilesArea" data-foreach="folderData.listing">
         <div class="itemElement">
-            <span class="itemFolder" data-if="type = 'dir'">
-                <span class="image" data-event="click:clickFolderItem"><img src="/resource/base/image/admin/page/files/folder.png"></span>
-                <span data-variable="name" data-event="click:clickFolderItem"></span>
+            <span class="itemFolder" data-if="item.type = 'dir'">
+                <span class="image" data-event="click:item.clickFolderItem"><img src="/resource/base/image/admin/page/files/folder.png"></span>
+                <span data-variable="item.name" data-event="click:item.clickFolderItem"></span>
                 <span class="removeButton">
-                    <span data-event="click:clickRemove">X</span>
+                    <span data-event="click:item.clickRemove">X</span>
                 </span>
             </span>
-            <span class="itemFile" data-if="type = 'file'">
-                <span class="image" data-event="click:clickFileItem"><img src="/resource/base/image/admin/page/files/file.png"></span>
-                <span data-variable="name" data-event="click:clickFileItem"></span>
+            <span class="itemFile" data-if="item.type = 'file'">
+                <span class="image" data-event="click:item.clickFileItem"><img src="/resource/base/image/admin/page/files/file.png"></span>
+                <span data-variable="item.name" data-event="click:item.clickFileItem"></span>
                 <span>
-                    <span data-event="click:clickRemove" class="removeButton">X</span>
+                    <span data-event="click:item.clickRemove" class="removeButton">X</span>
                 </span>
             </span>
         </div>

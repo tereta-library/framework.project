@@ -59,14 +59,14 @@
         </div>
         <div data-template="menuItem">
             <div class="itemLine">
-                <label data-variable-id="attribute:for:clientId" data-event="actionEdit" data-variable="label" class="itemLabel"></label>
+                <label data-variable-id="attribute:for:item.clientId" data-event="item.actionEdit" data-variable="item.label" class="itemLabel"></label>
                 <div>
-                    <label data-variable-id="attribute:for:clientId" data-if="menu.length">&#8628;</label>
+                    <label data-variable-id="attribute:for:item.clientId" data-if="item.menu.length">&#8628;</label>
                 </div>
-                <div class="itemRemove" data-event="actionRemove">&#10005;</div>
+                <div class="itemRemove" data-event="item.actionRemove">&#10005;</div>
             </div>
-            <input data-variable-id="attribute:id:clientId" data-variable="checked:!!opened" data-if="menu" type="checkbox" class="subMenuItemsActive">
-            <div data-foreach="menu" class="subMenuItems" data-if="menu" data-use="menuItem"></div>
+            <input data-variable-id="attribute:id:item.clientId" data-variable="checked:!!item.opened" data-if="item.menu" type="checkbox" class="subMenuItemsActive">
+            <div data-foreach="item.menu" class="subMenuItems" data-if="item.menu" data-use="menuItem"></div>
         </div>
     </fieldset>
 </form>

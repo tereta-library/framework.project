@@ -43,7 +43,10 @@ export class SyntaxLoops extends SyntaxAbstract{
             return;
         }
 
-        value.forEach((item) => {
+        const keys = (typeof value == 'object' ? Object.keys(value) : value.keys());
+
+        keys.forEach((key) => {
+            const item = value[key];
             let insertElement = document.createElement(element.tagName);
             const syntaxClass = this.syntax.getSyntaxClass();
             insertElement.innerHTML = template.trim();
@@ -54,11 +57,10 @@ export class SyntaxLoops extends SyntaxAbstract{
                     return;
                 }
 
-                if (item instanceof String) {
-                    item = {item: item};
-                }
-
-                const syntax = new syntaxClass(childNode, item);
+                const syntax = new syntaxClass(childNode, {
+                    'key': key,
+                    'item': item
+                });
                 syntax.update();
 
                 element.append(childNode);

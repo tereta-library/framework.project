@@ -14,35 +14,31 @@ export class AdminSiteFormConfig {
         let configStructure = {};
 
         siteData.configs.forEach((item) => {
-            if (item.config.namespace !== 'config') return;
-            this.appendConfigStructure(configStructure, item.config.identifier, item.config.label);
+            if (item.config.type !== 'config') return;
+            this.appendConfigStructure(configStructure, item.config.identifier, item.config.label, item.config.namespace);
         });
 
         this.configStructure = this.encodeConfigStructure(configStructure);
+        debugger;
     }
 
     encodeConfigStructure(configStructure) {
-        let config = [];
+        let config = {};
         for (let key in configStructure) {
             if (typeof configStructure[key] === 'object') {
-                config.push({key: key, value: this.encodeConfigStructure(configStructure[key])});
+                config[key] = this.encodeConfigStructure(configStructure[key]);
             } else {
-                config.push({key: key, value: configStructure[key]});
+                config[key] = configStructure[key];
             }
         }
         return config;
     }
 
-    appendConfigStructure(configStructure, identifier, label) {
-        const labelPointer = label.shift();
-        if (!configStructure[labelPointer]) {
-            configStructure[labelPointer] = {};
-        }
-        if (label.length == 1) {
-            configStructure[labelPointer][label[0]] = identifier;
-            return;
+    appendConfigStructure(configStructure, identifier, label, namespace) {
+        if (!configStructure[namespace]) {
+            configStructure[namespace] = {};
         }
 
-        this.appendConfigStructure(configStructure[labelPointer], identifier, label);
+        configStructure[namespace][label] = identifier;
     }
 }

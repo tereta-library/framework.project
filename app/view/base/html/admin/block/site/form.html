@@ -111,10 +111,10 @@
                 <div class="fields" id="configSection" data-foreach="configSection.configStructure">
                     <div>
                         <div data-variable="text:key"></div>
-                        <table data-foreach="value">
+                        <table data-foreach="item">
                             <tr>
                                 <th data-variable="text:key"></th>
-                                <td><input type="text" data-variable="attribute:name:value" /></td>
+                                <td><input type="text" data-variable="attribute:name:item" /></td>
                             </tr>
                         </table>
                     </div>
