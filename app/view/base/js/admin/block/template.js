@@ -18,7 +18,7 @@ export default class AdminTemplate extends Template {
         }
         this.rootAdminJs.elementPanel.hideForms();
         this.rootAdminJs.elementPanel.hideAllElements();
-        itemForm.show(config);
+        await itemForm.show(config);
         this.rootAdminJs.elementPanel.showForms();
         return itemForm;
     }

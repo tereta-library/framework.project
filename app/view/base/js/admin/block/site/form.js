@@ -180,9 +180,8 @@ export class AdminSiteForm extends AdminTemplateForm {
                 syntax.set('successMessage', 'Site Configuration Saved');
             }
 
-            jsonResponse.configs = self.siteData.configs;
-
-            self.show(jsonResponse);
+            // @todo: need to append the data to the form
+            self.show([]);
             syntax.update();
 
             self.rootAdminJs.elementCanvas.contentWindow.location.reload();
@@ -229,10 +228,35 @@ export class AdminSiteForm extends AdminTemplateForm {
     /**
      * Show the form
      *
-     * @param siteData
+     * @param initialItems
      */
-    show(siteData) {
-        this.siteData = siteData;
+    async show(initialItems) {
+        const token = this.rootAdminJs.getToken();
+        let siteData = {};
+        let loadAdditionalConfigs = [];
+
+        initialItems.forEach((item) => {
+            if (item.config.type !== 'config') return;
+            loadAdditionalConfigs.push(item.config.identifier);
+        });
+
+        await fetch('/api/json/site/configuration/get/' + loadAdditionalConfigs.join(':'), {
+            method: "GET",
+            headers: {
+                "Cache-Control": "no-cache",
+                "API-Token": token,
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then((response) => response.json()).then((json) => {
+            siteData = json;
+        });
+
+        if (siteData.error && siteData.errorCode == 401) {
+            this.rootAdminJs.elementPanel.actionLogout();
+            return;
+        }
+
+        siteData.configs = initialItems;
 
         this.syntax
             .set('logoImage', siteData.logoImage)
@@ -247,7 +271,8 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('configSection', this.configSection)
             .update();
 
-        this.configSection.show(siteData);
+        this.configSection.setSiteData(siteData);
+        this.syntax.update();
 
         super.show();
     }

@@ -41,12 +41,16 @@ class Configuration implements Api
     }
 
     /**
+     * @param string $additionalParams
      * @return array
      * @throws Exception
-     * @api GET /^site\/configuration$/Usi
+     * @api GET /^site\/configuration\/get\/(.*)$/Usi
      */
-    public function getConfiguration(): array
+    public function getConfiguration(string $additionalParams): array
     {
+        $additionalParams = $additionalParams ? explode(':', $additionalParams) : [];
+
+        // @todo need to append with values from configuration repository
         return $this->siteModel->getPublicData();
     }
 

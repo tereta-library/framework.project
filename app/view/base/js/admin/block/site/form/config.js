@@ -10,7 +10,7 @@ export class AdminSiteFormConfig {
         this.canvasNode = node;
     }
 
-    show(siteData) {
+    setSiteData(siteData) {
         let configStructure = {};
 
         siteData.configs.forEach((item) => {
