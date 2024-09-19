@@ -50,8 +50,16 @@ class Configuration implements Api
     {
         $additionalParams = $additionalParams ? explode(':', $additionalParams) : [];
 
+        $additionalConfig = [];
+        foreach($additionalParams as $configPath) {
+            $additionalConfig[$configPath] = $this->configurationRepository->get($configPath);
+        }
+
         // @todo need to append with values from configuration repository
-        return $this->siteModel->getPublicData();
+        $return = $this->siteModel->getPublicData();
+        $return['additionalConfig'] = $additionalConfig;
+
+        return $return;
     }
 
     /**

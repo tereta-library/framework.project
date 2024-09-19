@@ -256,7 +256,17 @@ export class AdminSiteForm extends AdminTemplateForm {
             return;
         }
 
-        siteData.configs = initialItems;
+        debugger;
+        let additionalConfigs = {};
+        Object.keys(initialItems).forEach((key) => {
+            const item = initialItems[key];
+            if (item.config.type !== 'config') return;
+            item.config.value = siteData.additionalConfig[item.config.identifier] ?? '';
+            additionalConfigs[item.config.identifier] = item.config;
+        });
+
+        debugger;
+        siteData.configs = additionalConfigs;
 
         this.syntax
             .set('logoImage', siteData.logoImage)

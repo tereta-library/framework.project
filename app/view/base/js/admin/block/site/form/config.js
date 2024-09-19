@@ -13,12 +13,13 @@ export class AdminSiteFormConfig {
     setSiteData(siteData) {
         let configStructure = {};
 
-        siteData.configs.forEach((item) => {
-            if (item.config.type !== 'config') return;
-            this.appendConfigStructure(configStructure, item.config.identifier, item.config.label, item.config.namespace);
+        Object.keys(siteData.configs).forEach((key) => {
+            const item = siteData.configs[key];
+            this.appendConfigStructure(configStructure, item.identifier, item.label, item.namespace, item.value);
         });
 
         this.configStructure = this.encodeConfigStructure(configStructure);
+        debugger;
     }
 
     encodeConfigStructure(configStructure) {
@@ -33,7 +34,7 @@ export class AdminSiteFormConfig {
         return config;
     }
 
-    appendConfigStructure(configStructure, identifier, label, namespace) {
+    appendConfigStructure(configStructure, identifier, label, namespace, value) {
         if (!configStructure[namespace]) {
             configStructure[namespace] = {};
         }
@@ -42,7 +43,7 @@ export class AdminSiteFormConfig {
             'key': identifier,
             'keyUp': this.onKeyup.bind(this, identifier),
             'onChange': this.onChange.bind(this, identifier),
-            'getValue': this.getValue.bind(this, identifier)
+            'value': value
         };
     }
 
