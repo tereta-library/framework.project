@@ -46,18 +46,18 @@ class Configuration implements Api
      * @throws Exception
      * @api GET /^site\/configuration\/get\/(.*)$/Usi
      */
-    public function getConfiguration(string $additionalParams): array
+    public function getConfiguration(string $additionalConfigs): array
     {
-        $additionalParams = $additionalParams ? explode(':', $additionalParams) : [];
+        $additionalConfigs = $additionalConfigs ? explode(':', $additionalConfigs) : [];
 
-        $additionalConfig = [];
-        foreach($additionalParams as $configPath) {
-            $additionalConfig[$configPath] = $this->configurationRepository->get($configPath);
+        $additionalConfigValues = [];
+        foreach($additionalConfigs as $configPath) {
+            $additionalConfigValues[$configPath] = $this->configurationRepository->get($configPath);
         }
 
         // @todo need to append with values from configuration repository
         $return = $this->siteModel->getPublicData();
-        $return['additionalConfig'] = $additionalConfig;
+        $return['additionalConfig'] = $additionalConfigValues;
 
         return $return;
     }

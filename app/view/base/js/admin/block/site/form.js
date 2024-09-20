@@ -180,8 +180,6 @@ export class AdminSiteForm extends AdminTemplateForm {
                 syntax.set('successMessage', 'Site Configuration Saved');
             }
 
-            // @todo: need to append the data to the form
-            self.show([]);
             syntax.update();
 
             self.rootAdminJs.elementCanvas.contentWindow.location.reload();
@@ -199,10 +197,7 @@ export class AdminSiteForm extends AdminTemplateForm {
         this.formData.append('phone', this.syntax.get('phone'));
         this.formData.append('email', this.syntax.get('email'));
         this.formData.append('name', this.syntax.get('name'));
-        Object.keys(this.extendedVariables).forEach((key) => {
-            const value = this.extendedVariables[key];
-            this.formData.append(`extendedVariables[${key}]`, value);
-        });
+
         if (this.syntax.get('iconImageFile')) {
             this.formData.append('iconImage', this.syntax.get('iconImageFile'));
         }
@@ -211,16 +206,7 @@ export class AdminSiteForm extends AdminTemplateForm {
             this.formData.append('logoImage', this.syntax.get('logoImageFile'));
         }
 
-        const additionalConfigs = this.syntax.get('additionalConfig') ?? {};
-
-        Object.keys(additionalConfigs).forEach((key) => {
-            const value = additionalConfigs[key];
-
-            this.formData.append(
-                `additionalConfig[${key}]`,
-                value
-            );
-        });
+        this.syntax.get('configSection').save(this.formData)
 
         xhr.send(this.formData);
     }
@@ -256,7 +242,6 @@ export class AdminSiteForm extends AdminTemplateForm {
             return;
         }
 
-        debugger;
         let additionalConfigs = {};
         Object.keys(initialItems).forEach((key) => {
             const item = initialItems[key];
@@ -264,9 +249,6 @@ export class AdminSiteForm extends AdminTemplateForm {
             item.config.value = siteData.additionalConfig[item.config.identifier] ?? '';
             additionalConfigs[item.config.identifier] = item.config;
         });
-
-        debugger;
-        siteData.configs = additionalConfigs;
 
         this.syntax
             .set('logoImage', siteData.logoImage)
@@ -281,7 +263,7 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('configSection', this.configSection)
             .update();
 
-        this.configSection.setSiteData(siteData);
+        this.configSection.setSiteData(additionalConfigs);
         this.syntax.update();
 
         super.show();
