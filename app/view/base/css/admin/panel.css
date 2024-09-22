@@ -371,8 +371,18 @@
 #adminPanelControl .formSite .themeConfiguration .fields.locked .previousButton, #adminPanelControl .formSite .themeConfiguration .fields.locked .nextButton {
   opacity: 0.5;
 }
+#adminPanelControl .formSite .configurationsSection ul.fieldsMenu {
+  float: left;
+  width: 100px;
+  list-style: none;
+  margin: 0;
+  padding: 0 10px 0 0;
+}
 #adminPanelControl .formSite .configurationsSection ul.fieldsMenu > li.active {
   font-weight: bold;
+}
+#adminPanelControl .formSite .configurationsSection .fieldsContainer {
+  margin-left: 110px;
 }
 #adminPanelControl .formSite .configurationsSection .fieldsContainer > * {
   display: none;
