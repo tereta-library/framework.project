@@ -371,6 +371,15 @@
 #adminPanelControl .formSite .themeConfiguration .fields.locked .previousButton, #adminPanelControl .formSite .themeConfiguration .fields.locked .nextButton {
   opacity: 0.5;
 }
+#adminPanelControl .formSite .configurationsSection ul.fieldsMenu > li.active {
+  font-weight: bold;
+}
+#adminPanelControl .formSite .configurationsSection .fieldsContainer > * {
+  display: none;
+}
+#adminPanelControl .formSite .configurationsSection .fieldsContainer > *.active {
+  display: block;
+}
 #adminPanelControl .formSite .uploaderImage.uploaderIcon {
   height: 40px;
 }

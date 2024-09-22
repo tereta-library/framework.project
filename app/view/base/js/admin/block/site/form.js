@@ -10,7 +10,6 @@ export class AdminSiteForm extends AdminTemplateForm {
     elementIconUploadZone = null;
     elementIconUploadFile = null;
     themeSectionSlider    = null;
-    siteData              = null;
     formData         = new FormData();
     extendedVariables      = {};
 

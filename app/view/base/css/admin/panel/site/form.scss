@@ -91,6 +91,26 @@
             }
         }
 
+        .configurationsSection {
+            ul.fieldsMenu {
+                & > li {
+                    &.active {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .fieldsContainer {
+                & > * {
+                    display: none;
+
+                    &.active {
+                        display: block;
+                    }
+                }
+            }
+        }
+
         .uploaderImage {
             &.uploaderIcon{
                 height: 40px;

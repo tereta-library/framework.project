@@ -109,11 +109,11 @@
             <fieldset class="configurationsSection">
                 <legend data-translate="Configurations"></legend>
                 <div>
-                    <ul class="fields" data-foreach="configSection.configStructure">
-                        <li data-variable="text:key"></li>
+                    <ul class="fieldsMenu" data-foreach="configSection.configStructure">
+                        <li data-variable="text:item.name" data-variable-isActive="class:active:item.isActive" data-event="click:item.setActive"></li>
                     </ul>
-                    <div class="fields" data-foreach="configSection.configStructure">
-                        <table data-foreach="item">
+                    <div class="fieldsContainer" data-foreach="configSection.configStructure">
+                        <table data-foreach="item.fields" data-variable="class:active:item.isActive">
                             <tr>
                                 <th data-variable="text:key"></th>
                                 <td><input type="text" data-variable="attribute:value:item.value" data-event="keyup:item.keyUp" data-event-change="change:item.onChange" /></td>
