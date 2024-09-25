@@ -7,5 +7,11 @@ return [
         'application.manager.viewConfig' => [
             [Configuration::class => 'viewConfig'],
         ],
+    ],
+    'additionalConfigurations' => [
+        'footer.signature' => [
+            'namespace' => 'Common',
+            'label' => 'Footer Additional Subscription',
+        ],
     ]
 ];

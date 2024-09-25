@@ -42,7 +42,7 @@ export class AdminSiteFormConfig {
         let configStructure = {};
         Object.keys(configs).forEach((key) => {
             const item = configs[key];
-            this.configValues[key] = this.appendConfigStructure(configStructure, item.identifier, item.label, item.namespace, item.value);
+            this.configValues[key] = this.appendConfigStructure(configStructure, key, item.label, item.namespace, item.value);
         });
 
         let configStructureSource = [];

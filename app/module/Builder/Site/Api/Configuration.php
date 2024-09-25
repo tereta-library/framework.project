@@ -5,6 +5,7 @@ namespace Builder\Site\Api;
 use Builder\Site\Model\Resource\Site as EntityResourceModel;
 use Framework\Api\Interface\Api;
 use Exception;
+use Framework\Application\Manager as ApplicationManager;
 use Framework\Application\Manager\Http\Parameter\Post as PostParameter;
 use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
@@ -27,10 +28,16 @@ class Configuration implements Api
     private ConfigurationRepository $configurationRepository;
 
     /**
+     * @var ApplicationManager $applicationManager
+     */
+    private ApplicationManager $applicationManager;
+
+    /**
      * @throws Exception
      */
     public function __construct()
     {
+        $this->applicationManager = ApplicationManager::getInstance();
         $this->siteResourceModel = new EntityResourceModel;
     }
 
@@ -57,7 +64,8 @@ class Configuration implements Api
 
         // @todo need to append with values from configuration repository
         $return = $this->siteModel->getPublicData();
-        $return['additionalConfig'] = $additionalConfigValues;
+
+        $return['additionalConfig'] = $this->addAdditionalConfig($additionalConfigValues);
 
         return $return;
     }
@@ -81,14 +89,34 @@ class Configuration implements Api
 
             $additionalConfig = $payload->get('additionalConfig') ?? [];
 
-            foreach ($additionalConfig as $key => $value) {
+            foreach ($additionalConfig as $key => &$value) {
                 $this->configurationRepository->set($key, $value);
             }
 
-            return array_merge($this->siteModel->getPublicData(), ['additionalConfig' => $additionalConfig]);
+            return array_merge($this->siteModel->getPublicData(), ['additionalConfig' => $this->addAdditionalConfig($additionalConfig)]);
         } catch (Exception $e) {
             $this->siteResourceModel->load($this->siteModel);
             return array_merge($this->siteModel->getPublicData(), ['error' => $e->getMessage()]);
         }
+    }
+
+    /**
+     * @param array $config
+     * @return array
+     */
+    private function addAdditionalConfig(array $config): array
+    {
+        $additionalConfig = [];
+        $additionalConfigSettings = $this->applicationManager->getConfig()->get('module.additionalConfigurations');
+
+        foreach($config as $configPath => $configValue) {
+            $additionalConfig[$configPath] = [
+                'value' => $configValue,
+                'namespace' => $additionalConfigSettings[$configPath]['namespace'] ?? 'Common',
+                'label' => $additionalConfigSettings[$configPath]['label'],
+            ];
+        }
+
+        return $additionalConfig;
     }
 }

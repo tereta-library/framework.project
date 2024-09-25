@@ -39,7 +39,7 @@ class Config extends Template
     public function render(): string
     {
         return '<!-- @dataAdmin ' . json_encode([
-            'site' => ['identifier' => $this->get('identifier'), 'label' => $this->get('label'), 'namespace' => $this->get('namespace') ?? 'Common', 'type' => 'config'],
+            'site' => ['identifier' => $this->get('identifier'), 'type' => 'config'],
             ]) . ' -->' .
             parent::render();
     }

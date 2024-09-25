@@ -241,12 +241,11 @@ export class AdminSiteForm extends AdminTemplateForm {
             return;
         }
 
-        let additionalConfigs = {};
+        let additionalConfig = {};
         Object.keys(initialItems).forEach((key) => {
             const item = initialItems[key];
             if (item.config.type !== 'config') return;
-            item.config.value = siteData.additionalConfig[item.config.identifier] ?? '';
-            additionalConfigs[item.config.identifier] = item.config;
+            additionalConfig = siteData.additionalConfig;
         });
 
         this.syntax
@@ -262,7 +261,7 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('configSection', this.configSection)
             .update();
 
-        this.configSection.setSiteData(additionalConfigs);
+        this.configSection.setSiteData(additionalConfig);
         this.syntax.update();
 
         super.show();
