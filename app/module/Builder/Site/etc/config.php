@@ -10,7 +10,7 @@ return [
     ],
     'additionalConfigurations' => [
         'footer.signature' => [
-            'namespace' => 'Common',
+            'namespace' => 'Footer',
             'label' => 'Footer Additional Subscription',
         ],
     ]

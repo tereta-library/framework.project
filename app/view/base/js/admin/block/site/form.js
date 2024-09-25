@@ -244,8 +244,16 @@ export class AdminSiteForm extends AdminTemplateForm {
         let additionalConfig = {};
         Object.keys(initialItems).forEach((key) => {
             const item = initialItems[key];
+            const identifier = item.config.identifier;
             if (item.config.type !== 'config') return;
-            additionalConfig = siteData.additionalConfig;
+            additionalConfig[identifier] = siteData.additionalConfig[identifier];
+
+            if (item.config['namespace']) {
+                additionalConfig[identifier]['namespace'] = item.config.namespace;
+            }
+            if (item.config['label']) {
+                additionalConfig[identifier]['label'] = item.config.label;
+            }
         });
 
         this.syntax

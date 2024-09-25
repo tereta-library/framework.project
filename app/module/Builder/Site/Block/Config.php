@@ -29,7 +29,6 @@ class Config extends Template
             $configurationRepository->register($this->get('identifier'));
             $this->assign('value', $configurationRepository->get($this->get('identifier')) ?? '');
         }
-        //$this->assign('value', 'Дзвоніть з понеділка по неділю, з 9:00 до 19:00, за номером телефона +380687445501.');
     }
 
     /**
@@ -38,8 +37,18 @@ class Config extends Template
      */
     public function render(): string
     {
+        $dataAdmin = ['identifier' => $this->get('identifier'), 'type' => 'config'];
+
+        if ($this->get('namespace')) {
+            $dataAdmin['namespace'] = $this->get('namespace');
+        }
+
+        if ($this->get('label')) {
+            $dataAdmin['label'] = $this->get('label');
+        }
+
         return '<!-- @dataAdmin ' . json_encode([
-            'site' => ['identifier' => $this->get('identifier'), 'type' => 'config'],
+            'site' => $dataAdmin,
             ]) . ' -->' .
             parent::render();
     }
