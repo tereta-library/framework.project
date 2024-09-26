@@ -17,10 +17,13 @@ export class AdminSiteFormTheme {
     }
 
     themeSelect() {
-        this.parent.extendedVariables['view.template'] = this.themeIdentifier;
         this.themeIdentifierSelected = this.themeIdentifier;
         this.parent.syntax.set('isSave', true).update();
         this.currentSyntax.set('isLocked', true).update();
+    }
+
+    save(formData) {
+        formData.append(`additionalConfig[view.template]`, this.themeIdentifier);
     }
 
     render(canLock = true) {

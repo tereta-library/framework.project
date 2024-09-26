@@ -205,6 +205,7 @@ export class AdminSiteForm extends AdminTemplateForm {
             this.formData.append('logoImage', this.syntax.get('logoImageFile'));
         }
 
+        this.syntax.get('themeSection').save(this.formData)
         this.syntax.get('configSection').save(this.formData)
 
         xhr.send(this.formData);
@@ -219,6 +220,10 @@ export class AdminSiteForm extends AdminTemplateForm {
         const token = this.rootAdminJs.getToken();
         let siteData = {};
         let loadAdditionalConfigs = [];
+
+        if (!initialItems) {
+            initialItems = [];
+        }
 
         initialItems.forEach((item) => {
             if (item.config.type !== 'config') return;

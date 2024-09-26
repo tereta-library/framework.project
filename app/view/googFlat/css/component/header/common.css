@@ -1,5 +1,10 @@
 .header {
   background-color: rgba(117, 175, 38, 0.95);
 }
+.headerLogo img {
+  top: 50%;
+  position: relative;
+  transform: translate(0, -50%);
+}
 
 /*# sourceMappingURL=common.css.map */

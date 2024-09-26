@@ -25,7 +25,7 @@
 .headerLogo img {
   max-width: 240px;
   max-height: 60px;
-  min-height: 60px;
+  width: 100%;
 }
 .headerMenu {
   clear: both;

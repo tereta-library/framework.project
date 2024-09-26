@@ -110,6 +110,10 @@ class Configuration implements Api
         $additionalConfigSettings = $this->applicationManager->getConfig()->get('module.additionalConfigurations');
 
         foreach($config as $configPath => $configValue) {
+            if (!isset($additionalConfigSettings[$configPath])) {
+                continue;
+            }
+
             $additionalConfig[$configPath] = [
                 'value' => $configValue,
                 'namespace' => $additionalConfigSettings[$configPath]['namespace'] ?? 'Common',
