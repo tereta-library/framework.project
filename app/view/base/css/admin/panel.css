@@ -855,6 +855,9 @@
 #adminPanelControl .block_pages_wrapper .blockPages > *.show {
   display: block;
 }
+#adminPanelControl .tabsContainer .tabGeneral .editorWrapper textarea {
+  height: 50px;
+}
 
 [data-if] {
   display: none;

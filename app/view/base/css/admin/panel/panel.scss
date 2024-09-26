@@ -95,4 +95,14 @@
             }
         }
     }
+
+    .tabsContainer {
+        .tabGeneral {
+            .editorWrapper {
+                textarea {
+                    height: 50px;
+                }
+            }
+        }
+    }
 }
