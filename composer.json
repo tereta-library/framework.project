@@ -1,6 +1,7 @@
 {
     "require": {
-        "tereta\/framework.application": "^0.0.19"
+        "tereta\/framework.application": "^0.0.19",
+        "scssphp/scssphp": "^1.13"
     },
     "autoload": {
         "psr-4": {
