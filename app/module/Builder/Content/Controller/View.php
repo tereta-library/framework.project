@@ -8,7 +8,6 @@ use Builder\Content\Model\Resource\Content as ResourceContent;
 use Builder\Content\Model\Content as ModelContent;
 use Exception;
 use Framework\Application\Controller\Error as ErrorController;
-use Builder\Site\Model\Repository as SiteRepository;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -53,6 +52,8 @@ class View implements Controller
             ->assign('title', $contentModel->get('seoTitle'))
             ->assign('description', $contentModel->get('description'));
 
+        $layout->getBlockById('headContentScripts')->setModel($contentModel);
+        
         $layout->getBlockById('main')->setModel($contentModel);
 
         return $layout->render();

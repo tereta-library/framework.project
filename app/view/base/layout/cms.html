@@ -2,6 +2,10 @@
 <head>
     <meta name="backend-update" content="index" />
 
+    <backend:container id="headContentScripts" type="application/html" data-backend-add="#head" data-backend-block="Builder\Content\Block\Scripts">
+        <link rel="stylesheet" type="text/css" data-backend-bind="attribute:href:$pageCss" />
+    </backend:container>
+
     <backend:container id="headSeo" type="application/html" data-backend-replace="#headSeo" data-backend-block="Builder\Content\Block\Seo">
         <!--: if $title -->
             <title><!--: echo $title --></title>
