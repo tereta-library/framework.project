@@ -1012,5 +1012,8 @@
 #adminPanelControl .formPage .tabGeneral .fieldDescription > .editorWrapper {
   padding-top: 14px;
 }
+#adminPanelControl .formPage .tabContent textarea.pageContentEditor, #adminPanelControl .formPage .tabContent textarea.pageCssEditor, #adminPanelControl .formPage .tabStyle textarea.pageContentEditor, #adminPanelControl .formPage .tabStyle textarea.pageCssEditor {
+  height: calc(100vh - 135px);
+}
 
 /*# sourceMappingURL=panel.css.map */

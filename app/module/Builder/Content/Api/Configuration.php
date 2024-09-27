@@ -65,6 +65,7 @@ class Configuration implements Api
                 'title'       => null,
                 'description' => null,
                 'content'     => null,
+                'css'         => null,
             ];
         }
 
@@ -137,6 +138,7 @@ class Configuration implements Api
         $contentModel->set('header', $payload->get('header') ?? '');
         $contentModel->set('description', $payload->get('description') ?? '');
         $contentModel->set('content', $payload->get('content') ?? '');
+        $contentModel->set('css', $payload->get('css') ?? '');
 
         try {
             SingletonDatabase::getConnection()->beginTransaction();

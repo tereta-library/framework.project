@@ -29,7 +29,9 @@ class Url implements InterfaceUrl
         foreach ($collection as $item) {
             $result[$item->get('id')] = [
                 'id' => $item->get('id'),
-                'title' => $item->get('header'),
+                'title' => $item->get('header') ? $item->get('header') : (
+                    $item->get('seoTitle') ? $item->get('seoTitle') : $item->get('identifier')
+                ),
             ];
         }
 

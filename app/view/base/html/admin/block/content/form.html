@@ -17,10 +17,12 @@
     <div class="tabs">
         <input type="radio" name="tab" id="formPageGeneral" data-variable="attribute:id:getMode('formPageGeneral')" checked />
         <input type="radio" name="tab" id="formPageContent" data-variable="attribute:id:getMode('formPageContent')" />
+        <input type="radio" name="tab" id="formPageCss" data-variable="attribute:id:getMode('formPageCss')" />
         <input type="radio" name="tab" id="formPageSeo" data-variable="attribute:id:getMode('formPageSeo')" />
         <div class="tabsBar">
             <label for="formPageGeneral" data-translate="General" data-variable="attribute:for:getMode('formPageGeneral')"></label>
             <label for="formPageContent" data-translate="Content" data-variable="attribute:for:getMode('formPageContent')"></label>
+            <label for="formPageCss" data-translate="CSS Styles" data-variable="attribute:for:getMode('formPageCss')"></label>
             <label for="formPageSeo" data-translate="SEO" data-variable="attribute:for:getMode('formPageSeo')"></label>
         </div>
         <div class="tabsContainer">
@@ -78,8 +80,14 @@
             </fieldset>
             <fieldset>
                 <legend data-translate="Content"></legend>
-                <div>
+                <div class="tabContent">
                     <textarea class="pageContentEditor" data-event="onChange('content')" data-event-drop="drop:onPasteFile('content')" data-event-keyup="onKeyup('content')" data-variable="value:content"></textarea>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend data-translate="CSS Styles"></legend>
+                <div class="tabStyle">
+                    <textarea class="pageCssEditor" data-event="onChange('css')" data-event-keyup="onKeyup('css')" data-variable="value:css"></textarea>
                 </div>
             </fieldset>
             <fieldset>

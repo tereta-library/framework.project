@@ -18,6 +18,7 @@ export class AdminMenuForm extends AdminTemplateForm {
         this.syntax.set('header', config.header);
         this.syntax.set('description', config.description);
         this.syntax.set('content', config.content);
+        this.syntax.set('css', config.css);
 
         this.syntax.update();
         super.show();
@@ -47,6 +48,7 @@ export class AdminMenuForm extends AdminTemplateForm {
             header            : '',
             description       : '',
             content           : '',
+            css               : 'testCSS',
             isSave            : false,
             onRemove          : this.onRemove.bind(this),
             onClose           : this.onClose.bind(this),
@@ -61,6 +63,9 @@ export class AdminMenuForm extends AdminTemplateForm {
 
         this.editorContentNode = new EditorLibrary(this.node.querySelector('.pageContentEditor'));
         this.editorContentNode.show();
+
+        this.editorCssNode = new EditorLibrary(this.node.querySelector('.pageCssEditor'));
+        this.editorCssNode.show();
 
         this.editorDescriptionNode = new EditorLibrary(this.node.querySelector('.pageDescriptionEditor'));
         this.editorDescriptionNode.show();
@@ -209,14 +214,15 @@ export class AdminMenuForm extends AdminTemplateForm {
         };
 
         xhr.send(JSON.stringify({
-            id: this.syntax.get('id'),
-            identifier: this.syntax.get('identifier'),
-            status: this.syntax.get('status') === 'yes' ? true : false,
-            seoUri: this.syntax.get('seoUri'),
-            seoTitle: this.syntax.get('seoTitle'),
-            header: this.syntax.get('header'),
+            id         : this.syntax.get('id'),
+            identifier : this.syntax.get('identifier'),
+            status     : this.syntax.get('status') === 'yes' ? true : false,
+            seoUri     : this.syntax.get('seoUri'),
+            seoTitle   : this.syntax.get('seoTitle'),
+            header     : this.syntax.get('header'),
             description: this.syntax.get('description'),
-            content: this.syntax.get('content')
+            content    : this.syntax.get('content'),
+            css        : this.syntax.get('css'),
         }));
     }
 }

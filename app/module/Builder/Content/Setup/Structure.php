@@ -31,6 +31,7 @@ class Structure extends Upgrade
         $tableQuery->addString('header')->setComment('Page header');
         $tableQuery->addString('description')->setComment('Page short description');
         $tableQuery->addString('content', $tableQuery::TYPE_TEXT)->setComment('Page content');
+        $tableQuery->addString('css', $tableQuery::TYPE_TEXT)->setComment('Page CSS');
         $tableQuery->addUnique('siteId', 'identifier');
         $tableQuery->addUnique('siteId', 'seoUri');
         $connection->query($tableQuery->build());
