@@ -1,4 +1,4 @@
 #!/bin/bash
 
-VERSION="0.0.73"
-COMMENT="Library bug fixing $VERSION"
+VERSION="0.0.74"
+COMMENT="Cache processing $VERSION"
