@@ -65,6 +65,10 @@ class Configuration implements Api
         // @todo need to append with values from configuration repository
         $return = $this->siteModel->getPublicData();
 
+        $publicMediaUrl = $this->applicationManager->getConfig()->get('publicMediaUri');
+        if (!$return['iconImage']) $return['iconImage'] = "{$publicMediaUrl}/default/upload.png";
+        if (!$return['logoImage']) $return['logoImage'] = "{$publicMediaUrl}/default/upload.png";
+
         $return['additionalConfig'] = $this->addAdditionalConfig($additionalConfigValues);
 
         return $return;

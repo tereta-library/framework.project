@@ -3,6 +3,7 @@
 namespace Builder\Site\Block;
 
 use Builder\Site\Model\Site as SiteModel;
+use Framework\Application\Manager as ApplicationManager;
 use Framework\View\Php\Template;
 use Builder\Site\Model\Repository as SiteRepository;
 use Exception;
@@ -27,8 +28,10 @@ class Data extends Template
         $this->assign('site', $this->siteModel->getData());
         $this->assign('siteModel', $this->siteModel);
 
-        $this->assign('siteLogoImage', $this->siteModel->getLogoImageUrl());
-        $this->assign('siteIconImage', $this->siteModel->getIconImageUrl());
+        $applicationConfig = ApplicationManager::getInstance()->getConfig();
+
+        $this->assign('siteLogoImage', $this->siteModel->getLogoImageUrl() ?? $applicationConfig->get('publicMediaUri') . '/default/logo.png');
+        $this->assign('siteIconImage', $this->siteModel->getIconImageUrl() ?? $applicationConfig->get('publicMediaUri') . '/default/icon.png');
 
         parent::construct();
     }

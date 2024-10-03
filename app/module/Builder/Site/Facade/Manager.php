@@ -83,7 +83,7 @@ class Manager
             $siteUserModel->set('userId', $userId);
             $siteUserModel->set('acl', 1);
             $siteUserResourceModel->save($siteUserModel);
-            yield new Message("The \"{$administrator['email']}\" site is successfully created.", Message::TYPE_INFO);
+            yield new Message("The \"{$siteModel->get('identifier')}\" site is successfully created.", Message::TYPE_INFO);
             yield new Message("The \"{$administrator['email']}\" user is related to the \"{$siteModel->get('identifier')}\" site.", Message::TYPE_INFO);
             SingletonDatabase::getConnection()->commit();
         } catch (Exception $e) {

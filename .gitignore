@@ -3,7 +3,7 @@ composer.lock
 pub/index.php
 pub/.htaccess
 pub/resource
-pub/media
+pub/media/site
 .idea
 .DS_Store
 vendor

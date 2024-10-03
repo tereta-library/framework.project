@@ -1,4 +1,4 @@
 #!/bin/bash
 
-VERSION="0.0.75"
-COMMENT="Cache processing $VERSION"
+VERSION="0.0.76"
+COMMENT="Bug fixing $VERSION"
