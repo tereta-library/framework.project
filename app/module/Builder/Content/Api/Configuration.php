@@ -125,8 +125,13 @@ class Configuration implements Api
     {
         $this->securityCheck((int) $payload->get('id'));
 
-        if (!$payload->get('seoUri')) {
-            throw new Exception('SEO URI is required');
+        switch(true) {
+            case(!$payload->get('identifier')):
+                throw new Exception('Identifier is required');
+            case(!$payload->get('seoUri')):
+                throw new Exception('SEO URI is required');
+            case(!$payload->get('seoTitle')):
+                throw new Exception('SEO Title is required');
         }
 
         $contentModel = new ContentModel($payload->getData());
