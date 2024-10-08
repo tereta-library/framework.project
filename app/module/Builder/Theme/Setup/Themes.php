@@ -25,4 +25,21 @@ class Themes extends Upgrade
         $tableQuery->addString('identifier', $tableQuery::TYPE_VARCHAR)->setUnique()->setComment('Layout directory name');
         $connection->query($tableQuery->build());
     }
+
+    /**
+     * @date 2024-10-08 00:00:00 Created
+     * @return void
+     * @throws Exception
+     */
+    public function siteConfiguration(): void
+    {
+        $connection = $this->connection;
+
+        $query = Factory::createInsert('siteConfiguration')->values([
+            'path' => 'view.customCss'
+        ])->updateOnDupilicate(['path']);
+
+        $pdoStat = $connection->prepare($query->build());
+        $pdoStat->execute($query->getParams());
+    }
 }

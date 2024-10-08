@@ -219,7 +219,7 @@ export class AdminSiteForm extends AdminTemplateForm {
     async show(initialItems) {
         const token = this.rootAdminJs.getToken();
         let siteData = {};
-        let loadAdditionalConfigs = [];
+        let loadAdditionalConfigs = ['view.customCss'];
 
         if (!initialItems) {
             initialItems = [];
@@ -274,6 +274,7 @@ export class AdminSiteForm extends AdminTemplateForm {
             .set('configSection', this.configSection)
             .update();
 
+        this.themeSection.setSiteData(siteData);
         this.configSection.setSiteData(additionalConfig);
         this.syntax.update();
 

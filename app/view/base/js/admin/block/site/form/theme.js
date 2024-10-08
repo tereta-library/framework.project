@@ -1,4 +1,5 @@
 import Syntax from '../../../syntax.js';
+import {Editor as EditorLibrary} from "../../../../library/editor/editor.js";
 
 export class AdminSiteFormTheme {
     slider = null;
@@ -9,11 +10,22 @@ export class AdminSiteFormTheme {
     themeIdentifier = null;
     themeIdentifierSelected = null;
     reloadCurrentAttempted = false;
+    editorContentNode = null;
+    customCss = '';
+    themeCssEditorElement = null;
 
     constructor(parent, slider, themeItemTemplate) {
         this.slider = slider;
         this.parent = parent;
         this.themeItemTemplate = themeItemTemplate;
+        this.themeCssEditorElement = parent.node.querySelector('.themeCssEditor');
+        this.editorContentNode = new EditorLibrary(this.themeCssEditorElement);
+        this.editorContentNode.show();
+    }
+
+    setSiteData(configs) {
+        this.customCss = configs.additionalConfig['view.customCss'].value;
+        this.themeCssEditorElement.value = this.customCss;
     }
 
     themeSelect() {
@@ -24,6 +36,12 @@ export class AdminSiteFormTheme {
 
     save(formData) {
         formData.append(`additionalConfig[view.template]`, this.themeIdentifier);
+        formData.append(`additionalConfig[view.customCss]`, this.customCss);
+    }
+
+    changeCss(event, element) {
+        this.customCss = element.value;
+        this.parent.syntax.set('isSave', true).update();
     }
 
     render(canLock = true) {

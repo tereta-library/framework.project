@@ -13,6 +13,23 @@
         .themeConfiguration{
             position: relative;
 
+            & > .tabsBar {
+                float: left;
+                width: 170px;
+                padding: 0;
+                list-style: none;
+            }
+
+            & > .tabsBar + .tabsContainer {
+                margin-left: 170px;
+                clear: none;
+            }
+
+             textarea.themeCssEditor {
+                 height: calc(100vh - 160px);
+                 width: 100%;
+             }
+
             .fields {
                 position: relative;
 

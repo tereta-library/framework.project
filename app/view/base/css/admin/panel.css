@@ -314,6 +314,20 @@
 #adminPanelControl .formSite .themeConfiguration {
   position: relative;
 }
+#adminPanelControl .formSite .themeConfiguration > .tabsBar {
+  float: left;
+  width: 170px;
+  padding: 0;
+  list-style: none;
+}
+#adminPanelControl .formSite .themeConfiguration > .tabsBar + .tabsContainer {
+  margin-left: 170px;
+  clear: none;
+}
+#adminPanelControl .formSite .themeConfiguration textarea.themeCssEditor {
+  height: calc(100vh - 160px);
+  width: 100%;
+}
 #adminPanelControl .formSite .themeConfiguration .fields {
   position: relative;
 }

@@ -97,18 +97,34 @@
                     </div>
                 </div>
             </fieldset>
-            <fieldset class="themeConfiguration">
-                <legend data-translate="Theme Configuration"></legend>
-                <link href="/resource/base/css/library/slider.css" rel="stylesheet" />
-                <div class="fields" data-variable="class:locked:themeSection.locked">
-                    <div id="themeSection">
-                        <span class="checkButton" data-variable="class:locked:isLocked" data-event="click:themeSection.themeSelect">&check;</span>
-                        <img data-variable="attribute:src:imageDesktop" />
-                    </div>
-                    <div class="previousButton" data-event="click:themeSection.previous">&#8678;</div>
-                    <div class="nextButton" data-event="click:themeSection.next">&#8680;</div>
+            <div class="themeConfiguration tabs">
+                <input type="radio" name="themeConfiguration" id="themeSelection" checked />
+                <input type="radio" name="themeConfiguration" id="themeCustomCss" />
+                <div class="tabsBar">
+                    <label for="themeSelection" data-translate="Theme Selection"></label>
+                    <label for="themeCustomCss" data-translate="Custom CSS"></label>
                 </div>
-            </fieldset>
+                <div class="tabsContainer">
+                    <fieldset>
+                        <legend data-translate="Theme Selection"></legend>
+                        <link href="/resource/base/css/library/slider.css" rel="stylesheet" />
+                        <div class="fields" data-variable="class:locked:themeSection.locked">
+                            <div id="themeSection">
+                                <span class="checkButton" data-variable="class:locked:isLocked" data-event="click:themeSection.themeSelect">&check;</span>
+                                <img data-variable="attribute:src:imageDesktop" />
+                            </div>
+                            <div class="previousButton" data-event="click:themeSection.previous">&#8678;</div>
+                            <div class="nextButton" data-event="click:themeSection.next">&#8680;</div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend data-translate="Custom CSS"></legend>
+                        <div class="tabStyle">
+                            <textarea class="themeCssEditor" data-event="change:themeSection.changeCss"></textarea>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
             <fieldset class="configurationsSection">
                 <legend data-translate="Configurations"></legend>
                 <div>

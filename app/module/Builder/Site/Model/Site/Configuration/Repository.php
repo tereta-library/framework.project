@@ -123,6 +123,10 @@ class Repository extends AbstractRepository
             $path
         );
 
+        if (!$model->get('pathId')) {
+            throw new Exception("The \"{$path}\" configuration not found.");
+        }
+
         return $this->setRegisterModel($model);
     }
 }

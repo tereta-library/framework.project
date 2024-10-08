@@ -115,6 +115,9 @@ class Configuration implements Api
 
         foreach($config as $configPath => $configValue) {
             if (!isset($additionalConfigSettings[$configPath])) {
+                $additionalConfig[$configPath] = [
+                    'value' => $configValue
+                ];
                 continue;
             }
 
