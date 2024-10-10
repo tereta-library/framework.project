@@ -48,7 +48,7 @@ class Configuration implements Api
     }
 
     /**
-     * @param string $additionalParams
+     * @param string $additionalConfigs
      * @return array
      * @throws Exception
      * @api GET /^site\/configuration\/get\/(.*)$/Usi
