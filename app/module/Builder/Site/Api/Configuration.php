@@ -9,6 +9,8 @@ use Framework\Application\Manager as ApplicationManager;
 use Framework\Application\Manager\Http\Parameter\Post as PostParameter;
 use Builder\Site\Api\Traits\Administrator as AdministratorTrait;
 use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
+use Builder\Site\Model\Style as StyleModel;
+use Builder\Site\Model\Resource\Style as StyleResourceModel;
 
 /**
  * @class Builder\Site\Api\Configuration
@@ -33,12 +35,18 @@ class Configuration implements Api
     private ApplicationManager $applicationManager;
 
     /**
+     * @var StyleResourceModel $styleResourceModel
+     */
+    private StyleResourceModel $styleResourceModel;
+
+    /**
      * @throws Exception
      */
     public function __construct()
     {
         $this->applicationManager = ApplicationManager::getInstance();
         $this->siteResourceModel = new EntityResourceModel;
+        $this->styleResourceModel = new StyleResourceModel;
     }
 
     public function construct() {
@@ -71,6 +79,9 @@ class Configuration implements Api
 
         $return['additionalConfig'] = $this->addAdditionalConfig($additionalConfigValues);
 
+        $this->styleResourceModel->load($styleModel = new StyleModel, $this->siteModel->get('id'),'siteId');
+        $return['style'] = $styleModel->get('css');
+
         return $return;
     }
 
@@ -97,7 +108,15 @@ class Configuration implements Api
                 $this->configurationRepository->set($key, $value);
             }
 
-            return array_merge($this->siteModel->getPublicData(), ['additionalConfig' => $this->addAdditionalConfig($additionalConfig)]);
+            $this->styleResourceModel->load($styleModel = new StyleModel, $this->siteModel->get('id'),'siteId');
+            $this->styleResourceModel->save(
+                $styleModel->set('siteId', $this->siteModel->get('id'))->set('css', $payload->get('style'))
+            );
+
+            return array_merge($this->siteModel->getPublicData(), [
+                'additionalConfig' => $this->addAdditionalConfig($additionalConfig),
+                'style' => $styleModel->get('css')
+            ]);
         } catch (Exception $e) {
             $this->siteResourceModel->load($this->siteModel);
             return array_merge($this->siteModel->getPublicData(), ['error' => $e->getMessage()]);

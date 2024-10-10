@@ -24,7 +24,7 @@ export class AdminSiteFormTheme {
     }
 
     setSiteData(configs) {
-        this.customCss = configs.additionalConfig['view.customCss'].value;
+        this.customCss = configs.style;
         this.themeCssEditorElement.value = this.customCss;
     }
 
@@ -36,7 +36,7 @@ export class AdminSiteFormTheme {
 
     save(formData) {
         formData.append(`additionalConfig[view.template]`, this.themeIdentifier);
-        formData.append(`additionalConfig[view.customCss]`, this.customCss);
+        formData.append(`style`, this.customCss);
     }
 
     changeCss(event, element) {

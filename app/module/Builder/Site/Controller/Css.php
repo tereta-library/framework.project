@@ -8,6 +8,8 @@ use Exception;
 use ScssPhp\ScssPhp\Compiler as ScssCompiler;
 use ScssPhp\ScssPhp\Exception\SassException;
 use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
+use Builder\Site\Model\Style as StyleModel;
+use Builder\Site\Model\Resource\Style as StyleResourceModel;
 
 /**
  * ···························WWW.TERETA.DEV······························
@@ -30,18 +32,20 @@ use Builder\Site\Model\Site\Configuration\Repository as ConfigurationRepository;
  */
 class Css implements Controller
 {
+    private $siteModel;
+
     /**
-     * @var ConfigurationRepository $configurationRepository
+     * @var StyleResourceModel $styleResourceModel
      */
-    private ConfigurationRepository $configurationRepository;
+    private StyleResourceModel $styleResourceModel;
 
     /**
      * @throws Exception
      */
     public function __construct()
     {
-        $siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
-        $this->configurationRepository = ConfigurationRepository::getSiteInstance($siteModel->get('id'));
+        $this->styleResourceModel = new StyleResourceModel;
+        $this->siteModel = SiteRepository::getInstance()->getByDomain($_SERVER['HTTP_HOST']);
     }
 
     /**
@@ -52,9 +56,11 @@ class Css implements Controller
      */
     public function render(): string
     {
+        $this->styleResourceModel->load($styleModel = new StyleModel, $this->siteModel->get('id'),'siteId');
+
         $scss = new ScssCompiler();
         $compilationResult = $scss->compileString(
-            $this->configurationRepository->get('view.customCss')
+            $styleModel->get('css')
         );
 
         header('Content-Type: text/css');

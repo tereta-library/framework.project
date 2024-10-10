@@ -104,4 +104,22 @@ class Structure extends Upgrade
         $pdoStat = $connection->prepare($query->build());
         $pdoStat->execute($query->getParams());
     }
+
+    /**
+     * @date 2024-10-10 23:12:00 Created
+     * @return void
+     * @throws Exception
+     */
+    public function setStyles(): void
+    {
+        $connection = $this->connection;
+
+        // Create site configuration value
+        $tableQuery = Factory::createTable('siteStyle');
+        $tableQuery->addInteger('id')->setAutoIncrement()->setNotNull()->setPrimaryKey()->setComment('Styles value ID');
+        $tableQuery->addForeign($connection, 'siteId')->foreign('site', 'id')->setComment('Site ID');
+        $tableQuery->addString('css', $tableQuery::TYPE_MEDIUMTEXT)->setDefault(null)->setComment('CSS Styling');
+        $tableQuery->addUnique('siteId');
+        $connection->query($tableQuery->build());
+    }
 }
